@@ -241,7 +241,7 @@ throwputArray = compileFinal str
 	["Smoke Grenade (Purple)", "SmokeShellPurple", 50],
 	["Smoke Grenade (Blue)", "SmokeShellBlue", 50],
 	["Smoke Grenade (Green)", "SmokeShellGreen", 50],
-	["Smoke Grenade (Yellow)", "SmokeShellYellow", 50],
+//	["Smoke Grenade (Yellow)", "SmokeShellYellow", 50],
 	["Smoke Grenade (Orange)", "SmokeShellOrange", 50],
 	["Smoke Grenade (Red)", "SmokeShellRed", 50]
 ];
@@ -320,7 +320,7 @@ ammoArray = compileFinal str
 	["40mm HE Grenade Round", "1Rnd_HE_Grenade_shell", 500],
 	["40mm 3Rnd HE Grenades", "3Rnd_HE_Grenade_shell", 1000],
 	["40mm Toxic Gas", "1Rnd_SmokeYellow_Grenade_shell", 1000],
-	["40mm 3Rnd Toxic Gas)", "3Rnd_SmokeYellow_Grenade_shell", 1500],
+	["40mm 3Rnd Toxic Gas", "3Rnd_SmokeYellow_Grenade_shell", 1500],
 	["40mm Smoke Round (White)", "1Rnd_Smoke_Grenade_shell", 50],
 	["40mm Smoke Round (Purple)", "1Rnd_SmokePurple_Grenade_shell", 50],
 	["40mm Smoke Round (Blue)", "1Rnd_SmokeBlue_Grenade_shell", 50],
