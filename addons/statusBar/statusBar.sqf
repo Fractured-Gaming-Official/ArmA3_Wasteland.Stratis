@@ -58,6 +58,42 @@ ZGO_StatusEnabled = true; // LOL ^^
 			_time = (round(360-(serverTime)/60));  //edit the '240' value (60*4=240) to change the countdown timer if your server restarts are shorter or longer than 4 hour intervals
 			_hours = (floor(_time/60));
 			_minutes = (_time - (_hours * 60));
+			_fracColor = parseText "";
+			_gears = 0;
+			_gearsEnabled = ["A3W_gearsEnabled"] call isConfigOn;
+			if (_gearsEnabled) then
+			{
+				_result = ["getPlayerGearLevel:" + _UID, 2] call extDB_Database_async;
+
+				if (count _result > 0) then
+				{
+					_gears = _result select 0;
+				};
+			};
+			_gearToStr = "";
+
+			//Gear Level
+			call
+			{
+			    if (__gears == 1) exitWith {_gearToStr = "1"; _fracColor = parseText "#FBFCFE";};
+			    if (__gears == 2) exitWith {_gearToStr = "2"; _fracColor = parseText "#FBFCFE";};
+			    if (__gears == 3) exitWith {_gearToStr = "3"; _fracColor = parseText "#FBFCFE";};
+					if (__gears == 4) exitWith {_gearToStr = "4"; _fracColor = parseText "#FBFCFE";};
+			    if (__gears == 5) exitWith {_gearToStr = "5"; _fracColor = parseText "#FBFCFE";};
+			    if (__gears == 6) exitWith {_gearToStr = "6"; _fracColor = parseText "#FBFCFE";};
+					if (__gears == 7) exitWith {_gearToStr = "7"; _fracColor = parseText "#FBFCFE";};
+			    if (__gears == 8) exitWith {_gearToStr = "8"; _fracColor = parseText "#FBFCFE";};
+			    if (__gears == 9) exitWith {_gearToStr = "9"; _fracColor = parseText "#FBFCFE";};
+					if (__gears == 10) exitWith {_gearToStr = "10"; _fracColor = parseText "#FBFCFE";};
+			    if (__gears == 11) exitWith {_gearToStr = "1"; _fracColor = parseText "FFCC00";};
+			    if (__gears == 12) exitWith {_gearToStr = "2"; _fracColor = parseText "FFCC00";};
+					if (__gears == 13) exitWith {_gearToStr = "3"; _fracColor = parseText "FFCC00";};
+			    if (__gears == 14) exitWith {_gearToStr = "4"; _fracColor = parseText "FFCC00";};
+			    if (__gears == 15) exitWith {_gearToStr = "5"; _fracColor = parseText "FFCC00";};
+					if (__gears == 16) exitWith {_gearToStr = "SP"};
+			    _gearToStr = "0";
+					_fracColor = parseText "#FBFCFE";
+			};
 
 			switch(_minutes) do
 			{
@@ -108,6 +144,7 @@ ZGO_StatusEnabled = true; // LOL ^^
 			parseText
 			format
 			["
+				<t shadow='1' shadowColor='#000000' color='%18'><img size='1.0'	shadowColor='#000000' image='addons\statusbar\icons\frac.paa' color='%9'/> %17</t>
 				<t shadow='1' shadowColor='#000000' color='%9'><img size='1.6'  shadowColor='#000000' image='addons\statusbar\icons\players.paa' color='%9'/> %2</t>
 				<t shadow='1' shadowColor='#000000' color='%14'><img size='1.0'  shadowColor='#000000' image='addons\statusbar\icons\health.paa' color='%9'/> %3%1</t>
 				<t shadow='1' shadowColor='#000000' color='%9'><img size='1.0'  shadowColor='#000000' image='addons\statusbar\icons\money.paa' color='%9'/> %4</t>
@@ -131,7 +168,9 @@ ZGO_StatusEnabled = true; // LOL ^^
 						_minutes,
 						_colourDamage,
 						_colourHunger,
-						_colourThirst
+						_colourThirst,
+						_gearToStr,
+						_fracColor
 			];
 		};
 	};

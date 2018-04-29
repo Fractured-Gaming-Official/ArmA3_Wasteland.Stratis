@@ -26,6 +26,7 @@
 
 	_input = _dialog displayCtrl AtmAmountInput_IDC;
 	_input ctrlAddEventHandler ["KeyUp", mf_items_atm_refresh_amounts];
+
 	ctrlSetFocus _input;
 }] execFSM "call.fsm")
 spawn

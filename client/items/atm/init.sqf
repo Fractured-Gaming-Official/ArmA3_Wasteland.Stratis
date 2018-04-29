@@ -15,6 +15,7 @@ mf_items_atm_refresh_amounts = [_path, "refresh_amounts.sqf"] call mf_compile;
 mf_items_atm_select_account = [_path, "select_account.sqf"] call mf_compile;
 
 mf_items_atm_deposit = [_path, "deposit.sqf"] call mf_compile;
+mf_items_atm_depositall = [_path, "depositAll.sqf"] call mf_compile;
 mf_items_atm_withdraw = [_path, "withdraw.sqf"] call mf_compile;
 mf_items_atm_transfer = [_path, "transfer.sqf"] call mf_compile;
 
