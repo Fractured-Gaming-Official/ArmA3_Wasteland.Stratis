@@ -144,6 +144,7 @@ _availableLmgs =
 "arifle_SPAR_02_blk_F",
 "arifle_SPAR_02_khk_F",
 "arifle_SPAR_02_snd_F",
+"LMG_03_F",
 "LMG_Mk200_F",
 "LMG_Zafir_F",
 "MMG_01_hex_F",
@@ -164,6 +165,8 @@ _availableLmgMagazines =
 "30Rnd_65x39_caseless_mag_Tracer",
 "150Rnd_556x45_Drum_Mag_F",
 "150Rnd_556x45_Drum_Mag_Tracer_F",
+"200Rnd_556x45_Box_Tracer_F",
+"200Rnd_556x45_Box_Tracer_Red_F",
 "200Rnd_65x39_cased_Box",
 "200Rnd_65x39_cased_Box_Tracer",
 "150Rnd_762x54_Box",
@@ -344,7 +347,7 @@ _availableExplosives =
 "APERSBoundingMine_Range_Mag",
 "APERSMine_Range_Mag",
 //"APERSMineDispenser_Mag",
-"APERSTripMine_Wire_Mag",
+//"APERSTripMine_Wire_Mag",
 "ATMine_Range_Mag",
 "ClaymoreDirectionalMine_Remote_Mag",
 "DemoCharge_Remote_Mag",
@@ -360,9 +363,6 @@ _availableExplosives =
 
 _availableHeadGear =
 [
-// Work In Progress
-
-
 "H_HelmetSpecO_blk",
 "H_HelmetSpecO_ghex_F",
 "H_HelmetSpecO_ocamo",
@@ -603,9 +603,6 @@ _availableHeadGearAccessories =
 
 _availableUniforms =
 [
-// Work In Progress
-
-
 "U_B_CombatUniform_mcam",
 "U_B_CombatUniform_mcam_tshirt",
 "U_B_CombatUniform_mcam_vest",
@@ -739,9 +736,6 @@ _availableUniforms =
 
 _availableBackPacks =
 [
-// Work In Progress
-
-
 "B_AssaultPack_blk",
 "B_AssaultPack_cbr",
 "B_AssaultPack_dgtl",
@@ -801,9 +795,6 @@ _availableBackPacks =
 
 _availableVests =
 [
-// Work In Progress
-
-
 "V_PlateCarrierGL_blk",
 "V_PlateCarrierGL_rgr",
 "V_PlateCarrierGL_mtp",
@@ -898,7 +889,7 @@ _availableAccessories =
 "ItemCompass",
 "ItemGPS",
 "ItemMap",
-"ItemRadio",
+"ItemRadio";
 "ItemWatch",
 // "Laserdesignator",
 // "Laserdesignator_01_khk_F",

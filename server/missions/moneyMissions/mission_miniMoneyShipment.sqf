@@ -2,99 +2,73 @@
 // * This project is licensed under the GNU Affero GPL v3. Copyright © 2014 A3Wasteland.com *
 // ******************************************************************************************
 //	@file Version: 2.1
-//	@file Name: mission_ArmedPatrol.sqf
+//	@file Name: mission_MoneyShipment.sqf
 //	@file Author: JoSchaap / routes by Del1te - (original idea by Sanjo), AgentRev
 //	@file Created: 31/08/2013 18:19
 
 if (!isServer) exitwith {};
-#include "MainMissionDefines.sqf";
+#include "moneyMissionDefines.sqf";
 
-private ["_Patrol", "_convoys", "_vehChoices", "_vehClasses", "_createVehicle", "_vehicles", "_veh2", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_box1", "_box2", "_box3", "_Mortar"];
+private ["_MoneyShipment", "_moneyAmount", "_convoys", "_vehChoices", "_moneyText", "_vehClasses", "_createVehicle", "_vehicles", "_veh2", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_cash"];
 
 _setupVars =
 {
 	// _locationsArray = nil;
 
-	// Patrol settings
+	// Money Shipments settings
 	// Difficulties : Min = 1, Max = infinite
 	// Convoys per difficulty : Min = 1, Max = infinite
 	// Vehicles per convoy : Min = 1, Max = infinite
 	// Choices per vehicle : Min = 1, Max = infinite
-	_Patrol =
+	_MoneyShipment = selectRandom
 	[
+		// Easy
+		[
+			"Money Runners", // Marker text
+			30000, // Money
+			[
+				[ // NATO convoy
+					["B_MRAP_01_hmg_F", "B_MRAP_01_gmg_F", "B_T_LSV_01_armed_F", "B_T_LSV_01_AT_F"], // Veh 1
+					["B_MRAP_01_hmg_F", "B_MRAP_01_gmg_F", "B_T_LSV_01_armed_F", "B_T_LSV_01_AT_F"] // Veh 2
+				],
+				[ // CSAT convoy
+					["O_MRAP_02_hmg_F", "O_MRAP_02_gmg_F", "B_T_LSV_01_armed_F", "O_T_LSV_02_AT_F"], // Veh 1
+					["O_MRAP_02_hmg_F", "O_MRAP_02_gmg_F", "B_T_LSV_01_armed_F", "O_T_LSV_02_AT_F"] // Veh 2
+				],
+				[ // AAF convoy
+					["I_MRAP_03_hmg_F", "I_MRAP_03_gmg_F", "I_LT_01_cannon_F", "O_T_LSV_02_AT_F"], // Veh 1
+					["I_MRAP_03_hmg_F", "I_MRAP_03_gmg_F", "I_LT_01_AT_F", "B_T_LSV_01_AT_F"] // Veh 2
+				]
+			]
+		],
 		// Medium
 		[
-			"APC Patrol", // Marker text
+			"Money Runners+", // Marker text
+			60000, // Money
 			[
-				[ // Tracked convoy 1
-					["O_APC_Tracked_02_cannon_F", "I_APC_tracked_03_cannon_F"], // Veh 1
-					["B_APC_Tracked_01_rcws_F", "I_APC_tracked_03_cannon_F"], // Veh 2
-					["O_APC_Tracked_02_cannon_F", "I_APC_tracked_03_cannon_F"] // Veh 3
+				[ // NATO convoy
+					["I_LT_01_cannon_F", "I_LT_01_AT_F", "I_LT_01_AA_F"], // Veh 1
+					["O_T_LSV_02_AT_F", "B_T_LSV_01_AT_F", "I_LT_01_cannon_F"], // Veh 2
+					["I_LT_01_cannon_F", "I_LT_01_AT_F", "I_LT_01_AA_F"] // Veh 3
 				],
-				[ // Wheeled convoy
-					["B_APC_Wheeled_01_cannon_F", "I_APC_Wheeled_03_cannon_F"], // Veh 1
-					["B_APC_Wheeled_01_cannon_F", "O_APC_Wheeled_02_rcws_F"], // Veh 2
-					["B_APC_Wheeled_01_cannon_F", "I_APC_Wheeled_03_cannon_F"] // Veh 4
-				],
-				[ // Tracked Convoy 2
-					["O_APC_Tracked_02_cannon_F", "I_APC_tracked_03_cannon_F"], // Veh 1
-					["O_APC_Tracked_02_cannon_F", "B_APC_Tracked_01_CRV_F"], // Veh 2
-					["O_APC_Tracked_02_cannon_F", "I_APC_tracked_03_cannon_F"] // Veh 3
-				]
-			]
-		],
-		// Hard
-		[
-			"Armored Patrol", // Marker text
-			[
-				[ // Tracked convoy 1
-					["O_APC_Tracked_02_cannon_F", "I_APC_tracked_03_cannon_F"], // Veh 1
-					["I_MBT_03_cannon_F", "O_MBT_02_cannon_F"], // Veh 2
-					["O_APC_Tracked_02_cannon_F", "I_APC_tracked_03_cannon_F"] // Veh 3
-				],
-				[ // Wheeled convoy
-					["B_APC_Wheeled_01_cannon_F", "I_APC_Wheeled_03_cannon_F"], // Veh 1
-					["B_APC_Wheeled_01_cannon_F", "O_APC_Wheeled_02_rcws_F"], // Veh 2
-					["B_APC_Wheeled_01_cannon_F", "I_APC_Wheeled_03_cannon_F"] // Veh 4
-				],
-				[ // Tracked Convoy 2
-					["O_APC_Tracked_02_cannon_F", "I_APC_tracked_03_cannon_F"], // Veh 1
-					["B_MBT_01_cannon_F", "B_MBT_01_TUSK_F" ], // Veh 2
-					["O_APC_Tracked_02_cannon_F", "I_APC_tracked_03_cannon_F"] // Veh 3
-				]
-			]
-		],
-		// Extreme
-		[
-			"Anti Air Patrol", // Marker text
-			[
-				[ // Tracked convoy 1
-					["O_APC_Tracked_02_cannon_F", "I_APC_tracked_03_cannon_F"], // Veh 1
-					["B_APC_Tracked_01_AA_F", "B_APC_Tracked_01_AA_F"], // Veh 2
-					["O_APC_Tracked_02_cannon_F", "I_APC_tracked_03_cannon_F"] // Veh 3
-				],
-				[ // Wheeled convoy
-					["B_APC_Wheeled_01_cannon_F", "I_APC_Wheeled_03_cannon_F"], // Veh 1
-					["B_APC_Tracked_01_AA_F", "B_APC_Tracked_01_AA_F"], // Veh 2
-					["B_APC_Wheeled_01_cannon_F", "I_APC_Wheeled_03_cannon_F"] // Veh 4
-				],
-				[ // Tracked Convoy 2
-					["O_APC_Tracked_02_cannon_F", "I_APC_tracked_03_cannon_F"], // Veh 1
-					["O_APC_Tracked_02_AA_F", "O_APC_Tracked_02_AA_F"], // Veh 2
-					["O_APC_Tracked_02_cannon_F", "I_APC_tracked_03_cannon_F"] // Veh 3
+				[ // AAF convoy
+					["O_T_LSV_02_AT_F", "B_T_LSV_01_AT_F", "I_LT_01_cannon_F"], // Veh 1
+					["I_LT_01_cannon_F", "I_LT_01_AT_F", "I_LT_01_AA_F"], // Veh 2
+					["O_T_LSV_02_AT_F", "B_T_LSV_01_AT_F", "I_LT_01_cannon_F"] // Veh 3
 				]
 			]
 		]
 	]
-	call BIS_fnc_selectRandom;
 
-	_missionType = _Patrol select 0;
-	_convoys = _Patrol select 1;
-	_vehChoices = _convoys call BIS_fnc_selectRandom;
+	_missionType = _MoneyShipment select 0;
+	_moneyAmount = _MoneyShipment select 1;
+	_convoys = _MoneyShipment select 2;
+	_vehChoices = selectRandom _convoys;
 
+	_moneyText = format ["$%1", [_moneyAmount] call fn_numbersText];
 
 	_vehClasses = [];
-	{ _vehClasses pushBack (_x call BIS_fnc_selectRandom) } forEach _vehChoices;
+	{ _vehClasses pushBack selectRandom _x } forEach _vehChoices;
 };
 
 _setupObjects =
@@ -114,19 +88,33 @@ _setupObjects =
 		_vehicle setVariable ["R3F_LOG_disabled", true, true];
 		[_vehicle] call vehicleSetup;
 
+		// apply tropical textures to vehicles on Tanoa
+		if (worldName == "Tanoa" && _type select [1,3] != "_T_") then
+		{
+			switch (toUpper (_type select [0,2])) do
+			{
+				case "B_": { [_vehicle, ["Olive"]] call applyVehicleTexture };
+				case "O_": { [_vehicle, ["GreenHex"]] call applyVehicleTexture };
+			};
+		};
+
 		_vehicle setDir _direction;
 		_aiGroup addVehicle _vehicle;
 
 		_soldier = [_aiGroup, _position] call createRandomSoldier;
 		_soldier moveInDriver _vehicle;
 
-		_soldier = [_aiGroup, _position] call createRandomSoldier;
-		_soldier moveInCargo [_vehicle, 0];
+		if !(_type isKindOf "LT_01_base_F") then
+		{
+			_soldier = [_aiGroup, _position] call createRandomSoldier;
+			_soldier moveInCargo [_vehicle, 0];
+		};
 
 		if !(_type isKindOf "Truck_F") then
 		{
 			_soldier = [_aiGroup, _position] call createRandomSoldier;
 			_soldier moveInGunner _vehicle;
+			if (_type isKindOf "LT_01_base_F") exitWith {};
 
 			_soldier = [_aiGroup, _position] call createRandomSoldier;
 
@@ -141,6 +129,7 @@ _setupObjects =
 		};
 
 		[_vehicle, _aiGroup] spawn checkMissionVehicleLock;
+
 		_vehicle
 	};
 
@@ -149,8 +138,7 @@ _setupObjects =
 
     _skippedTowns = // get the list from -> \mapConfig\towns.sqf
     [
-        "Town_17",
-		"Town_14" // Pythos Island Marker Name
+        "Town_14" // Pythos Island Marker Name
     ];
 
     _town = ""; _missionPos = [0,0,0]; _radius = 0;
@@ -214,10 +202,10 @@ _setupObjects =
 
 	_missionPos = getPosATL leader _aiGroup;
 
-	_missionPicture = getText (configFile >> "CfgVehicles" >> (_veh2 param [0,""]) >> "picture");
- 	_vehicleName = getText (configFile >> "CfgVehicles" >> (_veh2 param [0,""]) >> "displayName");
+	_missionPicture = getText (configFile >> "CfgVehicles" >> _veh2 >> "picture");
+	_vehicleName = getText (configFile >> "cfgVehicles" >> _veh2 >> "displayName");
 
-	_missionHintText = format ["A Military Patrol containing a <t color='%3'>%1</t> is patrolling the island. Destroy them and recover their cargo!", _vehicleName, mainMissionColor];
+	_missionHintText = format ["Money Runners transporting <t color='%1'>%2</t> escorted by a <t color='%1'>%3</t> is en route to an unknown location.<br/>Stop them!", moneyMissionColor, _moneyText, _vehicleName];
 
 	_numWaypoints = count waypoints _aiGroup;
 };
@@ -234,23 +222,16 @@ _successExec =
 {
 	// Mission completed
 
-	_box1 = createVehicle ["Box_NATO_Wps_F", _lastPos, [], 5, "None"];
-	_box1 setDir random 360;
-	[_box1, "mission_USSpecial"] call fn_refillbox;
+	for "_i" from 1 to 10 do
+	{
+		_cash = createVehicle ["Land_Money_F", _lastPos, [], 5, "None"];
+		_cash setPos ([_lastPos, [[2 + random 3,0,0], random 360] call BIS_fnc_rotateVector2D] call BIS_fnc_vectorAdd);
+		_cash setDir random 360;
+		_cash setVariable ["cmoney", _moneyAmount / 10, true];
+		_cash setVariable ["owner", "world", true];
+	};
 
-	_box2 = createVehicle ["Box_East_Wps_F", _lastPos, [], 5, "None"];
-	_box2 setDir random 360;
-	[_box2, "mission_USLaunchers"] call fn_refillbox;
-
-	_box3 = createVehicle ["Box_IND_WpsSpecial_F", _lastPos, [], 5, "None"];
-	_box3 setDir random 360;
-	[_box3, "mission_Main_A3snipers"] call fn_refillbox;
-
-	_mortar = createVehicle ["I_Mortar_01_F", _lastPos, [], 5, "None"];
-	_mortar setVariable ["R3F_LOG_Disabled", false, true];
-	_mortar setDir random 360;
-
-	_successHintMessage = "The Patrol has been stopped! Ammo crates and a Mortar have fallen nearby.";
+	_successHintMessage = "The runners has been stopped, the money and vehicles are now yours to take.";
 };
 
-_this call MainMissionProcessor;
+_this call moneyMissionProcessor;
