@@ -109,6 +109,7 @@ if (hasInterface || isServer) then
     [] execVM "addons\outOfBounds\outOfBoundsLandVehicle.sqf";
     [] execVM "addons\outOfBounds\outOfBoundsRemote.sqf";
 	[] execVM "addons\Fuel\Fuelconsumption.sqf";
+	[] execVM "addons\FSNVG\fullScreenNightVision.sqf";
 
 	if (isNil "drn_DynamicWeather_MainThread") then { drn_DynamicWeather_MainThread = [] execVM "addons\scripts\DynamicWeatherEffects.sqf" };
 };
