@@ -216,6 +216,10 @@ if (!isNil "_itemEntry") then
 				{
 					_description = "Thermally insulated";
 				};
+				if (_itemType == "G_Combat_Goggles_tna_F") then
+				{
+					_description = "See the World clearly, even at night. (Make sure to remove your clunky NVG's First!)";
+				};
 			};
 			default
 			{

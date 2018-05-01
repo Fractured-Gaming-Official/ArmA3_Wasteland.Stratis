@@ -788,6 +788,7 @@ genItemArray = compileFinal str
 	["Compact NVG (Hex)", "O_NVGoggles_hex_F", 1500, "nvg"],
 	["Compact NVG (G Hex)", "O_NVGoggles_ghex_F", 1500, "nvg"],
 	["Compact NVG (Urban)", "O_NVGoggles_urb_F", 1500, "nvg"],
+	["Full Screen NVG's", "G_Combat_Goggles_tna_F", 5000, "gogg", "noDLC"],
 	["Binoculars", "Binocular", 50, "binoc"],
 
 	["Rangefinder", "Rangefinder", 200, "binoc"],
@@ -810,7 +811,6 @@ genItemArray = compileFinal str
 	["Stealth Balaclava (Green)", "G_Balaclava_TI_tna_F", 400, "gogg"],
 	["Stealth Balaclava (Green, Goggles)", "G_Balaclava_TI_G_tna_F", 450, "gogg"],
 	["Combat Goggles", "G_Combat", 125, "gogg"],
-	["Full Screen NVG's (remove normal nvgs)", "G_Combat_Goggles_tna_F", 5000, "gogg", "noDLC"],
 	["VR Goggles", "G_Goggles_VR", 125, "gogg"],
 	["Balaclava (Black)", "G_Balaclava_blk", 125, "gogg"],
 	["Balaclava (Combat Goggles)", "G_Balaclava_combat", 125, "gogg"],

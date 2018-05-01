@@ -2,7 +2,7 @@
 //	@file Name: getItemDescription.sqf
 //	@file Author: AgentRev
 //	@file Created: 12/10/2013 22:45
-//	@file Args: 
+//	@file Args:
 
 private ["_itemText", "_itemData", "_price", "_description", "_showAmmo", "_itemEntry", "_parentCfg", "_itemType", "_weapon"];
 
@@ -44,7 +44,7 @@ if (isNil "_itemEntry") then
 		{
 			_itemEntry = _x;
 			_itemType = _x select 3;
-			
+
 			switch (true) do
 			{
 				case (_itemType == "mag"):                            { _parentCfg = "CfgMagazines" };
@@ -59,7 +59,7 @@ if (isNil "_itemEntry") then
 {
 	{
 		if (!isNil "_itemEntry") exitWith {};
-		
+
 		{
 			if (_itemText == _x select 0 && _itemData == _x select 1) exitWith
 			{
@@ -74,7 +74,7 @@ if (isNil "_itemEntry") then
 {
 	{
 		if (!isNil "_itemEntry") exitWith {};
-		
+
 		{
 			if (_itemText == _x select 0 && _itemData == _x select 1) exitWith
 			{
@@ -90,7 +90,7 @@ if (!isNil "_itemEntry") then
 	_itemType = _itemEntry select 1;
 	_price = _itemEntry select 2;
 	_weapon = configFile >> _parentCfg >> _itemType;
-	
+
 	// Set custom name and/or description
 	if (count _itemEntry > 3) then
 	{
@@ -99,8 +99,8 @@ if (!isNil "_itemEntry") then
 			case "backpack":
 			{
 				_weapon = (configFile >> "CfgVehicles" >> _itemType);
-				
-				switch (true) do 
+
+				switch (true) do
 				{
 					case (_itemType isKindOf "B_Parachute"):
 					{
@@ -110,16 +110,16 @@ if (!isNil "_itemEntry") then
 					case (["_UAV_01_backpack_", _itemType] call fn_findString != -1):
 					{
 						private "_uavType";
-						
+
 						switch (playerSide) do
 						{
 							case BLUFOR: { _uavType = "B_UAV_01_F" };
 							case OPFOR:  { _uavType = "O_UAV_01_F" };
 							default      { _uavType = "I_UAV_01_F" };
 						};
-						
+
 						_weapon = configFile >> "CfgVehicles" >> _uavType;
-						
+
 						//_name = getText (_weapon >> "displayName") + " UAV";
 						_description = "Remote-controled quadcopter to spy on your neighbors, pre-packaged in a backpack.<br/>UAV Terminal sold separately. Ages 8+";
 					};
@@ -144,7 +144,7 @@ if (!isNil "_itemEntry") then
 			case "gogg":
 			{
 				_weapon = configFile >> "CfgGlasses" >> _itemType;
-				
+
 				if (_itemType == "G_Diving") then
 				{
 					_description = "Increases underwater visibility";
@@ -159,17 +159,17 @@ if (!isNil "_itemEntry") then
 						//_name = _itemText;
 						_description = "In case you lost your clothes";
 					};
-					case (["_GhillieSuit", _itemType] call fn_findString != -1): 
+					case (["_GhillieSuit", _itemType] call fn_findString != -1):
 					{
 						//_name = _itemText;
 						_description = "Disguise as a swamp monster";
 					};
-					case (["_Wetsuit", _itemType] call fn_findString != -1): 
+					case (["_Wetsuit", _itemType] call fn_findString != -1):
 					{
 						//_name = _itemText;
 						_description = "Allows faster swimming";
 					};
-					case (["_UavTerminal", _itemType] call fn_findString != -1): 
+					case (["_UavTerminal", _itemType] call fn_findString != -1):
 					{
 						//_name = getText (_weapon >> "displayName");
 						_description = getText (_weapon >> "descriptionShort") + "<br/>Assign to GPS slot.";
@@ -182,7 +182,7 @@ if (!isNil "_itemEntry") then
 
 if (isNil "_itemEntry") then
 {
-	{	
+	{
 		if (_itemData == _x select 1) exitWith
 		{
 			_itemEntry = _x;
