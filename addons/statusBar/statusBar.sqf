@@ -75,24 +75,24 @@ ZGO_StatusEnabled = true; // LOL ^^
 			//Gear Level
 			call
 			{
-			    if (__gears == 1) exitWith {_gearToStr = "1"; _fracColor = parseText "#FBFCFE";};
-			    if (__gears == 2) exitWith {_gearToStr = "2"; _fracColor = parseText "#FBFCFE";};
-			    if (__gears == 3) exitWith {_gearToStr = "3"; _fracColor = parseText "#FBFCFE";};
-					if (__gears == 4) exitWith {_gearToStr = "4"; _fracColor = parseText "#FBFCFE";};
-			    if (__gears == 5) exitWith {_gearToStr = "5"; _fracColor = parseText "#FBFCFE";};
-			    if (__gears == 6) exitWith {_gearToStr = "6"; _fracColor = parseText "#FBFCFE";};
-					if (__gears == 7) exitWith {_gearToStr = "7"; _fracColor = parseText "#FBFCFE";};
-			    if (__gears == 8) exitWith {_gearToStr = "8"; _fracColor = parseText "#FBFCFE";};
-			    if (__gears == 9) exitWith {_gearToStr = "9"; _fracColor = parseText "#FBFCFE";};
-					if (__gears == 10) exitWith {_gearToStr = "10"; _fracColor = parseText "#FBFCFE";};
-			    if (__gears == 11) exitWith {_gearToStr = "1"; _fracColor = parseText "FFCC00";};
-			    if (__gears == 12) exitWith {_gearToStr = "2"; _fracColor = parseText "FFCC00";};
-					if (__gears == 13) exitWith {_gearToStr = "3"; _fracColor = parseText "FFCC00";};
-			    if (__gears == 14) exitWith {_gearToStr = "4"; _fracColor = parseText "FFCC00";};
-			    if (__gears == 15) exitWith {_gearToStr = "5"; _fracColor = parseText "FFCC00";};
-					if (__gears == 16) exitWith {_gearToStr = "SP"};
-			    _gearToStr = "0";
-					_fracColor = parseText "#FBFCFE";
+				_gearToStr = "0";
+				if (_gears == 1) exitWith {_gearToStr = "1"; _fracColor = parseText "#FBFCFE";};
+				if (_gears == 2) exitWith {_gearToStr = "2"; _fracColor = parseText "#FBFCFE";};
+				if (_gears == 3) exitWith {_gearToStr = "3"; _fracColor = parseText "#FBFCFE";};
+				if (_gears == 4) exitWith {_gearToStr = "4"; _fracColor = parseText "#FBFCFE";};
+			    	if (_gears == 5) exitWith {_gearToStr = "5"; _fracColor = parseText "#FBFCFE";};
+			    	if (_gears == 6) exitWith {_gearToStr = "6"; _fracColor = parseText "#FBFCFE";};
+				if (_gears == 7) exitWith {_gearToStr = "7"; _fracColor = parseText "#FBFCFE";};
+			    	if (_gears == 8) exitWith {_gearToStr = "8"; _fracColor = parseText "#FBFCFE";};
+			    	if (_gears == 9) exitWith {_gearToStr = "9"; _fracColor = parseText "#FBFCFE";};
+				if (_gears == 10) exitWith {_gearToStr = "10"; _fracColor = parseText "#FBFCFE";};
+			    	if (_gears == 11) exitWith {_gearToStr = "1"; _fracColor = parseText "#FFCC00";};
+			    	if (_gears == 12) exitWith {_gearToStr = "2"; _fracColor = parseText "#FFCC00";};
+				if (_gears == 13) exitWith {_gearToStr = "3"; _fracColor = parseText "#FFCC00";};
+			    	if (_gears == 14) exitWith {_gearToStr = "4"; _fracColor = parseText "#FFCC00";};
+			    	if (_gears == 15) exitWith {_gearToStr = "5"; _fracColor = parseText "#FFCC00";};
+				if (_gears == 16) exitWith {_gearToStr = "SP"};
+				_fracColor = parseText "#FBFCFE";
 			};
 
 			switch(_minutes) do
