@@ -10,8 +10,8 @@
 // Name, Building Position, Desk Direction (or [Desk Direction, Front Offset]), Excluded Buttons
 storeOwnerConfig = compileFinal str
 [
-	["GenStore1", -1, [], []],		//Agia Marina 
-	["GenStore2", -1, [], []],		//Kamino 
+	["GenStore1", -1, [], []],		//Agia Marina
+	["GenStore2", -1, [], []],		//Kamino
 	["GenStore3", -1, [], []],		//Rogain
 	["GenStore4", -1, [], []],		//Airbase
 	["GenStore5", -1, [], []],		//JayCove
@@ -25,7 +25,8 @@ storeOwnerConfig = compileFinal str
 	["GunStore5", -1, [], []],		//Agia Marina
 	["GunStore6", -1, [], []],		//Camp Maxwell
 	["GunStore7", -1, [], []],		//Walmart
-	
+	["GunStore8", -1, [], []],		//Walmart
+
 
 	// Buttons you can disable: "Land", "Armored", "Tanks", "Helicopters", "Boats", "Planes"
 	["VehStore1", -1, [], ["Planes", "Helicopters"]],		//Kamino
@@ -36,7 +37,7 @@ storeOwnerConfig = compileFinal str
 	["VehStore6", -1, [], ["Planes"]],				//Girna
     ["VehStore7", -1, [], ["Boats", "Planes", "Tanks"]],	//Rogain
 	["VehStore8", -1, [], ["Land", "Armored", "Tanks"]]	//Kamino Aircraft Carrier
-	
+
 ];
 
 // Outfits for store owners
@@ -57,6 +58,7 @@ storeOwnerConfigAppearance = compileFinal str
 	["GunStore5", [["weapon", ""], ["uniform", "U_IG_Guerilla1_1"]]],
 	["GunStore6", [["weapon", ""], ["uniform", "U_IG_Guerilla1_1"]]],
 	["GunStore7", [["weapon", ""], ["uniform", "U_IG_Guerilla1_1"]]],
+	["GunStore8", [["weapon", ""], ["uniform", "U_IG_Guerilla1_1"]]],
 
 	["VehStore1", [["weapon", ""], ["uniform", "U_Competitor"]]],
 	["VehStore2", [["weapon", ""], ["uniform", "U_Competitor"]]],
