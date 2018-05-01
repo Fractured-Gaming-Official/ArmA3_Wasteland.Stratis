@@ -59,6 +59,33 @@ ZGO_StatusEnabled = true; // LOL ^^
 			_hours = (floor(_time/60));
 			_minutes = (_time - (_hours * 60));
 
+			/*/--------------------GearLevels--------------------/*/
+			_gearsEnabled = ["A3W_gearsEnabled"] call isConfigOn;
+		        _gearLevel = player getVariable ["gear", 0];
+            		_fracColor = parseText "";
+            		_gearToStr = "";
+
+            		switch (_gearLevel) do
+             			{
+            				case 1: {_gearToStr = "1"; _fracColor = parseText "#FBFCFE";};
+            				case 2: {_gearToStr = "2"; _fracColor = parseText "#FBFCFE";};
+                			case 3: {_gearToStr = "3"; _fracColor = parseText "#FBFCFE";};
+                			case 4: {_gearToStr = "4"; _fracColor = parseText "#FBFCFE";};
+                			case 5: {_gearToStr = "5"; _fracColor = parseText "#FBFCFE";};
+                			case 6: {_gearToStr = "6"; _fracColor = parseText "#FBFCFE";};
+                			case 7: {_gearToStr = "7"; _fracColor = parseText "#FBFCFE";};
+                			case 8: {_gearToStr = "8"; _fracColor = parseText "#FBFCFE";};
+                			case 9: {_gearToStr = "9"; _fracColor = parseText "#FBFCFE";};
+                			case 10: {_gearToStr = "10"; _fracColor = parseText "#FBFCFE";};
+                			case 11: {_gearToStr = "1"; _fracColor = parseText "#FFCC00";};
+                			case 12: {_gearToStr = "2"; _fracColor = parseText "#FFCC00";};
+                			case 13: {_gearToStr = "3"; _fracColor = parseText "#FFCC00";};
+                			case 14: {_gearToStr = "4"; _fracColor = parseText "#FFCC00";};
+                			case 15: {_gearToStr = "5"; _fracColor = parseText "#FFCC00";};
+                			case 16: {_gearToStr = "SP"; _fracColor = parseText "#2787DB";};
+            				default {_gearToStr = "0"; _fracColor = parseText "#FBFCFE";};
+            			};
+
 			switch(_minutes) do
 			{
 				case 9: {_minutes = "09"};
@@ -108,6 +135,7 @@ ZGO_StatusEnabled = true; // LOL ^^
 			parseText
 			format
 			["
+				<t shadow='1' shadowColor='#000000' color='%18'><img size='1.0'	shadowColor='#000000' image='addons\statusbar\icons\frac.paa' color='%9'/> %17</t>
 				<t shadow='1' shadowColor='#000000' color='%9'><img size='1.6'  shadowColor='#000000' image='addons\statusbar\icons\players.paa' color='%9'/> %2</t>
 				<t shadow='1' shadowColor='#000000' color='%14'><img size='1.0'  shadowColor='#000000' image='addons\statusbar\icons\health.paa' color='%9'/> %3%1</t>
 				<t shadow='1' shadowColor='#000000' color='%9'><img size='1.0'  shadowColor='#000000' image='addons\statusbar\icons\money.paa' color='%9'/> %4</t>
@@ -131,7 +159,9 @@ ZGO_StatusEnabled = true; // LOL ^^
 						_minutes,
 						_colourDamage,
 						_colourHunger,
-						_colourThirst
+						_colourThirst,
+						_gearToStr,
+						_fracColor
 			];
 		};
 	};
