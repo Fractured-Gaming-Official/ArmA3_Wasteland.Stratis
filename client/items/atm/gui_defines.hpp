@@ -13,3 +13,4 @@
 #define AtmDepositButton_IDC 2010
 #define AtmWithdrawButton_IDC 2020
 #define AtmCancelButton_IDC 2030
+#define AtmDepositAll_IDC 2040

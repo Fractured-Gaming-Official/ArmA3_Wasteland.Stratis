@@ -11,7 +11,7 @@ class AtmGUI
 	idd = AtmGUI_IDD;
 	movingEnable = true;
 	enableSimulation = true;
-	controls[] = {AtmBalanceHead, AtmBalanceText, AtmAmountLabel, AtmAmountInput, AtmAccountLabel, AtmAccountDropdown, AtmFeeLabel, AtmFeeText, AtmTotalLabel, AtmTotalText, AtmDepositButton, AtmWithdrawButton, AtmCancelButton};
+	controls[] = {AtmBalanceHead, AtmBalanceText, AtmAmountLabel, AtmAmountInput, AtmAccountLabel, AtmAccountDropdown, AtmFeeLabel, AtmFeeText, AtmTotalLabel, AtmTotalText, AtmDepositButton, AtmWithdrawButton, AtmCancelButton, AtmDepositAll};
 	controlsBackground[] = {AtmBG, AtmTopBG, AtmTopLogo, AtmBalanceBG};
 
 
@@ -27,7 +27,7 @@ class AtmGUI
 		idc = -1;
 		colorBackground[] = {0, 0, 0, 0.6};
 
-		#define AtmBG_W (0.5 * X_SCALE)
+		#define AtmBG_W (0.7 * X_SCALE)
 		#define AtmBG_H (0.4 * Y_SCALE)
 		#define AtmBG_X (0.5 - (AtmBG_W / 2)) // middle of screen
 		#define AtmBG_Y (0.5 - (AtmBG_H / 2)) // middle of screen
@@ -259,7 +259,7 @@ class AtmGUI
 	};
 
 
-	#define AtmButton_W ((AtmBG_W - ((Atm_OUTER_MARGIN_X * 2) + (Atm_INNER_MARGIN_X * 2))) / 3)
+	#define AtmButton_W ((AtmBG_W - ((Atm_OUTER_MARGIN_X * 8) + (Atm_INNER_MARGIN_X * 8))) / 3)
 	#define AtmButton_H (0.033 * Y_SCALE)
 	#define AtmButton_Y ((AtmBG_Y + AtmBG_H) - (Atm_OUTER_MARGIN_Y + AtmButton_H))
 
@@ -290,13 +290,24 @@ class AtmGUI
 		x = AtmDepositButton_X;
 	};
 
+	class AtmDepositAll : AtmGreenButton
+	{
+		idc = AtmDepositAll;
+		text = "Deposit All";
+		action = "call mf_items_atm_depositall";
+
+		#define AtmDepositAll_X (AtmDepositButton_X + AtmButton_W + Atm_INNER_MARGIN_X)
+
+		x = AtmDepositAll_X;
+	}
+
 	class AtmWithdrawButton : AtmGreenButton
 	{
 		idc = AtmWithdrawButton_IDC;
 		text = "Withdraw";
 		action = "call mf_items_atm_withdraw";
 
-		#define AtmWithdrawButton_X (AtmDepositButton_X + AtmButton_W + Atm_INNER_MARGIN_X)
+		#define AtmWithdrawButton_X (AtmDepositAll_X + AtmButton_W + Atm_INNER_MARGIN_X)
 
 		x = AtmWithdrawButton_X;
 	};
