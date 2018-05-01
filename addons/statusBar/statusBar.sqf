@@ -58,42 +58,33 @@ ZGO_StatusEnabled = true; // LOL ^^
 			_time = (round(360-(serverTime)/60));  //edit the '240' value (60*4=240) to change the countdown timer if your server restarts are shorter or longer than 4 hour intervals
 			_hours = (floor(_time/60));
 			_minutes = (_time - (_hours * 60));
-			_fracColor = parseText "";
-			_gears = 0;
+
+			/*/--------------------GearLevels--------------------/*/
 			_gearsEnabled = ["A3W_gearsEnabled"] call isConfigOn;
-			if (_gearsEnabled) then
-			{
-				_result = ["getPlayerGearLevel:" + _UID, 2] call extDB_Database_async;
+		        _gearLevel = player getVariable ["gear", 0];
+            		_fracColor = parseText "";
+            		_gearToStr = "";
 
-				if (count _result > 0) then
-				{
-					_gears = _result select 0;
-				};
-			};
-			_gearToStr = "";
-
-			//Gear Level
-			call
-			{
-				_gearToStr = "0";
-				if (_gears == 1) exitWith {_gearToStr = "1"; _fracColor = parseText "#FBFCFE";};
-				if (_gears == 2) exitWith {_gearToStr = "2"; _fracColor = parseText "#FBFCFE";};
-				if (_gears == 3) exitWith {_gearToStr = "3"; _fracColor = parseText "#FBFCFE";};
-				if (_gears == 4) exitWith {_gearToStr = "4"; _fracColor = parseText "#FBFCFE";};
-			    	if (_gears == 5) exitWith {_gearToStr = "5"; _fracColor = parseText "#FBFCFE";};
-			    	if (_gears == 6) exitWith {_gearToStr = "6"; _fracColor = parseText "#FBFCFE";};
-				if (_gears == 7) exitWith {_gearToStr = "7"; _fracColor = parseText "#FBFCFE";};
-			    	if (_gears == 8) exitWith {_gearToStr = "8"; _fracColor = parseText "#FBFCFE";};
-			    	if (_gears == 9) exitWith {_gearToStr = "9"; _fracColor = parseText "#FBFCFE";};
-				if (_gears == 10) exitWith {_gearToStr = "10"; _fracColor = parseText "#FBFCFE";};
-			    	if (_gears == 11) exitWith {_gearToStr = "1"; _fracColor = parseText "#FFCC00";};
-			    	if (_gears == 12) exitWith {_gearToStr = "2"; _fracColor = parseText "#FFCC00";};
-				if (_gears == 13) exitWith {_gearToStr = "3"; _fracColor = parseText "#FFCC00";};
-			    	if (_gears == 14) exitWith {_gearToStr = "4"; _fracColor = parseText "#FFCC00";};
-			    	if (_gears == 15) exitWith {_gearToStr = "5"; _fracColor = parseText "#FFCC00";};
-				if (_gears == 16) exitWith {_gearToStr = "SP"};
-				_fracColor = parseText "#FBFCFE";
-			};
+            		switch (_gearLevel) do
+             			{
+            				case 1: {_gearToStr = "1"; _fracColor = parseText "#FBFCFE";};
+            				case 2: {_gearToStr = "2"; _fracColor = parseText "#FBFCFE";};
+                			case 3: {_gearToStr = "3"; _fracColor = parseText "#FBFCFE";};
+                			case 4: {_gearToStr = "4"; _fracColor = parseText "#FBFCFE";};
+                			case 5: {_gearToStr = "5"; _fracColor = parseText "#FBFCFE";};
+                			case 6: {_gearToStr = "6"; _fracColor = parseText "#FBFCFE";};
+                			case 7: {_gearToStr = "7"; _fracColor = parseText "#FBFCFE";};
+                			case 8: {_gearToStr = "8"; _fracColor = parseText "#FBFCFE";};
+                			case 9: {_gearToStr = "9"; _fracColor = parseText "#FBFCFE";};
+                			case 10: {_gearToStr = "10"; _fracColor = parseText "#FBFCFE";};
+                			case 11: {_gearToStr = "1"; _fracColor = parseText "#FFCC00";};
+                			case 12: {_gearToStr = "2"; _fracColor = parseText "#FFCC00";};
+                			case 13: {_gearToStr = "3"; _fracColor = parseText "#FFCC00";};
+                			case 14: {_gearToStr = "4"; _fracColor = parseText "#FFCC00";};
+                			case 15: {_gearToStr = "5"; _fracColor = parseText "#FFCC00";};
+                			case 16: {_gearToStr = "SP"; _fracColor = parseText "#2787DB";};
+            				default {_gearToStr = "0"; _fracColor = parseText "#FBFCFE";};
+            			};
 
 			switch(_minutes) do
 			{
