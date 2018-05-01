@@ -24,6 +24,7 @@ player createDiaryRecord ["changelog",
 [
 "FRACTURED Logs",
 "
+<<<<<<< HEAD
 <br/>[Restricted] Restricted Items Removed From VA Whitelist
 <br/>[Limited] VA Grenades to 2 (2 per type)
 <br/>[Limited] VA Rockets to 3 (1 AT in Rocket 1 HE and 1 AT in Inventory)
@@ -44,6 +45,30 @@ player createDiaryRecord ["changelog",
 <br/>[Added] Tanks DLC to stores
 <br/>[Fixed] Store Prices
 <br/>[Fixed] Disable Thermals
+=======
+<br/>[ADDED] Gear Level To Status Bar (Beside Logo)
+<br/>[ADDED] FG Logo To Status Bar
+<br/>[ADDED] Deposit All Button to ATM
+<br/>[LIMITED] VA Grenades to 2 (2 per type)
+<br/>[LIMITED] VA Rockets to 3 (1 AT in Rocket 1 HE and 1 AT in Inventory)
+<br/>[LIMITED] VA Mags to 5 (1 in gun 4 in inventory)
+<br/>[LIMITED]VA Spawn Order VA -> Select Spawn
+<br/>[OPTIMIZED] VA Gear Level
+<br/>[LIMITED] Ammo Amount for Gear Levels
+<br/>[REDUCED] Frequency of Abandoned Vehicle Mission
+<br/>[REMOVED] Vehicles from Abandoned Vehicle Mission
+<br/>[FIX] Start Up Messages
+<br/>[OPTIMIZED] Code and Calls
+<br/>[UPDATE] Mission and Database to current
+<br/>[ADDED] New Vehicles to Disable Thermals
+<br/>[ADDED] New Vehicles to ToxicGas Exemptions
+<br/>[UPDATE] Anti-Hack :)
+<br/>[NEW] Mission - Abandoned Vehicle
+<br/>[ADDED] Server Messages
+<br/>[ADDED] Tanks DLC to stores
+<br/>[FIXED] Store Prices
+<br/>[FIXED] Disable Thermals
+>>>>>>> devBranch
 <br/>][REDUCED] HVT Map Refresh Time to 5 seconds
 <br/>][REMOVED] Bounty System by Centrifugal
 <br/>[FIXED] Optimizations for Server
