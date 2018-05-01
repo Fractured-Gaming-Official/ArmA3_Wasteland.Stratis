@@ -24,7 +24,7 @@ player createDiaryRecord ["changelog",
 [
 "FRACTURED Logs",
 "
-<br/>[ADDED] Gear Level To Status Bar (Beside FG Logo)
+<br/>[ADDED] Gear Level To Status Bar (Beside Logo)
 <br/>[ADDED] FG Logo To Status Bar
 <br/>[ADDED] Deposit All Button to ATM
 <br/>[LIMITED] VA Grenades to 2 (2 per type)
