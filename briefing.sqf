@@ -24,6 +24,8 @@ player createDiaryRecord ["changelog",
 [
 "FRACTURED Logs",
 "
+<br/>[UPDATE] Full Screen NVG fixes
+<br/>[ADDED] Visual effects while transfering sight from water to air
 <br/>[REMOVED] Broken Mission
 <br/>[ADDED] Tempest Gunstore
 <br/>[ADDED] Full Screen NVG
