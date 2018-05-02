@@ -15,7 +15,7 @@ _setupVars =
 {
 	_missionType = "Enemy Outpost";
 	_locationsArray = MissionSpawnMarkers;
-	_nbUnits = AI_GROUP_MEDIUM;
+	_nbUnits = AI_GROUP_LARGE;
 };
 
 _setupObjects =

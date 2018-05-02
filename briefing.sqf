@@ -24,6 +24,9 @@ player createDiaryRecord ["changelog",
 [
 "FRACTURED Logs",
 "
+<br/>[REMOVED] Broken Mission
+<br/>[ADDED] Tempest Gunstore
+<br/>[ADDED] Full Screen NVG
 <br/>[ADDED] Gear Level To Status Bar (Beside Logo)
 <br/>[ADDED] FG Logo To Status Bar
 <br/>[ADDED] Deposit All Button to ATM

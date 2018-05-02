@@ -21,8 +21,13 @@ MainMissions =
 	["mission_Hackers",0.5],
 	["mission_HostileJetFormation", .5],
 	["mission_AbandonedJet", .5],
+<<<<<<< HEAD
 	["mission_ArmedPatrol", 1],
 	["mission_AbandonedVehicle", 0.75]
+=======
+	["mission_ArmedPatrol", .75]
+//["mission_AbandonedVehicle", 0.75]
+>>>>>>> devBranch
 ];
 
 SideMissions =

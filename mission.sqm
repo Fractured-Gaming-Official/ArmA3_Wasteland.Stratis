@@ -8,7 +8,11 @@ class EditorData
 	toggles=10;
 	class ItemIDProvider
 	{
+<<<<<<< HEAD
 		nextID=1311;
+=======
+		nextID=1316;
+>>>>>>> devBranch
 	};
 	class MarkerIDProvider
 	{
@@ -16,6 +20,7 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
+<<<<<<< HEAD
 		nextID=102;
 	};
 	class Camera
@@ -24,6 +29,16 @@ class EditorData
 		dir[]={0.65840966,-0.2687715,-0.70319307};
 		up[]={0.18383564,0.96303183,-0.19634496};
 		aside[]={-0.73008817,-2.2567256e-006,-0.6835795};
+=======
+		nextID=104;
+	};
+	class Camera
+	{
+		pos[]={1972.9537,13.777751,3523.4221};
+		dir[]={0.91484463,-0.046186339,-0.40145281};
+		up[]={0.04255129,0.99878585,-0.018675638};
+		aside[]={-0.40189606,-1.9457511e-006,-0.91585225};
+>>>>>>> devBranch
 	};
 };
 binarizationWanted=0;
@@ -270,7 +285,11 @@ class Mission
 	};
 	class Entities
 	{
+<<<<<<< HEAD
 		items=805;
+=======
+		items=808;
+>>>>>>> devBranch
 		class Item0
 		{
 			dataType="Group";
@@ -9234,7 +9253,11 @@ class Mission
 					name="VehStore8_seaSpawn";
 					type="Empty";
 					colorName="ColorBlack";
+<<<<<<< HEAD
 					angle=225.3956;
+=======
+					angle=225.39558;
+>>>>>>> devBranch
 					id=1126;
 					atlOffset=17.706646;
 				};
@@ -10115,7 +10138,7 @@ class Mission
 					};
 					id=624;
 					type="C_man_1_1_F";
-					atlOffset=0.30299997;
+					atlOffset=0.30299902;
 					class CustomAttributes
 					{
 						class Attribute0
@@ -10145,7 +10168,7 @@ class Mission
 			{
 			};
 			id=623;
-			atlOffset=0.30299997;
+			atlOffset=0.30299902;
 		};
 		class Item437
 		{
@@ -17158,5 +17181,117 @@ class Mission
 			type="Land_Cargo_Patrol_V1_F";
 			atlOffset=-0.076751709;
 		};
+<<<<<<< HEAD
+=======
+		class Item805
+		{
+			dataType="Group";
+			side="Civilian";
+			class Entities
+			{
+				items=1;
+				class Item0
+				{
+					dataType="Object";
+					class PositionInfo
+					{
+						position[]={1975.4797,2.9155598,3530.9534};
+						angles[]={0,3.0632801,0};
+					};
+					side="Civilian";
+					flags=7;
+					class Attributes
+					{
+						init="0=[this] spawn A3W_fnc_setupStoreNPC";
+						name="GunStore8";
+					};
+					id=1312;
+					type="C_man_1_1_F";
+					atlOffset=0.027393579;
+					class CustomAttributes
+					{
+						class Attribute0
+						{
+							property="speaker";
+							expression="_this setspeaker _value;";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"STRING"
+										};
+									};
+									value="Male01GRE";
+								};
+							};
+						};
+						class Attribute1
+						{
+							property="pitch";
+							expression="_this setpitch _value;";
+							class Value
+							{
+								class data
+								{
+									class type
+									{
+										type[]=
+										{
+											"SCALAR"
+										};
+									};
+									value=0.99000001;
+								};
+							};
+						};
+						nAttributes=2;
+					};
+				};
+			};
+			class Attributes
+			{
+			};
+			id=1311;
+			atlOffset=0.027393579;
+		};
+		class Item806
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={1975.7451,3.832603,3521.6492};
+				angles[]={0,3.151057,0};
+			};
+			side="Empty";
+			flags=4;
+			class Attributes
+			{
+				init="[this] call A3W_fnc_setupMissionATM";
+			};
+			id=1313;
+			type="Land_Atm_01_F";
+			atlOffset=0.10553312;
+		};
+		class Item807
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={1975.6844,6.1604543,3527.7507};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+			};
+			id=1315;
+			type="Land_Cargo_HQ_V3_F";
+			atlOffset=-0.3354063;
+		};
+>>>>>>> devBranch
 	};
 };
