@@ -10,8 +10,8 @@ x64 bit version. extDB3 Required.
 * [X] HvT
 * [X] Hackers/Laptop
 * [X] Main missions(ish)
-* [] 3DMarkers.Removal
-* [] BreakLock
+* [x] 3DMarkers.Removal
+* [x] BreakLock
 * [X] Beacon Detector
 * [X] Mine Detector
 * [X] buryDeadBody(fixed)
@@ -20,7 +20,7 @@ x64 bit version. extDB3 Required.
 * [X] disable Thermal
 * [X] Arma Info (On connect)
 * [] Fast rope
-* [] water edge
+* [x] water edge
 * [X] View Distance Menu Update
 * [X] OutofBounds activated
 
