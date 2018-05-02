@@ -23,8 +23,6 @@
 
 	["Track Beacons", "addons\beacondetector\beacondetector.sqf",0,-10,false,false,"","('ToolKit' in (items player)) && !BeaconScanInProgress"],
 
-	["Carpet Bomb (Use Laser Designator)", "addons\carpetBomb\addAction.sqf",0,-10,false,false,"","('Laserdesignator_02' in (Assigneditems _this)"],
-
 	["View Distance", CHVD_fnc_openDialog, [], -99, false, false, "", "true"],
 
 	// If you have a custom vehicle licence system, simply remove/comment the following action
@@ -85,7 +83,7 @@ player addAction ["Carpet Bomb",
 if (currentWeapon player == "Laserdesignator_02" && isLaserOn player) then
 {
   _pos = screenToWorld [0.5,0.5];
-  _bomb = ["", _pos,270,20,100] spawn GOM_fnc_carpetbombing;
+  _bomb = ["", _pos,270,15,200] spawn GOM_fnc_carpetbombing;
   player removeWeapon "Laserdesignator_02";
 } else {
 systemChat "Your not designating anything or you don't have the correct designators";
