@@ -1,26 +1,65 @@
-// ************************************************************************************************
-// * This project is licensed under the GNU Affero GPL v3. Copyright © 2018 soulkobk.blogspot.com *
-// ************************************************************************************************
-// * written by soulkobk (soulkobk.blogspot.com) @ 01/05/2018 for full screen night vision *hack*
-// *
-// * unequip your nvgoggles and equip yourself with the combat goggles (green) as a replacement
-// * which will make your night vision full screen.
-// *
-// * equipped nvgoggles = black border night vision.
-// * equipped combat goggles (green) = full screen night vision.
-// *
-// * load this file as...
-// * [] execVM "fullScreenNightVision.sqf";
-// *
-// * enjoy a mod-free version of full screen night vision without any ppEffect.
-// ************************************************************************************************
+/*
+	----------------------------------------------------------------------------------------------
 
-if (!hasInterface) exitWith {};
+	Copyright © 2018 soulkobk (soulkobk.blogspot.com)
+
+	This program is free software: you can redistribute it and/or modify
+	it under the terms of the GNU Affero General Public License as
+	published by the Free Software Foundation, either version 3 of the
+	License, or (at your option) any later version.
+
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+	GNU Affero General Public License for more details.
+
+	You should have received a copy of the GNU Affero General Public License
+	along with this program. If not, see <http://www.gnu.org/licenses/>.
+
+	----------------------------------------------------------------------------------------------
+
+	Name: fullScreenNightVision.sqf
+	Version: 1.0
+	Author: soulkobk (soulkobk.blogspot.com)
+	Creation Date: 12:54 PM 2/05/2018
+	Modification Date: 12:54 PM 2/05/2018
+
+	Description:
+	This script will allow night vision mode in FULL SCREEN, no black borders! No mod needed!
+	How? Unequip the Night Vision Goggles altogether (hmd slot), and equip Combat Goggles (Green)
+	(goggles slot) to replace the night vision optics (NVG head gear will function as normal if
+	they are equipped to the hmd slot).
+
+	* Unequipped NVGoggles and equipped Combat Goggles (Green) = FULL SCREEN NIGHT VISION.
+	* Equipped NVGoggles and equipped Combat Goggles (Green) = black border night vision.
+	* Unequipped Combat Goggles (Green) and equipped NVGoggles = black border night vision.
+
+	Enjoy a simple mod-free version of full screen night vision without any use of custom ppEffects.
+
+	Place the following code within your init.sqf file...
+	[] execVM "<your path here>\fullScreenNightVision.sqf";
+
+	Parameter(s): none
+
+	Example: none
+
+	Change Log:
+	1.0 - original base script.
+	1.1 - fixed event handler bind. small routine changes.
+
+	----------------------------------------------------------------------------------------------
+*/
+
+if (!hasInterface) exitWith {}; // DO NOT DELETE THIS!
 
 SL_var_fullScreenNightVision =
 [
 	"G_Combat_Goggles_tna_F"
 ];
+
+/*	------------------------------------------------------------------------------------------
+		DO NOT EDIT BELOW HERE!
+	------------------------------------------------------------------------------------------	*/
 
 SL_fn_fullScreenNightVision = {
 	params ["_displayCode","_keyCode","_isShift","_isCtrl","_isAlt"];
@@ -30,7 +69,6 @@ SL_fn_fullScreenNightVision = {
 		switch SL_var_fullScreenNightVisionMode do
 		{
 			case 0: {
-				9876 cutText ["", "PLAIN", 0.001, false];
 				if (cameraView != "GUNNER") then
 				{
 					if (goggles player in SL_var_fullScreenNightVision) then
@@ -42,51 +80,40 @@ SL_fn_fullScreenNightVision = {
 				};
 			};
 			case 1: {
-				9876 cutText ["", "PLAIN", 0.001, false];
 				if (cameraView != "GUNNER") then
 				{
-					player action ["nvGogglesOff", player];
-					SL_var_fullScreenNightVisionMode = currentVisionMode player;
-					_handled = true;
+					if (goggles player in SL_var_fullScreenNightVision) then
+					{
+						player action ["nvGogglesOff", player];
+						SL_var_fullScreenNightVisionMode = currentVisionMode player;
+						_handled = true;
+					};
 				};
-			};
-			case 2: {
-				9876 cutText ["", "PLAIN", 0.001, false];
-				_handled = false;
 			};
 		};
 	};
 	_handled
 };
 
+waitUntil {alive player};
+
 player addEventHandler ["GetOutMan", {
 	params ["_player", "_role", "_vehicle", "_turret"];
 	switch SL_var_fullScreenNightVisionMode do
 	{
 		case 1: {
-			9876 cutText ["", "PLAIN", 0.001, false];
-			if (cameraView != "GUNNER") then
+			if (goggles _player in SL_var_fullScreenNightVision) then
 			{
-				if (goggles player in SL_var_fullScreenNightVision) then
-				{
-					player action ["nvGoggles", player];
-					SL_var_fullScreenNightVisionMode = currentVisionMode player;
-					_handled = true;
-				};
+				_player action ["nvGoggles", _player];
+				SL_var_fullScreenNightVisionMode = currentVisionMode _player;
 			};
 		};
 		case 0: {
-			9876 cutText ["", "PLAIN", 0.001, false];
-			if (cameraView != "GUNNER") then
+			if (goggles _player in SL_var_fullScreenNightVision) then
 			{
-				player action ["nvGogglesOff", player];
-				SL_var_fullScreenNightVisionMode = currentVisionMode player;
-				_handled = true;
+				_player action ["nvGogglesOff", _player];
+				SL_var_fullScreenNightVisionMode = currentVisionMode _player;
 			};
-		};
-		case 2: {
-			9876 cutText ["", "PLAIN", 0.001, false];
-			_handled = false;
 		};
 	};
 }];
