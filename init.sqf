@@ -103,14 +103,14 @@ if (hasInterface || isServer) then
 	[] execVM "addons\laptop\init.sqf";
 	[] execVM "addons\Grenades\initGrenades.sqf";
 	[] execVM "addons\outOfBounds\outOfBoundsPlayer.sqf";
-    [] execVM "addons\outOfBounds\outOfBoundsHeli.sqf";
-    [] execVM "addons\outOfBounds\outOfBoundsPlane.sqf";
-    [] execVM "addons\outOfBounds\outOfBoundsShip.sqf";
-    [] execVM "addons\outOfBounds\outOfBoundsLandVehicle.sqf";
-    [] execVM "addons\outOfBounds\outOfBoundsRemote.sqf";
+    	[] execVM "addons\outOfBounds\outOfBoundsHeli.sqf";
+    	[] execVM "addons\outOfBounds\outOfBoundsPlane.sqf";
+    	[] execVM "addons\outOfBounds\outOfBoundsShip.sqf";
+    	[] execVM "addons\outOfBounds\outOfBoundsLandVehicle.sqf";
+    	[] execVM "addons\outOfBounds\outOfBoundsRemote.sqf";
 	[] execVM "addons\Fuel\Fuelconsumption.sqf";
 	[] execVM "addons\FSNVG\fullScreenNightVision.sqf";
-
+	[] execVM "addons\carpetBomb\GOM_fnc_carpetBombing.sqf";
 	if (isNil "drn_DynamicWeather_MainThread") then { drn_DynamicWeather_MainThread = [] execVM "addons\scripts\DynamicWeatherEffects.sqf" };
 };
 
