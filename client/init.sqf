@@ -165,6 +165,7 @@ A3W_scriptThreads pushBack execVM "addons\Lootspawner\LSclientScan.sqf";
 [] execVM "client\functions\drawPlayerIcons.sqf";
 [] execVM "addons\camera\functions.sqf";
 [] execVM "addons\UAV_Control\functions.sqf";
+[] execVM "addons\water_edge\functions.sqf";
 
 if(hasInterface) then{[] execVM "addons\statusBar\statusBar.sqf"};
 
