@@ -8,11 +8,7 @@ class EditorData
 	toggles=10;
 	class ItemIDProvider
 	{
-<<<<<<< HEAD
-		nextID=1311;
-=======
 		nextID=1316;
->>>>>>> devBranch
 	};
 	class MarkerIDProvider
 	{
@@ -20,16 +16,6 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-<<<<<<< HEAD
-		nextID=102;
-	};
-	class Camera
-	{
-		pos[]={3982.8838,332.48633,5771.605};
-		dir[]={0.65840966,-0.2687715,-0.70319307};
-		up[]={0.18383564,0.96303183,-0.19634496};
-		aside[]={-0.73008817,-2.2567256e-006,-0.6835795};
-=======
 		nextID=104;
 	};
 	class Camera
@@ -38,7 +24,6 @@ class EditorData
 		dir[]={0.91484463,-0.046186339,-0.40145281};
 		up[]={0.04255129,0.99878585,-0.018675638};
 		aside[]={-0.40189606,-1.9457511e-006,-0.91585225};
->>>>>>> devBranch
 	};
 };
 binarizationWanted=0;
@@ -285,11 +270,7 @@ class Mission
 	};
 	class Entities
 	{
-<<<<<<< HEAD
-		items=805;
-=======
 		items=808;
->>>>>>> devBranch
 		class Item0
 		{
 			dataType="Group";
@@ -9253,11 +9234,7 @@ class Mission
 					name="VehStore8_seaSpawn";
 					type="Empty";
 					colorName="ColorBlack";
-<<<<<<< HEAD
-					angle=225.3956;
-=======
 					angle=225.39558;
->>>>>>> devBranch
 					id=1126;
 					atlOffset=17.706646;
 				};
@@ -17181,8 +17158,6 @@ class Mission
 			type="Land_Cargo_Patrol_V1_F";
 			atlOffset=-0.076751709;
 		};
-<<<<<<< HEAD
-=======
 		class Item805
 		{
 			dataType="Group";
@@ -17292,6 +17267,5 @@ class Mission
 			type="Land_Cargo_HQ_V3_F";
 			atlOffset=-0.3354063;
 		};
->>>>>>> devBranch
 	};
 };
