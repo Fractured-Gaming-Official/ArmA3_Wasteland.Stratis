@@ -221,6 +221,13 @@ if (!isNil "_itemEntry") then
 					_description = "See the World clearly, even at night. (Make sure to remove your clunky NVG's First!)";
 				};
 			};
+			case "binoc":
+			{
+				if (_itemType == "Laserdesignator_02") then
+				{
+					_description = "Laser Designated Airstrike, Use Scrollwheel for Action";
+				};
+			}
 			default
 			{
 				switch (true) do

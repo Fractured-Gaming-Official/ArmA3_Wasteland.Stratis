@@ -760,7 +760,7 @@ backpackArray = compileFinal str
 
 genItemArray = compileFinal str
 [
-	["Carpet Bomb Designator", "Laserdesignator_02", 1000000, "binoc", "noDLC"],
+	["Airstrike Designator", "Laserdesignator_02", 1000000, "binoc", "noDLC"],
 	["Designator Batteries", "Laserbatteries", 50, "item"],
 	["UAV Terminal (NATO)", "B_UavTerminal", 150, "gps"],
 	["UAV Terminal (CSAT)", "O_UavTerminal", 150, "gps"],
@@ -797,7 +797,7 @@ genItemArray = compileFinal str
 	["Laser Designator (Sand)", "Laserdesignator", 500, "binoc", "noDLC"],
 	["Laser Designator (Olive)", "Laserdesignator_03", 550, "binoc", "noDLC"],
 	["Laser Designator (Khaki)", "Laserdesignator_01_khk_F", 550, "binoc", "noDLC"],
-	["Laser Designator (G Hex)", "Laserdesignator_02_ghex_F", 600, "binoc", "noDLC"],
+//["Laser Designated", "Laserdesignator_02_ghex_F", 600, "binoc", "noDLC"],
 
 	["IR Designator Grenade", "B_IR_Grenade", 50, "mag", "WEST"],
 	["IR Designator Grenade", "O_IR_Grenade", 50, "mag", "EAST"],
