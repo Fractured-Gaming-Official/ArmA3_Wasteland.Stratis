@@ -8,7 +8,7 @@ class EditorData
 	toggles=10;
 	class ItemIDProvider
 	{
-		nextID=1340;
+		nextID=1341;
 	};
 	class MarkerIDProvider
 	{
@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=106;
+		nextID=108;
 	};
 	class Camera
 	{
-		pos[]={2892.2769,99.893112,3668.7312};
-		dir[]={-0.90559047,-0.37417769,0.20031773};
-		up[]={-0.36553517,0.92710197,0.080860741};
-		aside[]={0.21602425,1.7586863e-006,0.97656524};
+		pos[]={2005.2629,27.821815,3498.5459};
+		dir[]={0,-0.70710683,0.70710683};
+		up[]={0,0.70710677,0.70710677};
+		aside[]={0.99999994,0,-0};
 	};
 };
 binarizationWanted=0;
@@ -270,7 +270,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=832;
+		items=833;
 		class Item0
 		{
 			dataType="Group";
@@ -9234,7 +9234,7 @@ class Mission
 					name="VehStore8_seaSpawn";
 					type="Empty";
 					colorName="ColorBlack";
-					angle=225.39557;
+					angle=225.39554;
 					id=1126;
 					atlOffset=17.706646;
 				};
@@ -10115,7 +10115,7 @@ class Mission
 					};
 					id=624;
 					type="C_man_1_1_F";
-					atlOffset=0.30299997;
+					atlOffset=0.30299902;
 					class CustomAttributes
 					{
 						class Attribute0
@@ -10145,7 +10145,7 @@ class Mission
 			{
 			};
 			id=623;
-			atlOffset=0.30299997;
+			atlOffset=0.30299902;
 		};
 		class Item437
 		{
@@ -15747,7 +15747,7 @@ class Mission
 			name="RoadblockMission_3";
 			type="Empty";
 			colorName="ColorCIV";
-			angle=106.25797;
+			angle=106.25796;
 			id=1169;
 		};
 		class Item737
@@ -17279,10 +17279,32 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="[this, true, true] call A3W_fnc_setupMissionObject;";
 			};
 			id=1316;
 			type="Land_Loudspeakers_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"BOOL"
+								};
+							};
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
 		};
 		class Item809
 		{
@@ -17295,10 +17317,32 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="[this, true, true] call A3W_fnc_setupMissionObject;";
 			};
 			id=1317;
 			type="Land_Loudspeakers_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"BOOL"
+								};
+							};
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
 		};
 		class Item810
 		{
@@ -17311,10 +17355,32 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="[this, true, true] call A3W_fnc_setupMissionObject;";
 			};
 			id=1318;
 			type="Land_Loudspeakers_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"BOOL"
+								};
+							};
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
 		};
 		class Item811
 		{
@@ -17327,10 +17393,32 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="[this, true, true] call A3W_fnc_setupMissionObject;";
 			};
 			id=1319;
 			type="Land_Loudspeakers_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"BOOL"
+								};
+							};
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
 		};
 		class Item812
 		{
@@ -17343,10 +17431,32 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="[this, true, true] call A3W_fnc_setupMissionObject;";
 			};
 			id=1320;
 			type="Land_Loudspeakers_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"BOOL"
+								};
+							};
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
 		};
 		class Item813
 		{
@@ -17359,10 +17469,32 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="[this, true, true] call A3W_fnc_setupMissionObject;";
 			};
 			id=1321;
 			type="Land_Loudspeakers_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"BOOL"
+								};
+							};
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
 		};
 		class Item814
 		{
@@ -17375,10 +17507,32 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="[this, true, true] call A3W_fnc_setupMissionObject;";
 			};
 			id=1322;
 			type="Land_Loudspeakers_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"BOOL"
+								};
+							};
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
 		};
 		class Item815
 		{
@@ -17391,10 +17545,32 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="[this, true, true] call A3W_fnc_setupMissionObject;";
 			};
 			id=1323;
 			type="Land_Loudspeakers_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"BOOL"
+								};
+							};
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
 		};
 		class Item816
 		{
@@ -17407,10 +17583,33 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="[this, true, true] call A3W_fnc_setupMissionObject;";
 			};
 			id=1324;
 			type="Land_Loudspeakers_F";
+			atlOffset=4.7683716e-007;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"BOOL"
+								};
+							};
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
 		};
 		class Item817
 		{
@@ -17423,10 +17622,32 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="[this, true, true] call A3W_fnc_setupMissionObject;";
 			};
 			id=1325;
 			type="Land_Loudspeakers_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"BOOL"
+								};
+							};
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
 		};
 		class Item818
 		{
@@ -17439,10 +17660,32 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="[this, true, true] call A3W_fnc_setupMissionObject;";
 			};
 			id=1326;
 			type="Land_Loudspeakers_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"BOOL"
+								};
+							};
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
 		};
 		class Item819
 		{
@@ -17455,10 +17698,32 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="[this, true, true] call A3W_fnc_setupMissionObject;";
 			};
 			id=1327;
 			type="Land_Loudspeakers_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"BOOL"
+								};
+							};
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
 		};
 		class Item820
 		{
@@ -17471,10 +17736,32 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="[this, true, true] call A3W_fnc_setupMissionObject;";
 			};
 			id=1328;
 			type="Land_Loudspeakers_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"BOOL"
+								};
+							};
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
 		};
 		class Item821
 		{
@@ -17487,10 +17774,32 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="[this, true, true] call A3W_fnc_setupMissionObject;";
 			};
 			id=1329;
 			type="Land_Loudspeakers_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"BOOL"
+								};
+							};
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
 		};
 		class Item822
 		{
@@ -17503,10 +17812,32 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="[this, true, true] call A3W_fnc_setupMissionObject;";
 			};
 			id=1330;
 			type="Land_Loudspeakers_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"BOOL"
+								};
+							};
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
 		};
 		class Item823
 		{
@@ -17519,10 +17850,32 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="[this, true, true] call A3W_fnc_setupMissionObject;";
 			};
 			id=1331;
 			type="Land_Loudspeakers_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"BOOL"
+								};
+							};
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
 		};
 		class Item824
 		{
@@ -17535,10 +17888,32 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="[this, true, true] call A3W_fnc_setupMissionObject;";
 			};
 			id=1332;
 			type="Land_Loudspeakers_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"BOOL"
+								};
+							};
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
 		};
 		class Item825
 		{
@@ -17551,10 +17926,32 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="[this, true, true] call A3W_fnc_setupMissionObject;";
 			};
 			id=1333;
 			type="Land_Loudspeakers_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"BOOL"
+								};
+							};
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
 		};
 		class Item826
 		{
@@ -17567,10 +17964,32 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="[this, true, true] call A3W_fnc_setupMissionObject;";
 			};
 			id=1334;
 			type="Land_Loudspeakers_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"BOOL"
+								};
+							};
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
 		};
 		class Item827
 		{
@@ -17583,10 +18002,32 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="[this, true, true] call A3W_fnc_setupMissionObject;";
 			};
 			id=1335;
 			type="Land_Loudspeakers_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"BOOL"
+								};
+							};
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
 		};
 		class Item828
 		{
@@ -17599,10 +18040,32 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="[this, true, true] call A3W_fnc_setupMissionObject;";
 			};
 			id=1336;
 			type="Land_Loudspeakers_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"BOOL"
+								};
+							};
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
 		};
 		class Item829
 		{
@@ -17615,10 +18078,32 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="[this, true, true] call A3W_fnc_setupMissionObject;";
 			};
 			id=1337;
 			type="Land_Loudspeakers_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"BOOL"
+								};
+							};
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
 		};
 		class Item830
 		{
@@ -17631,10 +18116,32 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="[this, true, true] call A3W_fnc_setupMissionObject;";
 			};
 			id=1338;
 			type="Land_Loudspeakers_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"BOOL"
+								};
+							};
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
 		};
 		class Item831
 		{
@@ -17647,10 +18154,71 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="[this, true, true] call A3W_fnc_setupMissionObject;";
 			};
 			id=1339;
 			type="Land_Loudspeakers_F";
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"BOOL"
+								};
+							};
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
+		};
+		class Item832
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={2469.1741,83.526382,5622.7661};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+			};
+			id=1340;
+			type="Land_Loudspeakers_F";
+			atlOffset=0.01499176;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"BOOL"
+								};
+							};
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
 		};
 	};
 };
