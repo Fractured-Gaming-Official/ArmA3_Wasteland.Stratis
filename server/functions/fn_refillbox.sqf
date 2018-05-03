@@ -37,7 +37,7 @@ switch (_boxType) do
 		_boxItems =
 		[
 			// Item type, Item class(es), # of items, # of magazines per weapon
-			["wep", ["Laserdesignator", "Laserdesignator_02", "Laserdesignator_03"], 1, 1],
+			["wep", ["Laserdesignator", "Laserdesignator_03"], 1, 1],
 			["wep",[
 				"launch_NLAW_F",
 				["launch_RPG32_F", "launch_RPG32_ghex_F"],
