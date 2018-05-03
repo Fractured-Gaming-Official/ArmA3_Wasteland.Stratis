@@ -9,7 +9,7 @@
  *   [_debug]: Optional. true if debug text is to be shown, otherwise false.
  */
 
-params [["_initialFog",-1,[0]], ["_initialOvercast",-1,[0]], ["_initialRain",-1,[0]], ["_initialWind",[],[[]]], ["_debug",false,[false]]]; 
+params [["_initialFog",-1,[0]], ["_initialOvercast",-1,[0]], ["_initialRain",-1,[0]], ["_initialWind",[],[[]]], ["_debug",false,[false]]];
 
 private ["_minWeatherChangeTimeMin", "_maxWeatherChangeTimeMin", "_minTimeBetweenWeatherChangesMin", "_maxTimeBetweenWeatherChangesMin", "_rainIntervalRainProbability", "_windChangeProbability"];
 private ["_minimumFog", "_maximumFog", "_minimumOvercast", "_maximumOvercast", "_minimumRain", "_maximumRain", "_minimumWind", "_maximumWind", "_minRainIntervalTimeMin", "_maxRainIntervalTimeMin", "_forceRainToStopAfterOneRainInterval", "_maxWind"];
@@ -72,7 +72,7 @@ _minimumWind = 0;
 
 // Wind vector strength never exceeds this value. Must be greater or equal to 0 and greater than or equal to _minimumWind.
 // (Suggested value: 5).
-_maximumWind = 5;
+_maximumWind = 1;
 
 // Probability in percent for wind to change when weather changes. If set to 0 then wind will never change. If set to 100 then rain will
 // change every time the weather (fog or overcast) start to change. (Suggested value: 25);
