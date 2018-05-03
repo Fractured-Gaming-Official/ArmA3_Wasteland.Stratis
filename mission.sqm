@@ -8,7 +8,7 @@ class EditorData
 	toggles=10;
 	class ItemIDProvider
 	{
-		nextID=1316;
+		nextID=1340;
 	};
 	class MarkerIDProvider
 	{
@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=104;
+		nextID=106;
 	};
 	class Camera
 	{
-		pos[]={1972.9537,13.777751,3523.4221};
-		dir[]={0.91484463,-0.046186339,-0.40145281};
-		up[]={0.04255129,0.99878585,-0.018675638};
-		aside[]={-0.40189606,-1.9457511e-006,-0.91585225};
+		pos[]={2892.2769,99.893112,3668.7312};
+		dir[]={-0.90559047,-0.37417769,0.20031773};
+		up[]={-0.36553517,0.92710197,0.080860741};
+		aside[]={0.21602425,1.7586863e-006,0.97656524};
 	};
 };
 binarizationWanted=0;
@@ -270,7 +270,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=808;
+		items=832;
 		class Item0
 		{
 			dataType="Group";
@@ -9234,7 +9234,7 @@ class Mission
 					name="VehStore8_seaSpawn";
 					type="Empty";
 					colorName="ColorBlack";
-					angle=225.39558;
+					angle=225.39557;
 					id=1126;
 					atlOffset=17.706646;
 				};
@@ -10115,7 +10115,7 @@ class Mission
 					};
 					id=624;
 					type="C_man_1_1_F";
-					atlOffset=0.30299902;
+					atlOffset=0.30299997;
 					class CustomAttributes
 					{
 						class Attribute0
@@ -10145,7 +10145,7 @@ class Mission
 			{
 			};
 			id=623;
-			atlOffset=0.30299902;
+			atlOffset=0.30299997;
 		};
 		class Item437
 		{
@@ -17182,7 +17182,7 @@ class Mission
 					};
 					id=1312;
 					type="C_man_1_1_F";
-					atlOffset=0.027393579;
+					atlOffset=0.026961088;
 					class CustomAttributes
 					{
 						class Attribute0
@@ -17231,7 +17231,7 @@ class Mission
 			{
 			};
 			id=1311;
-			atlOffset=0.027393579;
+			atlOffset=0.026961088;
 		};
 		class Item806
 		{
@@ -17256,16 +17256,401 @@ class Mission
 			dataType="Object";
 			class PositionInfo
 			{
-				position[]={1975.6844,6.1604543,3527.7507};
+				position[]={1975.684,6.1608868,3527.751};
 			};
 			side="Empty";
 			flags=5;
 			class Attributes
 			{
+				init="[this, true, true] call A3W_fnc_setupMissionObject;";
 			};
 			id=1315;
 			type="Land_Cargo_HQ_V3_F";
-			atlOffset=-0.3354063;
+			atlOffset=-0.3349998;
+		};
+		class Item808
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={2005.2629,6.3250008,3523.5459};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				init="[this, true, true] call A3W_fnc_setupMissionObject;";
+			};
+			id=1316;
+			type="Land_Loudspeakers_F";
+		};
+		class Item809
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={2064.1868,10.443606,2702.3171};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				init="[this, true, true] call A3W_fnc_setupMissionObject;";
+			};
+			id=1317;
+			type="Land_Loudspeakers_F";
+		};
+		class Item810
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={2157.7817,7.7491159,1920.42};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				init="[this, true, true] call A3W_fnc_setupMissionObject;";
+			};
+			id=1318;
+			type="Land_Loudspeakers_F";
+		};
+		class Item811
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={2788.4275,146.12193,1734.6035};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				init="[this, true, true] call A3W_fnc_setupMissionObject;";
+			};
+			id=1319;
+			type="Land_Loudspeakers_F";
+		};
+		class Item812
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={2630.4712,12.59786,1218.708};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				init="[this, true, true] call A3W_fnc_setupMissionObject;";
+			};
+			id=1320;
+			type="Land_Loudspeakers_F";
+		};
+		class Item813
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={2987.3918,175.1732,1846.9885};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				init="[this, true, true] call A3W_fnc_setupMissionObject;";
+			};
+			id=1321;
+			type="Land_Loudspeakers_F";
+		};
+		class Item814
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={3086.165,170.76869,2167.6658};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				init="[this, true, true] call A3W_fnc_setupMissionObject;";
+			};
+			id=1322;
+			type="Land_Loudspeakers_F";
+		};
+		class Item815
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={3278.9697,232.68318,2939.4722};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				init="[this, true, true] call A3W_fnc_setupMissionObject;";
+			};
+			id=1323;
+			type="Land_Loudspeakers_F";
+		};
+		class Item816
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4274.3335,8.7210712,2701.3298};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				init="[this, true, true] call A3W_fnc_setupMissionObject;";
+			};
+			id=1324;
+			type="Land_Loudspeakers_F";
+		};
+		class Item817
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4320.8135,237.72319,3873.7354};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				init="[this, true, true] call A3W_fnc_setupMissionObject;";
+			};
+			id=1325;
+			type="Land_Loudspeakers_F";
+		};
+		class Item818
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={5202.4707,226.48318,4989.9028};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				init="[this, true, true] call A3W_fnc_setupMissionObject;";
+			};
+			id=1326;
+			type="Land_Loudspeakers_F";
+		};
+		class Item819
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={5531.3389,79.84729,4699.8022};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				init="[this, true, true] call A3W_fnc_setupMissionObject;";
+			};
+			id=1327;
+			type="Land_Loudspeakers_F";
+		};
+		class Item820
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={6419.8354,11.503185,5387.2583};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				init="[this, true, true] call A3W_fnc_setupMissionObject;";
+			};
+			id=1328;
+			type="Land_Loudspeakers_F";
+		};
+		class Item821
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={6543.8198,50.65554,5051.2163};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				init="[this, true, true] call A3W_fnc_setupMissionObject;";
+			};
+			id=1329;
+			type="Land_Loudspeakers_F";
+		};
+		class Item822
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={7108.645,12.165088,6013.3643};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				init="[this, true, true] call A3W_fnc_setupMissionObject;";
+			};
+			id=1330;
+			type="Land_Loudspeakers_F";
+		};
+		class Item823
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={6046.5361,20.88203,5640.2783};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				init="[this, true, true] call A3W_fnc_setupMissionObject;";
+			};
+			id=1331;
+			type="Land_Loudspeakers_F";
+		};
+		class Item824
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4635.0313,134.79297,5303.7393};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				init="[this, true, true] call A3W_fnc_setupMissionObject;";
+			};
+			id=1332;
+			type="Land_Loudspeakers_F";
+		};
+		class Item825
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={5039.9346,212.49416,5926.9707};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				init="[this, true, true] call A3W_fnc_setupMissionObject;";
+			};
+			id=1333;
+			type="Land_Loudspeakers_F";
+		};
+		class Item826
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={4399.3159,129.51042,6786.4448};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				init="[this, true, true] call A3W_fnc_setupMissionObject;";
+			};
+			id=1334;
+			type="Land_Loudspeakers_F";
+		};
+		class Item827
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={3039.563,6.4534612,5947.4072};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				init="[this, true, true] call A3W_fnc_setupMissionObject;";
+			};
+			id=1335;
+			type="Land_Loudspeakers_F";
+		};
+		class Item828
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={2087.7651,8.6826839,5835.7139};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				init="[this, true, true] call A3W_fnc_setupMissionObject;";
+			};
+			id=1336;
+			type="Land_Loudspeakers_F";
+		};
+		class Item829
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={1974.9207,6.4383812,5333.9023};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				init="[this, true, true] call A3W_fnc_setupMissionObject;";
+			};
+			id=1337;
+			type="Land_Loudspeakers_F";
+		};
+		class Item830
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={3497.5935,203.28989,4940.5};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				init="[this, true, true] call A3W_fnc_setupMissionObject;";
+			};
+			id=1338;
+			type="Land_Loudspeakers_F";
+		};
+		class Item831
+		{
+			dataType="Object";
+			class PositionInfo
+			{
+				position[]={2852.3425,49.210686,3686.7324};
+			};
+			side="Empty";
+			flags=5;
+			class Attributes
+			{
+				init="[this, true, true] call A3W_fnc_setupMissionObject;";
+			};
+			id=1339;
+			type="Land_Loudspeakers_F";
 		};
 	};
 };

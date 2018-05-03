@@ -1,6 +1,6 @@
 /*
 	----------------------------------------------------------------------------------------------
-	
+
 	Copyright © 2016 soulkobk (soulkobk.blogspot.com)
 
 	This program is free software: you can redistribute it and/or modify
@@ -120,7 +120,7 @@ _binoculars =
 [
 	"Laserdesignator", // Laser Designator (Sand) BINOCULAR"
 	"Laserdesignator_01_khk_F", // Laser Designator (Khaki) BINOCULAR"
-	"Laserdesignator_02", // Laser Designator (Hex) BINOCULAR"
+	//"Laserdesignator_02", // Laser Designator (Hex) BINOCULAR"
 	"Laserdesignator_02_ghex_F", // Laser Designator (Green Hex) BINOCULAR"
 	"Laserdesignator_03", // Laser Designator (Olive) BINOCULAR"
 	// "NVGoggles", // NV Goggles (Brown) BINOCULAR"
@@ -989,7 +989,7 @@ _vests =
 	"V_TacVest_khk", // Tactical Vest (Khaki) VEST"
 	"V_TacVest_oli" // Tactical Vest (Olive) VEST"
 ];
-	
+
 _weaponAccessories =
 [
 	"acc_flashlight", // Flashlight WEAPONLIGHT"
@@ -1094,11 +1094,11 @@ _loadCrateWithWhat = "";
 for [{_i = 0},{_i < _overallLoopAmount},{_i = _i + 1}] do
 {
 	_loadCrateWithWhat = selectRandom _loadCrateWithWhatArray;
-	
+
 	#ifdef __DEBUG__
 		diag_log format ["%1 -> %2",(_i + 1),_loadCrateWithWhat];
 	#endif
-	
+
 	switch (_loadCrateWithWhat) do
 	{
 		case "_backPacks": {
