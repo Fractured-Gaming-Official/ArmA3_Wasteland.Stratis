@@ -84,11 +84,9 @@ if (currentWeapon player == "Laserdesignator_02" && isLaserOn player) then
 	{
 		if (isNull cursorObject) then
 		{
-			systemChat "Object Null you aimed at the ground";
 			_pos = screenToWorld [0.5,0.5];
 			_bomb = ["", _pos,270,15,200] spawn GOM_fnc_carpetbombing;
 		} else {
-			systemChat "You aimed at " + str cursorObject;
 			_pos = getPos cursorObject;
 			_bomb = ["", _pos,270,15,200] spawn GOM_fnc_carpetbombing;
 		};
