@@ -82,12 +82,20 @@ player addAction ["Carpet Bomb",
 {
 if (currentWeapon player == "Laserdesignator_02" && isLaserOn player) then
 	{
-  	_pos = screenToWorld [0.5,0.5];
-  	_bomb = ["", _pos,270,15,200] spawn GOM_fnc_carpetbombing;
+		if (isNull cursorObject) then
+		{
+			systemChat "Object Null you aimed at the ground";
+			_pos = screenToWorld [0.5,0.5];
+			_bomb = ["", _pos,270,15,200] spawn GOM_fnc_carpetbombing;
+		} else {
+			systemChat "You aimed at " + str cursorObject;
+			_pos = getPos cursorObject;
+			_bomb = ["", _pos,270,15,200] spawn GOM_fnc_carpetbombing;
+		};
   	player removeWeapon "Laserdesignator_02";
 	}
-	else 
+	else
 	{
-		systemChat "Your not designating anything or you don't have the correct designators";
+		systemChat "You're not designating anything!";
 	};
 }, [], 1, false, true, "", " ""Laserdesignator_02"" in (Assigneditems _this)"];
