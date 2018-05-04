@@ -74,3 +74,4 @@ class A3W_fnc_unflip {};
 class APOC_srv_startAirdrop { allowedTargets = 2; };
 class JTS_FNC_SENT {};
 class GOM_fnc_carpetbombing {allowedTargets = 2;};
+class GOM_fnc_airRaidSirens {allowedTargets = 1;};
