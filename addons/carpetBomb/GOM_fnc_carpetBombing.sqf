@@ -25,8 +25,7 @@ GOM_fnc_airRaidSirens = {
 
     for "_i" from 0 to 4 do {
 
-        {[_x,["air_raid",500,1]] remoteExec ["say3D",[0,-2] select isDedicated]} foreach _airraidsirens;
-        sleep 8.6;
+        {[_x,["air_raid",500,1]] remoteExec ["say3D",-2]} foreach _airraidsirens; // executes to ALL connected clients but NOT server.
 
     };
 
