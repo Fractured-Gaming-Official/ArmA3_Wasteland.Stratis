@@ -24,6 +24,10 @@ player createDiaryRecord ["changelog",
 [
 "FRACTURED Logs",
 "
+<br/>[CHANGED] GUI for all menus
+<br/>[CLEANED] ` key menu
+<br/>[ADDED] Logo to ` key menu
+<br/>[ADDED] Money Runner Mission
 <br/>[UPDATE] Full Screen NVG fixes
 <br/>[ADDED] Visual effects while transfering sight from water to air
 <br/>[REMOVED] Broken Mission
