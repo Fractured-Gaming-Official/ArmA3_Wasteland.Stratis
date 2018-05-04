@@ -58,7 +58,7 @@ _setupVars =
 				]
 			]
 		]
-	]
+	];
 
 	_missionType = _MoneyShipment select 0;
 	_moneyAmount = _MoneyShipment select 1;
