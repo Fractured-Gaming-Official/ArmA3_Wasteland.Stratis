@@ -889,7 +889,7 @@ _availableAccessories =
 "ItemCompass",
 "ItemGPS",
 "ItemMap",
-"ItemRadio";
+"ItemRadio",
 "ItemWatch",
 // "Laserdesignator",
 // "Laserdesignator_01_khk_F",
