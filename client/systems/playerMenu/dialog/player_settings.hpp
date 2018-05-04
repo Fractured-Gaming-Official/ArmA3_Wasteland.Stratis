@@ -57,12 +57,12 @@ class playerSettings {
 			w = 0.04 / (4/3); h = 0.04;
 		};*/
 
-		class moneyIcon : w_RscPicture {
+		/*class moneyIcon : w_RscPicture {
 			idc = -1;
 			text = "client\icons\money.paa";
 			x = 0.022; y = 0.32;
 			w = 0.04 / (4/3); h = 0.04;
-		};
+		};*/
 
 		class serverLogo : w_RscPicture {
 			idc = -1;
@@ -93,7 +93,7 @@ class playerSettings {
 			sizeEx = 0.03;
 			x = 0.06; y = 0.313;
 			w = 0.3; h = 0.05;
-		};*/
+		};
 
 		/*class distanceText : w_RscText {
 			idc = view_range_text;
@@ -216,7 +216,7 @@ class playerSettings {
 			idc = -1;
 			text = "Effects";
 			onButtonClick = "[] execVM 'addons\disableEnvironment\disableEnvironment.sqf'";
-			x = 0.158; y = 0.5;
+			x = 0.295; y = 0.57;
 			w = 0.125; h = 0.033 * safezoneH;
 		};
 
