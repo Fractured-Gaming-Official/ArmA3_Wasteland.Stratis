@@ -72,6 +72,7 @@ class PlayersMenu
 			colorSelection[] = {0.2,0.4,0.6,1};
 			colorDisabled[] = {1,1,1,0.3};
 			canModify = 0;
+			colorText[] = {A3W_UICOLOR_R, A3W_UICOLOR_G, A3W_UICOLOR_B, 1};
 		};
 
 
@@ -102,6 +103,7 @@ class PlayersMenu
 			y = 0.235 * SZ_SCALE_ABS + safezoneY;
 			w = 0.25 * (4/3) * SZ_SCALE_ABS;
 			h = 0.04 * SZ_SCALE_ABS;
+			colorText[] = {A3W_UICOLOR_R, A3W_UICOLOR_G, A3W_UICOLOR_B, 1};
 		};
 
 		class PlayerSkinText: w_RscText
@@ -113,6 +115,7 @@ class PlayersMenu
 			y = 0.255 * SZ_SCALE_ABS + safezoneY;
 			w = 0.21 * (4/3) * SZ_SCALE_ABS;
 			h = 0.04 * SZ_SCALE_ABS;
+			colorText[] = {A3W_UICOLOR_R, A3W_UICOLOR_G, A3W_UICOLOR_B, 1};
 		};
 
 		class PlayerGunText: w_RscText
@@ -124,6 +127,7 @@ class PlayersMenu
 			y = 0.275 * SZ_SCALE_ABS + safezoneY;
 			w = 0.25 * (4/3) * SZ_SCALE_ABS;
 			h = 0.04 * SZ_SCALE_ABS;
+			colorText[] = {A3W_UICOLOR_R, A3W_UICOLOR_G, A3W_UICOLOR_B, 1};
 		};
 
 		class PlayerItemsText: w_RscText
@@ -135,6 +139,7 @@ class PlayersMenu
 			y = 0.295 * SZ_SCALE_ABS + safezoneY;
 			w = 0.40 * (4/3) * SZ_SCALE_ABS;
 			h = 0.04 * SZ_SCALE_ABS;
+			colorText[] = {A3W_UICOLOR_R, A3W_UICOLOR_G, A3W_UICOLOR_B, 1};
 		};
 
 		class PlayerHealthText: w_RscText
@@ -146,6 +151,7 @@ class PlayersMenu
 			y = 0.315 * SZ_SCALE_ABS + safezoneY;
 			w = 0.25 * (4/3) * SZ_SCALE_ABS;
 			h = 0.04 * SZ_SCALE_ABS;
+			colorText[] = {A3W_UICOLOR_R, A3W_UICOLOR_G, A3W_UICOLOR_B, 1};
 		};
 
 		class PlayerPosistionText: w_RscText
@@ -157,6 +163,7 @@ class PlayersMenu
 			y = 0.335 * SZ_SCALE_ABS + safezoneY;
 			w = 0.25 * (4/3) * SZ_SCALE_ABS;
 			h = 0.04 * SZ_SCALE_ABS;
+			colorText[] = {A3W_UICOLOR_R, A3W_UICOLOR_G, A3W_UICOLOR_B, 1};
 		};
 	};
 
@@ -283,4 +290,3 @@ class PlayersMenu
 		};*/
 	};
 };
-
