@@ -85,10 +85,10 @@ if (currentWeapon player == "Laserdesignator_02" && isLaserOn player) then
 		if (isNull cursorObject) then
 		{
 			_pos = screenToWorld [0.5,0.5];
-			_bomb = ["", _pos,270,15,200] spawn GOM_fnc_carpetbombing;
+			_bomb = ["", _pos,270,15,200] remoteExec ["GOM_fnc_carpetbombing",2,false];
 		} else {
 			_pos = getPos cursorObject;
-			_bomb = ["", _pos,270,15,200] spawn GOM_fnc_carpetbombing;
+			_bomb = ["", _pos,270,15,200] remoteExec ["GOM_fnc_carpetbombing",2,false];
 		};
   	player removeWeapon "Laserdesignator_02";
 	}
