@@ -24,10 +24,13 @@ player createDiaryRecord ["changelog",
 [
 "FRACTURED Logs",
 "
+<br/>--------5/4/2018--------
+<br/>[ADDED] #MakeGenStoresGreatAgain (You can figure out the rest)
 <br/>[CHANGED] GUI for all menus
 <br/>[CLEANED] ` key menu
 <br/>[ADDED] Logo to ` key menu
 <br/>[ADDED] Money Runner Mission
+<br/>--------5/1/2018--------
 <br/>[UPDATE] Full Screen NVG fixes
 <br/>[ADDED] Visual effects while transfering sight from water to air
 <br/>[REMOVED] Broken Mission
@@ -36,12 +39,14 @@ player createDiaryRecord ["changelog",
 <br/>[ADDED] Gear Level To Status Bar (Beside Logo)
 <br/>[ADDED] FG Logo To Status Bar
 <br/>[ADDED] Deposit All Button to ATM
+<br/>--------4/28/2018--------
 <br/>[LIMITED] VA Grenades to 2 (2 per type)
 <br/>[LIMITED] VA Rockets to 3 (1 AT in Rocket 1 HE and 1 AT in Inventory)
 <br/>[LIMITED] VA Mags to 5 (1 in gun 4 in inventory)
 <br/>[LIMITED]VA Spawn Order VA -> Select Spawn
 <br/>[OPTIMIZED] VA Gear Level
 <br/>[LIMITED] Ammo Amount for Gear Levels
+<br/>--------4/10/2018--------
 <br/>[REDUCED] Frequency of Abandoned Vehicle Mission
 <br/>[REMOVED] Vehicles from Abandoned Vehicle Mission
 <br/>[FIX] Start Up Messages
