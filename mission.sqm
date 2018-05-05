@@ -8,7 +8,7 @@ class EditorData
 	toggles=10;
 	class ItemIDProvider
 	{
-		nextID=1341;
+		nextID=1340;
 	};
 	class MarkerIDProvider
 	{
@@ -20,10 +20,10 @@ class EditorData
 	};
 	class Camera
 	{
-		pos[]={2005.2629,27.821815,3498.5459};
-		dir[]={0,-0.70710683,0.70710683};
-		up[]={0,0.70710677,0.70710677};
-		aside[]={0.99999994,0,-0};
+		pos[]={1980.1609,43.752636,3468.207};
+		dir[]={-0.073497131,-0.68606752,0.72397703};
+		up[]={-0.069293305,0.72727197,0.68260205};
+		aside[]={0.9950633,3.5255216e-006,0.10101263};
 	};
 };
 binarizationWanted=0;
@@ -270,7 +270,7 @@ class Mission
 	};
 	class Entities
 	{
-		items=833;
+		items=832;
 		class Item0
 		{
 			dataType="Group";
@@ -7168,7 +7168,7 @@ class Mission
 			};
 			id=477;
 			type="Land_i_Stone_HouseBig_V1_F";
-			atlOffset=1.6420012;
+			atlOffset=1.6420002;
 		};
 		class Item320
 		{
@@ -9234,7 +9234,7 @@ class Mission
 					name="VehStore8_seaSpawn";
 					type="Empty";
 					colorName="ColorBlack";
-					angle=225.39554;
+					angle=225.39555;
 					id=1126;
 					atlOffset=17.706646;
 				};
@@ -10115,7 +10115,7 @@ class Mission
 					};
 					id=624;
 					type="C_man_1_1_F";
-					atlOffset=0.30299902;
+					atlOffset=0.30299997;
 					class CustomAttributes
 					{
 						class Attribute0
@@ -10145,7 +10145,7 @@ class Mission
 			{
 			};
 			id=623;
-			atlOffset=0.30299902;
+			atlOffset=0.30299997;
 		};
 		class Item437
 		{
@@ -15747,7 +15747,7 @@ class Mission
 			name="RoadblockMission_3";
 			type="Empty";
 			colorName="ColorCIV";
-			angle=106.25796;
+			angle=106.25797;
 			id=1169;
 		};
 		class Item737
@@ -17262,7 +17262,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="[this, true, true] call A3W_fnc_setupMissionObject;";
+				init="[this, true, true] call A3W_fnc_setupMissionObject; this allowDamage false;";
 			};
 			id=1315;
 			type="Land_Cargo_HQ_V3_F";
@@ -17279,6 +17279,7 @@ class Mission
 			flags=5;
 			class Attributes
 			{
+				init="[this, true, true] call A3W_fnc_setupMissionObject;";
 			};
 			id=1316;
 			type="Land_Loudspeakers_F";
