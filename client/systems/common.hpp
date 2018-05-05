@@ -554,7 +554,6 @@ class RscHTML
  	 prevPage = "\ca\ui\data\arrow_left_ca.paa";
      nextPage = "\ca\ui\data\arrow_right_ca.paa";
 
-
      class HeadingStyle {
          font = "PuristaBold";
          fontBold = "TahomaB";
