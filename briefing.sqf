@@ -24,6 +24,8 @@ player createDiaryRecord ["changelog",
 [
 "FRACTURED Logs",
 "
+<br/>--------5/8/2018--------
+<br/>[ADDED] Night Vision to Rocket Launchers
 <br/>--------5/4/2018--------
 <br/>[ADDED] #MakeGenStoresGreatAgain (You can figure out the rest)
 <br/>[CHANGED] GUI for all menus
