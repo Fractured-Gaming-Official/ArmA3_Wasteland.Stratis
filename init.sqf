@@ -111,6 +111,7 @@ if (hasInterface || isServer) then
 	[] execVM "addons\Fuel\Fuelconsumption.sqf";
 	[] execVM "addons\FSNVG\fullScreenNightVision.sqf";
 	[] execVM "addons\carpetBomb\GOM_fnc_carpetBombing.sqf";
+	[] execVM "addons\overRideOptics\overRideLauncherOptics.sqf";
 	if (isNil "drn_DynamicWeather_MainThread") then { drn_DynamicWeather_MainThread = [] execVM "addons\scripts\DynamicWeatherEffects.sqf" };
 };
 
