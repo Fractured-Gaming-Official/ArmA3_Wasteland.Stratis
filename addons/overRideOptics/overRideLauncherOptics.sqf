@@ -88,14 +88,14 @@ SL_fn_nightVisionLauncher = {
 						switch SL_modeLauncher do
 						{
 							case 0: {
-								setApertureNew [-1];
+								setApertureNew [2, 8, 14, .9];
 								SL_colorCorrectionLauncher = ppEffectCreate ["ColorCorrections",1500];
 								SL_colorCorrectionLauncher ppEffectEnable true;
 								SL_colorCorrectionLauncher ppEffectAdjust [1,1,0,[0,0.8,2,0.3],[1,5,5,0.5],[2,-1.5,0.8,-0.62],[0,0,0,0,0,0,4]];
 								SL_colorCorrectionLauncher ppEffectCommit 0;
-								SL_filmGrainLauncher = ppEffectCreate ["FilmGrain",2000];
+								SL_filmGrainLauncher = ppEffectCreate ["FilmGrain",2050];
 								SL_filmGrainLauncher ppEffectEnable true;
-								SL_filmGrainLauncher ppEffectAdjust [0.25,0.5,0.5,0.5,0.5,true];
+								SL_filmGrainLauncher ppEffectAdjust [0.15,0.5,0.25,0.5,0.5,true];
 								SL_filmGrainLauncher ppEffectCommit 0;
 								uiNameSpace setVariable ["SL_fn_launcherState",1];
 								[] spawn

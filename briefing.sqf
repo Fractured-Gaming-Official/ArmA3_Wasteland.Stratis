@@ -24,6 +24,7 @@ player createDiaryRecord ["changelog",
 [
 "FRACTURED Logs",
 "
+<br/>[FIXED] Launcher NVGs (The Darker it is, the better they work)
 <br/>--------5/8/2018--------
 <br/>[ADDED] Night Vision to Rocket Launchers
 <br/>--------5/4/2018--------
