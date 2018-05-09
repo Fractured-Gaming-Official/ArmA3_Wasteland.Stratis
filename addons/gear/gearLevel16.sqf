@@ -2,9 +2,9 @@
 //@file Name: gearLevel1.sqf
 //@file Author: Cael817, based of something i found
 private ["_player"];
+
 _player = _this;
 
-// _player setVariable ["cmoney", (_player getVariable "cmoney") + 25000, true];
 _player setVariable ["gmoney",25000];
 
 {_player removeWeapon _x} forEach weapons _player;

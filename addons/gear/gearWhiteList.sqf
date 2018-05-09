@@ -1,5 +1,12 @@
+/*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*///*//*//*/
 
-/*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*/
+//	@file Version: 1.0
+//	@file Name gearWhiteList.sqf
+//	@file Author: [FRAC] Mokey , PIX515E
+//	@file Created: 4/21/2018 09:48
+
+/*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//
+
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU Affero General Public License as published
 by the Free Software Foundation, either version 3 of the License, or
@@ -9,11 +16,8 @@ This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU Affero General Public License for more details.
-/*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*/
-//	@file Version: 1.0
-//	@file Name gearWhiteList.sqf
-//	@file Author: [FRAC] Mokey , PIX515E
-//	@file Created: 4/21/2018 09:48
+/*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*/
+
 
 _availableRifles =
   [
