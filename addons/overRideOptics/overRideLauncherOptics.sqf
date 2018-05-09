@@ -88,7 +88,7 @@ SL_fn_nightVisionLauncher = {
 						switch SL_modeLauncher do
 						{
 							case 0: {
-								setApertureNew [0.5, 1, .75, 0.5];
+								setApertureNew [-1];
 								SL_colorCorrectionLauncher = ppEffectCreate ["ColorCorrections",1500];
 								SL_colorCorrectionLauncher ppEffectEnable true;
 								SL_colorCorrectionLauncher ppEffectAdjust [1,1,0,[0,0.8,2,0.3],[1,5,5,0.5],[2,-1.5,0.8,-0.62],[0,0,0,0,0,0,4]];
