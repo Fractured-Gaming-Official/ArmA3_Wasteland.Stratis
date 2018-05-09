@@ -82,7 +82,7 @@ if !(_resupplyObjects isEqualTo []) then
 			_resupplyObjectTrigger setTriggerActivation ["ANYPLAYER", "PRESENT", true];
 			_resupplyObjectTrigger setTriggerStatements [
 				"
-					((vehicle player) in thisList) && {(_x isKindOf 'AllVehicles') && (alive _x) && (!isNull assignedDriver _x)} count thisList > 0;
+					((vehicle player) in thisList) && {(_x isKindOf 'AllVehicles') && (alive _x) && ((!isNull assignedDriver _x) || (!isNull assignedGunner _x))} count thisList > 0;
 				",
 				"
 					resupplyVehicle = player addAction ['<img image=''client\icons\repair.paa''/> Resupply Vehicle', 'client\functions\fn_resupplyTruck.sqf', [], 2, false, true, '', 'alive objectParent _this && attachedTo _target != vehicle _this && _target distance vehicle _this <= 10 && (isNil ''mutexScriptInProgress'' || {!mutexScriptInProgress})'];
