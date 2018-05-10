@@ -82,19 +82,21 @@ setNoGasStatus =
 
 setGasStatus =
         {
-                "dynamicBlur" ppEffectEnable true;              // enables ppeffect
-                "dynamicBlur" ppEffectAdjust [12];              // intensity of blur
-                "dynamicBlur" ppEffectCommit 5;                 // time till vision is fully blurred
+                "dynamicBlur" ppEffectEnable true;                 // enables ppeffect
+                "dynamicBlur" ppEffectAdjust [8];                 // intensity of blur
+                "dynamicBlur" ppEffectCommit 10;                 // time till vision is fully blurred
                 enableCamShake true;                            // enables camera shake
-                addCamShake [10, 45, 10];                       // sets shakevalues
-                //player setFatigue 1;                          // sets the fatigue to 100%
-                5 fadeSound 0.1;                                // fades the sound to 10% in 5 seconds
+                addCamShake [5, 20, 5];                        // sets shakevalues [power, duration, frequency]
+                //player setFatigue 1;                        // sets the fatigue to 100%
+                5 fadeSound 0.1;                             // fades the sound to 10% in 5 seconds
         };
 
 gasDamage =
         {
-                player setDamage (damage player + 0.15);        //damage per tick
-                sleep 3;                                        // Timer damage is assigned "seconds"
+                player setDamage (damage player + 0.10);      //damage per tick
+                call BIS_fnc_indicateBleeding;
+                sleep 2;                                      // Timer damage is assigned "seconds"
+
         };
 
 []spawn{

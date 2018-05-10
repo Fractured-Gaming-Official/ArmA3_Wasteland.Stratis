@@ -24,6 +24,10 @@ player createDiaryRecord ["changelog",
 [
 "FRACTURED Logs",
 "
+<br/>--------5/10/2018--------
+<br>/[CHANGED] Damaging Values to Gas Grenades
+<br/>[ADDED] Screen Red Effect to Toxic Gas Grenades
+<br/>[OPTIMIZED] Toxic Gas Grenade Scripts
 <br/>[FIXED] Launcher NVGs (The Darker it is, the better they work)
 <br/>--------5/8/2018--------
 <br/>[ADDED] Night Vision to Rocket Launchers
