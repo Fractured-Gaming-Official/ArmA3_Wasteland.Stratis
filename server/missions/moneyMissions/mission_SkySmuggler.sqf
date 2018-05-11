@@ -161,11 +161,13 @@ _successExec =
 
 	_box1 = createVehicle ["Box_East_Wps_F", _lastPos, [], 5, "None"];
 	_box1 setDir (random 360);
-	[_box1, "mission_USLaunchers"] call fn_refillbox;
+	//[_box1, "mission_USLaunchers"] call fn_refillbox;
+	_box1 call randomCrateLoadOut; // new randomCrateLoadOut function call
 
 	_box2 = createVehicle ["Box_IND_WpsSpecial_F", _lastPos, [], 5, "None"];
 	_box2 setDir (random 360);
-	[_box2, "mission_Main_A3snipers"] call fn_refillbox;
+	//[_box2, "mission_Main_A3snipers"] call fn_refillbox;
+	_box2 call randomCrateLoadOut; // new randomCrateLoadOut function call
 
 	for "_i" from 1 to 10 do
 	{

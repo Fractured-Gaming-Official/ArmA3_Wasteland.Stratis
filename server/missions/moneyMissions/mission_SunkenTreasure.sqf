@@ -25,7 +25,8 @@ _setupObjects =
 	_box1 = createVehicle ["Box_NATO_Wps_F", _missionPos, [], 0, "None"];
 	_box1 setVariable ["R3F_LOG_disabled", true, true];
 	_box1 setDir random 360;
-	[_box1, "mission_USSpecial"] call fn_refillbox;
+	//[_box1, "mission_USSpecial"] call fn_refillbox;
+	_box1 call randomCrateLoadOut; // new randomCrateLoadOut function call
 
 	_cashObjects = [];
 

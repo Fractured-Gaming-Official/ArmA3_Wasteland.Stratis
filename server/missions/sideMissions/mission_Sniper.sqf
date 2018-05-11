@@ -23,11 +23,13 @@ _setupObjects =
 
 	_box1 = createVehicle ["Box_NATO_Wps_F", _missionPos, [], 5, "None"];
 	_box1 setDir random 360;
-	[_box1, "mission_USSpecial"] call fn_refillbox;
+//	[_box1, "mission_USSpecial"] call fn_refillbox;
+	_box1 call randomCrateLoadOut; // new randomCrateLoadOut function call
 
 	_box2 = createVehicle ["Box_East_Wps_F", _missionPos, [], 5, "None"];
 	_box2 setDir random 360;
-	[_box2, "mission_USLaunchers"] call randomCrateLoadOut;
+//	[_box2, "mission_USLaunchers"] call randomCrateLoadOut;
+	_box2 call randomCrateLoadOut; // new randomCrateLoadOut function call
 
 	{ _x setVariable ["R3F_LOG_disabled", true, true] } forEach [_box1, _box2];
 
