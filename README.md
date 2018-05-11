@@ -27,7 +27,7 @@ x64 bit version. extDB3 Required.
 HAI MOKEY
 Mokey is pushy
 I r strilles.
-webhook test
+webhook test!
 # A3Wasteland Stratis
 
 A3Wasteland is a survival-like combat sandbox, which incorporates elements of team deathmatch and sector control in one big fun-to-play package. Similar to DayZ, the objectives are to scavenge weapons and vehicles, team up with fellow players, and engage in combat to obtain control of the landscape. Best experienced with 50 or more players.
