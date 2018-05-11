@@ -25,6 +25,8 @@ player createDiaryRecord ["changelog",
 "FRACTURED Logs",
 "
 <br/>--------5/10/2018--------
+<br/>[CHANGED]Mission Crates, All are 100% randomized now.
+<br/>--------5/10/2018--------
 <br>/[CHANGED] Damaging Values to Gas Grenades
 <br/>[ADDED] Screen Red Effect to Toxic Gas Grenades
 <br/>[OPTIMIZED] Toxic Gas Grenade Scripts
