@@ -21,6 +21,8 @@ For more for see <http://www.gnu.org/licenses/>.
 -----------------------------------------------------------------------
 */
 
+if !(hasInterface) exitWith {};
+
 //Expects a String NOT an array
 thrownSmokeShell = "SmokeShellYellow";
 launcherSmokeShell = "G_40mm_SmokeYellow";
@@ -99,53 +101,56 @@ gasDamage =
 
         };
 
-[]spawn{
-        While{true} do
+[]spawn
+{
+        while{true} do
+        {
+                call setNoGasStatus;
+                waituntil
+                {
+                        _smokeShellThrown = nearestObject [getPosATL player, thrownSmokeShell];
+                        _curPlayerInvulnState = player getVariable ["isAdminInvulnerable", false];
+                        _smokeShellThrown distance player < effectDistance
+                        &&
+                        velocity _smokeShellThrown isEqualTo [ 0, 0, 0 ]
+                        &&
+                        !_curPlayerInvulnState
+                };
+                if ((headgear player in gasMask) || ((typeOf vehicle player) in exemptVehicles)) then
                 {
                         call setNoGasStatus;
-                        waituntil
-                        {
-                                _smokeShell = nearestObject [getPosATL player, thrownSmokeShell];
-                                _curPlayerInvulnState = player getVariable ["isAdminInvulnerable", false];
-                                _smokeShell distance player < effectDistance
-                                &&
-                                velocity _smokeShell isEqualTo [ 0, 0, 0 ]
-                                &&
-                                !_curPlayerInvulnState
-                        };
-                        if ((headgear player in gasMask) || ((typeOf vehicle player) in exemptVehicles)) then
-                        {
-                                call setNoGasStatus;
-                        }
-                        else
-                        {
-                                call setGasStatus;
-                                call gasDamage;
-                        };
+                }
+                else
+                {
+                        call setGasStatus;
+                        call gasDamage;
                 };
         };
-[]spawn{
-        While{true} do
+};
+
+[]spawn
+{
+        while{true} do
+        {
+                call setNoGasStatus;
+                waituntil
+                {
+                        _smokeShellLaunched = nearestObject [getPosATL player, launcherSmokeShell];
+                        _curPlayerInvulnState = player getVariable ["isAdminInvulnerable", false];
+                        _smokeShellLaunched distance player < effectDistance
+                        &&
+                        velocity _smokeShellLaunched isEqualTo [ 0, 0, 0 ]
+                        &&
+                        !_curPlayerInvulnState
+                };
+                if ((headgear player in gasMask) || ((typeOf vehicle player) in exemptVehicles)) then
                 {
                         call setNoGasStatus;
-                        waituntil
-                        {
-                                _smokeShell = nearestObject [getPosATL player, launcherSmokeShell];
-                                _curPlayerInvulnState = player getVariable ["isAdminInvulnerable", false];
-                                _smokeShell distance player < effectDistance
-                                &&
-                                velocity _smokeShell isEqualTo [ 0, 0, 0 ]
-                                &&
-                                !_curPlayerInvulnState
-                        };
-                        if ((headgear player in gasMask) || ((typeOf vehicle player) in exemptVehicles)) then
-                        {
-                                call setNoGasStatus;
-                        }
-                        else
-                        {
-                                call setGasStatus;
-                                call gasDamage;
-                        };
+                }
+                else
+                {
+                        call setGasStatus;
+                        call gasDamage;
                 };
         };
+};

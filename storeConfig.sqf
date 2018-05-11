@@ -1,4 +1,4 @@
-"hat", "RCLO_HEADGEAR"],// ******************************************************************************************
+// ******************************************************************************************
 // * This project is licensed under the GNU Affero GPL v3. Copyright © 2014 A3Wasteland.com *
 // ******************************************************************************************
 /*********************************************************#
@@ -233,7 +233,7 @@ throwputArray = compileFinal str
 	["APERS Mine", "APERSMine_Range_Mag", 600, "RCLO_MINE"],
 	["Claymore Charge", "ClaymoreDirectionalMine_Remote_Mag", "RCLO_MINE"],
 	["M6 SLAM Mine", "SLAMDirectionalMine_Wire_Mag", 750, "RCLO_MINE"],
-	["AT Mine", "ATMine_Range_Mag", 1500, , "RCLO_MINE"],
+	["AT Mine", "ATMine_Range_Mag", 1500, "RCLO_MINE"],
 	["Explosive Charge", "DemoCharge_Remote_Mag", 750, "RCLO_MINE"],
 	["Explosive Satchel", "SatchelCharge_Remote_Mag", 1500, "RCLO_MINE"],
 	["Mine Dispenser", "APERSMineDispenser_Mag", 30000, "RCLO_MINE"],
@@ -793,10 +793,10 @@ genItemArray = compileFinal str
 	["Full Screen NVG's", "G_Combat_Goggles_tna_F", 5000, "gogg", "noDLC"],
 	["Binoculars", "Binocular", 50, "binoc"],
 
-	["Rangefinder", "Rangefinder", 200, "binoc"],
-	["Laser Designator (Sand)", "Laserdesignator", 500, "binoc", "noDLC"],
-	["Laser Designator (Olive)", "Laserdesignator_03", 550, "binoc", "noDLC"],
-	["Laser Designator (Khaki)", "Laserdesignator_01_khk_F", 550, "binoc", "noDLC"],
+	["Rangefinder", "Rangefinder", 200, "binoc", "RCLO_BINOCULAR"],
+	["Laser Designator (Sand)", "Laserdesignator", 500, "binoc", "noDLC", "RCLO_BINOCULAR"],
+	["Laser Designator (Olive)", "Laserdesignator_03", 550, "binoc", "noDLC", "RCLO_BINOCULAR"],
+	["Laser Designator (Khaki)", "Laserdesignator_01_khk_F", 550, "binoc", "noDLC", "RCLO_BINOCULAR"],
 //["Laser Designated", "Laserdesignator_02_ghex_F", 600, "binoc", "noDLC"],
 
 	["IR Designator Grenade", "B_IR_Grenade", 50, "mag", "WEST"],
@@ -847,7 +847,7 @@ genItemArray = compileFinal str
 	["Square Spectacles", "G_Squares", 110, "gogg", "RCLO_GOGGLE"],
 	["Tactical Glasses", "G_Tactical_Clear", 110, "gogg", "RCLO_GOGGLE"],
 	["Tactical Shades", "G_Tactical_Black", 110, "gogg", "RCLO_GOGGLE"],
-	["Tinted Spectacles", "G_Spectacles_Tinted", 110, "gogg"]
+	["Tinted Spectacles", "G_Spectacles_Tinted", 110, "gogg", "RCLO_GOGGLE"]
 ];
 
 allStoreMagazines = compileFinal str (call ammoArray + call throwputArray + call genItemArray);
@@ -1351,5 +1351,7 @@ customPlayerItems = compileFinal str
 ];
 
 call compile preprocessFileLineNumbers "mapConfig\storeOwners.sqf";
+
+RCLO_ARRAY = compileFinal str (call pistolArray + call smgArray + call rifleArray + call lmgArray + call launcherArray + call throwputArray + call ammoArray + call accessoriesArray + call headArray + call uniformArray + call vestArray + call backpackArray + call genItemArray);
 
 storeConfigDone = compileFinal "true";
