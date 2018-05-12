@@ -215,7 +215,7 @@ for [{_i = 0},{_i < _overallLoopAmount},{_i = _i + 1}] do
 			_loadCrateAmount = _backPackAmount;
 			for [{_lootCount = 0 },{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
 			{
-				_loadCrateItem = selectRandom _backPacks select 1;
+				_loadCrateItem = (selectRandom _backPacks) select 1;
 				_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
 				if (_addToCrate) then
 				{
@@ -230,7 +230,7 @@ for [{_i = 0},{_i < _overallLoopAmount},{_i = _i + 1}] do
 			_loadCrateAmount = _binocularAmount;
 			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
 			{
-				_loadCrateItem = selectRandom _binoculars select 1;
+				_loadCrateItem = (selectRandom _binoculars) select 1;
 				_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
 				if (_addToCrate) then
 				{
@@ -245,7 +245,7 @@ for [{_i = 0},{_i < _overallLoopAmount},{_i = _i + 1}] do
 			_loadCrateAmount = _bipodAmount;
 			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
 			{
-				_loadCrateItem = selectRandom _bipods select 1;
+				_loadCrateItem = (selectRandom _bipods) select 1;
 				_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
 				if (_addToCrate) then
 				{
@@ -260,7 +260,8 @@ for [{_i = 0},{_i < _overallLoopAmount},{_i = _i + 1}] do
 			_loadCrateAmount = _headGearAmount;
 			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
 			{
-				_loadCrateItem = selectRandom _headGear select 1;
+				diag_log format ["testing to put %1 in to crate %2",_loadCrateItem,_crate];
+				_loadCrateItem = (selectRandom _headGear) select 1;
 				_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
 				if (_addToCrate) then
 				{
@@ -275,7 +276,7 @@ for [{_i = 0},{_i < _overallLoopAmount},{_i = _i + 1}] do
 			_loadCrateAmount = _itemAmount;
 			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
 			{
-				_loadCrateItem = selectRandom _items select 1;
+				_loadCrateItem = (selectRandom _items) select 1;
 				_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
 				if (_addToCrate) then
 				{
@@ -290,7 +291,7 @@ for [{_i = 0},{_i < _overallLoopAmount},{_i = _i + 1}] do
 			_loadCrateAmount = _launcherAmount;
 			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
 			{
-				_loadCrateItem = selectRandom _launcherWeapons select 1;
+				_loadCrateItem = (selectRandom _launcherWeapons) select 1;
 				_loadCrateLootMagazine = getArray (configFile / "CfgWeapons" / _loadCrateItem / "magazines");
 				_loadCrateLootMagazineClass = selectRandom _loadCrateLootMagazine;
 				_loadCrateLootMagazineNum = floor (round (random 4) + 2); // minimum 2, maximum 6
@@ -316,7 +317,7 @@ for [{_i = 0},{_i < _overallLoopAmount},{_i = _i + 1}] do
 			_loadCrateAmount = _magazineAmount;
 			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
 			{
-				_loadCrateItem = selectRandom _magazines select 1;
+				_loadCrateItem = (selectRandom _magazines) select 1;
 				_loadCrateLootMagazineNum = floor (round (random 4) + 2); // minimum 2, maximum 6
 				_addToCrate = [_crate,_loadCrateItem,_loadCrateLootMagazineNum] call _canAddToCrate;
 				if (_addToCrate) then
@@ -332,7 +333,7 @@ for [{_i = 0},{_i < _overallLoopAmount},{_i = _i + 1}] do
 			_loadCrateAmount = _throwableAmount;
 			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
 			{
-				_loadCrateItem = selectRandom _throwables select 1;
+				_loadCrateItem = (selectRandom _throwables) select 1;
 				_loadCrateLootMagazineNum = floor (round (random 8) + 2); // minimum 2, maximum 10
 				_addToCrate = [_crate,_loadCrateItem,_loadCrateLootMagazineNum] call _canAddToCrate;
 				if (_addToCrate) then
@@ -348,7 +349,7 @@ for [{_i = 0},{_i < _overallLoopAmount},{_i = _i + 1}] do
 			_loadCrateAmount = _muzzleAmount;
 			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
 			{
-				_loadCrateItem = selectRandom _muzzles select 1;
+				_loadCrateItem = (selectRandom _muzzles) select 1;
 				_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
 				if (_addToCrate) then
 				{
@@ -363,7 +364,7 @@ for [{_i = 0},{_i < _overallLoopAmount},{_i = _i + 1}] do
 			_loadCrateAmount = _opticAmount;
 			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
 			{
-				_loadCrateItem = selectRandom _optics select 1;
+				_loadCrateItem = (selectRandom _optics) select 1;
 				_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
 				if (_addToCrate) then
 				{
@@ -378,7 +379,7 @@ for [{_i = 0},{_i < _overallLoopAmount},{_i = _i + 1}] do
 			_loadCrateAmount = _primaryWeaponAmount;
 			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
 			{
-				_loadCrateItem = selectRandom _primaryWeapons select 1;
+				_loadCrateItem = (selectRandom _primaryWeapons) select 1;
 				_loadCrateLootMagazine = getArray (configFile / "CfgWeapons" / _loadCrateItem / "magazines");
 				_loadCrateLootMagazineClass = selectRandom _loadCrateLootMagazine;
 				_loadCrateLootMagazineNum = floor (round (random 6) + 4); // minimum 4, maximum 10
@@ -404,7 +405,7 @@ for [{_i = 0},{_i < _overallLoopAmount},{_i = _i + 1}] do
 			_loadCrateAmount = _secondaryWeaponAmount;
 			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
 			{
-				_loadCrateItem = selectRandom _secondaryWeapons select 1;
+				_loadCrateItem = (selectRandom _secondaryWeapons) select 1;
 				_loadCrateLootMagazine = getArray (configFile / "CfgWeapons" / _loadCrateItem / "magazines");
 				_loadCrateLootMagazineClass = selectRandom _loadCrateLootMagazine;
 				_loadCrateLootMagazineNum = floor (round (random 4) + 2); // minimum 2, maximum 6
@@ -430,7 +431,7 @@ for [{_i = 0},{_i < _overallLoopAmount},{_i = _i + 1}] do
 			_loadCrateAmount = _uniformAmount;
 			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
 			{
-				_loadCrateItem = selectRandom _uniforms select 1;
+				_loadCrateItem = (selectRandom _uniforms) select 1;
 				_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
 				if (_addToCrate) then
 				{
@@ -445,7 +446,7 @@ for [{_i = 0},{_i < _overallLoopAmount},{_i = _i + 1}] do
 			_loadCrateAmount = _vestAmount;
 			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
 			{
-				_loadCrateItem = selectRandom _vests select 1;
+				_loadCrateItem = (selectRandom _vests) select 1;
 				_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
 				if (_addToCrate) then
 				{
@@ -460,7 +461,7 @@ for [{_i = 0},{_i < _overallLoopAmount},{_i = _i + 1}] do
 			_loadCrateAmount = _weaponAccessoryAmount;
 			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
 			{
-				_loadCrateItem = selectRandom _weaponAccessories select 1;
+				_loadCrateItem = (selectRandom _weaponAccessories) select 1;
 				_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
 				if (_addToCrate) then
 				{
@@ -475,7 +476,7 @@ for [{_i = 0},{_i < _overallLoopAmount},{_i = _i + 1}] do
 			_loadCrateAmount = _minesAmount;
 			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
 			{
-				_loadCrateItem = selectRandom _mines select 1;
+				_loadCrateItem = (selectRandom _mines) select 1;
 				_loadCrateLootMagazineNum = floor (round (random 2) + 2); // minimum 2, maximum 4
 				_addToCrate = [_crate,_loadCrateItem,_loadCrateLootMagazineNum] call _canAddToCrate;
 				if (_addToCrate) then
@@ -491,7 +492,7 @@ for [{_i = 0},{_i < _overallLoopAmount},{_i = _i + 1}] do
 			_loadCrateAmount = _goggleAmount;
 			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
 			{
-				_loadCrateItem = selectRandom _goggles select 1;
+				_loadCrateItem = (selectRandom _goggles) select 1;
 				_loadCrateLootMagazineNum = floor (round (random 2) + 2); // minimum 2, maximum 4
 				_addToCrate = [_crate,_loadCrateItem,_loadCrateLootMagazineNum] call _canAddToCrate;
 				if (_addToCrate) then
