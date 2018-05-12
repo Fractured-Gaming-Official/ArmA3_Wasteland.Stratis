@@ -35,21 +35,21 @@
 	storeConfigDone = compileFinal "true";
 
 	Also edit each existing array in storeConfig.sqf to allow specific objects to be added to RCLO crates with any of the following strings...
+	"RCLO_WEAPONPRIMARY"
+	"RCLO_WEAPONSECONDARY"
+	"RCLO_WEAPONLAUNCHER"
+	"RCLO_WEAPONACCESSORY"
 	"RCLO_BACKPACK"
 	"RCLO_BINOCULAR"
 	"RCLO_BIPOD"
 	"RCLO_HEADGEAR"
 	"RCLO_ITEM"
-	"RCLO_WEAPONLAUNCHER"
 	"RCLO_MAGAZINE"
 	"RCLO_THROWABLE"
 	"RCLO_MUZZLE"
 	"RCLO_OPTIC"
-	"RCLO_WEAPONPRIMARY"
-	"RCLO_WEAPONSECONDARY"
 	"RCLO_UNIFORM"
 	"RCLO_VEST"
-	"RCLO_WEAPONACCESSORY"
 	"RCLO_MINE"
 	"RCLO_GOGGLE"
 
@@ -94,6 +94,9 @@
 */
 
 if !(isServer) exitWith {}; // DO NOT DELETE THIS LINE!
+
+
+waitUntil {!(isNil "RCLO_ARRAY")};
 
 // #define __DEBUG__
 
@@ -260,7 +263,6 @@ for [{_i = 0},{_i < _overallLoopAmount},{_i = _i + 1}] do
 			_loadCrateAmount = _headGearAmount;
 			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
 			{
-				diag_log format ["testing to put %1 in to crate %2",_loadCrateItem,_crate];
 				_loadCrateItem = (selectRandom _headGear) select 1;
 				_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
 				if (_addToCrate) then
