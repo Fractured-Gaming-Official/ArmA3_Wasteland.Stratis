@@ -98,22 +98,22 @@ if !(isServer) exitWith {}; // DO NOT DELETE THIS LINE!
 // #define __DEBUG__
 
 _backPacks = call RCLO_ARRAY select {"RCLO_BACKPACK" in (_x select [3,999])}; // compiles array from storeConfig.sqf (A3Wasteland).
-_binoculars = call RCLO_ARRAY select ("RCLO_BINOCULAR" in (_x select [3,999]));
-_bipods = call RCLO_ARRAY select ("RCLO_BIPOD" in (_x select [3,999]));
-_headGear = call RCLO_ARRAY select ("RCLO_HEADGEAR" in (_x select [3,999]));
-_items = call RCLO_ARRAY select ("RCLO_ITEM" in (_x select [3,999]));
-_launcherWeapons = call RCLO_ARRAY select ("RCLO_WEAPONLAUNCHER" in (_x select [3,999]));
-_magazines = call RCLO_ARRAY select ("RCLO_MAGAZINE" in (_x select [3,999]));
-_throwables = call RCLO_ARRAY select ("RCLO_THROWABLE" in (_x select [3,999]));
-_muzzles = call RCLO_ARRAY select ("RCLO_MUZZLE" in (_x select [3,999]));
-_optics = call RCLO_ARRAY select ("RCLO_OPTIC" in (_x select [3,999]));
-_primaryWeapons = call RCLO_ARRAY select ("RCLO_WEAPONPRIMARY" in (_x select [3,999]));
-_secondaryWeapons = call RCLO_ARRAY select ("RCLO_WEAPONSECONDARY" in (_x select [3,999]));
-_uniforms = call RCLO_ARRAY select ("RCLO_UNIFORM" in (_x select [3,999]));
-_vests = call RCLO_ARRAY select ("RCLO_VEST" in (_x select [3,999]));
-_weaponAccessories = call RCLO_ARRAY select ("RCLO_WEAPONACCESSORY" in (_x select [3,999]));
-_mines = call RCLO_ARRAY select ("RCLO_MINE" in (_x select [3,999]));
-_goggles = call RCLO_ARRAY select ("RCLO_GOGGLE" in (_x select [3,999]));
+_binoculars = call RCLO_ARRAY select {"RCLO_BINOCULAR" in (_x select [3,999])};
+_bipods = call RCLO_ARRAY select {"RCLO_BIPOD" in (_x select [3,999])};
+_headGear = call RCLO_ARRAY select {"RCLO_HEADGEAR" in (_x select [3,999])};
+_items = call RCLO_ARRAY select {"RCLO_ITEM" in (_x select [3,999])};
+_launcherWeapons = call RCLO_ARRAY select {"RCLO_WEAPONLAUNCHER" in (_x select [3,999])};
+_magazines = call RCLO_ARRAY select {"RCLO_MAGAZINE" in (_x select [3,999])};
+_throwables = call RCLO_ARRAY select {"RCLO_THROWABLE" in (_x select [3,999])};
+_muzzles = call RCLO_ARRAY select {"RCLO_MUZZLE" in (_x select [3,999])};
+_optics = call RCLO_ARRAY select {"RCLO_OPTIC" in (_x select [3,999])};
+_primaryWeapons = call RCLO_ARRAY select {"RCLO_WEAPONPRIMARY" in (_x select [3,999])};
+_secondaryWeapons = call RCLO_ARRAY select {"RCLO_WEAPONSECONDARY" in (_x select [3,999])};
+_uniforms = call RCLO_ARRAY select {"RCLO_UNIFORM" in (_x select [3,999])};
+_vests = call RCLO_ARRAY select {"RCLO_VEST" in (_x select [3,999])};
+_weaponAccessories = call RCLO_ARRAY select {"RCLO_WEAPONACCESSORY" in (_x select [3,999])};
+_mines = call RCLO_ARRAY select {"RCLO_MINE" in (_x select [3,999])};
+_goggles = call RCLO_ARRAY select {"RCLO_GOGGLE" in (_x select [3,999])};
 
 _overallLoopAmount = 0;
 _fillTheCrate = selectRandom [true,false];
