@@ -12,13 +12,12 @@ private ["_vehicleClass", "_vehicle", "_createVehicle", "_vehicles", "_leader", 
 _setupVars =
 {
 	_missionType = "Hostile Jet";
-	_locationsArray = nil; // locations are generated on the fly from towns
+	_locationsArray = nil;
 };
 
 _setupObjects =
 {
 	_missionPos = markerPos (((call cityList) call BIS_fnc_selectRandom) select 0);
-
 	_vehicleClass = if (missionDifficultyHard) then
 	{
 		selectRandom [["Plane_Fighter_04_Base_F", "GryphonA"], ["O_Plane_CAS_02_dynamicLoadout_F", "NeoMission"], ["B_Plane_CAS_01_dynamicLoadout_F", "WipeoutMission"], ["O_T_VTOL_02_infantry_dynamicLoadout_F", "Xi'anAir"]];
@@ -54,12 +53,8 @@ _setupObjects =
  		};
 
 		[_vehicle] call vehicleSetup;
-
 		_vehicle setDir _direction;
 		_aiGroup addVehicle _vehicle;
-
-		// add a driver/pilot/captain to the vehicle
-		// the little bird, orca, and hellcat do not require gunners and should not have any passengers
 		_soldier = [_aiGroup, _position] call createRandomSoldierC;
 		_soldier moveInDriver _vehicle;
 
@@ -67,43 +62,25 @@ _setupObjects =
 		{
 			case (_type isKindOf "O_T_VTOL_02_infantry_dynamicLoadout_F"):
 			{
-				// these choppers need 1 gunner
 				_soldier = [_aiGroup, _position] call createRandomSoldierC;
 				_soldier moveInGunner _vehicle;
 			};
 		};
-
-		/*// remove flares because it overpowers AI choppers
-		if (_type isKindOf "Air") then
-		{
-			{
-				if (["CMFlare", _x] call fn_findString != -1) then
-				{
-					_vehicle removeMagazinesTurret [_x, [-1]];
-				};
-			} forEach getArray (configFile >> "CfgVehicles" >> _type >> "magazines");
-		};*/
 
 		[_vehicle, _aiGroup] spawn checkMissionVehicleLock;
 		_vehicle
 	};
 
 	_aiGroup = createGroup CIVILIAN;
-
 	_vehicle = [_vehicleClass, _missionPos, 0] call _createVehicle;
-
 	_leader = effectiveCommander _vehicle;
 	_aiGroup selectLeader _leader;
-
-	_aiGroup setCombatMode "YELLOW"; // Defensive behaviour
+	_aiGroup setCombatMode "YELLOW";
 	_aiGroup setBehaviour "COMBAT";
 	_aiGroup setFormation "STAG COLUMN";
-
 	_speedMode = if (missionDifficultyHard) then { "NORMAL" } else { "LIMITED" };
-
 	_aiGroup setSpeedMode _speedMode;
 
-	// behaviour on waypoints
 	{
 		_waypoint = _aiGroup addWaypoint [markerPos (_x select 0), 0];
 		_waypoint setWaypointType "MOVE";
@@ -115,55 +92,60 @@ _setupObjects =
 	} forEach ((call cityList) call BIS_fnc_arrayShuffle);
 
 	_missionPos = getPosATL leader _aiGroup;
-
 	_missionPicture = getText (configFile >> "CfgVehicles" >> (_vehicleClass param [0,""]) >> "picture");
  	_vehicleName = getText (configFile >> "CfgVehicles" >> (_vehicleClass param [0,""]) >> "displayName");
-
 	_missionHintText = format ["An Experimental <t color='%2'>%1</t> is patrolling the island. Intercept it and recover its cargo!", _vehicleName, sideMissionColor];
-
 	_numWaypoints = count waypoints _aiGroup;
 };
 
 _waitUntilMarkerPos = {getPosATL _leader};
 _waitUntilExec = nil;
 _waitUntilCondition = {currentWaypoint _aiGroup >= _numWaypoints};
-
 _failedExec = nil;
-
-// _vehicle is automatically deleted or unlocked in missionProcessor depending on the outcome
 
 _successExec =
 {
-	// Mission completed
-
-	// wait until heli is down to spawn crates
-	_vehicle spawn
+	_vehicle spawn // spawn crate 1 - soulkobk
 	{
-		_veh = _this;
-
-		waitUntil
-		{
-			sleep 0.1;
-			_pos = getPos _veh;
-			(isTouchingGround _veh || _pos select 2 < 5) && {vectorMagnitude velocity _veh < [1,5] select surfaceIsWater _pos}
-		};
-
-		_box1 = createVehicle ["Box_NATO_Wps_F", (getPosATL _veh) vectorAdd ([[_veh call fn_vehSafeDistance, 0, 0], random 360] call BIS_fnc_rotateVector2D), [], 5, "None"];
-		_box1 setDir (random 360);
-		//[_box1, "mission_USSpecial"] call fn_refillbox;
-		_box1 call randomCrateLoadOut; // new randomCrateLoadOut function call
-
-		_box2 = createVehicle ["Box_East_Wps_F", (getPosATL _veh) vectorAdd ([[_veh call fn_vehSafeDistance, 0, 0], random 360] call BIS_fnc_rotateVector2D), [], 5, "None"];
-		_box2 setDir (random 360);
-	//	[_box2, "mission_USLaunchers"] call randomCrateLoadOut;
-		_box2 call randomCrateLoadOut; // new randomCrateLoadOut function call
-
+		params ["_vehicle"];
+		_crate = createVehicle ["Box_East_Wps_F", (getPosATL _vehicle) vectorAdd ([[_vehicle call fn_vehSafeDistance, 0, 0], random 360] call BIS_fnc_rotateVector2D), [], 5, "None"];
+		_crate setDir random 360;
+		_crate allowDamage false;
+		waitUntil {!isNull _crate};
+		_crateParachute = createVehicle ["O_Parachute_02_F", (getPosATL _crate), [], 0, "CAN_COLLIDE" ];
+		_crateParachute allowDamage false;
+		_crate attachTo [_crateParachute, [0,0,0]];
+		_crate call randomCrateLoadOut;
+		waitUntil {getPosATL _crate select 2 < 5};
+		detach _crate;
+		deleteVehicle _crateParachute;
+		_smokeSignal = createVehicle  ["SmokeShellRed", getPosATL _crate, [], 0, "CAN_COLLIDE" ];
+		_lightSignal = createVehicle  ["Chemlight_red", getPosATL _crate, [], 0, "CAN_COLLIDE" ];
+		_smokeSignal attachTo [_crate, [0,0,0.2]];
+		_lightSignal attachTo [_crate, [0,1,0]];
+		_crate allowDamage true;
 	};
-
-	_smoke = createVehicle ["Smokeshellgreen", _lastPos, [], 5, "None"];
-	_smoke setDir (random 360);
-
-	_successHintMessage = "The sky is clear again, the enemy patrol was taken out! Ammo crates have fallen near the wreck.";
+	_vehicle spawn // spawn crate 2 - soulkobk
+	{
+		params ["_vehicle"];
+		_crate = createVehicle ["Box_East_Wps_F", (getPosATL _vehicle) vectorAdd ([[_vehicle call fn_vehSafeDistance, 0, 0], random 360] call BIS_fnc_rotateVector2D), [], 5, "None"];
+		_crate setDir random 360;
+		_crate allowDamage false;
+		waitUntil {!isNull _crate};
+		_crateParachute = createVehicle ["O_Parachute_02_F", (getPosATL _crate), [], 0, "CAN_COLLIDE" ];
+		_crateParachute allowDamage false;
+		_crate attachTo [_crateParachute, [0,0,0]];
+		_crate call randomCrateLoadOut;
+		waitUntil {getPosATL _crate select 2 < 5};
+		detach _crate;
+		deleteVehicle _crateParachute;
+		_smokeSignal = createVehicle  ["SmokeShellRed", getPosATL _crate, [], 0, "CAN_COLLIDE" ];
+		_lightSignal = createVehicle  ["Chemlight_red", getPosATL _crate, [], 0, "CAN_COLLIDE" ];
+		_smokeSignal attachTo [_crate, [0,0,0.2]];
+		_lightSignal attachTo [_crate, [0,1,0]];
+		_crate allowDamage true;
+	};
+	_successHintMessage = "The sky is clear again, the enemy patrol was taken out! Ammo crates have fallen out of their Jet.";
 };
 
 _this call sideMissionProcessor;
