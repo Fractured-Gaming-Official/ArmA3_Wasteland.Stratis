@@ -125,65 +125,31 @@ _failedExec = nil;
 
 _successExec =
 {
-	_vehicle spawn // spawn crate 1 - soulkobk
+	_numCratesToSpawn = 3;
+	_i = 0;
+	while {_i < _numCratesToSpawn} do
 	{
-		params ["_vehicle"];
-		_crate = createVehicle ["Box_East_Wps_F", (getPosATL _vehicle) vectorAdd ([[_vehicle call fn_vehSafeDistance, 0, 0], random 360] call BIS_fnc_rotateVector2D), [], 5, "None"];
-		_crate setDir random 360;
-		_crate allowDamage false;
-		waitUntil {!isNull _crate};
-		_crateParachute = createVehicle ["O_Parachute_02_F", (getPosATL _crate), [], 0, "CAN_COLLIDE" ];
-		_crateParachute allowDamage false;
-		_crate attachTo [_crateParachute, [0,0,0]];
-		_crate call randomCrateLoadOut;
-		waitUntil {getPosATL _crate select 2 < 5};
-		detach _crate;
-		deleteVehicle _crateParachute;
-		_smokeSignal = createVehicle  ["SmokeShellRed", getPosATL _crate, [], 0, "CAN_COLLIDE" ];
-		_lightSignal = createVehicle  ["Chemlight_red", getPosATL _crate, [], 0, "CAN_COLLIDE" ];
-		_smokeSignal attachTo [_crate, [0,0,0.2]];
-		_lightSignal attachTo [_crate, [0,1,0]];
-		_crate allowDamage true;
-	};
-	_vehicle spawn // spawn crate 2 - soulkobk
-	{
-		params ["_vehicle"];
-		_crate = createVehicle ["Box_East_Wps_F", (getPosATL _vehicle) vectorAdd ([[_vehicle call fn_vehSafeDistance, 0, 0], random 360] call BIS_fnc_rotateVector2D), [], 5, "None"];
-		_crate setDir random 360;
-		_crate allowDamage false;
-		waitUntil {!isNull _crate};
-		_crateParachute = createVehicle ["O_Parachute_02_F", (getPosATL _crate), [], 0, "CAN_COLLIDE" ];
-		_crateParachute allowDamage false;
-		_crate attachTo [_crateParachute, [0,0,0]];
-		_crate call randomCrateLoadOut;
-		waitUntil {getPosATL _crate select 2 < 5};
-		detach _crate;
-		deleteVehicle _crateParachute;
-		_smokeSignal = createVehicle  ["SmokeShellRed", getPosATL _crate, [], 0, "CAN_COLLIDE" ];
-		_lightSignal = createVehicle  ["Chemlight_red", getPosATL _crate, [], 0, "CAN_COLLIDE" ];
-		_smokeSignal attachTo [_crate, [0,0,0.2]];
-		_lightSignal attachTo [_crate, [0,1,0]];
-		_crate allowDamage true;
-	};
-	_vehicle spawn // spawn crate 2 - soulkobk
-	{
-		params ["_vehicle"];
-		_crate = createVehicle ["Box_East_Wps_F", (getPosATL _vehicle) vectorAdd ([[_vehicle call fn_vehSafeDistance, 0, 0], random 360] call BIS_fnc_rotateVector2D), [], 5, "None"];
-		_crate setDir random 360;
-		_crate allowDamage false;
-		waitUntil {!isNull _crate};
-		_crateParachute = createVehicle ["O_Parachute_02_F", (getPosATL _crate), [], 0, "CAN_COLLIDE" ];
-		_crateParachute allowDamage false;
-		_crate attachTo [_crateParachute, [0,0,0]];
-		_crate call randomCrateLoadOut;
-		waitUntil {getPosATL _crate select 2 < 5};
-		detach _crate;
-		deleteVehicle _crateParachute;
-		_smokeSignal = createVehicle  ["SmokeShellRed", getPosATL _crate, [], 0, "CAN_COLLIDE" ];
-		_lightSignal = createVehicle  ["Chemlight_red", getPosATL _crate, [], 0, "CAN_COLLIDE" ];
-		_smokeSignal attachTo [_crate, [0,0,0.2]];
-		_lightSignal attachTo [_crate, [0,1,0]];
-		_crate allowDamage true;
+	    _vehicle spawn
+	    {
+	        params ["_vehicle"];
+	        _crate = createVehicle ["Box_East_Wps_F", (getPosATL _vehicle) vectorAdd ([[_vehicle call fn_vehSafeDistance, 0, 0], random 360] call BIS_fnc_rotateVector2D), [], 5, "None"];
+	        _crate setDir random 360;
+	        _crate allowDamage false;
+	        waitUntil {!isNull _crate};
+	        _crateParachute = createVehicle ["O_Parachute_02_F", (getPosATL _crate), [], 0, "CAN_COLLIDE" ];
+	        _crateParachute allowDamage false;
+	        _crate attachTo [_crateParachute, [0,0,0]];
+	        _crate call randomCrateLoadOut;
+	        waitUntil {getPosATL _crate select 2 < 5};
+	        detach _crate;
+	        deleteVehicle _crateParachute;
+	        _smokeSignal = createVehicle  ["SmokeShellRed", getPosATL _crate, [], 0, "CAN_COLLIDE" ];
+	        _lightSignal = createVehicle  ["Chemlight_red", getPosATL _crate, [], 0, "CAN_COLLIDE" ];
+	        _smokeSignal attachTo [_crate, [0,0,0.2]];
+	        _lightSignal attachTo [_crate, [0,1,0]];
+	        _crate allowDamage true;
+	    };
+	    _i = _i + 1;
 	};
 	_successHintMessage = "The sky is clear again, the enemy patrol was taken out! Ammo crates have fallen out their chopper.";
 };
