@@ -155,33 +155,59 @@ _failedExec = nil;
 
 _successExec =
 {
-	// Mission completed
+	/*/ --------------------------------------------------------------------------------------- /*/
+    _numCratesToSpawn = 2; // edit this value to how many crates are to be spawned!
+	/*/ --------------------------------------------------------------------------------------- /*/
 
-
-
-	_box1 = createVehicle ["Box_East_Wps_F", _lastPos, [], 5, "None"];
-	_box1 setDir (random 360);
-	//[_box1, "mission_USLaunchers"] call fn_refillbox;
-	_box1 call randomCrateLoadOut; // new randomCrateLoadOut function call
-
-	_box2 = createVehicle ["Box_IND_WpsSpecial_F", _lastPos, [], 5, "None"];
-	_box2 setDir (random 360);
-	//[_box2, "mission_Main_A3snipers"] call fn_refillbox;
-	_box2 call randomCrateLoadOut; // new randomCrateLoadOut function call
-
-	for "_i" from 1 to 10 do
-	{
-		_cash = createVehicle ["Land_Money_F", _lastPos, [], 5, "None"];
-		_cash setPos ([_lastPos, [[2 + random 3,0,0], random 360] call BIS_fnc_rotateVector2D] call BIS_fnc_vectorAdd);
-		_cash setDir random 360;
-		_cash setVariable ["cmoney", 7500, true];
-		_cash setVariable ["owner", "world", true];
-	};
-
-	_smoke = createVehicle ["Smokeshellgreen", _lastPos, [], 5, "None"];
-	_smoke setDir (random 360);
-
-
+	/*/ --------------------------------------------------------------------------------------- /*/
+	_lastPos = _this;
+    _i = 0;
+    while {_i < _numCratesToSpawn} do
+    {
+        _lastPos spawn
+        {
+		_lastPos = _this;
+            	_crate = createVehicle ["Box_East_Wps_F", _lastPos, [], 5, "None"];
+            	_crate setDir random 360;
+            	_crate allowDamage false;
+            	waitUntil {!isNull _crate};
+            	_crateParachute = createVehicle ["O_Parachute_02_F", (getPosATL _crate), [], 0, "CAN_COLLIDE" ];
+            	_crateParachute allowDamage false;
+            	_crate attachTo [_crateParachute, [0,0,0]];
+            	_crate call randomCrateLoadOut;
+            	waitUntil {getPosATL _crate select 2 < 5};
+            	detach _crate;
+            	deleteVehicle _crateParachute;
+	    	_moneyAmt = 10;
+	    	_moneyPerAmt = 3500;
+	    	_j = 0;
+	    	while {_j < _moneyAmt} do
+		{
+			_cash = createVehicle ["Land_Money_F", _crate, [], 5, "None"];
+			_cash setPos ([_lastPos, [[2 + random 3,0,0], random 360] call BIS_fnc_rotateVector2D] call BIS_fnc_vectorAdd);
+		    	_cash setDir random 360;
+		    	_cash setVariable ["cmoney", _moneyPerAmt, true];
+		    	_cash setVariable ["owner", "world", true];
+		    	_j = _j + 1;
+		};
+            	_smokeSignalTop = createVehicle  ["SmokeShellRed_infinite", getPosATL _crate, [], 0, "CAN_COLLIDE" ];
+            	_lightSignalTop = createVehicle  ["Chemlight_red", getPosATL _crate, [], 0, "CAN_COLLIDE" ];
+            	_smokeSignalTop attachTo [_crate, [0,0,0.25]];
+            	_lightSignalTop attachTo [_crate, [0,0,0.25]];
+            	_smokeSignalBtm = createVehicle  ["SmokeShellRed_infinite", getPosATL _crate, [], 0, "CAN_COLLIDE" ];
+            	_lightSignalBtm = createVehicle  ["Chemlight_red", getPosATL _crate, [], 0, "CAN_COLLIDE" ];
+            	_smokeSignalBtm attachTo [_crate, [0,0,-0.2]];
+            	_lightSignalBtm attachTo [_crate, [0,0,-0.2]];
+	    	_timer = time + 240;
+	    	waitUntil {sleep 1; time > _timer};
+            	_crate allowDamage true;
+	    	deleteVehicle _smokeSignalTop;
+	    	deleteVehicle _lightSignalTop;
+	    	deleteVehicle _smokeSignalBtm;
+	    	deleteVehicle _lightSignalBtm;
+        };
+        _i = _i + 1;
+    };
 	_successHintMessage = "The sky is clear again, the Smuggler and Escort were taken out! Ammo crates and Money have fallen near the wreck.";
 };
 

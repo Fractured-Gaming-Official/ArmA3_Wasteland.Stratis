@@ -232,26 +232,46 @@ _failedExec = nil;
 
 _successExec =
 {
-	// Mission completed
-
-	_box1 = createVehicle ["Box_NATO_Wps_F", _lastPos, [], 5, "None"];
-	_box1 setDir random 360;
-	//[_box1, "mission_USSpecial"] call fn_refillbox;
-	_box1 call randomCrateLoadOut; // new randomCrateLoadOut function call
-
-	_box2 = createVehicle ["Box_East_Wps_F", _lastPos, [], 5, "None"];
-	_box2 setDir random 360;
-	//[_box2, "mission_USLaunchers"] call fn_refillbox;
-	_box2 call randomCrateLoadOut; // new randomCrateLoadOut function call
-
-	_box3 = createVehicle ["Box_IND_WpsSpecial_F", _lastPos, [], 5, "None"];
-	_box3 setDir random 360;
-	//[_box3, "mission_Main_A3snipers"] call fn_refillbox;
-	_box3 call randomCrateLoadOut; // new randomCrateLoadOut function call
-
-	_mortar = createVehicle ["I_Mortar_01_F", _lastPos, [], 5, "None"];
-	_mortar setVariable ["R3F_LOG_Disabled", false, true];
-	_mortar setDir random 360;
+	_numCratesToSpawn = 2; // edit this value to how many crates are to be spawned!
+	_lastPos = _this;
+	_i = 0;
+	while {_i < _numCratesToSpawn} do
+	{
+		_lastPos spawn
+		{
+			_lastPos = _this;
+	     		_crate = createVehicle ["Box_East_Wps_F", _lastPos, [], 5, "None"];
+	     		_crate setDir random 360;
+	     		_crate allowDamage false;
+	     		waitUntil {!isNull _crate};
+	     		if ((_lastPos select 2) > 5) then
+			{
+		 		_crateParachute = createVehicle ["O_Parachute_02_F", (getPosATL _crate), [], 0, "CAN_COLLIDE" ];
+		 		_crateParachute allowDamage false;
+		 		_crate attachTo [_crateParachute, [0,0,0]];
+		 		_crate call randomCrateLoadOut;
+		 		waitUntil {getPosATL _crate select 2 < 5};
+		 		detach _crate;
+		 		deleteVehicle _crateParachute;
+			};
+	     		_smokeSignalTop = createVehicle  ["SmokeShellRed_infinite", getPosATL _crate, [], 0, "CAN_COLLIDE" ];
+	     		_lightSignalTop = createVehicle  ["Chemlight_red", getPosATL _crate, [], 0, "CAN_COLLIDE" ];
+	     		_smokeSignalTop attachTo [_crate, [0,0,0.25]];
+	     		_lightSignalTop attachTo [_crate, [0,0,0.25]];
+	     		_smokeSignalBtm = createVehicle  ["SmokeShellRed_infinite", getPosATL _crate, [], 0, "CAN_COLLIDE" ];
+	     		_lightSignalBtm = createVehicle  ["Chemlight_red", getPosATL _crate, [], 0, "CAN_COLLIDE" ];
+	     		_smokeSignalBtm attachTo [_crate, [0,0,-0.2]];
+	     		_lightSignalBtm attachTo [_crate, [0,0,-0.2]];
+			_timer = time + 120;
+			waitUntil {sleep 1; time > _timer};
+			_crate allowDamage true;
+			deleteVehicle _smokeSignalTop;
+			deleteVehicle _lightSignalTop;
+			deleteVehicle _smokeSignalBtm;
+			deleteVehicle _lightSignalBtm;
+	 	};
+	        _i = _i + 1;
+	};
 
 	_successHintMessage = "The Patrol has been stopped! Ammo crates and a Mortar have fallen nearby.";
 };
