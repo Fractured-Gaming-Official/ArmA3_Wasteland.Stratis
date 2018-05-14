@@ -9,7 +9,7 @@ if (!isServer) exitwith {};
 #define MISSION_LOCATION_COOLDOWN (10*60)
 #define MISSION_TIMER_EXTENSION (15*60)
 
-private ["_controllerSuffix", "_missionTimeout", "_availableLocations", "_missionLocation", "_leader", "_marker", "_failed", "_complete", "_startTime", "_oldAiCount", "_leaderTemp", "_newAiCount", "_adjustTime", "_lastPos", "_floorHeight"];
+private ["_controllerSuffix", "_missionTimeout", "_availableLocations", "_missionLocation", "_leader", "_leaderPos", "_marker", "_failed", "_complete", "_startTime", "_oldAiCount", "_leaderTemp", "_newAiCount", "_adjustTime", "_lastPos", "_floorHeight"];
 
 // Variables that can be defined in the mission script :
 private ["_missionType", "_locationsArray", "_aiGroup", "_missionPos", "_missionPicture", "_missionHintText", "_successHintMessage", "_failedHintMessage"];
@@ -41,6 +41,8 @@ if (!isNil "_locationsArray") then
 if (!isNil "_setupObjects") then { call _setupObjects };
 
 _leader = leader _aiGroup;
+_leaderPos = getPos _leader;
+
 _marker = [_missionType, _missionPos] call createMissionMarker;
 _aiGroup setVariable ["A3W_missionMarkerName", _marker, true];
 
@@ -93,7 +95,11 @@ waitUntil
 
 	_oldAiCount = _newAiCount;
 
-	if (!isNull _leaderTemp) then { _leader = _leaderTemp }; // Update current leader
+	if (!isNull _leaderTemp) then
+	{
+		_leader = _leaderTemp;
+		_leaderPos = getPos _leader;
+	}; // Update current leader
 
 	if (!isNil "_waitUntilMarkerPos") then { _marker setMarkerPos (call _waitUntilMarkerPos) };
 	if (!isNil "_waitUntilExec") then { call _waitUntilExec };
@@ -147,18 +153,20 @@ else
 {
 	// Mission completed
 
-	if (isNull _leader) then
-	{
-		_lastPos = markerPos _marker;
-	}
-	else
-	{
-		_lastPos = _leader call fn_getPos3D;
-		_floorHeight = (getPos _leader) select 2;
-		_lastPos set [2, (_lastPos select 2) - _floorHeight];
-	};
+	// if (isNull _leader) then
+	// {
+		// _lastPos = markerPos _marker;
+	// }
+	// else
+	// {
+		// _lastPos = _leader call fn_getPos3D;
+		// _floorHeight = (getPos _leader) select 2;
+		// _lastPos set [2, (_lastPos select 2) - _floorHeight];
+	// };
 
-	if (!isNil "_successExec") then { call _successExec };
+	_lastPos = _leaderPos;
+
+	if (!isNil "_successExec") then { _lastPos call _successExec };
 
 	if (!isNil "_vehicle" && {typeName _vehicle == "OBJECT"}) then
 	{
