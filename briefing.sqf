@@ -24,6 +24,9 @@ player createDiaryRecord ["changelog",
 [
 "FRACTURED Logs",
 "
+<br/>--------5/15/2018--------
+<br/>[CHANGED] How Crates Spawn. If Air Mission, Crates Fall from sky with parachute
+<br>If a crate is on the ground it spawns with red smoke and a red chemlight
 <br/>--------5/10/2018--------
 <br/>[CHANGED]Mission Crates, All are 100% randomized now.
 <br/>--------5/10/2018--------
