@@ -231,7 +231,7 @@ throwputArray = compileFinal str
 	["APERS Tripwire Mine", "APERSTripMine_Wire_Mag", 700, "RCLO_MINE"],
 	["APERS Bounding Mine", "APERSBoundingMine_Range_Mag", 750, "RCLO_MINE"],
 	["APERS Mine", "APERSMine_Range_Mag", 600, "RCLO_MINE"],
-	["Claymore Charge", "ClaymoreDirectionalMine_Remote_Mag", "RCLO_MINE"],
+	["Claymore Charge", "ClaymoreDirectionalMine_Remote_Mag", 500, "RCLO_MINE"],
 	["M6 SLAM Mine", "SLAMDirectionalMine_Wire_Mag", 750, "RCLO_MINE"],
 	["AT Mine", "ATMine_Range_Mag", 1500, "RCLO_MINE"],
 	["Explosive Charge", "DemoCharge_Remote_Mag", 750, "RCLO_MINE"],
