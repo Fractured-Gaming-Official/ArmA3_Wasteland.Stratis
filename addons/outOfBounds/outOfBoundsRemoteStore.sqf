@@ -69,8 +69,8 @@ params ["_uav"];
 
 if (!isNil "_uav") then
 {
-	_uavText = format ["\n! %1 PLEASE NOTE THAT THE REMOTE VEHICLE '%2' HAS A MAX ALTITUDE OF %3M !",toUpper (name player),toUpper (getText (configfile >> "CfgVehicles" >> typeOf _uav >> "displayName")),_maxHeightRemote];
-	[_uavText, 5] call mf_notify_client;
+	//_uavText = format ["\n! %1 PLEASE NOTE THAT THE REMOTE VEHICLE '%2' HAS A MAX ALTITUDE OF %3M !",toUpper (name player),toUpper (getText (configfile >> "CfgVehicles" >> typeOf _uav >> "displayName")),_maxHeightRemote];
+	//[_uavText, 5] call mf_notify_client;
 
 	[_uav,_maxTime,_maxHeightRemote] spawn
 	{
