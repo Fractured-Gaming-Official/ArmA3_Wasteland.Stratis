@@ -119,19 +119,12 @@ rifleArray = compileFinal str
 
 	// Sniper Rifles
 
-	["M320 LRR Sniper", "srifle_LRR_LRPS_F", 2000, "RCLO_WEAPONPRIMARY"],
-	["M320 LRR Sniper (Camo)", "srifle_LRR_camo_LRPS_F", 2000, "RCLO_WEAPONPRIMARY"],
-	["M320 LRR Sniper (Tropic)", "srifle_LRR_tna_LRPS_F", 2000, "RCLO_WEAPONPRIMARY"],
-	["GM6 Lynx Sniper", "srifle_GM6_LRPS_F", 2100, "RCLO_WEAPONPRIMARY"],
-	["GM6 Lynx Sniper (Camo)", "srifle_GM6_camo_LRPS_F", 2100, "RCLO_WEAPONPRIMARY"],
-	["GM6 Lynx Sniper (G Hex)", "srifle_GM6_ghex_LRPS_F", 2100, "RCLO_WEAPONPRIMARY"],
-
-	["M320 LRR Sniper", "srifle_LRR_LRPS_F", 1000, "RCLO_WEAPONPRIMARY"],
-	["M320 LRR Sniper (Camo)", "srifle_LRR_camo_LRPS_F", 1200, "RCLO_WEAPONPRIMARY"],
-	["M320 LRR Sniper (Tropic)", "srifle_LRR_tna_LRPS_F", 1200, "noDLC", "RCLO_WEAPONPRIMARY"],
-	["GM6 Lynx Sniper", "srifle_GM6_LRPS_F", 1250, "RCLO_WEAPONPRIMARY"],
-	["GM6 Lynx Sniper (Camo)", "srifle_GM6_camo_LRPS_F", 1500, "RCLO_WEAPONPRIMARY"],
-	["GM6 Lynx Sniper (G Hex)", "srifle_GM6_ghex_LRPS_F", 1500, "noDLC", "RCLO_WEAPONPRIMARY"],
+	["M320 LRR Sniper", "srifle_LRR_LRPS_F", 3000, "RCLO_WEAPONPRIMARY"],
+	["M320 LRR Sniper (Camo)", "srifle_LRR_camo_LRPS_F", 3000, "RCLO_WEAPONPRIMARY"],
+	["M320 LRR Sniper (Tropic)", "srifle_LRR_tna_LRPS_F", 3000, "noDLC", "RCLO_WEAPONPRIMARY"],
+	["GM6 Lynx Sniper", "srifle_GM6_LRPS_F", 3000, "RCLO_WEAPONPRIMARY"],
+	["GM6 Lynx Sniper (Camo)", "srifle_GM6_camo_LRPS_F", 3500, "RCLO_WEAPONPRIMARY"],
+	["GM6 Lynx Sniper (G Hex)", "srifle_GM6_ghex_LRPS_F", 3500, "noDLC", "RCLO_WEAPONPRIMARY"],
 
 
 	["ASP-1 Kir Rifle", "srifle_DMR_04_F", 2000, "RCLO_WEAPONPRIMARY"],
@@ -154,11 +147,11 @@ lmgArray = compileFinal str
 	["CAR-95-1 LMG (G Hex)", "arifle_CTARS_ghex_F", 1300, "RCLO_WEAPONPRIMARY"],
 	["LIM-85 LMG", "LMG_03_F", 1350, "RCLO_WEAPONPRIMARY"],
 
-	["SPMG MMG (Sand)", "MMG_02_sand_F", 1750, "RCLO_WEAPONPRIMARY"],
-	["SPMG MMG (MTP)", "MMG_02_camo_F", 1750, "RCLO_WEAPONPRIMARY"],
-	["SPMG MMG (Black)", "MMG_02_black_F", 1750, "RCLO_WEAPONPRIMARY"],
-	["Navid MMG (Tan)", "MMG_01_tan_F", 2000, "RCLO_WEAPONPRIMARY"],
-	["Navid MMG (Hex)", "MMG_01_hex_F", 2000, "RCLO_WEAPONPRIMARY"]
+	["SPMG MMG (Sand)", "MMG_02_sand_F", 2000, "RCLO_WEAPONPRIMARY"],
+	["SPMG MMG (MTP)", "MMG_02_camo_F", 2000, "RCLO_WEAPONPRIMARY"],
+	["SPMG MMG (Black)", "MMG_02_black_F", 2000, "RCLO_WEAPONPRIMARY"],
+	["Navid MMG (Tan)", "MMG_01_tan_F", 2500, "RCLO_WEAPONPRIMARY"],
+	["Navid MMG (Hex)", "MMG_01_hex_F", 2500, "RCLO_WEAPONPRIMARY"]
 ];
 
 launcherArray = compileFinal str
@@ -257,62 +250,62 @@ ammoArray = compileFinal str
 	[".45 ACP 6Rnd Cylinder", "6Rnd_45ACP_Cylinder", 5, "RCLO_MAGAZINE"],
 	[".45 ACP 9Rnd Mag", "9Rnd_45ACP_Mag", 10, "RCLO_MAGAZINE"],
 	[".45 ACP 11Rnd Mag", "11Rnd_45ACP_Mag", 15, "RCLO_MAGAZINE"],
-	[".45 ACP 30Rnd Vermin Mag", "30Rnd_45ACP_MAG_SMG_01", 20, "RCLO_MAGAZINE"],
-	[".45 ACP 30Rnd Tracer (Green) Mag", "30Rnd_45ACP_Mag_SMG_01_tracer_green", 15, "RCLO_MAGAZINE"],
-	["5.45mm 30Rnd Mag", "30Rnd_545x39_Mag_F", 20, "RCLO_MAGAZINE"],
-	["5.45mm 30Rnd Tracer (Yellow) Mag", "30Rnd_545x39_Mag_Tracer_F", 15, "RCLO_MAGAZINE"],
-	["5.45mm 30Rnd Tracer (Green) Mag", "30Rnd_545x39_Mag_Tracer_Green_F", 15, "RCLO_MAGAZINE"],
-	["5.56mm 20Rnd Underwater Mag", "20Rnd_556x45_UW_mag", 10, "RCLO_MAGAZINE"],
-	["5.56mm 30Rnd STANAG Mag", "30Rnd_556x45_Stanag", 20, "RCLO_MAGAZINE"],
-	["5.56mm 30Rnd Tracer (Green) Mag", "30Rnd_556x45_Stanag_Tracer_Green", 15, "RCLO_MAGAZINE"],
-	["5.56mm 30Rnd Tracer (Yellow) Mag", "30Rnd_556x45_Stanag_Tracer_Yellow", 15, "RCLO_MAGAZINE"],
+	[".45 ACP 30Rnd Vermin Mag", "30Rnd_45ACP_MAG_SMG_01", 50, "RCLO_MAGAZINE"],
+	[".45 ACP 30Rnd Tracer (Green) Mag", "30Rnd_45ACP_Mag_SMG_01_tracer_green", 50, "RCLO_MAGAZINE"],
+	["5.45mm 30Rnd Mag", "30Rnd_545x39_Mag_F", 150, "RCLO_MAGAZINE"],
+	["5.45mm 30Rnd Tracer (Yellow) Mag", "30Rnd_545x39_Mag_Tracer_F", 150, "RCLO_MAGAZINE"],
+	["5.45mm 30Rnd Tracer (Green) Mag", "30Rnd_545x39_Mag_Tracer_Green_F", 150, "RCLO_MAGAZINE"],
+	["5.56mm 20Rnd Underwater Mag", "20Rnd_556x45_UW_mag", 150, "RCLO_MAGAZINE"],
+	["5.56mm 30Rnd STANAG Mag", "30Rnd_556x45_Stanag", 150, "RCLO_MAGAZINE"],
+	["5.56mm 30Rnd Tracer (Green) Mag", "30Rnd_556x45_Stanag_Tracer_Green", 150, "RCLO_MAGAZINE"],
+	["5.56mm 30Rnd Tracer (Yellow) Mag", "30Rnd_556x45_Stanag_Tracer_Yellow", 150, "RCLO_MAGAZINE"],
 	["5.56mm 30Rnd Tracer (Red) Mag", "30Rnd_556x45_Stanag_Tracer_Red", 15, "RCLO_MAGAZINE"],
-	["5.56mm 150Rnd Mag", "150Rnd_556x45_Drum_Mag_F", 100, "RCLO_MAGAZINE"],
-	["5.56mm 150Rnd Tracer (Red) Mag", "150Rnd_556x45_Drum_Mag_Tracer_F", 75, "RCLO_MAGAZINE"],
-	["5.56mm 200Rnd Box", "200Rnd_556x45_Box_F", 125, "RCLO_MAGAZINE"],
-	["5.56mm 200Rnd Tracer (Yellow) Box", "200Rnd_556x45_Box_Tracer_F", 100, "RCLO_MAGAZINE"],
-	["5.56mm 200Rnd Tracer (Red) Box", "200Rnd_556x45_Box_Tracer_Red_F", 100, "RCLO_MAGAZINE"],
-	["5.8mm 30Rnd Mag", "30Rnd_580x42_Mag_F", 20, "RCLO_MAGAZINE"],
-	["5.8mm 30Rnd Tracer (Green) Mag", "30Rnd_580x42_Mag_Tracer_F", 15, "RCLO_MAGAZINE"],
-	["5.8mm 100Rnd Mag", "100Rnd_580x42_Mag_F", 100, "RCLO_MAGAZINE"],
-	["5.8mm 100Rnd Tracer (Green) Mag", "100Rnd_580x42_Mag_Tracer_F", 75, "RCLO_MAGAZINE"],
-	["6.5mm 20Rnd Mag", "20Rnd_650x39_Cased_Mag_F", 15, "RCLO_MAGAZINE"],
-	["6.5mm 30Rnd STANAG Mag", "30Rnd_65x39_caseless_mag", 20, "RCLO_MAGAZINE"],
-	["6.5mm 30Rnd Tracer (Red) Mag", "30Rnd_65x39_caseless_mag_Tracer", 15, "RCLO_MAGAZINE"],
-	["6.5mm 30Rnd Caseless Mag", "30Rnd_65x39_caseless_green", 20, "RCLO_MAGAZINE"],
-	["6.5mm 30Rnd Tracer (Green) Mag", "30Rnd_65x39_caseless_green_mag_Tracer", 15, "RCLO_MAGAZINE"],
-	["6.5mm 100Rnd Belt Case", "100Rnd_65x39_caseless_mag", 75, "RCLO_MAGAZINE"],
-	["6.5mm 100Rnd Tracer (Red) Belt Case", "100Rnd_65x39_caseless_mag_Tracer", 50, "RCLO_MAGAZINE"],
-	["6.5mm 200Rnd Belt Case", "200Rnd_65x39_cased_Box", 150, "RCLO_MAGAZINE"],
-	["6.5mm 200Rnd Tracer (Yellow) Belt Case", "200Rnd_65x39_cased_Box_Tracer", 125, "RCLO_MAGAZINE"],
+	["5.56mm 150Rnd Mag", "150Rnd_556x45_Drum_Mag_F", 500, "RCLO_MAGAZINE"],
+	["5.56mm 150Rnd Tracer (Red) Mag", "150Rnd_556x45_Drum_Mag_Tracer_F", 500, "RCLO_MAGAZINE"],
+	["5.56mm 200Rnd Box", "200Rnd_556x45_Box_F", 750, "RCLO_MAGAZINE"],
+	["5.56mm 200Rnd Tracer (Yellow) Box", "200Rnd_556x45_Box_Tracer_F", 750, "RCLO_MAGAZINE"],
+	["5.56mm 200Rnd Tracer (Red) Box", "200Rnd_556x45_Box_Tracer_Red_F", 750, "RCLO_MAGAZINE"],
+	["5.8mm 30Rnd Mag", "30Rnd_580x42_Mag_F", 400, "RCLO_MAGAZINE"],
+	["5.8mm 30Rnd Tracer (Green) Mag", "30Rnd_580x42_Mag_Tracer_F", 400, "RCLO_MAGAZINE"],
+	["5.8mm 100Rnd Mag", "100Rnd_580x42_Mag_F", 1000, "RCLO_MAGAZINE"],
+	["5.8mm 100Rnd Tracer (Green) Mag", "100Rnd_580x42_Mag_Tracer_F", 400, "RCLO_MAGAZINE"],
+	["6.5mm 20Rnd Mag", "20Rnd_650x39_Cased_Mag_F", 500, "RCLO_MAGAZINE"],
+	["6.5mm 30Rnd STANAG Mag", "30Rnd_65x39_caseless_mag", 500, "RCLO_MAGAZINE"],
+	["6.5mm 30Rnd Tracer (Red) Mag", "30Rnd_65x39_caseless_mag_Tracer", 500, "RCLO_MAGAZINE"],
+	["6.5mm 30Rnd Caseless Mag", "30Rnd_65x39_caseless_green", 500, "RCLO_MAGAZINE"],
+	["6.5mm 30Rnd Tracer (Green) Mag", "30Rnd_65x39_caseless_green_mag_Tracer", 500, "RCLO_MAGAZINE"],
+	["6.5mm 100Rnd Belt Case", "100Rnd_65x39_caseless_mag", 1000, "RCLO_MAGAZINE"],
+	["6.5mm 100Rnd Tracer (Red) Belt Case", "100Rnd_65x39_caseless_mag_Tracer", 1000, "RCLO_MAGAZINE"],
+	["6.5mm 200Rnd Belt Case", "200Rnd_65x39_cased_Box", 1250, "RCLO_MAGAZINE"],
+	["6.5mm 200Rnd Tracer (Yellow) Belt Case", "200Rnd_65x39_cased_Box_Tracer", 1250, "RCLO_MAGAZINE"],
 	//["7.62mm 10Rnd Mag", "10Rnd_762x51_Mag", 15],
-	["7.62mm 10Rnd Mag", "10Rnd_762x54_Mag", 15, "RCLO_MAGAZINE"],
-	["7.62mm 20Rnd Mag", "20Rnd_762x51_Mag", 25, "RCLO_MAGAZINE"],
-	["7.62mm 30Rnd Mag", "30Rnd_762x39_Mag_F", 20, "RCLO_MAGAZINE"],
-	["7.62mm 30Rnd Tracer (Yellow) Mag", "30Rnd_762x39_Mag_Tracer_F", 15, "RCLO_MAGAZINE"],
-	["7.62mm 30Rnd Tracer (Green) Mag", "30Rnd_762x39_Mag_Tracer_Green_F", 15, "RCLO_MAGAZINE"],
+	["7.62mm 10Rnd Mag", "10Rnd_762x54_Mag", 200, "RCLO_MAGAZINE"],
+	["7.62mm 20Rnd Mag", "20Rnd_762x51_Mag", 400, "RCLO_MAGAZINE"],
+	["7.62mm 30Rnd Mag", "30Rnd_762x39_Mag_F", 600, "RCLO_MAGAZINE"],
+	["7.62mm 30Rnd Tracer (Yellow) Mag", "30Rnd_762x39_Mag_Tracer_F", 500, "RCLO_MAGAZINE"],
+	["7.62mm 30Rnd Tracer (Green) Mag", "30Rnd_762x39_Mag_Tracer_Green_F", 500, "RCLO_MAGAZINE"],
 	//["7.62mm 150Rnd Box", "150Rnd_762x51_Box", 150],
 	//["7.62mm 150Rnd Tracer (Green) Box", "150Rnd_762x51_Box_Tracer", 125],
-	["7.62mm 150Rnd Box", "150Rnd_762x54_Box", 150, "RCLO_MAGAZINE"],
-	["7.62mm 150Rnd Tracer (Green) Box", "150Rnd_762x54_Box_Tracer", 125, "RCLO_MAGAZINE"],
-	[".338 LM 10Rnd Mag", "10Rnd_338_Mag", 250, "RCLO_MAGAZINE"],
-	[".338 NM 130Rnd Belt", "130Rnd_338_Mag", 750, "RCLO_MAGAZINE"],
-	["9.3mm 10Rnd Mag", "10Rnd_93x64_DMR_05_Mag", 300, "RCLO_MAGAZINE"],
-	["9.3mm 150Rnd Belt", "150Rnd_93x64_Mag", 1500, "RCLO_MAGAZINE"],
-	[".408 7Rnd Cheetah Mag", "7Rnd_408_Mag", 700, "RCLO_MAGAZINE"],
+	["7.62mm 150Rnd Box", "150Rnd_762x54_Box", 1500, "RCLO_MAGAZINE"],
+	["7.62mm 150Rnd Tracer (Green) Box", "150Rnd_762x54_Box_Tracer", 1500, "RCLO_MAGAZINE"],
+	[".338 LM 10Rnd Mag", "10Rnd_338_Mag", 600, "RCLO_MAGAZINE"],
+	[".338 NM 130Rnd Belt", "130Rnd_338_Mag", 2500, "RCLO_MAGAZINE"],
+	["9.3mm 10Rnd Mag", "10Rnd_93x64_DMR_05_Mag", 700, "RCLO_MAGAZINE"],
+	["9.3mm 150Rnd Belt", "150Rnd_93x64_Mag", 3000, "RCLO_MAGAZINE"],
+	[".408 7Rnd Cheetah Mag", "7Rnd_408_Mag", 1000, "RCLO_MAGAZINE"],
 	["12.7mm 5Rnd Mag", "5Rnd_127x108_Mag", 500, "RCLO_MAGAZINE"],
-	["12.7mm 5Rnd Armor-Piercing Mag", "5Rnd_127x108_APDS_Mag", 700, "RCLO_MAGAZINE"],
-	["12.7mm 10Rnd Subsonic Mag", "10Rnd_127x54_Mag", 75, "RCLO_MAGAZINE"],
+	["12.7mm 5Rnd Armor-Piercing Mag", "5Rnd_127x108_APDS_Mag", 1000, "RCLO_MAGAZINE"],
+	["12.7mm 10Rnd Subsonic Mag", "10Rnd_127x54_Mag", 200, "RCLO_MAGAZINE"],
 
 	[".50 BW 10Rnd Mag", "10Rnd_50BW_Mag_F", 1000, "RCLO_MAGAZINE"],             //                 hit                      hit,  radius
-	["PG-7VM HEAT Grenade", "RPG7_F", 500, "RCLO_MAGAZINE"],                   // Direct damage:  343     | Splash damage:  13,  3.0m     | Guidance: none
+	["PG-7VM HEAT Grenade", "RPG7_F", 750, "RCLO_MAGAZINE"],                   // Direct damage:  343     | Splash damage:  13,  3.0m     | Guidance: none
 	["RPG-42 AT Rocket", "RPG32_F", 1000, "RCLO_MAGAZINE"],                     //                 422     |                 28,  2.5m     |           none
 	["RPG-42 HE Rocket", "RPG32_HE_F", 1250, "RCLO_MAGAZINE"],                  //                 200     |                 50,  6.0m     |           none
-	["MAAWS HEAT 75 Rocket", "MRAWS_HEAT_F", 1250, "RCLO_MAGAZINE"],            //                 435     |                 14,  2.0m     |           none
-	["MAAWS HE 44 Rocket", "MRAWS_HE_F", 1500, "RCLO_MAGAZINE"],                //                 200     |                 50,  6.0m     |           none
-	["9M135 HEAT Missile", "Vorona_HEAT", 2000, "RCLO_MAGAZINE"],              //                 634     |                 28,  2.5m     |           mouse
-	["9M135 HE Missile", "Vorona_HE", 3000, "RCLO_MAGAZINE"],                   //                 220     |                 45,  8.0m     |           mouse
-	["PCML AT Missile", "NLAW_F", 1250, "RCLO_MAGAZINE"],                       //                 462     |                 25,  2.4m     |           laser/IR, cold/hot ground vehicles
+	["MAAWS HEAT 75 Rocket", "MRAWS_HEAT_F", 2000, "RCLO_MAGAZINE"],            //                 435     |                 14,  2.0m     |           none
+	["MAAWS HE 44 Rocket", "MRAWS_HE_F", 2500, "RCLO_MAGAZINE"],                //                 200     |                 50,  6.0m     |           none
+	["9M135 HEAT Missile", "Vorona_HEAT", 3000, "RCLO_MAGAZINE"],              //                 634     |                 28,  2.5m     |           mouse
+	["9M135 HE Missile", "Vorona_HE", 4000, "RCLO_MAGAZINE"],                   //                 220     |                 45,  8.0m     |           mouse
+	["PCML AT Missile", "NLAW_F", 1500, "RCLO_MAGAZINE"],                       //                 462     |                 25,  2.4m     |           laser/IR, cold/hot ground vehicles
 	["Titan Anti-Tank Missile", "Titan_AT", 4000, "RCLO_MAGAZINE"],            //                 515     |                 20,  2.0m     |           mouse, laser/IR, hot ground vehicles
 	["Titan Anti-Personnel Missile", "Titan_AP", 6000, "RCLO_MAGAZINE"],        //                 100     |                 25, 10.0m     |           mouse, laser/IR
 	["Titan AA Missile", "Titan_AA", 4000, "RCLO_MAGAZINE"],                    //                  80     |                 60,  6.0m     |           aircraft
