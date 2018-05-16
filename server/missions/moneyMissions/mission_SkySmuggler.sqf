@@ -3,6 +3,8 @@
 // ******************************************************************************************
 //	@file Name: mission_SkySmuggler.sqf
 //	@file Author: JoSchaap, AgentRev
+//	@file Modified: [FRAC] Mokey
+//	@file missionSuccessHandler Author: soulkobk
 
 if (!isServer) exitwith {};
 #include "MoneyMissionDefines.sqf"
@@ -151,58 +153,23 @@ _waitUntilCondition = {currentWaypoint _aiGroup >= _numWaypoints};
 
 _failedExec = nil;
 
-// _vehicles are automatically deleted or unlocked in missionProcessor depending on the outcome
+#include "..\missionSuccessHandler.sqf"
 
-_successExec =
-{
-	/*/ --------------------------------------------------------------------------------------- /*/
-    _numCratesToSpawn = 2; // edit this value to how many crates are to be spawned!
-	/*/ --------------------------------------------------------------------------------------- /*/
+_missionCratesSpawn = true;
+_missionCrateNumber = selectRandom [1,2,3,4,5];
+_missionCrateSmoke = true;
+_missionCrateSmokeDuration = 120;
+_missionCrateChemlight = true;
+_missionCrateChemlightDuration = 120;
 
-	/*/ --------------------------------------------------------------------------------------- /*/
-	_lastPos = _this;
-    _i = 0;
-    while {_i < _numCratesToSpawn} do
-    {
-        _lastPos spawn
-        {
-		_lastPos = _this;
-            	_crate = createVehicle ["Box_East_Wps_F", _lastPos, [], 5, "None"];
-            	_crate setDir random 360;
-            	_crate allowDamage false;
-            	waitUntil {!isNull _crate};
-            	_crateParachute = createVehicle ["O_Parachute_02_F", (getPosATL _crate), [], 0, "CAN_COLLIDE" ];
-            	_crateParachute allowDamage false;
-            	_crate attachTo [_crateParachute, [0,0,0]];
-            	_crate call randomCrateLoadOut;
-            	waitUntil {getPosATL _crate select 2 < 5};
-            	detach _crate;
-            	deleteVehicle _crateParachute;
-	    	_moneyAmt = 10;
-	    	_moneyPerAmt = 3500;
-	    	_j = 0;
-	    	while {_j < _moneyAmt} do
-		{
-			_cash = createVehicle ["Land_Money_F", _crate, [], 5, "None"];
-			_cash setPos ([_lastPos, [[2 + random 3,0,0], random 360] call BIS_fnc_rotateVector2D] call BIS_fnc_vectorAdd);
-		    	_cash setDir random 360;
-		    	_cash setVariable ["cmoney", _moneyPerAmt, true];
-		    	_cash setVariable ["owner", "world", true];
-		    	_j = _j + 1;
-		};
-            	_smokeSignalTop = createVehicle  ["SmokeShellRed_infinite", getPosATL _crate, [], 0, "CAN_COLLIDE" ];
-            	_lightSignalTop = createVehicle  ["Chemlight_red", getPosATL _crate, [], 0, "CAN_COLLIDE" ];
-            	_smokeSignalTop attachTo [_crate, [0,0,0.5]];
-            	_lightSignalTop attachTo [_crate, [0,0,0.25]];
-	    	_timer = time + 240;
-	    	waitUntil {sleep 1; time > _timer};
-            	_crate allowDamage true;
-	    	deleteVehicle _smokeSignalTop;
-	    	deleteVehicle _lightSignalTop;
-        };
-        _i = _i + 1;
-    };
-	_successHintMessage = "The sky is clear again, the Smuggler and Escort were taken out! Ammo crates and Money have fallen near the wreck.";
-};
+_missionMoneySpawn = true;
+_missionMoneyTotal = 100000;
+_missionMoneyBundles = 10;
+_missionMoneySmoke = true;
+_missionMoneySmokeDuration = 120;
+_missionMoneyChemlight = true;
+_missionMoneyChemlightDuration = 120;
+
+_missionSuccessMessage = "The sky is clear again, the Smuggler and Escort were taken out! Ammo crates and Money have fallen near the wreck.";
 
 _this call moneyMissionProcessor;

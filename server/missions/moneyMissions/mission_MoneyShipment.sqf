@@ -5,6 +5,8 @@
 //	@file Name: mission_MoneyShipment.sqf
 //	@file Author: JoSchaap / routes by Del1te - (original idea by Sanjo), AgentRev
 //	@file Created: 31/08/2013 18:19
+//	@file Modified: [FRAC] Mokey
+//	@file missionSuccessHandler Author: soulkobk
 
 if (!isServer) exitwith {};
 #include "moneyMissionDefines.sqf";
@@ -24,8 +26,9 @@ _setupVars =
 	[
 		// Easy
 		[
-			"Small Money Shipment", // Marker text
+			"Small Smuggler Shipment", // Marker text
 			80000, // Money
+			//2, //crates
 			[
 				[ // NATO convoy
 					["B_MRAP_01_hmg_F", "B_MRAP_01_gmg_F", "O_T_LSV_02_armed_F"], // Veh 1
@@ -45,8 +48,9 @@ _setupVars =
 		],
 		// Medium
 		[
-			"Medium Money Shipment", // Marker text
-			140000, // Money
+			"Medium Smuggler Shipment", // Marker text
+			100000, // Money
+			//3, //crates
 			[
 				[ // NATO convoy
 					["B_MRAP_01_hmg_F", "B_MRAP_01_gmg_F"], // Veh 1
@@ -67,8 +71,9 @@ _setupVars =
 		],
 		// Hard
 		[
-			"Large Money Shipment", // Marker text
-			180000, // Money
+			"Large Smuggler Shipment", // Marker text
+			150000, // Money
+			//4, //crates
 			[
 				[ // NATO convoy
 					["B_APC_Wheeled_01_cannon_F", "B_APC_Tracked_01_rcws_F", "B_APC_Tracked_01_AA_F", "B_AFV_Wheeled_01_up_cannon_F"], // Veh 1
@@ -89,8 +94,9 @@ _setupVars =
 		],
 		// Extreme
 		[
-			"Heavy Money Shipment", // Marker text
-			230000, // Money
+			"Heavy Smugglers Shipment", // Marker text
+			200000, // Money
+			//5, //crates
 			[
 				[ // NATO convoy
 					["B_APC_Wheeled_01_cannon_F", "B_APC_Tracked_01_rcws_F", "B_APC_Tracked_01_AA_F", "B_MBT_01_cannon_F", "B_MBT_01_TUSK_F"], // Veh 1
@@ -116,6 +122,7 @@ _setupVars =
 
 	_missionType = _MoneyShipment select 0;
 	_moneyAmount = _MoneyShipment select 1;
+	//_crateAmount = _MoneyShipment select 2;
 	_convoys = _MoneyShipment select 2;
 	_vehChoices = selectRandom _convoys;
 
@@ -272,20 +279,23 @@ _failedExec = nil;
 
 // _vehicles are automatically deleted or unlocked in missionProcessor depending on the outcome
 
-_successExec =
-{
-	// Mission completed
+#include "..\missionSuccessHandler.sqf"
 
-	for "_i" from 1 to 10 do
-	{
-		_cash = createVehicle ["Land_Money_F", _lastPos, [], 5, "None"];
-		_cash setPos ([_lastPos, [[2 + random 3,0,0], random 360] call BIS_fnc_rotateVector2D] call BIS_fnc_vectorAdd);
-		_cash setDir random 360;
-		_cash setVariable ["cmoney", _moneyAmount / 10, true];
-		_cash setVariable ["owner", "world", true];
-	};
+_missionCratesSpawn = true;
+_missionCrateNumber = selectRandom [3,4,5,6];
+_missionCrateSmoke = true;
+_missionCrateSmokeDuration = 120;
+_missionCrateChemlight = true;
+_missionCrateChemlightDuration = 120;
 
-	_successHintMessage = "The convoy has been stopped, the money and vehicles are now yours to take.";
-};
+_missionMoneySpawn = true;
+_missionMoneyTotal = _moneyAmount;
+_missionMoneyBundles = 10;
+_missionMoneySmoke = true;
+_missionMoneySmokeDuration = 120;
+_missionMoneyChemlight = true;
+_missionMoneyChemlightDuration = 120;
+
+_missionSuccessMessage = "The convoy has been stopped, the money and vehicles are now yours to take.";
 
 _this call moneyMissionProcessor;

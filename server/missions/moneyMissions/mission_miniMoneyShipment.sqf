@@ -5,6 +5,8 @@
 //	@file Name: mission_MoneyShipment.sqf
 //	@file Author: JoSchaap / routes by Del1te - (original idea by Sanjo), AgentRev
 //	@file Created: 31/08/2013 18:19
+//	@file Modified: [FRAC] Mokey
+//	@file missionSuccessHandler Author: soulkobk
 
 if (!isServer) exitwith {};
 #include "moneyMissionDefines.sqf";
@@ -24,8 +26,9 @@ _setupVars =
 	[
 		// Easy
 		[
-			"Money Runners", // Marker text
+			"Solo Smugglers", // Marker text
 			30000, // Money
+			//1, //crates
 			[
 				[ // NATO convoy
 					["B_MRAP_01_hmg_F", "B_MRAP_01_gmg_F", "B_T_LSV_01_armed_F", "B_T_LSV_01_AT_F"], // Veh 1
@@ -43,8 +46,9 @@ _setupVars =
 		],
 		// Medium
 		[
-			"Money Runners+", // Marker text
+			"Solo Smugglers+", // Marker text
 			60000, // Money
+			//2, //crates
 			[
 				[ // NATO convoy
 					["I_LT_01_cannon_F", "I_LT_01_AT_F", "I_LT_01_AA_F"], // Veh 1
@@ -62,6 +66,7 @@ _setupVars =
 
 	_missionType = _MoneyShipment select 0;
 	_moneyAmount = _MoneyShipment select 1;
+	//_crateAmount = _MoneyShipment select 2;
 	_convoys = _MoneyShipment select 2;
 	_vehChoices = selectRandom _convoys;
 
@@ -216,22 +221,23 @@ _waitUntilCondition = {currentWaypoint _aiGroup >= _numWaypoints};
 
 _failedExec = nil;
 
-// _vehicles are automatically deleted or unlocked in missionProcessor depending on the outcome
+#include "..\missionSuccessHandler.sqf"
 
-_successExec =
-{
-	// Mission completed
+_missionCratesSpawn = true;
+_missionCrateNumber = selectRandom [1,2,3];
+_missionCrateSmoke = true;
+_missionCrateSmokeDuration = 120;
+_missionCrateChemlight = true;
+_missionCrateChemlightDuration = 120;
 
-	for "_i" from 1 to 10 do
-	{
-		_cash = createVehicle ["Land_Money_F", _lastPos, [], 5, "None"];
-		_cash setPos ([_lastPos, [[2 + random 3,0,0], random 360] call BIS_fnc_rotateVector2D] call BIS_fnc_vectorAdd);
-		_cash setDir random 360;
-		_cash setVariable ["cmoney", _moneyAmount / 10, true];
-		_cash setVariable ["owner", "world", true];
-	};
+_missionMoneySpawn = true;
+_missionMoneyTotal = _moneyAmount;
+_missionMoneyBundles = 10;
+_missionMoneySmoke = true;
+_missionMoneySmokeDuration = 120;
+_missionMoneyChemlight = true;
+_missionMoneyChemlightDuration = 120;
 
-	_successHintMessage = "The runners has been stopped, the money and vehicles are now yours to take.";
-};
+_missionSuccessMessage = "The runners have been stopped, the money and vehicles are now yours to take.";
 
 _this call moneyMissionProcessor;

@@ -3,24 +3,25 @@
 // ******************************************************************************************
 //	@file Name: mission_HostileHeliFormation.sqf
 //	@file Author: JoSchaap, AgentRev
+//	@file Modified: [FRAC] Mokey
+//	@file missionSuccessHandler Author: soulkobk
 
 if (!isServer) exitwith {};
 #include "mainMissionDefines.sqf"
 
 private ["_lastVehiclePos","_heliChoices", "_convoyVeh", "_veh1Class", "_veh2Class", "_veh3Class", "_createVehicle", "_vehicles", "_leader", "_speedMode", "_waypoint", "_vehiclePrimary", "_vehicleSupport", "_numWaypoints", "_box1", "_box2", "_box3", "_smoke"];
 
-private ["_veh1Object","_veh2Object","_veh3Object"]; // vehicle object declares
+private ["_veh1Object","_veh2Object","_veh3Object"];
 
 _setupVars =
 {
 	_missionType = "Hostile Helicopters";
-	_locationsArray = nil; // locations are generated on the fly from towns
+	_locationsArray = nil;
 };
 
 _setupObjects =
 {
-	/*/ --------------------------------------------------------------------------------------- /*/
-	_createVehicle = // create vehicle private function
+	_createVehicle =
 	{
 		private ["_type", "_position", "_direction", "_variant", "_vehicle", "_soldier"];
 		_type = _this select 0;
@@ -71,47 +72,36 @@ _setupObjects =
 		[_vehicle, _aiGroup] spawn checkMissionVehicleLock;
 		_vehicle
 	};
-	/*/ --------------------------------------------------------------------------------------- /*/
 	_missionPos = markerPos (((call cityList) call BIS_fnc_selectRandom) select 0);
-	/*/ --------------------------------------------------------------------------------------- /*/
 	_heliChoices =
 	[
 		["B_Heli_Transport_01_F", ["B_Heli_Light_01_dynamicLoadout_F", "pawneeNormal"]],
 		["B_Heli_Transport_01_camo_F", ["O_Heli_Light_02_dynamicLoadout_F", "orcaDAGR"]],
 		["B_Heli_Transport_01_F", "I_Heli_light_03_dynamicLoadout_F"]
 	];
-	/*/ --------------------------------------------------------------------------------------- /*/
 	if (missionDifficultyHard) then
 	{
 		(_heliChoices select 0) set [0, "B_Heli_Attack_01_dynamicLoadout_F"];
 		(_heliChoices select 1) set [0, "O_Heli_Attack_02_dynamicLoadout_F"];
 		(_heliChoices select 2) set [0, "O_Heli_Attack_02_dynamicLoadout_F"];
 	};
-	/*/ --------------------------------------------------------------------------------------- /*/
 	_convoyVeh = selectRandom _heliChoices;
-	/*/ --------------------------------------------------------------------------------------- /*/
-	_veh1Class = _convoyVeh select 0; // select main vehicle
-	_veh2Class = _convoyVeh select 1; // select support vehicle
-	_veh3Class = _convoyVeh select 1; // select support vehicle
-
-	/*/ --------------------------------------------------------------------------------------- /*/
+	_veh1Class = _convoyVeh select 0;
+	_veh2Class = _convoyVeh select 1;
+	_veh3Class = _convoyVeh select 1;
 	_aiGroup = createGroup CIVILIAN;
-	/*/ --------------------------------------------------------------------------------------- /*/
 	_directionToFly = random 360; // fly direction.
-	_veh1Object = [_veh1Class,([_missionPos,100,0] call BIS_fnc_relPos),_directionToFly] call _createVehicle; // create vehicle 1
-	_veh2Object = [_veh2Class,([_missionPos,100,120] call BIS_fnc_relPos),_directionToFly] call _createVehicle; // create vehicle 2.
-	_veh3Object = [_veh3Class,([_missionPos,100,240] call BIS_fnc_relPos),_directionToFly] call _createVehicle; // create vehicle 3.
-	_vehicles = [_veh1Object,_veh2Object,_veh3Object]; // combine all 3 vehicles in to a _vehicles array.
-	/*/ --------------------------------------------------------------------------------------- /*/
+	_veh1Object = [_veh1Class,([_missionPos,100,0] call BIS_fnc_relPos),_directionToFly] call _createVehicle;
+	_veh2Object = [_veh2Class,([_missionPos,100,120] call BIS_fnc_relPos),_directionToFly] call _createVehicle;
+	_veh3Object = [_veh3Class,([_missionPos,100,240] call BIS_fnc_relPos),_directionToFly] call _createVehicle;
+	_vehicles = [_veh1Object,_veh2Object,_veh3Object];
 	_leader = effectiveCommander (_vehicles select 0);
 	_aiGroup selectLeader _leader;
-	_aiGroup setCombatMode "YELLOW"; // units will defend themselves
-	_aiGroup setBehaviour "SAFE"; // units feel safe until they spot an enemy or get into contact
+	_aiGroup setCombatMode "YELLOW";
+	_aiGroup setBehaviour "SAFE";
 	_aiGroup setFormation "VEE";
-	/*/ --------------------------------------------------------------------------------------- /*/
 	_speedMode = if (missionDifficultyHard) then { "NORMAL" } else { "LIMITED" };
 	_aiGroup setSpeedMode _speedMode;
-	/*/ --------------------------------------------------------------------------------------- /*/
 	{
 		_waypoint = _aiGroup addWaypoint [markerPos (_x select 0), 0];
 		_waypoint setWaypointType "MOVE";
@@ -121,61 +111,34 @@ _setupObjects =
 		_waypoint setWaypointFormation "VEE";
 		_waypoint setWaypointSpeed _speedMode;
 	} forEach ((call cityList) call BIS_fnc_arrayShuffle);
-	/*/ --------------------------------------------------------------------------------------- /*/
-	_missionPicture = getText (configFile >> "CfgVehicles" >> (_veh1Class param [0,""]) >> "picture"); // used in missionProcessor.
+	_missionPicture = getText (configFile >> "CfgVehicles" >> (_veh1Class param [0,""]) >> "picture");
 	_vehiclePrimary = getText (configFile >> "CfgVehicles" >> (_veh1Class param [0,""]) >> "displayName");
 	_vehicleSupport = getText (configFile >> "CfgVehicles" >> (_veh2Class param [0,""]) >> "displayName");
-	/*/ --------------------------------------------------------------------------------------- /*/
 	_missionHintText = format ["A formation of armed helicopters containing a <t color='%3'>%1</t> and two <t color='%3'>%2</t> are patrolling the island. Destroy them and recover their cargo!", _vehiclePrimary, _vehicleSupport, mainMissionColor];
-	/*/ --------------------------------------------------------------------------------------- /*/
 	_numWaypoints = count (wayPoints _aiGroup);
 };
-/*/ --------------------------------------------------------------------------------------- /*/
 _waitUntilMarkerPos = {getPosATL _leader};
 _waitUntilSuccessCondition = {(!(alive _veh1Object) && !(alive _veh2Object) && !(alive _veh3Object) && !(alive _leader))};
 _waitUntilCondition = {currentWaypoint _aiGroup >= _numWaypoints};
-/*/ --------------------------------------------------------------------------------------- /*/
 _failedExec = nil;
-/*/ --------------------------------------------------------------------------------------- /*/
-_successExec =
-{
-	/*/ --------------------------------------------------------------------------------------- /*/
-    _numCratesToSpawn = 3; // edit this value to how many crates are to be spawned!
-	/*/ --------------------------------------------------------------------------------------- /*/
 
-	/*/ --------------------------------------------------------------------------------------- /*/
-	_lastPos = _this;
-    _i = 0;
-    while {_i < _numCratesToSpawn} do
-    {
-        _lastPos spawn
-        {
-            _lastPos = _this;
-            _crate = createVehicle ["Box_East_Wps_F", _lastPos, [], 5, "None"];
-            _crate setDir random 360;
-            _crate allowDamage false;
-            waitUntil {!isNull _crate};
-            _crateParachute = createVehicle ["O_Parachute_02_F", (getPosATL _crate), [], 0, "CAN_COLLIDE" ];
-            _crateParachute allowDamage false;
-            _crate attachTo [_crateParachute, [0,0,0]];
-            _crate call randomCrateLoadOut;
-            waitUntil {getPosATL _crate select 2 < 5};
-            detach _crate;
-            deleteVehicle _crateParachute;
-            _smokeSignalTop = createVehicle  ["SmokeShellRed_infinite", getPosATL _crate, [], 0, "CAN_COLLIDE" ];
-            _lightSignalTop = createVehicle  ["Chemlight_red", getPosATL _crate, [], 0, "CAN_COLLIDE" ];
-            _smokeSignalTop attachTo [_crate, [0,0,0.5]];
-            _lightSignalTop attachTo [_crate, [0,0,0.25]];
-	    _timer = time + 120;
-	    waitUntil {sleep 1; time > _timer};
-            _crate allowDamage true;
-	    deleteVehicle _smokeSignalTop;
-	    deleteVehicle _lightSignalTop;
-        };
-        _i = _i + 1;
-    };
-	/*/ --------------------------------------------------------------------------------------- /*/
-    _successHintMessage = "The sky is clear again, the enemy patrol was taken out! Ammo crates have fallen out their chopper.";
-};
-/*/ --------------------------------------------------------------------------------------- /*/
+#include "..\missionSuccessHandler.sqf"
+
+_missionCratesSpawn = true;
+_missionCrateNumber = 4;
+_missionCrateSmoke = true;
+_missionCrateSmokeDuration = 120;
+_missionCrateChemlight = true;
+_missionCrateChemlightDuration = 120;
+
+_missionMoneySpawn = false;
+_missionMoneyTotal = 100000;
+_missionMoneyBundles = 10;
+_missionMoneySmoke = true;
+_missionMoneySmokeDuration = 120;
+_missionMoneyChemlight = true;
+_missionMoneyChemlightDuration = 120;
+
+_missionSuccessMessage = "The sky is clear again, the enemy patrol was taken out! Ammo crates have fallen out their chopper.";
+
 _this call mainMissionProcessor;

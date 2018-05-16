@@ -3,7 +3,8 @@
 // ******************************************************************************************
 //	@file Name: mission_TownInvasion.sqf
 //	@file Author: [404] Deadbeat, [404] Costlyy, JoSchaap, AgentRev, Zenophon
-//  @file Information: JoSchaap's Lite version of 'Infantry Occupy House' Original was made by: Zenophon
+//  	@file Information: JoSchaap's Lite version of 'Infantry Occupy House' Original was made by: Zenophon
+
 
 if (!isServer) exitwith {};
 

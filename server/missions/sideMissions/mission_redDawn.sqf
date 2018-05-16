@@ -2,7 +2,7 @@
 // * This project is licensed under the GNU Affero GPL v3. Copyright © 2014 A3Wasteland.com *
 // ******************************************************************************************
 //	@file Name: mission_redDawn.sqf
-//	@file Author: [FRAC] Mokey , Soulklobk
+//	@file Author: [FRAC] Mokey , Soulkobk
 
 if (!isServer) exitwith {};
 
@@ -44,25 +44,22 @@ _waitUntilExec = nil;
 _waitUntilCondition = nil;
 _failedExec = nil;
 
-/*/ ------------------------------------------------------------------------------------------- /*/
-/*/ scripted by soulkobk 5:00 PM 16/05/2018 for Arma 3 - A3Wasteland -------------------------- /*/
-/*/ ------------------------------------------------------------------------------------------- /*/
 #include "..\missionSuccessHandler.sqf"
 
-_missionCratesSpawn = true; // upon mission success, spawn crates?
-_missionCrateNumber = 2; // the total number of crates to spawn.
-_missionCrateSmoke = true; // spawn crate smoke (red) to show location of dropped crates?
-_missionCrateSmokeDuration = 120; // how long will the smoke last for once the crate reaches the ground?
-_missionCrateChemlight = true; // spawn crate chemlight (red) to show location of dropped crates?
-_missionCrateChemlightDuration = 120; // how long will the chemlight last for once the crate reaches the ground?
+_missionCratesSpawn = true;
+_missionCrateNumber = 2;
+_missionCrateSmoke = true;
+_missionCrateSmokeDuration = 120;
+_missionCrateChemlight = true;
+_missionCrateChemlightDuration = 120;
 
-_missionMoneySpawn = false; // upon mission success, spawn money?
-_missionMoneyTotal = 100000; // the total amount of money to spawn.
-_missionMoneyBundles = 10; // edit this! how many bundles of money to spawn? (_missionMoneyTotal / _missionMoneyBundles).
-_missionMoneySmoke = true; // spawn money smoke (red) to show location of dropped money?
-_missionMoneySmokeDuration = 120; // how long will the smoke last for once the money reaches the ground?
-_missionMoneyChemlight = true; // spawn money chemlight (red) to show location of dropped money?
-_missionMoneyChemlightDuration = 120; // how long will the chemlight last for once the money reaches the ground?
+_missionMoneySpawn = false;
+_missionMoneyTotal = 100000;
+_missionMoneyBundles = 10;
+_missionMoneySmoke = true;
+_missionMoneySmokeDuration = 120;
+_missionMoneyChemlight = true;
+_missionMoneyChemlightDuration = 120;
 
 _missionSuccessMessage = "Good job! WOLVERINES!!! <br/>Go take their supplies!";
 

@@ -3,6 +3,8 @@
 // ******************************************************************************************
 //	@file Name: mission_SunkenSupplies.sqf
 //	@file Author: JoSchaap, AgentRev
+//	@file Modified: [FRAC] Mokey
+//	@file missionSuccessHandler Author: soulkobk
 
 if (!isServer) exitwith {};
 #include "sideMissionDefines.sqf"
@@ -18,23 +20,6 @@ _setupVars =
 _setupObjects =
 {
 	_missionPos = markerPos _missionLocation;
-
-	_box1 = createVehicle ["Box_NATO_Wps_F", _missionPos, [], 5, "None"];
-//	[_box1, "mission_USSpecial"] call fn_refillbox;
-	_box1 call randomCrateLoadOut; // new randomCrateLoadOut function call
-
-	_box2 = createVehicle ["Box_East_Wps_F", _missionPos, [], 5, "None"];
-//	[_box2, "mission_USLaunchers"] call randomCrateLoadOut;
-	_box2 call randomCrateLoadOut; // new randomCrateLoadOut function call
-
-	{
-		_boxPos = getPosASL _x;
-		_boxPos set [2, getTerrainHeightASL _boxPos + 1];
-		_x setPos _boxPos;
-		_x setDir random 360;
-		_x setVariable ["R3F_LOG_disabled", true, true];
-	} forEach [_box1, _box2];
-
 	_aiGroup = createGroup CIVILIAN;
 	[_aiGroup, _missionPos] call createSmallDivers;
 
@@ -45,18 +30,25 @@ _waitUntilMarkerPos = nil;
 _waitUntilExec = nil;
 _waitUntilCondition = nil;
 
-_failedExec =
-{
-	// Mission failed
-	{ deleteVehicle _x } forEach [_box1, _box2];
-};
+_failedExec = nil;
 
-_successExec =
-{
-	// Mission completed
-	{ _x setVariable ["R3F_LOG_disabled", false, true] } forEach [_box1, _box2];
+#include "..\missionSuccessHandler.sqf"
 
-	_successHintMessage = "The sunken supplies have been collected, well done.";
-};
+_missionCratesSpawn = true;
+_missionCrateNumber = 2;
+_missionCrateSmoke = true;
+_missionCrateSmokeDuration = 120;
+_missionCrateChemlight = true;
+_missionCrateChemlightDuration = 120;
+
+_missionMoneySpawn = false;
+_missionMoneyTotal = 100000;
+_missionMoneyBundles = 10;
+_missionMoneySmoke = true;
+_missionMoneySmokeDuration = 120;
+_missionMoneyChemlight = true;
+_missionMoneyChemlightDuration = 120;
+
+_missionSuccessMessage = "Divers are in over their head.<br/> Supplies are now yours!";
 
 _this call sideMissionProcessor;

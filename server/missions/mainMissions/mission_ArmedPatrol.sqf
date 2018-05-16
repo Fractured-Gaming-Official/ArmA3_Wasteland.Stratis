@@ -5,6 +5,8 @@
 //	@file Name: mission_ArmedPatrol.sqf
 //	@file Author: JoSchaap / routes by Del1te - (original idea by Sanjo), AgentRev
 //	@file Created: 31/08/2013 18:19
+//	@file Modified: [FRAC] Mokey
+//	@file missionSuccessHandler Author: soulkobk
 
 if (!isServer) exitwith {};
 #include "MainMissionDefines.sqf";
@@ -230,44 +232,25 @@ _failedExec = nil;
 
 // _vehicles are automatically deleted or unlocked in missionProcessor depending on the outcome
 
-_successExec =
-{
-	_numCratesToSpawn = 2; // edit this value to how many crates are to be spawned!
-	_lastPos = _this;
-	_i = 0;
-	while {_i < _numCratesToSpawn} do
-	{
-		_lastPos spawn
-		{
-			_lastPos = _this;
-	     		_crate = createVehicle ["Box_East_Wps_F", _lastPos, [], 5, "None"];
-	     		_crate setDir random 360;
-	     		_crate allowDamage false;
-	     		waitUntil {!isNull _crate};
-	     		if ((_lastPos select 2) > 5) then
-			{
-		 		_crateParachute = createVehicle ["O_Parachute_02_F", (getPosATL _crate), [], 0, "CAN_COLLIDE" ];
-		 		_crateParachute allowDamage false;
-		 		_crate attachTo [_crateParachute, [0,0,0]];
-		 		_crate call randomCrateLoadOut;
-		 		waitUntil {getPosATL _crate select 2 < 5};
-		 		detach _crate;
-		 		deleteVehicle _crateParachute;
-			};
-	     		_smokeSignalTop = createVehicle  ["SmokeShellRed_infinite", getPosATL _crate, [], 0, "CAN_COLLIDE" ];
-	     		_lightSignalTop = createVehicle  ["Chemlight_red", getPosATL _crate, [], 0, "CAN_COLLIDE" ];
-	     		_smokeSignalTop attachTo [_crate, [0,0,0.5]];
-	     		_lightSignalTop attachTo [_crate, [0,0,0.25]];
-			_timer = time + 120;
-			waitUntil {sleep 1; time > _timer};
-			_crate allowDamage true;
-			deleteVehicle _smokeSignalTop;
-			deleteVehicle _lightSignalTop;
-	 	};
-	        _i = _i + 1;
-	};
+#include "..\missionSuccessHandler.sqf"
 
-	_successHintMessage = "The Patrol has been stopped! Ammo crates and a Mortar have fallen nearby.";
-};
+_missionCratesSpawn = true;
+_missionCrateNumber = 3;
+_missionCrateSmoke = true;
+_missionCrateSmokeDuration = 120;
+_missionCrateChemlight = true;
+_missionCrateChemlightDuration = 120;
+
+_missionMoneySpawn = false;
+_missionMoneyTotal = 100000;
+_missionMoneyBundles = 10;
+_missionMoneySmoke = true;
+_missionMoneySmokeDuration = 120;
+_missionMoneyChemlight = true;
+_missionMoneyChemlightDuration = 120;
+
+_missionSuccessMessage = "The Patrol has been stopped! Crates have been dropped nearby!";
+
+
 
 _this call MainMissionProcessor;
