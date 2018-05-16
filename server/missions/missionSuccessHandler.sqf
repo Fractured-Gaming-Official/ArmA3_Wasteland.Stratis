@@ -1,17 +1,23 @@
 /*
 	----------------------------------------------------------------------------------------------
+
 	Copyright © 2018 soulkobk (soulkobk.blogspot.com)
+
 	This program is free software: you can redistribute it and/or modify
 	it under the terms of the GNU Affero General Public License as
 	published by the Free Software Foundation, either version 3 of the
 	License, or (at your option) any later version.
+
 	This program is distributed in the hope that it will be useful,
 	but WITHOUT ANY WARRANTY; without even the implied warranty of
 	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
 	GNU Affero General Public License for more details.
+
 	You should have received a copy of the GNU Affero General Public License
 	along with this program. If not, see <http://www.gnu.org/licenses/>.
+
 	----------------------------------------------------------------------------------------------
+
 	Name: missionSuccessHandler.sqf
 	Version: 1.0.A3WL
 	Author: soulkobk (soulkobk.blogspot.com) in conjunction with Mokey [FRAC]
@@ -22,12 +28,15 @@
 	For use with A3Wasteland 1.3x mission (A3Wasteland.com).
 
 	Parameter(s):
+
 	Example:
 
 	Change Log:
-	1.0.A3W - new missionSuccessHandler for all A3Wasteland missions.
+	1.0.A3WL - new missionSuccessHandler for all A3Wasteland missions.
+
 	----------------------------------------------------------------------------------------------
 */
+
 _missionCratesSpawn = true; // upon mission success, spawn crates?
 _missionCrateNumber = 2; // the total number of crates to spawn.
 _missionCrateSmoke = true; // spawn crate smoke (red) to show location of dropped crates?
@@ -43,9 +52,9 @@ _missionMoneySmokeDuration = 120; // how long will the smoke last for once the m
 _missionMoneyChemlight = true; // spawn money chemlight (red) to show location of dropped money?
 _missionMoneyChemlightDuration = 120; // how long will the chemlight last for once the money reaches the ground?
 
-_missionSuccessMessage = "Mission Complete";
-/*/----------------------------------------------------------------------------------------/*/
+_missionSuccessMessage = "The hostile helicopters have been eradicated, go collect the dropped supplies!";
 
+/*/ ------------------------------------------------------------------------------------------- /*/
 _missionFinishPos = [0,0,0];
 _waitUntilExec =
 {
@@ -196,3 +205,4 @@ _successExec =
 	};
 	_successHintMessage = _missionSuccessMessage;
 };
+/*/ ------------------------------------------------------------------------------------------- /*/
