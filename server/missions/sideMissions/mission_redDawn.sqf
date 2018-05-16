@@ -64,6 +64,6 @@ _missionMoneySmokeDuration = 120; // how long will the smoke last for once the m
 _missionMoneyChemlight = true; // spawn money chemlight (red) to show location of dropped money?
 _missionMoneyChemlightDuration = 120; // how long will the chemlight last for once the money reaches the ground?
 
-_missionSuccessMessage = "Good job! WOLVERINES!!! <br/>Go take their supples!";
+_missionSuccessMessage = "Good job! WOLVERINES!!! <br/>Go take their supplies!";
 
 _this call sideMissionProcessor;
