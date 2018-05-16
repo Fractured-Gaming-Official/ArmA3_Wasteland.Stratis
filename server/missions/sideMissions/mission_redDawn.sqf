@@ -45,6 +45,10 @@ _waitUntilExec = nil;
 _waitUntilCondition = nil;
 _failedExec = nil;
 
+
+/*/ ------------------------------------------------------------------------------------------- /*/
+/*/ scripted by soulkobk 5:00 PM 16/05/2018 for Arma 3 - A3Wasteland -------------------------- /*/
+/*/ ------------------------------------------------------------------------------------------- /*/
 _missionCratesSpawn = true; // upon mission success, spawn crates?
 _missionCrateNumber = 2; // the total number of crates to spawn.
 _missionCrateSmoke = true; // spawn crate smoke (red) to show location of dropped crates?
