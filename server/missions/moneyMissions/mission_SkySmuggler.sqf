@@ -163,8 +163,8 @@ _missionCrateChemlight = true;
 _missionCrateChemlightDuration = 120;
 
 _missionMoneySpawn = true;
-_missionParseSetupVars = call _setupVars;
-_missionMoneyTotal = _moneyAmount;
+//_missionParseSetupVars = call _setupVars;
+_missionMoneyTotal = 75000;
 _missionMoneyBundles = 10;
 _missionMoneySmoke = true;
 _missionMoneySmokeDuration = 120;
