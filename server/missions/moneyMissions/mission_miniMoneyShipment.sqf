@@ -16,13 +16,6 @@ private ["_MoneyShipment", "_convoys", "_vehChoices", "_moneyText", "_vehClasses
 private ["_moneyAmount"];
 _setupVars =
 {
-	// _locationsArray = nil;
-
-	// Money Shipments settings
-	// Difficulties : Min = 1, Max = infinite
-	// Convoys per difficulty : Min = 1, Max = infinite
-	// Vehicles per convoy : Min = 1, Max = infinite
-	// Choices per vehicle : Min = 1, Max = infinite
 	_MoneyShipment = selectRandom
 	[
 		// Easy
@@ -48,7 +41,7 @@ _setupVars =
 		[
 			"Solo Smugglers+", // Marker text
 			30000, 60000, 90000, // Money
-			[,
+			[
 				[ // NATO convoy
 					["I_LT_01_cannon_F", "I_LT_01_AT_F", "I_LT_01_AA_F"], // Veh 1
 					["O_T_LSV_02_AT_F", "B_T_LSV_01_AT_F", "I_LT_01_cannon_F"], // Veh 2
@@ -64,13 +57,10 @@ _setupVars =
 	];
 
 	_missionType = _MoneyShipment select 0;
-	_moneyAmount = _MoneyShipment select 1;
-	//_crateAmount = _MoneyShipment select 2;
-	_convoys = _MoneyShipment select 2;
+	_moneyAmount = floor (random [_moneyShipment select 1, _moneyShipment select 2,  _moneyShipment select 3]);
+	_convoys = _MoneyShipment select 4;
 	_vehChoices = selectRandom _convoys;
-
 	_moneyText = format ["$%1", [_moneyAmount] call fn_numbersText];
-
 	_vehClasses = [];
 	{ _vehClasses pushBack selectRandom _x } forEach _vehChoices;
 };
@@ -78,21 +68,16 @@ _setupVars =
 _setupObjects =
 {
 	private ["_starts", "_startDirs", "_waypoints"];
-	// call compile preprocessFileLineNumbers format ["mapConfig\convoys\%1.sqf", _missionLocation];
-
 	_createVehicle =
 	{
 		private ["_type", "_position", "_direction", "_vehicle", "_soldier"];
-
 		_type = _this select 0;
 		_position = _this select 1;
 		_direction = _this select 2;
-
 		_vehicle = createVehicle [_type, _position, [], 0, "None"];
 		_vehicle setVariable ["R3F_LOG_disabled", true, true];
 		[_vehicle] call vehicleSetup;
 
-		// apply tropical textures to vehicles on Tanoa
 		if (worldName == "Tanoa" && _type select [1,3] != "_T_") then
 		{
 			switch (toUpper (_type select [0,2])) do
@@ -104,7 +89,6 @@ _setupObjects =
 
 		_vehicle setDir _direction;
 		_aiGroup addVehicle _vehicle;
-
 		_soldier = [_aiGroup, _position] call createRandomSoldier;
 		_soldier moveInDriver _vehicle;
 
@@ -113,7 +97,6 @@ _setupObjects =
 			_soldier = [_aiGroup, _position] call createRandomSoldier;
 			_soldier moveInCargo [_vehicle, 0];
 		};
-
 		if !(_type isKindOf "Truck_F") then
 		{
 			_soldier = [_aiGroup, _position] call createRandomSoldier;
@@ -133,7 +116,6 @@ _setupObjects =
 		};
 
 		[_vehicle, _aiGroup] spawn checkMissionVehicleLock;
-
 		_vehicle
 	};
 
@@ -171,28 +153,23 @@ _setupObjects =
 			_vehicles pushBack ([_x, _vehiclePosArray, 0, _aiGroup] call _createVehicle);
     		} forEach _vehClasses;
 	}
-else
-{
-    {
-	_vehiclePosArray = [_missionPos,(_radius / 2),_radius,5,0,0,0] call findSafePos;
-	_vehicles pushBack ([_x, _vehiclePosArray, 0, _aiGroup] call _createVehicle);
-    } forEach _vehClasses;
-};
+	else
+	{
+    		{
+			_vehiclePosArray = [_missionPos,(_radius / 2),_radius,5,0,0,0] call findSafePos;
+			_vehicles pushBack ([_x, _vehiclePosArray, 0, _aiGroup] call _createVehicle);
+    		} forEach _vehClasses;
+	};
 /*/ --------------------------------------------------------------------------------------- /*/
 
 	_veh2 = _vehClasses select (1 min (count _vehClasses - 1));
-
 	_leader = effectiveCommander (_vehicles select 0);
 	_aiGroup selectLeader _leader;
-
 	_aiGroup setCombatMode "GREEN"; // units will defend themselves
 	_aiGroup setBehaviour "SAFE"; // units feel safe until they spot an enemy or get into contact
 	_aiGroup setFormation "COLUMN";
-
 	_speedMode = if (missionDifficultyHard) then { "NORMAL" } else { "LIMITED" };
-
 	_aiGroup setSpeedMode _speedMode;
-
 	{
 		_waypoint = _aiGroup addWaypoint [markerPos (_x select 0), 0];
 		_waypoint setWaypointType "MOVE";
@@ -202,21 +179,16 @@ else
 		_waypoint setWaypointFormation "COLUMN";
 		_waypoint setWaypointSpeed _speedMode;
 	} forEach ((call cityList) call BIS_fnc_arrayShuffle);
-
 	_missionPos = getPosATL leader _aiGroup;
-
 	_missionPicture = getText (configFile >> "CfgVehicles" >> _veh2 >> "picture");
 	_vehicleName = getText (configFile >> "cfgVehicles" >> _veh2 >> "displayName");
-
 	_missionHintText = format ["Money Runners transporting <t color='%1'>%2</t> escorted by a <t color='%1'>%3</t> is en route to an unknown location.<br/>Stop them!", moneyMissionColor, _moneyText, _vehicleName];
-
 	_numWaypoints = count waypoints _aiGroup;
 };
 
 _waitUntilMarkerPos = {getPosATL _leader};
 _waitUntilExec = nil;
 _waitUntilCondition = {currentWaypoint _aiGroup >= _numWaypoints};
-
 _failedExec = nil;
 
 #include "..\missionSuccessHandler.sqf"

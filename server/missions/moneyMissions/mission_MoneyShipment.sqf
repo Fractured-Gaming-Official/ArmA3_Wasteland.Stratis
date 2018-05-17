@@ -21,7 +21,6 @@ _setupVars =
 		[
 			"Small Smuggler Shipment", // Marker text
 			60000, 80000, 100000, // Money
-			//2, //crates
 			[
 				[ // NATO convoy
 					["B_MRAP_01_hmg_F", "B_MRAP_01_gmg_F", "O_T_LSV_02_armed_F"], // Veh 1
