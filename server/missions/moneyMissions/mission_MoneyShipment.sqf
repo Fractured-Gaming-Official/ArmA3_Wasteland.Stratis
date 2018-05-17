@@ -246,7 +246,7 @@ _failedExec = nil;
 #include "..\missionSuccessHandler.sqf"
 
 _missionCratesSpawn = true;
-_missionCrateNumber = selectRandom [3,4,5,6];
+_missionCrateNumber = selectRandom [2,3,4];
 _missionCrateSmoke = false;
 _missionCrateSmokeDuration = 120;
 _missionCrateChemlight = true;
