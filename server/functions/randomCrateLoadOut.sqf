@@ -509,6 +509,25 @@ for [{_i = 0},{_i < _overallLoopAmount},{_i = _i + 1}] do
 	};
 };
 
+_rareScopes =
+[
+    "optic_tws",
+    "optic_tws_mg",
+    "optic_Nightstalker"
+];
+_rareScopesLoop = 3;
+
+_i = 0;
+while {_i < _rareScopesLoop} do
+{
+    if (random 1.0 < 1/10) then
+    {
+        _loadCrateItem = selectRandom _rareScopes;
+        _crate addItemCargoGlobal [_loadCrateItem, 1];
+    };
+    _i = _i + 1;
+};
+
 if (["A3W_artilleryStrike"] call isConfigOn) then
 {
 	if (random 1.0 < ["A3W_artilleryCrateOdds", 1/10] call getPublicVar) then
