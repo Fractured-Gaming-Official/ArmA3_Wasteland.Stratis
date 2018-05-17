@@ -11,8 +11,8 @@
 if (!isServer) exitwith {};
 #include "moneyMissionDefines.sqf";
 
-private ["_MoneyShipment", "_moneyAmount", "_convoys", "_vehChoices", "_moneyText", "_vehClasses", "_createVehicle", "_vehicles", "_veh2", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_cash"];
-
+private ["_MoneyShipment", "_convoys", "_vehChoices", "_moneyText", "_vehClasses", "_createVehicle", "_vehicles", "_veh2", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_cash"];
+private ["_moneyAmount"];
 _setupVars =
 {
 	// _locationsArray = nil;
@@ -27,7 +27,7 @@ _setupVars =
 		// Easy
 		[
 			"Small Smuggler Shipment", // Marker text
-			80000, // Money
+			60000, 80000, 100000, // Money
 			//2, //crates
 			[
 				[ // NATO convoy
@@ -49,7 +49,7 @@ _setupVars =
 		// Medium
 		[
 			"Medium Smuggler Shipment", // Marker text
-			100000, // Money
+			100000, 120000, 140000, // Money
 			//3, //crates
 			[
 				[ // NATO convoy
@@ -72,7 +72,7 @@ _setupVars =
 		// Hard
 		[
 			"Large Smuggler Shipment", // Marker text
-			150000, // Money
+			140000, 160000, 180000, // Money
 			//4, //crates
 			[
 				[ // NATO convoy
@@ -95,7 +95,7 @@ _setupVars =
 		// Extreme
 		[
 			"Heavy Smugglers Shipment", // Marker text
-			200000, // Money
+			180000, 200000, 220000,// Money
 			//5, //crates
 			[
 				[ // NATO convoy
@@ -121,9 +121,8 @@ _setupVars =
 	];
 
 	_missionType = _MoneyShipment select 0;
-	_moneyAmount = _MoneyShipment select 1;
-	//_crateAmount = _MoneyShipment select 2;
-	_convoys = _MoneyShipment select 2;
+	_moneyAmount = floor (random [_moneyShipment select 1, _moneyShipment select 2,  _moneyShipment select 3]);
+	_convoys = _MoneyShipment select 4;
 	_vehChoices = selectRandom _convoys;
 
 	_moneyText = format ["$%1", [_moneyAmount] call fn_numbersText];
@@ -283,12 +282,13 @@ _failedExec = nil;
 
 _missionCratesSpawn = true;
 _missionCrateNumber = selectRandom [3,4,5,6];
-_missionCrateSmoke = true;
+_missionCrateSmoke = false;
 _missionCrateSmokeDuration = 120;
 _missionCrateChemlight = true;
 _missionCrateChemlightDuration = 120;
 
 _missionMoneySpawn = true;
+_missionParseSetupVars = call _setupVars;
 _missionMoneyTotal = _moneyAmount;
 _missionMoneyBundles = 10;
 _missionMoneySmoke = true;

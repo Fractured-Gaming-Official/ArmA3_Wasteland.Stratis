@@ -80,12 +80,12 @@ _successExec =
 					_crate = createVehicle [_crateObject,_missionFinishPos,[],5,"CAN_COLLIDE"];
 					_crate allowDamage false;
 					waitUntil {sleep 0.1; !isNull _crate};
+					_crate call randomCrateLoadOut;
 					if ((_missionFinishPos select 2) > 5) then
 					{
 						_crateParachute = createVehicle ["O_Parachute_02_F",(getPosATL _crate),[],0,"CAN_COLLIDE"];
 						_crateParachute allowDamage false;
 						_crate attachTo [_crateParachute, [0,0,0]];
-						_crate call randomCrateLoadOut;
 						waitUntil {getPosATL _crate select 2 < 5};
 						detach _crate;
 						deleteVehicle _crateParachute;
