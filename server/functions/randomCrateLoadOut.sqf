@@ -513,7 +513,7 @@ if (["A3W_artilleryStrike"] call isConfigOn) then
 {
 	if (random 1.0 < ["A3W_artilleryCrateOdds", 1/10] call getPublicVar) then
 	{
-		_box setVariable ["artillery", 1, true];
+		_crate setVariable ["artillery", 1, true];
 	};
 };
 
