@@ -5,6 +5,8 @@
 //	@file Name: mission_MiniConvoy.sqf
 //	@file Author: JoSchaap / routes by Del1te - (original idea by Sanjo), AgentRev
 //	@file Created: 31/08/2013 18:19
+//	@file Modified: [FRAC] Mokey
+//	@file missionSuccessHandler Author: soulkobk
 
 if (!isServer) exitwith {};
 #include "sideMissionDefines.sqf";
@@ -122,23 +124,26 @@ _setupObjects =
 _waitUntilMarkerPos = {getPosATL _leader};
 _waitUntilExec = nil;
 _waitUntilCondition = {currentWaypoint _aiGroup >= _numWaypoints};
-
 _failedExec = nil;
 
-// _vehicles are automatically deleted or unlocked in missionProcessor depending on the outcome
+#include "..\missionSuccessHandler.sqf"
 
-_successExec =
-{
-	// Mission completed
-	_box1 = createVehicle ["Box_NATO_Wps_F", _lastPos, [], 2, "None"];
-	_box1 setDir random 360;
-	[_box1, "mission_USSpecial2"] call fn_refillbox;
+_missionCratesSpawn = true;
+_missionCrateNumber = 2;
+_missionCrateSmoke = true;
+_missionCrateSmokeDuration = 120;
+_missionCrateChemlight = true;
+_missionCrateChemlightDuration = 120;
 
-	_box2 = createVehicle ["Box_East_WpsSpecial_F", _lastPos, [], 2, "None"];
-	_box2 setDir random 360;
-	[_box2, "mission_USLaunchers"] call randomCrateLoadOut;
+_missionMoneySpawn = false;
+_missionMoneyTotal = 100000;
+_missionMoneyBundles = 10;
+_missionMoneySmoke = true;
+_missionMoneySmokeDuration = 120;
+_missionMoneyChemlight = true;
+_missionMoneyChemlightDuration = 120;
 
-	_successHintMessage = "The convoy has been stopped, the weapon crates and vehicles are now yours to take.";
-};
+_missionSuccessMessage = "The convoy has been stopped, the weapon crates and vehicles are now yours to take.";
+
 
 _this call sideMissionProcessor;

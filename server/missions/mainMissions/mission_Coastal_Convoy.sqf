@@ -7,6 +7,8 @@
 //	@file Author: JoSchaap / routes by Del1te - (original idea by Sanjo)
 //	@file Created: 02/09/2013 11:29
 //	@file Args: none
+//	@file Modified: [FRAC] Mokey
+//	@file missionSuccessHandler Author: soulkobk
 
 if (!isServer) exitwith {};
 #include "mainMissionDefines.sqf"
@@ -174,28 +176,23 @@ _failedExec = nil;
 
 // _vehicles are automatically deleted or unlocked in missionProcessor depending on the outcome
 
-_successExec =
-{
-	// Mission completed
+#include "..\missionSuccessHandler.sqf"
 
-	_box1 = createVehicle ["Box_NATO_Wps_F", _lastPos, [], 5, "None"];
-	_box1 setDir random 360;
-	[_box1, "mission_USSpecial"] call fn_refillbox;
+_missionCratesSpawn = true;
+_missionCrateNumber = 3;
+_missionCrateSmoke = true;
+_missionCrateSmokeDuration = 120;
+_missionCrateChemlight = true;
+_missionCrateChemlightDuration = 120;
 
-	_box2 = createVehicle ["Box_East_Wps_F", _lastPos, [], 5, "None"];
-	_box2 setDir random 360;
-	[_box2, "mission_USLaunchers"] call fn_refillbox;
+_missionMoneySpawn = false;
+_missionMoneyTotal = 100000;
+_missionMoneyBundles = 10;
+_missionMoneySmoke = true;
+_missionMoneySmokeDuration = 120;
+_missionMoneyChemlight = true;
+_missionMoneyChemlightDuration = 120;
 
-	_box3 = createVehicle ["Box_IND_WpsSpecial_F", _lastPos, [], 5, "None"];
-	_box3 setDir random 360;
-	[_box3, "mission_Main_A3snipers"] call fn_refillbox;
-
-	_mortar = createVehicle ["I_Mortar_01_F", _lastPos, [], 5, "None"];
-	_mortar setVariable ["R3F_LOG_Disabled", false, true];
-	_mortar setDir random 360;
-
-	_successHintMessage = "The patrol has been stopped, the ammo crates and mortar are yours to take. Find them near the wreck!";
-
-};
+_missionSuccessMessage = "The patrol has been stopped, the ammo crates are yours to take. Find them near the wreck!";
 
 _this call mainMissionProcessor;

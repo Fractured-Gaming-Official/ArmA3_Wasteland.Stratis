@@ -43,7 +43,7 @@ class playerSettings {
 			w = 0.3; h = 0.05;
 		};
 
-		class waterIcon : w_RscPicture {
+		/*class waterIcon : w_RscPicture {
 			idc = -1;
 			text = "client\icons\water.paa";
 			x = 0.022; y = 0.2;
@@ -55,16 +55,23 @@ class playerSettings {
 			text = "client\icons\food.paa";
 			x = 0.022; y = 0.26;
 			w = 0.04 / (4/3); h = 0.04;
-		};
+		};*/
 
-		class moneyIcon : w_RscPicture {
+		/*class moneyIcon : w_RscPicture {
 			idc = -1;
 			text = "client\icons\money.paa";
 			x = 0.022; y = 0.32;
 			w = 0.04 / (4/3); h = 0.04;
+		};*/
+
+		class serverLogo : w_RscPicture {
+			idc = -1;
+			text = "mapconfig\Fractured.paa";
+			x = 0.3; y = 0.20;
+			w = 0.12 / (4/3); h = 0.12;
 		};
 
-		class waterText : w_RscText {
+		/*class waterText : w_RscText {
 			idc = water_text;
 			text = "";
 			sizeEx = 0.03;
@@ -209,15 +216,15 @@ class playerSettings {
 			idc = -1;
 			text = "Effects";
 			onButtonClick = "[] execVM 'addons\disableEnvironment\disableEnvironment.sqf'";
-			x = 0.158; y = 0.5;
+			x = 0.295; y = 0.57;
 			w = 0.125; h = 0.033 * safezoneH;
 		};
-		
+
 		class TOParmaInfoButton : w_RscButton {
 			idc = 1;
 			text = "FG Rules";
 			onButtonClick = "[] execVM 'addons\TOParmaInfo\loadToparmaInfo.sqf'";
-			x = 0.228; y = 0.254;
+			x = 0.228; y = 0.35;
 			w = 0.225; h = 0.033 * safezoneH;
 		};
 	};

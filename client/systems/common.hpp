@@ -412,7 +412,7 @@ class w_RscCombo {
 	colorDisabled[] = {0,0,0,0.3};
 	colorText[] = {0, 0, 0, 1};
 	colorBackground[] = {1, 1, 1, 1};
-	colorSelect[] = {1, 0, 0, 1};
+	colorSelect[] = {1, 1, 1, 1};
 	colorSelectBackground[] = {A3W_UICOLOR_R, A3W_UICOLOR_G, A3W_UICOLOR_B, 0.5};
 	soundSelect[] = {"", 0.000000, 1};
 	soundExpand[] = {"", 0.000000, 1};
@@ -553,43 +553,42 @@ class RscHTML
  	 filename = "";
  	 prevPage = "\ca\ui\data\arrow_left_ca.paa";
      nextPage = "\ca\ui\data\arrow_right_ca.paa";
- 
-     
+
      class HeadingStyle {
          font = "PuristaBold";
          fontBold = "TahomaB";
          sizeEx = Dlg_TEXTHGT;
      };
-     
+
      class H1: HeadingStyle {
          sizeEx = Dlg_TEXTHGT * 1.5;
      };
-     
+
      class H2: HeadingStyle {
          sizeEx = Dlg_TEXTHGT * 1.4;
      };
-     
+
      class H3: HeadingStyle {
          sizeEx = Dlg_TEXTHGT * 1.3;
      };
-     
+
      class H4: HeadingStyle {
          sizeEx = Dlg_TEXTHGT * 1.2;
      };
-     
+
      class H5: HeadingStyle {
          sizeEx = Dlg_TEXTHGT * 1.1;
      };
-     
+
      class H6: HeadingStyle {
          sizeEx = Dlg_TEXTHGT;
      };
-     
+
      class P: HeadingStyle {
         sizeEx = Dlg_TEXTHGT;
      };
  };
- 
+
 class w_RscMapControl
 {
 	type = CT_MAP_MAIN;

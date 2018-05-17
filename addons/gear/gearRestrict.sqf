@@ -1,10 +1,22 @@
-// ******************************************************************************************
-// * This project is licensed under the GNU Affero GPL v3. Copyright © 2014 A3Wasteland.com *
-// ******************************************************************************************
+/*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*///*//*//*/
+
 //	@file Version: 1.0
-//	@file Name: gearRestric.sqf
-//	@file Author: [FRAC] Mokey , PIX515E, Strilles
-//	@file Created: 4/18/2018 17:48
+//	@file Name gearRestrict.sqf
+//	@file Author: [FRAC] Mokey , PIX515E , Strilles
+//	@file Created: 4/21/2018 09:48
+
+/*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//
+
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published
+by the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+/*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*/
 
 /*/-----------------Limits apply to each array in gearWhiteList.sqf-----------------/*/
 /*/-----To remove an item completley, just comment it out in gearWhiteList.sqf-----/*/

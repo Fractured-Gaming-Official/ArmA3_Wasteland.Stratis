@@ -2,9 +2,9 @@
 //@file Name: gearLevel1.sqf
 //@file Author: Cael817, based of something i found
 private ["_player"];
+
 _player = _this;
 
-// _player setVariable ["cmoney", (_player getVariable "cmoney") + 25000, true];
 _player setVariable ["gmoney",25000];
 
 {_player removeWeapon _x} forEach weapons _player;
@@ -53,23 +53,18 @@ switch (true) do
 	case (["_medic_", typeOf _player] call fn_findString != -1):
 	{
 		_player addItem "MediKit";
-		_player removeItem "";
 	};
 	case (["_engineer_", typeOf _player] call fn_findString != -1):
 	{
 		_player addItem "ToolKit";
 		_Player addItem "MineDetector";
-		_player removeItem "";
 	};
 	case (["_sniper_", typeOf _player] call fn_findString != -1):
 	{
 		_player addWeapon "Rangefinder";
-		_player removeItem "";
 	};
 		case (["_diver_", typeOf _player] call fn_findString != -1):
 	{
 		_player addVest "V_RebreatherIA";
-		_player removeItem "";
-
 	};
 };

@@ -273,9 +273,9 @@ class AtmGUI
 
 	class AtmGreenButton : AtmButton
 	{
-		colorBackground[] = {0, 0.5, 0, 1}; // normal
-		colorFocused[] = {0, 0.3, 0, 1}; // pulse
-		colorBackgroundActive[] = {0, 0.6, 0, 1}; // hover
+		colorBackground[] = {A3W_UICOLOR_R, A3W_UICOLOR_G, A3W_UICOLOR_B, 0.8};
+		colorFocused[] = {0.3, 0, 0, 1}; // pulse
+		colorBackgroundActive[] = {A3W_UICOLOR_R, A3W_UICOLOR_G, A3W_UICOLOR_B, 1};
 	};
 
 

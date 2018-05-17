@@ -3,6 +3,8 @@
 // ******************************************************************************************
 //	@file Name: mission_HostileHelicopter.sqf
 //	@file Author: JoSchaap, AgentRev
+//	@file Modified: [FRAC] Mokey
+//	@file missionSuccessHandler Author: soulkobk
 
 if (!isServer) exitwith {};
 #include "sideMissionDefines.sqf"
@@ -12,7 +14,7 @@ private ["_vehicleClass", "_vehicle", "_createVehicle", "_vehicles", "_leader", 
 _setupVars =
 {
 	_missionType = "Hostile Helicopter";
-	_locationsArray = nil; // locations are generated on the fly from towns
+	_locationsArray = nil;
 };
 
 _setupObjects =
@@ -51,12 +53,8 @@ _setupObjects =
  		};
 
 		[_vehicle] call vehicleSetup;
-
 		_vehicle setDir _direction;
 		_aiGroup addVehicle _vehicle;
-
-		// add a driver/pilot/captain to the vehicle
-		// the little bird, orca, and hellcat do not require gunners and should not have any passengers
 		_soldier = [_aiGroup, _position] call createRandomSoldierC;
 		_soldier moveInDriver _vehicle;
 
@@ -80,7 +78,6 @@ _setupObjects =
 			};
 		};
 
-		// remove flares because it overpowers AI choppers
 		if (_type isKindOf "Air") then
 		{
 			{
@@ -96,22 +93,16 @@ _setupObjects =
 	};
 
 	_aiGroup = createGroup CIVILIAN;
-
 	_vehicle = [_vehicleClass, _missionPos, 0] call _createVehicle;
-
 	_leader = effectiveCommander _vehicle;
 	_aiGroup selectLeader _leader;
 	_leader setRank "LIEUTENANT";
-
-	_aiGroup setCombatMode "WHITE"; // Defensive behaviour
+	_aiGroup setCombatMode "WHITE";
 	_aiGroup setBehaviour "AWARE";
 	_aiGroup setFormation "STAG COLUMN";
-
 	_speedMode = if (missionDifficultyHard) then { "NORMAL" } else { "LIMITED" };
-
 	_aiGroup setSpeedMode _speedMode;
 
-	// behaviour on waypoints
 	{
 		_waypoint = _aiGroup addWaypoint [markerPos (_x select 0), 0];
 		_waypoint setWaypointType "MOVE";
@@ -135,42 +126,25 @@ _setupObjects =
 _waitUntilMarkerPos = {getPosATL _leader};
 _waitUntilExec = nil;
 _waitUntilCondition = {currentWaypoint _aiGroup >= _numWaypoints};
-
 _failedExec = nil;
 
-// _vehicle is automatically deleted or unlocked in missionProcessor depending on the outcome
+#include "..\missionSuccessHandler.sqf"
 
-_successExec =
-{
-	// Mission completed
+_missionCratesSpawn = true;
+_missionCrateNumber = 2;
+_missionCrateSmoke = true;
+_missionCrateSmokeDuration = 120;
+_missionCrateChemlight = true;
+_missionCrateChemlightDuration = 120;
 
-	// wait until heli is down to spawn crates
-	_vehicle spawn
-	{
-		_veh = _this;
+_missionMoneySpawn = false;
+_missionMoneyTotal = 100000;
+_missionMoneyBundles = 10;
+_missionMoneySmoke = true;
+_missionMoneySmokeDuration = 120;
+_missionMoneyChemlight = true;
+_missionMoneyChemlightDuration = 120;
 
-		waitUntil
-		{
-			sleep 0.1;
-			_pos = getPos _veh;
-			(isTouchingGround _veh || _pos select 2 < 5) && {vectorMagnitude velocity _veh < [1,5] select surfaceIsWater _pos}
-		};
-
-		_box1 = createVehicle ["Box_NATO_Wps_F", (getPosATL _veh) vectorAdd ([[_veh call fn_vehSafeDistance, 0, 0], random 360] call BIS_fnc_rotateVector2D), [], 5, "None"];
-		_box1 setDir (random 360);
-		[_box1, "mission_USSpecial"] call fn_refillbox;
-
-		_box2 = createVehicle ["Box_East_Wps_F", (getPosATL _veh) vectorAdd ([[_veh call fn_vehSafeDistance, 0, 0], random 360] call BIS_fnc_rotateVector2D), [], 5, "None"];
-		_box2 setDir (random 360);
-		[_box2, "mission_USLaunchers"] call randomCrateLoadOut;
-
-
-	};
-
-	_smoke = createVehicle ["Smokeshellgreen", _lastPos, [], 5, "None"];
-	_smoke setDir (random 360);
-
-	_successHintMessage = "The sky is clear again, the enemy patrol was taken out! Ammo crates have fallen near the wreck.";
-};
+_missionSuccessMessage = "The sky is clear again, the enemy patrol was taken out! Ammo crates have fallen out their chopper.";
 
 _this call sideMissionProcessor;

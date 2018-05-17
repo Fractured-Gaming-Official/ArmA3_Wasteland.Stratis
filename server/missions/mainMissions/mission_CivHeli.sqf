@@ -5,6 +5,8 @@
 //	@file Name: mission_CivHeli.sqf
 //	@file Author: [404] Deadbeat, [404] Costlyy, AgentRev
 //	@file Created: 08/12/2012 15:19
+//	@file Modified: [FRAC] Mokey
+//	@file missionSuccessHandler Author: soulkobk
 
 if (!isServer) exitwith {};
 #include "mainMissionDefines.sqf";
@@ -23,7 +25,7 @@ _setupVars =
 
 private _customVehicleSetup =
 {
-	_vehicle call fn_refilltruck;
+	_vehicle call randomCrateLoadOut;
 };
 
 _this call mission_VehicleCapture;

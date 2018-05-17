@@ -5,12 +5,15 @@
 //	@file Name: mission_MoneyShipment.sqf
 //	@file Author: JoSchaap / routes by Del1te - (original idea by Sanjo), AgentRev
 //	@file Created: 31/08/2013 18:19
+//	@file Modified: [FRAC] Mokey
+//	@file missionSuccessHandler Author: soulkobk
 
 if (!isServer) exitwith {};
 #include "moneyMissionDefines.sqf";
 
-private ["_MoneyShipment", "_moneyAmount", "_convoys", "_vehChoices", "_moneyText", "_vehClasses", "_createVehicle", "_vehicles", "_veh2", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_cash"];
+private ["_MoneyShipment", "_convoys", "_vehChoices", "_moneyText", "_vehClasses", "_createVehicle", "_vehicles", "_veh2", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_cash"];
 
+private ["_moneyAmount"];
 _setupVars =
 {
 	// _locationsArray = nil;
@@ -24,8 +27,9 @@ _setupVars =
 	[
 		// Easy
 		[
-			"Money Runners", // Marker text
+			"Solo Smugglers", // Marker text
 			30000, // Money
+			//1, //crates
 			[
 				[ // NATO convoy
 					["B_MRAP_01_hmg_F", "B_MRAP_01_gmg_F", "B_T_LSV_01_armed_F", "B_T_LSV_01_AT_F"], // Veh 1
@@ -43,8 +47,9 @@ _setupVars =
 		],
 		// Medium
 		[
-			"Money Runners+", // Marker text
+			"Solo Smugglers+", // Marker text
 			60000, // Money
+			//2, //crates
 			[
 				[ // NATO convoy
 					["I_LT_01_cannon_F", "I_LT_01_AT_F", "I_LT_01_AA_F"], // Veh 1
@@ -58,10 +63,11 @@ _setupVars =
 				]
 			]
 		]
-	]
+	];
 
 	_missionType = _MoneyShipment select 0;
 	_moneyAmount = _MoneyShipment select 1;
+	//_crateAmount = _MoneyShipment select 2;
 	_convoys = _MoneyShipment select 2;
 	_vehChoices = selectRandom _convoys;
 
@@ -155,27 +161,26 @@ _setupObjects =
         };
         sleep 0.1; // sleep between loops.
     };
-
 	_aiGroup = createGroup CIVILIAN;
-	//_town = selectRandom (call cityList);
-	//_missionPos = markerPos (_town select 0);
-	//_radius = (_town select 1);
-	// _vehiclePosArray = [_missionPos,(_radius / 2),_radius,5,0,0,0] call findSafePos;
-
-	// _vehicles = [];
-	// {
-		// _vehicles pushBack ([_x, _vehiclePosArray, 0, _aiGroup] call _createVehicle);
+	/*/ soulkobk ------------------------------------------------------------------------------ /*/
 	_vehicles = [];
 	_vehiclePosArray = nil;
+	_nearRoads = (_missionPos nearRoads _radius); // check if any roads are near.
+	if !(_nearRoads isEqualTo []) then
 	{
-		_vehiclePosArray = getPos ((_missionPos nearRoads _radius) select _forEachIndex);
-		if (isNil "_vehiclePosArray") then
-		{
-			_vehiclePosArray = [_missionPos,(_radius / 2),_radius,5,0,0,0] call findSafePos;
-		};
-		_vehicles pushBack ([_x, _vehiclePosArray, 0, _aiGroup] call _createVehicle);
-		_vehiclePosArray = nil;
-	} forEach _vehClasses;
+    		{
+			_vehiclePosArray = getPos (_nearRoads select _forEachIndex);
+			_vehicles pushBack ([_x, _vehiclePosArray, 0, _aiGroup] call _createVehicle);
+    		} forEach _vehClasses;
+	}
+else
+{
+    {
+	_vehiclePosArray = [_missionPos,(_radius / 2),_radius,5,0,0,0] call findSafePos;
+	_vehicles pushBack ([_x, _vehiclePosArray, 0, _aiGroup] call _createVehicle);
+    } forEach _vehClasses;
+};
+/*/ --------------------------------------------------------------------------------------- /*/
 
 	_veh2 = _vehClasses select (1 min (count _vehClasses - 1));
 
@@ -216,22 +221,24 @@ _waitUntilCondition = {currentWaypoint _aiGroup >= _numWaypoints};
 
 _failedExec = nil;
 
-// _vehicles are automatically deleted or unlocked in missionProcessor depending on the outcome
+#include "..\missionSuccessHandler.sqf"
 
-_successExec =
-{
-	// Mission completed
+_missionCratesSpawn = true;
+_missionCrateNumber = selectRandom [1,2,3];
+_missionCrateSmoke = false;
+_missionCrateSmokeDuration = 120;
+_missionCrateChemlight = true;
+_missionCrateChemlightDuration = 120;
 
-	for "_i" from 1 to 10 do
-	{
-		_cash = createVehicle ["Land_Money_F", _lastPos, [], 5, "None"];
-		_cash setPos ([_lastPos, [[2 + random 3,0,0], random 360] call BIS_fnc_rotateVector2D] call BIS_fnc_vectorAdd);
-		_cash setDir random 360;
-		_cash setVariable ["cmoney", _moneyAmount / 10, true];
-		_cash setVariable ["owner", "world", true];
-	};
+_missionMoneySpawn = true;
+_missionParseSetupVars = call _setupVars;
+_missionMoneyTotal = _moneyAmount;
+_missionMoneyBundles = 10;
+_missionMoneySmoke = true;
+_missionMoneySmokeDuration = 120;
+_missionMoneyChemlight = true;
+_missionMoneyChemlightDuration = 120;
 
-	_successHintMessage = "The runners has been stopped, the money and vehicles are now yours to take.";
-};
+_missionSuccessMessage = "The runners have been stopped, the money and vehicles are now yours to take.";
 
 _this call moneyMissionProcessor;

@@ -16,14 +16,14 @@ class EditorData
 	};
 	class LayerIndexProvider
 	{
-		nextID=106;
+		nextID=110;
 	};
 	class Camera
 	{
-		pos[]={2892.2769,99.893112,3668.7312};
-		dir[]={-0.90559047,-0.37417769,0.20031773};
-		up[]={-0.36553517,0.92710197,0.080860741};
-		aside[]={0.21602425,1.7586863e-006,0.97656524};
+		pos[]={1882.7788,43.752636,3583.981};
+		dir[]={0.6932193,-0.53825897,-0.47953287};
+		up[]={0.44276732,0.84250474,-0.30628759};
+		aside[]={-0.56900322,2.2365712e-006,-0.8225503};
 	};
 };
 binarizationWanted=0;
@@ -9234,7 +9234,7 @@ class Mission
 					name="VehStore8_seaSpawn";
 					type="Empty";
 					colorName="ColorBlack";
-					angle=225.39557;
+					angle=225.39554;
 					id=1126;
 					atlOffset=17.706646;
 				};
@@ -10115,7 +10115,7 @@ class Mission
 					};
 					id=624;
 					type="C_man_1_1_F";
-					atlOffset=0.30299997;
+					atlOffset=0.30299902;
 					class CustomAttributes
 					{
 						class Attribute0
@@ -10145,7 +10145,7 @@ class Mission
 			{
 			};
 			id=623;
-			atlOffset=0.30299997;
+			atlOffset=0.30299902;
 		};
 		class Item437
 		{
@@ -17262,11 +17262,34 @@ class Mission
 			flags=5;
 			class Attributes
 			{
-				init="[this, true, true] call A3W_fnc_setupMissionObject;";
+				init="[this, true, true] call A3W_fnc_setupMissionObject; this allowDamage false;";
 			};
 			id=1315;
 			type="Land_Cargo_HQ_V3_F";
 			atlOffset=-0.3349998;
+			class CustomAttributes
+			{
+				class Attribute0
+				{
+					property="allowDamage";
+					expression="_this allowdamage _value;";
+					class Value
+					{
+						class data
+						{
+							class type
+							{
+								type[]=
+								{
+									"BOOL"
+								};
+							};
+							value=0;
+						};
+					};
+				};
+				nAttributes=1;
+			};
 		};
 		class Item808
 		{
@@ -17283,6 +17306,7 @@ class Mission
 			};
 			id=1316;
 			type="Land_Loudspeakers_F";
+			atlOffset=2.3841858e-007;
 		};
 		class Item809
 		{
@@ -17411,6 +17435,7 @@ class Mission
 			};
 			id=1324;
 			type="Land_Loudspeakers_F";
+			atlOffset=4.7683716e-007;
 		};
 		class Item817
 		{

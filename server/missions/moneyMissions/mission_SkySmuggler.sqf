@@ -3,6 +3,8 @@
 // ******************************************************************************************
 //	@file Name: mission_SkySmuggler.sqf
 //	@file Author: JoSchaap, AgentRev
+//	@file Modified: [FRAC] Mokey
+//	@file missionSuccessHandler Author: soulkobk
 
 if (!isServer) exitwith {};
 #include "MoneyMissionDefines.sqf"
@@ -151,36 +153,24 @@ _waitUntilCondition = {currentWaypoint _aiGroup >= _numWaypoints};
 
 _failedExec = nil;
 
-// _vehicles are automatically deleted or unlocked in missionProcessor depending on the outcome
+#include "..\missionSuccessHandler.sqf"
 
-_successExec =
-{
-	// Mission completed
+_missionCratesSpawn = true;
+_missionCrateNumber = selectRandom [2,3];
+_missionCrateSmoke = false;
+_missionCrateSmokeDuration = 120;
+_missionCrateChemlight = true;
+_missionCrateChemlightDuration = 120;
 
+_missionMoneySpawn = true;
+//_missionParseSetupVars = call _setupVars;
+_missionMoneyTotal = 75000;
+_missionMoneyBundles = 10;
+_missionMoneySmoke = true;
+_missionMoneySmokeDuration = 120;
+_missionMoneyChemlight = true;
+_missionMoneyChemlightDuration = 120;
 
-
-	_box1 = createVehicle ["Box_East_Wps_F", _lastPos, [], 5, "None"];
-	_box1 setDir (random 360);
-	[_box1, "mission_USLaunchers"] call fn_refillbox;
-
-	_box2 = createVehicle ["Box_IND_WpsSpecial_F", _lastPos, [], 5, "None"];
-	_box2 setDir (random 360);
-	[_box2, "mission_Main_A3snipers"] call fn_refillbox;
-
-	for "_i" from 1 to 10 do
-	{
-		_cash = createVehicle ["Land_Money_F", _lastPos, [], 5, "None"];
-		_cash setPos ([_lastPos, [[2 + random 3,0,0], random 360] call BIS_fnc_rotateVector2D] call BIS_fnc_vectorAdd);
-		_cash setDir random 360;
-		_cash setVariable ["cmoney", 7500, true];
-		_cash setVariable ["owner", "world", true];
-	};
-
-	_smoke = createVehicle ["Smokeshellgreen", _lastPos, [], 5, "None"];
-	_smoke setDir (random 360);
-
-
-	_successHintMessage = "The sky is clear again, the Smuggler and Escort were taken out! Ammo crates and Money have fallen near the wreck.";
-};
+_missionSuccessMessage = "The sky is clear again, the Smuggler and Escort were taken out! Ammo crates and Money have fallen near the wreck.";
 
 _this call moneyMissionProcessor;

@@ -12,6 +12,7 @@ class BIS_fnc_effectKilledAirDestruction {};
 class BIS_fnc_effectKilledSecondaries {};
 class BIS_fnc_initVehicle {}; // required for vehicle parts like tank cages
 class BIS_fnc_objectVar {};
+class BIS_fnc_indicateBleeding {};
 
 // do NOT whitelist BIS_fnc_execVM or BIS_fnc_spawn, hackers will exploit them!
 
@@ -73,3 +74,5 @@ class A3W_fnc_setVehicleAmmoDef {};
 class A3W_fnc_unflip {};
 class APOC_srv_startAirdrop { allowedTargets = 2; };
 class JTS_FNC_SENT {};
+class GOM_fnc_carpetbombing {allowedTargets = 2;};
+class GOM_fnc_airRaidSirens {allowedTargets = 1;};

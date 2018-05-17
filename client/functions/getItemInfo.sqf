@@ -227,7 +227,7 @@ if (!isNil "_itemEntry") then
 				{
 					_description = "Laser Designated Airstrike, Use Scrollwheel for Action";
 				};
-			}
+			};
 			default
 			{
 				switch (true) do

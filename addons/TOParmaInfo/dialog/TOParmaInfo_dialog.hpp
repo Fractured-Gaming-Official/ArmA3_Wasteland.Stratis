@@ -5,21 +5,21 @@
 //	@file Author: Lodac
 
 #include "TOParmaInfo_defines.hpp"
-#define X_safezone 
+#define X_safezone
 #define RscHTML_sizeEx_H1 (((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1.2)
 #define RscHTML_sizeEx_H2 (((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1.2)
 #define RscHTML_sizeEx_P (((((safezoneW / safezoneH) min 1.2) / 1.2) / 25) * 1)
 class TOParmaInfoD
 {
-	idd = TOParmaInfo_dialog; 
-	movingEnable = 1; 
+	idd = TOParmaInfo_dialog;
+	movingEnable = 1;
 	enableSimulation = 1;
-	enableDisplay = 1; 
-	
-	onLoad = ""; 
+	enableDisplay = 1;
 
-	class controls 
-	{	
+	onLoad = "";
+
+	class controls
+	{
 		class TAInfoBackground: RscText
 		{
 			idc = 10089;
@@ -33,7 +33,7 @@ class TOParmaInfoD
 		{
 			idc = 10032;
 			text = "Fractured Gaming";
-			colorBackground[] = {0,0,0,1};
+			colorBackground[] = {0,0,0,0.8};
 			x = "0 * (((safezoneW / safezoneH) min 1.2) / 40)";
 			y = "0 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
 			w = "30 * (((safezoneW / safezoneH) min 1.2) / 40)";
@@ -51,14 +51,14 @@ class TOParmaInfoD
 			h = "1 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
 			colorText[] = {1,1,1,1};
 			colorBackground[] = {0,0,0,0};
-			
+
 		};
 		class TAGeneralInfoBackground: RscText
 		{
 			idc = TOParmaInfo_General_Info_BG;
 			type = CT_STRUCTURED_TEXT;
 			size = 0.030;
-			text = "Website: Fractured-Gaming.com TeamSpeak: ts.Fractued-Gaming.com";
+			text = "Website: Fractured-Gaming.com Discord: discord.frac.gg";
 			x = "0 * (((safezoneW / safezoneH) min 1.2) / 40)";
 			y = "1.1 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
 			w = "30 * (((safezoneW / safezoneH) min 1.2) / 40)";
@@ -76,7 +76,7 @@ class TOParmaInfoD
 			y = "2.2 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
 			w = "15 * (((safezoneW / safezoneH) min 1.2) / 40)";
 			h = "1 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-			colorBackground[] = {0.98,0.16,0.03,1};
+			colorBackground[] = {A3W_UICOLOR_R, A3W_UICOLOR_G, A3W_UICOLOR_B, 0.8};
 		};
 		class TARulesBackground: RscText
 		{
@@ -108,7 +108,7 @@ class TOParmaInfoD
 			y = "9.7 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
 			w = "14.9 * (((safezoneW / safezoneH) min 1.2) / 40)";
 			h = "1 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
-			colorBackground[] = {0.51,0.99,0.41,0.3};
+			colorBackground[] = {A3W_UICOLOR_R, A3W_UICOLOR_G, A3W_UICOLOR_B, 0.8};
 		};
 		class TANewsBackground: RscText
 		{
@@ -120,7 +120,7 @@ class TOParmaInfoD
 			colorBackground[] = {0,0,0,0.4};
 		};
 		class TARulesText: RscHTML
-		{	
+		{
 			idc = TOParmaInfo_Content_Rules;
 			type = 9;
 			shadow = 0;
@@ -149,7 +149,7 @@ class TOParmaInfoD
 			h = "7.4 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
 		};
 		class TANewsText: RscHTML
-		{	
+		{
 			idc = TOParmaInfo_Content_News;
 			type = 9;
 			shadow = 0;
@@ -178,7 +178,7 @@ class TOParmaInfoD
 			h = "10.2 * ((((safezoneW / safezoneH) min 1.2) / 1.2) / 25)";
 		};
 		class TAStatsText: RscHTML
-		{	
+		{
 			idc = TOParmaInfo_Content_Stats;
 			type = 9;
 			shadow = 0;

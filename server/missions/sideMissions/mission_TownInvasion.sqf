@@ -3,7 +3,8 @@
 // ******************************************************************************************
 //	@file Name: mission_TownInvasion.sqf
 //	@file Author: [404] Deadbeat, [404] Costlyy, JoSchaap, AgentRev, Zenophon
-//  @file Information: JoSchaap's Lite version of 'Infantry Occupy House' Original was made by: Zenophon
+//  	@file Information: JoSchaap's Lite version of 'Infantry Occupy House' Original was made by: Zenophon
+
 
 if (!isServer) exitwith {};
 
@@ -37,11 +38,13 @@ _setupObjects =
 	// spawn some crates in the middle of town (Town marker position)
 	_box1 = createVehicle ["Box_NATO_Wps_F", _missionPos, [], 5, "None"];
 	_box1 setDir random 360;
-	[_box1, "mission_USSpecial"] call fn_refillbox;
+	//[_box1, "mission_USSpecial"] call fn_refillbox;
+	_box1 call randomCrateLoadOut; // new randomCrateLoadOut function call
 
 	_box2 = createVehicle ["Box_East_Wps_F", _missionPos, [], 5, "None"];
 	_box2 setDir random 360;
-	[_box2, "mission_USLaunchers"] call randomCrateLoadOut;
+//	[_box2, "mission_USLaunchers"] call randomCrateLoadOut;
+	_box2 call randomCrateLoadOut; // new randomCrateLoadOut function call
 
 	// create some atmosphere around the crates 8)
 	_tent1 = createVehicle ["Land_cargo_addon02_V2_F", _missionPos, [], 3, "None"];
