@@ -41,7 +41,7 @@ _setupVars =
 		// Medium
 		[
 			"Medium Smuggler Shipment", // Marker text
-			100000, 120000, 140000, // Money
+			80000, 100000, 120000, // Money
 			//3, //crates
 			[
 				[ // NATO convoy
@@ -64,7 +64,7 @@ _setupVars =
 		// Hard
 		[
 			"Large Smuggler Shipment", // Marker text
-			140000, 160000, 180000, // Money
+			100000, 120000, 140000, // Money
 			//4, //crates
 			[
 				[ // NATO convoy
@@ -87,8 +87,7 @@ _setupVars =
 		// Extreme
 		[
 			"Heavy Smugglers Shipment", // Marker text
-			180000, 200000, 220000,// Money
-			//5, //crates
+			120000, 140000, 160000 // Money
 			[
 				[ // NATO convoy
 					["B_APC_Wheeled_01_cannon_F", "B_APC_Tracked_01_rcws_F", "B_APC_Tracked_01_AA_F", "B_MBT_01_cannon_F", "B_MBT_01_TUSK_F"], // Veh 1
