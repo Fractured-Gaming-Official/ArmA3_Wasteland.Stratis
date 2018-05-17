@@ -11,8 +11,9 @@
 if (!isServer) exitwith {};
 #include "moneyMissionDefines.sqf";
 
-private ["_MoneyShipment", "_moneyAmount", "_convoys", "_vehChoices", "_moneyText", "_vehClasses", "_createVehicle", "_vehicles", "_veh2", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_cash"];
+private ["_MoneyShipment", "_convoys", "_vehChoices", "_moneyText", "_vehClasses", "_createVehicle", "_vehicles", "_veh2", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_cash"];
 
+private ["_moneyAmount"];
 _setupVars =
 {
 	// _locationsArray = nil;
@@ -160,27 +161,26 @@ _setupObjects =
         };
         sleep 0.1; // sleep between loops.
     };
-
 	_aiGroup = createGroup CIVILIAN;
-	//_town = selectRandom (call cityList);
-	//_missionPos = markerPos (_town select 0);
-	//_radius = (_town select 1);
-	// _vehiclePosArray = [_missionPos,(_radius / 2),_radius,5,0,0,0] call findSafePos;
-
-	// _vehicles = [];
-	// {
-		// _vehicles pushBack ([_x, _vehiclePosArray, 0, _aiGroup] call _createVehicle);
+	/*/ soulkobk ------------------------------------------------------------------------------ /*/
 	_vehicles = [];
 	_vehiclePosArray = nil;
+	_nearRoads = (_missionPos nearRoads _radius); // check if any roads are near.
+	if !(_nearRoads isEqualTo []) then
 	{
-		_vehiclePosArray = getPos ((_missionPos nearRoads _radius) select _forEachIndex);
-		if (isNil "_vehiclePosArray") then
-		{
-			_vehiclePosArray = [_missionPos,(_radius / 2),_radius,5,0,0,0] call findSafePos;
-		};
-		_vehicles pushBack ([_x, _vehiclePosArray, 0, _aiGroup] call _createVehicle);
-		_vehiclePosArray = nil;
-	} forEach _vehClasses;
+    		{
+			_vehiclePosArray = getPos (_nearRoads select _forEachIndex);
+			_vehicles pushBack ([_x, _vehiclePosArray, 0, _aiGroup] call _createVehicle);
+    		} forEach _vehClasses;
+	}
+else
+{
+    {
+	_vehiclePosArray = [_missionPos,(_radius / 2),_radius,5,0,0,0] call findSafePos;
+	_vehicles pushBack ([_x, _vehiclePosArray, 0, _aiGroup] call _createVehicle);
+    } forEach _vehClasses;
+};
+/*/ --------------------------------------------------------------------------------------- /*/
 
 	_veh2 = _vehClasses select (1 min (count _vehClasses - 1));
 

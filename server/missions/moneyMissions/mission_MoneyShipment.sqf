@@ -15,13 +15,6 @@ private ["_MoneyShipment", "_convoys", "_vehChoices", "_moneyText", "_vehClasses
 private ["_moneyAmount"];
 _setupVars =
 {
-	// _locationsArray = nil;
-
-	// Money Shipments settings
-	// Difficulties : Min = 1, Max = infinite
-	// Convoys per difficulty : Min = 1, Max = infinite
-	// Vehicles per convoy : Min = 1, Max = infinite
-	// Choices per vehicle : Min = 1, Max = infinite
 	_MoneyShipment = selectRandom
 	[
 		// Easy
@@ -42,7 +35,6 @@ _setupVars =
 
 					["I_MRAP_03_hmg_F", "I_MRAP_03_gmg_F", "I_LT_01_cannon_F"], // Veh 1
 					["I_MRAP_03_hmg_F", "I_MRAP_03_gmg_F", "I_LT_01_AT_F"] // Veh 2
-
 				]
 			]
 		],
@@ -124,9 +116,7 @@ _setupVars =
 	_moneyAmount = floor (random [_moneyShipment select 1, _moneyShipment select 2,  _moneyShipment select 3]);
 	_convoys = _MoneyShipment select 4;
 	_vehChoices = selectRandom _convoys;
-
 	_moneyText = format ["$%1", [_moneyAmount] call fn_numbersText];
-
 	_vehClasses = [];
 	{ _vehClasses pushBack selectRandom _x } forEach _vehChoices;
 };
@@ -134,16 +124,12 @@ _setupVars =
 _setupObjects =
 {
 	private ["_starts", "_startDirs", "_waypoints"];
-	// call compile preprocessFileLineNumbers format ["mapConfig\convoys\%1.sqf", _missionLocation];
-
 	_createVehicle =
 	{
 		private ["_type", "_position", "_direction", "_vehicle", "_soldier"];
-
 		_type = _this select 0;
 		_position = _this select 1;
 		_direction = _this select 2;
-
 		_vehicle = createVehicle [_type, _position, [], 0, "None"];
 		_vehicle setVariable ["R3F_LOG_disabled", true, true];
 		[_vehicle] call vehicleSetup;
@@ -160,24 +146,19 @@ _setupObjects =
 
 		_vehicle setDir _direction;
 		_aiGroup addVehicle _vehicle;
-
 		_soldier = [_aiGroup, _position] call createRandomSoldier;
 		_soldier moveInDriver _vehicle;
-
 		if !(_type isKindOf "LT_01_base_F") then
 		{
 			_soldier = [_aiGroup, _position] call createRandomSoldier;
 			_soldier moveInCargo [_vehicle, 0];
 		};
-
 		if !(_type isKindOf "Truck_F") then
 		{
 			_soldier = [_aiGroup, _position] call createRandomSoldier;
 			_soldier moveInGunner _vehicle;
 			if (_type isKindOf "LT_01_base_F") exitWith {};
-
 			_soldier = [_aiGroup, _position] call createRandomSoldier;
-
 			if (_vehicle emptyPositions "commander" > 0) then
 			{
 				_soldier moveInCommander _vehicle;
@@ -189,18 +170,12 @@ _setupObjects =
 		};
 
 		[_vehicle, _aiGroup] spawn checkMissionVehicleLock;
-
 		_vehicle
 	};
-
-
-    // SKIP TOWN AND PLAYER PROXIMITY CHECK
-
     _skippedTowns = // get the list from -> \mapConfig\towns.sqf
     [
         "Town_14" // Pythos Island Marker Name
     ];
-
     _town = ""; _missionPos = [0,0,0]; _radius = 0;
     _townOK = false;
     while {!_townOK} do
@@ -215,41 +190,36 @@ _setupObjects =
         };
         sleep 0.1; // sleep between loops.
     };
-
 	_aiGroup = createGroup CIVILIAN;
-	//_town = selectRandom (call cityList);
-	//_missionPos = markerPos (_town select 0);
-	//_radius = (_town select 1);
-	// _vehiclePosArray = [_missionPos,(_radius / 2),_radius,5,0,0,0] call findSafePos;
 
-	// _vehicles = [];
-	// {
-		// _vehicles pushBack ([_x, _vehiclePosArray, 0, _aiGroup] call _createVehicle);
+	/*/ soulkobk ------------------------------------------------------------------------------ /*/
 	_vehicles = [];
 	_vehiclePosArray = nil;
+	_nearRoads = (_missionPos nearRoads _radius); // check if any roads are near.
+	if !(_nearRoads isEqualTo []) then
 	{
-		_vehiclePosArray = getPos ((_missionPos nearRoads _radius) select _forEachIndex);
-		if (isNil "_vehiclePosArray") then
+		{
+			_vehiclePosArray = getPos (_nearRoads select _forEachIndex);
+			_vehicles pushBack ([_x, _vehiclePosArray, 0, _aiGroup] call _createVehicle);
+		} forEach _vehClasses;
+	}
+	else
+	{
 		{
 			_vehiclePosArray = [_missionPos,(_radius / 2),_radius,5,0,0,0] call findSafePos;
-		};
-		_vehicles pushBack ([_x, _vehiclePosArray, 0, _aiGroup] call _createVehicle);
-		_vehiclePosArray = nil;
-	} forEach _vehClasses;
+			_vehicles pushBack ([_x, _vehiclePosArray, 0, _aiGroup] call _createVehicle);
+		} forEach _vehClasses;
+	};
+	/*/ --------------------------------------------------------------------------------------- /*/
 
 	_veh2 = _vehClasses select (1 min (count _vehClasses - 1));
-
 	_leader = effectiveCommander (_vehicles select 0);
 	_aiGroup selectLeader _leader;
-
 	_aiGroup setCombatMode "GREEN"; // units will defend themselves
 	_aiGroup setBehaviour "SAFE"; // units feel safe until they spot an enemy or get into contact
 	_aiGroup setFormation "COLUMN";
-
 	_speedMode = if (missionDifficultyHard) then { "NORMAL" } else { "LIMITED" };
-
 	_aiGroup setSpeedMode _speedMode;
-
 	{
 		_waypoint = _aiGroup addWaypoint [markerPos (_x select 0), 0];
 		_waypoint setWaypointType "MOVE";
@@ -259,25 +229,20 @@ _setupObjects =
 		_waypoint setWaypointFormation "COLUMN";
 		_waypoint setWaypointSpeed _speedMode;
 	} forEach ((call cityList) call BIS_fnc_arrayShuffle);
-
 	_missionPos = getPosATL leader _aiGroup;
-
 	_missionPicture = getText (configFile >> "CfgVehicles" >> _veh2 >> "picture");
 	_vehicleName = getText (configFile >> "cfgVehicles" >> _veh2 >> "displayName");
-
 	_missionHintText = format ["A convoy transporting <t color='%1'>%2</t> escorted by a <t color='%1'>%3</t> is en route to an unknown location.<br/>Stop them!", moneyMissionColor, _moneyText, _vehicleName];
-
 	_numWaypoints = count waypoints _aiGroup;
 };
 
 _waitUntilMarkerPos = {getPosATL _leader};
 _waitUntilExec = nil;
 _waitUntilCondition = {currentWaypoint _aiGroup >= _numWaypoints};
-
 _failedExec = nil;
-
 // _vehicles are automatically deleted or unlocked in missionProcessor depending on the outcome
 
+/*/ soulkobk ------------------------------------------------------------------------------ /*/
 #include "..\missionSuccessHandler.sqf"
 
 _missionCratesSpawn = true;
@@ -297,5 +262,6 @@ _missionMoneyChemlight = true;
 _missionMoneyChemlightDuration = 120;
 
 _missionSuccessMessage = "The convoy has been stopped, the money and vehicles are now yours to take.";
+/*/ --------------------------------------------------------------------------------------- /*/
 
 _this call moneyMissionProcessor;
