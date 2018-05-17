@@ -47,8 +47,8 @@ _setupVars =
 		// Medium
 		[
 			"Solo Smugglers+", // Marker text
-			30000, 60000, 90000 // Money
-			[
+			30000, 60000, 90000, // Money
+			[,
 				[ // NATO convoy
 					["I_LT_01_cannon_F", "I_LT_01_AT_F", "I_LT_01_AA_F"], // Veh 1
 					["O_T_LSV_02_AT_F", "B_T_LSV_01_AT_F", "I_LT_01_cannon_F"], // Veh 2

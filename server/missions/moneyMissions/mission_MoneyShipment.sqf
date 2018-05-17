@@ -87,7 +87,7 @@ _setupVars =
 		// Extreme
 		[
 			"Heavy Smugglers Shipment", // Marker text
-			120000, 140000, 160000 // Money
+			120000, 140000, 160000, // Money
 			[
 				[ // NATO convoy
 					["B_APC_Wheeled_01_cannon_F", "B_APC_Tracked_01_rcws_F", "B_APC_Tracked_01_AA_F", "B_MBT_01_cannon_F", "B_MBT_01_TUSK_F"], // Veh 1
