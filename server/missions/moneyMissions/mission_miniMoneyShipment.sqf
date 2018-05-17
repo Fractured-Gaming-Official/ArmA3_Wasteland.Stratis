@@ -225,12 +225,13 @@ _failedExec = nil;
 
 _missionCratesSpawn = true;
 _missionCrateNumber = selectRandom [1,2,3];
-_missionCrateSmoke = true;
+_missionCrateSmoke = false;
 _missionCrateSmokeDuration = 120;
 _missionCrateChemlight = true;
 _missionCrateChemlightDuration = 120;
 
 _missionMoneySpawn = true;
+_missionParseSetupVars = call _setupVars;
 _missionMoneyTotal = _moneyAmount;
 _missionMoneyBundles = 10;
 _missionMoneySmoke = true;
