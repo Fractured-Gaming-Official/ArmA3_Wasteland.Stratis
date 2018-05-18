@@ -21,7 +21,6 @@ _setupVars =
 		[
 			"Small Smuggler Shipment", // Marker text
 			60000, 80000, 100000, // Money
-			//2, //crates
 			[
 				[ // NATO convoy
 					["B_MRAP_01_hmg_F", "B_MRAP_01_gmg_F", "O_T_LSV_02_armed_F"], // Veh 1
@@ -41,7 +40,7 @@ _setupVars =
 		// Medium
 		[
 			"Medium Smuggler Shipment", // Marker text
-			100000, 120000, 140000, // Money
+			80000, 100000, 120000, // Money
 			//3, //crates
 			[
 				[ // NATO convoy
@@ -64,7 +63,7 @@ _setupVars =
 		// Hard
 		[
 			"Large Smuggler Shipment", // Marker text
-			140000, 160000, 180000, // Money
+			100000, 120000, 140000, // Money
 			//4, //crates
 			[
 				[ // NATO convoy
@@ -87,8 +86,7 @@ _setupVars =
 		// Extreme
 		[
 			"Heavy Smugglers Shipment", // Marker text
-			180000, 200000, 220000,// Money
-			//5, //crates
+			120000, 140000, 160000, // Money
 			[
 				[ // NATO convoy
 					["B_APC_Wheeled_01_cannon_F", "B_APC_Tracked_01_rcws_F", "B_APC_Tracked_01_AA_F", "B_MBT_01_cannon_F", "B_MBT_01_TUSK_F"], // Veh 1
@@ -246,7 +244,7 @@ _failedExec = nil;
 #include "..\missionSuccessHandler.sqf"
 
 _missionCratesSpawn = true;
-_missionCrateNumber = selectRandom [2,3,4];
+_missionCrateAmount = selectRandom [2,3,4];
 _missionCrateSmoke = false;
 _missionCrateSmokeDuration = 120;
 _missionCrateChemlight = true;
@@ -254,7 +252,7 @@ _missionCrateChemlightDuration = 120;
 
 _missionMoneySpawn = true;
 _missionParseSetupVars = call _setupVars;
-_missionMoneyTotal = _moneyAmount;
+_missionMoneyAmount = _moneyAmount;
 _missionMoneyBundles = 10;
 _missionMoneySmoke = true;
 _missionMoneySmokeDuration = 120;

@@ -1,6 +1,22 @@
-//@file Version: 1.2
-//@file Name: gearLevel1.sqf
-//@file Author: Cael817, based of something i found
+/*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*///*//*//*/
+
+//	@file Version: 2.0
+//	@file Name gearLevel16.sqf
+//	@file Author: Mokey
+//	@file Modified: Shinedwarf
+//	@file Created: 4/21/2018 09:48
+
+/*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU Affero General Public License as published
+by the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU Affero General Public License for more details.
+/*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*/
+
 private ["_player"];
 
 _player = _this;
@@ -53,18 +69,23 @@ switch (true) do
 	case (["_medic_", typeOf _player] call fn_findString != -1):
 	{
 		_player addItem "MediKit";
+		_player removeItem "";
 	};
 	case (["_engineer_", typeOf _player] call fn_findString != -1):
 	{
 		_player addItem "ToolKit";
 		_Player addItem "MineDetector";
+		_player removeItem "";
 	};
 	case (["_sniper_", typeOf _player] call fn_findString != -1):
 	{
 		_player addWeapon "Rangefinder";
+		_player removeItem "";
 	};
 		case (["_diver_", typeOf _player] call fn_findString != -1):
 	{
 		_player addVest "V_RebreatherIA";
+		_player removeItem "";
+
 	};
 };
