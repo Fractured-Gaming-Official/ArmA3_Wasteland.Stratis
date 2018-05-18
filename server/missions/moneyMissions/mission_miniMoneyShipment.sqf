@@ -122,25 +122,25 @@ _setupObjects =
 
     // SKIP TOWN AND PLAYER PROXIMITY CHECK
 
-    _skippedTowns = // get the list from -> \mapConfig\towns.sqf
-    [
-        "Town_14" // Pythos Island Marker Name
-    ];
+    	_skippedTowns = // get the list from -> \mapConfig\towns.sqf
+    	[
+        	"Town_14" // Pythos Island Marker Name
+    	];
 
-    _town = ""; _missionPos = [0,0,0]; _radius = 0;
-    _townOK = false;
-    while {!_townOK} do
-    {
-        _town = selectRandom (call cityList); // initially select a random town for the mission.
-        _missionPos = markerPos (_town select 0); // the town position.
-        _radius = (_town select 1); // the town radius.
-        _anyPlayersAround = (nearestObjects [_missionPos,["MAN"],_radius]) select {isPlayer _x}; // search the area for players only.
-        if (((count _anyPlayersAround) isEqualTo 0) && !((_town select 0) in _skippedTowns)) exitWith // if there are no players around and the town marker is not in the skip list, set _townOK to true (exit loop).
-        {
-            _townOK = true;
-        };
-        sleep 0.1; // sleep between loops.
-    };
+    	_town = ""; _missionPos = [0,0,0]; _radius = 0;
+    	_townOK = false;
+    	while {!_townOK} do
+	{
+	        _town = selectRandom (call cityList); // initially select a random town for the mission.
+	        _missionPos = markerPos (_town select 0); // the town position.
+	        _radius = (_town select 1); // the town radius.
+	        _anyPlayersAround = (nearestObjects [_missionPos,["MAN"],_radius]) select {isPlayer _x}; // search the area for players only.
+	        if (((count _anyPlayersAround) isEqualTo 0) && !((_town select 0) in _skippedTowns)) exitWith // if there are no players around and the town marker is not in the skip list, set _townOK to true (exit loop).
+	        {
+	            _townOK = true;
+	        };
+	        sleep 0.1; // sleep between loops.
+    	};
 	_aiGroup = createGroup CIVILIAN;
 	/*/ soulkobk ------------------------------------------------------------------------------ /*/
 	_vehicles = [];
@@ -160,7 +160,7 @@ _setupObjects =
 			_vehicles pushBack ([_x, _vehiclePosArray, 0, _aiGroup] call _createVehicle);
     		} forEach _vehClasses;
 	};
-/*/ --------------------------------------------------------------------------------------- /*/
+	/*/ --------------------------------------------------------------------------------------- /*/
 
 	_veh2 = _vehClasses select (1 min (count _vehClasses - 1));
 	_leader = effectiveCommander (_vehicles select 0);
