@@ -428,9 +428,9 @@ accessoriesArray = compileFinal str
 	["LRPS (G Hex)", "optic_LRPS_ghex_F", 300, "item", "noDLC", "RCLO_OPTIC"],
 	["LRPS (Tropic)", "optic_LRPS_tna_F", 300, "item", "noDLC", "RCLO_OPTIC"],
 	["NVS", "optic_NVS", 500, "item", "RCLO_OPTIC"],
-	["TWS", "optic_tws", 100000, "item", "HIDDEN"], // To hide from store list, add "HIDDEN" after "item", like "item", "HIDDEN"]
-	["TWS MG", "optic_tws_mg", 150000, "item", "HIDDEN"],
-	["Nightstalker", "optic_Nightstalker", 200000, "item", "HIDDEN"]
+	["TWS", "optic_tws", 100000, "item", "HIDDEN", "RCLO_OPTIC", "RCLO_RARE"], // To hide from store list, add "HIDDEN" after "item", like "item", "HIDDEN"]
+	["TWS MG", "optic_tws_mg", 150000, "item", "HIDDEN", "RCLO_OPTIC", "RCLO_RARE"],
+	["Nightstalker", "optic_Nightstalker", 200000, "item", "HIDDEN", "RCLO_OPTIC", "RCLO_RARE"]
 ];
 
 // If commented, means the color/camo isn't implemented or is a duplicate of another hat

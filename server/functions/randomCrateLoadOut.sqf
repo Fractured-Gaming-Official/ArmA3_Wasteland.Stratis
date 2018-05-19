@@ -19,7 +19,7 @@
 	----------------------------------------------------------------------------------------------
 
 	Name: randomCrateLoadOut.sqf
-	Version: 1.0.A3WL
+	Version: 1.0.A3WL1
 	Author: soulkobk (soulkobk.blogspot.com)
 	Creation Date: 3:10 PM 11/05/2018
 	Modification Date: 3:10 PM 11/05/2018
@@ -74,6 +74,12 @@
 	The custom function will disable damage to the crate, lock the crate until mission is completed,
 	and randomly fill the crate with loot.
 
+	"RCLO_RARE" was added in order to make the random choices based upon a percentage chance of being actually chosen.
+	Want an item to be rare? add "RCLO_RARE" in to the store item array, example...
+	["TWS MG", "optic_tws_mg", 150000, "item", "HIDDEN", "RCLO_OPTIC", "RCLO_RARE"],
+	If this item is randomly chosen, there is a percentage chance it will actually be added to the crate.
+	Probability is set via the _raresChance variable.
+
 	**This will also add artillery strikes to the crate randomly (see bottom of script, A3W_artilleryStrike).
 
 	Parameter(s): <object> call randomCrateLoadOut;
@@ -88,13 +94,13 @@
 	["Box_FIA_Wps_F",[-5,4.801,0],90,{_this call randomCrateLoadOut;}]
 
 	Change Log:
-	1.0.A3W - adapted script for use of storeConfig.sqf arrays of A3Wasteland (specific A3Wasteland edit).
+	1.0.A3WL0 - adapted script for use of storeConfig.sqf arrays of A3Wasteland (specific A3Wasteland edit).
+	1.0.A3WL1 - adapted script for RCLO_RARE usage with a percentage probability of actually being added.
 
 	----------------------------------------------------------------------------------------------
 */
 
 if !(isServer) exitWith {}; // DO NOT DELETE THIS LINE!
-
 
 waitUntil {!(isNil "RCLO_ARRAY")};
 
@@ -117,6 +123,9 @@ _vests = call RCLO_ARRAY select {"RCLO_VEST" in (_x select [3,999])};
 _weaponAccessories = call RCLO_ARRAY select {"RCLO_WEAPONACCESSORY" in (_x select [3,999])};
 _mines = call RCLO_ARRAY select {"RCLO_MINE" in (_x select [3,999])};
 _goggles = call RCLO_ARRAY select {"RCLO_GOGGLE" in (_x select [3,999])};
+
+_rares = call RCLO_ARRAY select {"RCLO_RARE" in (_x select [3,999])};
+_raresChance = 50; // percentage chance of actually being added to crate.
 
 _overallLoopAmount = 0;
 _fillTheCrate = selectRandom [true,false];
@@ -188,10 +197,26 @@ _loadCrateWithWhat = "";
 #endif
 
 _ableToAddToCrate = false;
-_canAddToCrate = {
-	params ["_crate","_item","_num"];
-	_ableToAddToCrate = _crate canAdd [_item,_num];
-	_ableToAddToCrate
+_canAddToCrate =
+{
+	params ["_crate","_item","_amount"];
+	_ableToAddToCrate = _crate canAdd [_item,_amount]; // check if able to add to crate.
+	if (_ableToAddToCrate) then // if able to add to crate
+	{
+		_isRare = !((_rares select {_item in _x}) isEqualTo []); // check if rare item
+		if (_isRare) then // if rare item
+		{
+			if ((random 1) < (1/_raresChance)) then // do percentage chance
+			{
+				_ableToAddToCrate = true; // if success
+			}
+			else
+			{
+				_ableToAddToCrate = false; // if fail
+			};
+		};
+	};
+	_ableToAddToCrate // return true/false
 };
 
 for [{_i = 0},{_i < _overallLoopAmount},{_i = _i + 1}] do
@@ -507,25 +532,6 @@ for [{_i = 0},{_i < _overallLoopAmount},{_i = _i + 1}] do
 			};
 		};
 	};
-};
-
-_rareScopes =
-[
-    "optic_tws",
-    "optic_tws_mg",
-    "optic_Nightstalker"
-];
-_rareScopesLoop = 3;
-
-_i = 0;
-while {_i < _rareScopesLoop} do
-{
-    if (random 1.0 < 1/10) then
-    {
-        _loadCrateItem = selectRandom _rareScopes;
-        _crate addItemCargoGlobal [_loadCrateItem, 1];
-    };
-    _i = _i + 1;
 };
 
 if (["A3W_artilleryStrike"] call isConfigOn) then
