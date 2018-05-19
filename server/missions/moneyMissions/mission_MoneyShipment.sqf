@@ -113,12 +113,12 @@ _setupVars =
 	];
 
 	_missionType = _moneyShipment select 0;
-	
-	_moneyAmount = floor (random [_moneyShipment select 1, _moneyShipment select 2,  _moneyShipment select 3]);
+
+	_moneyAmount = round (floor (random [_moneyShipment select 1, _moneyShipment select 2,  _moneyShipment select 3]));
 	_moneyText = "$" + (_moneyAmount call fn_numbersText);
-	
+
 	_missionMoneyAmount = _moneyAmount; // for the successExec handler (missionSuccessHandler).
-	
+
 	_vehClasses = [];
 	_vehChoices = selectRandom (_moneyShipment select 4);
 	{ _vehClasses pushBack selectRandom _x } forEach _vehChoices;
@@ -193,7 +193,7 @@ _setupObjects =
         sleep 0.1; // sleep between loops.
     };
 	_aiGroup = createGroup CIVILIAN;
-	
+
 	/*/ soulkobk ------------------------------------------------------------------------------ /*/
 	_vehicles = [];
 	_vehiclePosArray = nil;
@@ -213,7 +213,7 @@ _setupObjects =
 		} forEach _vehClasses;
 	};
 	/*/ --------------------------------------------------------------------------------------- /*/
-	
+
 	_veh2 = _vehClasses select (1 min (count _vehClasses - 1));
 	_leader = effectiveCommander (_vehicles select 0);
 	_aiGroup selectLeader _leader;

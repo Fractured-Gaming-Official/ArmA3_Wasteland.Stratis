@@ -58,7 +58,7 @@ _setupVars =
 
 	_missionType = _moneyShipment select 0;
 
-	_moneyAmount = floor (random [_moneyShipment select 1, _moneyShipment select 2,  _moneyShipment select 3]);
+	_moneyAmount = round (floor (random [_moneyShipment select 1, _moneyShipment select 2,  _moneyShipment select 3]));
 	_moneyText = "$" + (_moneyAmount call fn_numbersText);
 
 	_missionMoneyAmount = _moneyAmount; // for the successExec handler (missionSuccessHandler).
