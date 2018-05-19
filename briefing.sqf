@@ -24,6 +24,7 @@ player createDiaryRecord ["changelog",
 [
 "FRACTURED Logs",
 "
+<br/>--------5/18/2018-------
 <br/>[FIXED] Various Bugs
 <br/>[CHANGED] Gear Levels, now are class specific
 <br/>[FIXED] Money Missions displaying 1 value and giving another
