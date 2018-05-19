@@ -24,6 +24,8 @@ player createDiaryRecord ["changelog",
 [
 "FRACTURED Logs",
 "
+<br/>--------5/19/2018-------
+<br/>[FIX] Remaining Value in Smuggler Missions
 <br/>--------5/18/2018-------
 <br/>[FIXED] Various Bugs
 <br/>[CHANGED] Gear Levels, now are class specific
