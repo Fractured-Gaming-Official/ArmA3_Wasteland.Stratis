@@ -111,7 +111,7 @@ populateVehicleStore = "client\systems\vehicleStore\populateVehicleStore.sqf" ca
 requestStoreObject = "client\functions\requestStoreObject.sqf" call mf_compile;
 vehicleInfo = "client\systems\vehicleStore\vehicleInfo.sqf" call mf_compile;
 weaponInfo = "client\systems\gunStore\weaponInfo.sqf" call mf_compile;
-carpetBomb = "addons\carpetBomb\GOM_fnc_carpetBombing.sqf"; call mf_compile;
+carpetBomb = "addons\carpetBomb\GOM_fnc_carpetBombing.sqf" call mf_compile;
 
 /*/ ------------------------------------------------------------------------------------------- /*/
 va_fnc_gearCheck = "addons\gear\gearCheck.sqf" call mf_compile;
