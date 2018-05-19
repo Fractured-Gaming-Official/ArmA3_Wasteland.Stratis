@@ -5,9 +5,12 @@
 
 if (!isServer) exitWith {};
 
-if (loadFile (externalConfigFolder + "\admins.sqf") != "") then
+if (!hasInterface) then 
 {
-	call compile preprocessFileLineNumbers (externalConfigFolder + "\admins.sqf");
+	if (loadFile (externalConfigFolder + "\admins.sqf") != "") then
+	{
+		call compile preprocessFileLineNumbers (externalConfigFolder + "\admins.sqf");
+	};
 }
 else
 {
@@ -41,8 +44,7 @@ else
 	// Server Owners: access to everything, including god mode, money, guns, and vehicles
 	serverOwners = compileFinal str
 	[
-	"76561198198288585"
-	// Put player UIDs here
+		// Put player UIDs here
 	];
 
 	/********************************************************/

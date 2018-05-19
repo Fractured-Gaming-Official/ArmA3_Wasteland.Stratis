@@ -11,11 +11,13 @@
 if (!isServer) exitwith {};
 #include "moneyMissionDefines.sqf";
 
-private ["_MoneyShipment", "_convoys", "_vehChoices", "_moneyText", "_vehClasses", "_createVehicle", "_vehicles", "_veh2", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_cash"];
-private ["_moneyAmount"];
+private ["_moneyShipment", "_convoys", "_vehChoices", "_moneyText", "_moneyAmount", "_vehClasses", "_createVehicle", "_vehicles", "_veh2", "_leader", "_speedMode", "_waypoint", "_vehicleName", "_numWaypoints", "_cash"];
+
+private ["_missionMoneyAmount"]; // for the successExec handler (missionSuccessHandler).
+
 _setupVars =
 {
-	_MoneyShipment = selectRandom
+	_moneyShipment = selectRandom
 	[
 		// Easy
 		[
@@ -110,12 +112,15 @@ _setupVars =
 		]
 	];
 
-	_missionType = _MoneyShipment select 0;
+	_missionType = _moneyShipment select 0;
+	
 	_moneyAmount = floor (random [_moneyShipment select 1, _moneyShipment select 2,  _moneyShipment select 3]);
-	_convoys = _MoneyShipment select 4;
-	_vehChoices = selectRandom _convoys;
-	_moneyText = format ["$%1", [_moneyAmount] call fn_numbersText];
+	_moneyText = "$" + (_moneyAmount call fn_numbersText);
+	
+	_missionMoneyAmount = _moneyAmount; // for the successExec handler (missionSuccessHandler).
+	
 	_vehClasses = [];
+	_vehChoices = selectRandom (_moneyShipment select 4);
 	{ _vehClasses pushBack selectRandom _x } forEach _vehChoices;
 };
 
@@ -141,7 +146,6 @@ _setupObjects =
 				case "O_": { [_vehicle, ["GreenHex"]] call applyVehicleTexture };
 			};
 		};
-
 		_vehicle setDir _direction;
 		_aiGroup addVehicle _vehicle;
 		_soldier = [_aiGroup, _position] call createRandomSoldier;
@@ -189,7 +193,7 @@ _setupObjects =
         sleep 0.1; // sleep between loops.
     };
 	_aiGroup = createGroup CIVILIAN;
-
+	
 	/*/ soulkobk ------------------------------------------------------------------------------ /*/
 	_vehicles = [];
 	_vehiclePosArray = nil;
@@ -209,7 +213,7 @@ _setupObjects =
 		} forEach _vehClasses;
 	};
 	/*/ --------------------------------------------------------------------------------------- /*/
-
+	
 	_veh2 = _vehClasses select (1 min (count _vehClasses - 1));
 	_leader = effectiveCommander (_vehicles select 0);
 	_aiGroup selectLeader _leader;
@@ -252,7 +256,7 @@ _missionCrateChemlightDuration = 120;
 
 _missionMoneySpawn = true;
 _missionParseSetupVars = call _setupVars;
-_missionMoneyAmount = _moneyAmount;
+// _missionMoneyAmount = _moneyAmount; // declared within the _setupVars (needed there, not here!).
 _missionMoneyBundles = 10;
 _missionMoneySmoke = true;
 _missionMoneySmokeDuration = 120;

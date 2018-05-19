@@ -56,12 +56,15 @@ _setupVars =
 		]
 	];
 
-	_missionType = _MoneyShipment select 0;
+	_missionType = _moneyShipment select 0;
+
 	_moneyAmount = floor (random [_moneyShipment select 1, _moneyShipment select 2,  _moneyShipment select 3]);
-	_convoys = _MoneyShipment select 4;
-	_vehChoices = selectRandom _convoys;
-	_moneyText = format ["$%1", [_moneyAmount] call fn_numbersText];
+	_moneyText = "$" + (_moneyAmount call fn_numbersText);
+
+	_missionMoneyAmount = _moneyAmount; // for the successExec handler (missionSuccessHandler).
+
 	_vehClasses = [];
+	_vehChoices = selectRandom (_moneyShipment select 4);
 	{ _vehClasses pushBack selectRandom _x } forEach _vehChoices;
 };
 
@@ -202,7 +205,7 @@ _missionCrateChemlightDuration = 120;
 
 _missionMoneySpawn = true;
 _missionParseSetupVars = call _setupVars;
-_missionMoneyAmount = _moneyAmount;
+//_missionMoneyAmount = _moneyAmount; // declared within the _setupVars (needed there, not here!).
 _missionMoneyBundles = 10;
 _missionMoneySmoke = true;
 _missionMoneySmokeDuration = 120;
