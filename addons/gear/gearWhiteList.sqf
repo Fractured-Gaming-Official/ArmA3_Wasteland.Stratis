@@ -118,7 +118,7 @@ _availableSnipers = compileFinal str
         "srifle_DMR_07_blk_F",
         "srifle_DMR_07_ghex_F",
         "srifle_DMR_07_hex_F",
-        "srifle_EBR_F"
+        "srifle_EBR_F",
         "srifle_GM6_camo_F",
         "srifle_GM6_F",
         "srifle_GM6_ghex_F",
@@ -155,7 +155,7 @@ _availableLmgs = compileFinal str
         "arifle_SPAR_02_snd_F",
         "LMG_03_F",
         "LMG_Mk200_F",
-        "LMG_Zafir_F"
+        "LMG_Zafir_F",
         "MMG_01_hex_F",
         "MMG_01_tan_F",
         "MMG_02_black_F",
