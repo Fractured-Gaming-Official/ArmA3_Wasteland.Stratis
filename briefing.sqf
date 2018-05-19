@@ -24,6 +24,9 @@ player createDiaryRecord ["changelog",
 [
 "FRACTURED Logs",
 "
+<br/>[FIXED] Various Bugs
+<br/>[CHANGED] Gear Levels, now are class specific
+<br/>[FIXED] Money Missions displaying 1 value and giving another
 <br/>--------5/16/2018-------
 <br/>[ADDED] New Mission: RED DAWN
 <br/>[ADDED] New Mission: Smuggler Missions: Small, Medium, Large, Heavy
