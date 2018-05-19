@@ -16,7 +16,7 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU Affero General Public License for more details.
 /*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*//*/
 
-_availableRifles =
+_availableRifles = compileFinal str
 [
         "arifle_AK12_F",
         "arifle_AK12_GL_F",
@@ -70,7 +70,7 @@ _availableRifles =
 ];
 
 
-_availableRifleMagazines =
+_availableRifleMagazines = compileFinal str
 [
         "30Rnd_762x39_Mag_F",
         "30Rnd_762x39_Mag_Green_F",
@@ -97,7 +97,7 @@ _availableRifleMagazines =
 ];
 
 
-_availableSnipers =
+_availableSnipers = compileFinal str
 [
         "srifle_DMR_01_F",
         "srifle_DMR_02_camo_F",
@@ -128,7 +128,7 @@ _availableSnipers =
 ];
 
 
-_availableSniperMagazines =
+_availableSniperMagazines = compileFinal str
 [
         "10Rnd_762x54_Mag",
         "10Rnd_338_Mag",
@@ -142,7 +142,7 @@ _availableSniperMagazines =
 ];
 
 
-_availableLmgs =
+_availableLmgs = compileFinal str
 [
         "arifle_CTARS_blk_F",
         "arifle_CTARS_ghex_F",
@@ -164,7 +164,7 @@ _availableLmgs =
 ];
 
 
-_availableLmgMagazines =
+_availableLmgMagazines = compileFinal str
 [
         "100Rnd_580x42_Mag_F",
         "100Rnd_580x42_Mag_Tracer_F",
@@ -185,7 +185,7 @@ _availableLmgMagazines =
 ];
 
 
-_availableSmgs =
+_availableSmgs = compileFinal str
 [
         "hgun_PDW2000_F",
         "hgun_Pistol_01_F",
@@ -195,7 +195,7 @@ _availableSmgs =
 ];
 
 
-_availableSmgMagazines =
+_availableSmgMagazines = compileFinal str
 [
         "16Rnd_9x21_green_Mag",
         "16Rnd_9x21_Mag",
@@ -221,7 +221,7 @@ _availableSmgMagazines =
 ];
 
 
-_availableHandGuns =
+_availableHandGuns = compileFinal str
 [
         "hgun_ACPC2_F",
         "hgun_P07_F",
@@ -233,7 +233,7 @@ _availableHandGuns =
 ];
 
 
-_availableHandGunMagazines =
+_availableHandGunMagazines = compileFinal str
 [
         "9Rnd_45ACP_Mag",
         "16Rnd_9x21_green_Mag",
@@ -247,7 +247,7 @@ _availableHandGunMagazines =
 ];
 
 
-_availableLaunchers =
+_availableLaunchers = compileFinal str
 [
         // "launch_B_Titan_F",
         // "launch_B_Titan_short_F",
@@ -261,7 +261,7 @@ _availableLaunchers =
         // "launch_MRAWS_olive_rail_F",
         // "launch_MRAWS_sand_F",
         // "launch_MRAWS_sand_rail_F",
-         "launch_NLAW_F",
+        "launch_NLAW_F",
         // "launch_O_Titan_F",
         // "launch_O_Titan_ghex_F",
         // "launch_O_Titan_short_F",
@@ -276,14 +276,14 @@ _availableLaunchers =
 ];
 
 
-_availableRockets =
+_availableRockets = compileFinal str
 [
         // "Titan_AA",
         // "Titan_AP",
         // "Titan_AT",
         // "MRAWS_HE_F",
         // "MRAWS_HEAT_F",
-        0 "NLAW_F",
+        "NLAW_F",
         // "Vorona_HE",
         // "Vorona_HEAT",
         "RPG32_F",
@@ -292,7 +292,7 @@ _availableRockets =
 ];
 
 
-_availableHandGrenades =
+_availableHandGrenades = compileFinal str
 [
         "B_IR_Grenade",
         "Chemlight_blue",
@@ -314,7 +314,7 @@ _availableHandGrenades =
 ];
 
 
-_availableGLRounds =
+_availableGLRounds = compileFinal str
 [
         "1Rnd_HE_Grenade_shell",
         "1Rnd_Smoke_Grenade_shell",
@@ -333,7 +333,7 @@ _availableGLRounds =
 ];
 
 
-_available3GLRounds =
+_available3GLRounds = compileFinal str
 [
         "3Rnd_HE_Grenade_shell",
         "3Rnd_Smoke_Grenade_shell",
@@ -351,7 +351,7 @@ _available3GLRounds =
 ];
 
 
-_availableExplosives =
+_availableExplosives = compileFinal str
 [
         "APERSBoundingMine_Range_Mag",
         "APERSMine_Range_Mag",
@@ -370,7 +370,7 @@ _availableExplosives =
 ];
 
 
-_availableHeadGear =
+_availableHeadGear = compileFinal str
 [
         "H_HelmetSpecO_blk",
         "H_HelmetSpecO_ghex_F",
@@ -595,7 +595,7 @@ _availableHeadGear =
 ];
 
 
-_availableHeadGearAccessories =
+_availableHeadGearAccessories = compileFinal str
 [
         "NVGoggles",
         "NVGoggles_INDEP",
@@ -610,7 +610,7 @@ _availableHeadGearAccessories =
 ];
 
 
-_availableUniforms =
+_availableUniforms = compileFinal str
 [
         "U_B_CombatUniform_mcam",
         "U_B_CombatUniform_mcam_tshirt",
@@ -743,7 +743,7 @@ _availableUniforms =
 ];
 
 
-_availableBackPacks =
+_availableBackPacks = compileFinal str
 [
         "B_AssaultPack_blk",
         "B_AssaultPack_cbr",
@@ -802,7 +802,7 @@ _availableBackPacks =
 ];
 
 
-_availableVests =
+_availableVests = compileFinal str
 [
         "V_PlateCarrierGL_blk",
         "V_PlateCarrierGL_rgr",
@@ -885,7 +885,7 @@ _availableVests =
 ];
 
 
-_availableAccessories =
+_availableAccessories = compileFinal str
 [
         "B_UavTerminal",
         "Binocular",
@@ -912,7 +912,7 @@ _availableAccessories =
 ];
 
 
-_availableAttachments =
+_availableAttachments = compileFinal str
 [
         "acc_flashlight",
         "acc_flashlight_pistol",
