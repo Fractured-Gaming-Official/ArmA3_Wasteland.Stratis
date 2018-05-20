@@ -19,10 +19,10 @@
 	----------------------------------------------------------------------------------------------
 
 	Name: randomCrateLoadOut.sqf
-	Version: 1.0.A3WL1
+	Version: 1.0.A3WL2
 	Author: soulkobk (soulkobk.blogspot.com)
 	Creation Date: 3:10 PM 11/05/2018
-	Modification Date: 3:10 PM 11/05/2018
+	Modification Date: 6:35 PM 20/05/2018
 
 	Description:
 	For use with A3Wasteland 1.3x mission (A3Wasteland.com). This script is a replacement mission
@@ -96,6 +96,7 @@
 	Change Log:
 	1.0.A3WL0 - adapted script for use of storeConfig.sqf arrays of A3Wasteland (specific A3Wasteland edit).
 	1.0.A3WL1 - adapted script for RCLO_RARE usage with a percentage probability of actually being added.
+	1.0.A3WL2 - updated script to precisely fill crates to a certain (random) percentage from 25% to 100%.
 
 	----------------------------------------------------------------------------------------------
 */
@@ -127,34 +128,23 @@ _goggles = call RCLO_ARRAY select {"RCLO_GOGGLE" in (_x select [3,999])};
 _rares = call RCLO_ARRAY select {"RCLO_RARE" in (_x select [3,999])};
 _raresChance = 50; // percentage chance of actually being added to crate.
 
-_overallLoopAmount = 0;
-_fillTheCrate = selectRandom [true,false];
-if (_fillTheCrate) then
-{
-	_overallLoopAmount = 999;
-}
-else
-{
-	_overallLoopAmount = floor (round (random 8) + 2); // minimum 2, maximum 10
-};
-
-_backPackAmount = floor (round (random 3) + 3); // minimum 3, maximum 6
-_binocularAmount = floor (round (random 5) + 2); // minimum 3, maximum 7
-_bipodAmount = floor (round (random 3) + 2); // minimum 2, maximum 5
-_headGearAmount = floor (round (random 3) + 5); // minimum 5, maximum 8
-_itemAmount = floor (round (random 3) + 5); // minimum 5, maximum 8
-_launcherAmount = floor (round (random 3) + 2); // minimum 2, maximum 5
-_magazineAmount = floor (round (random 5) + 5); // minimum 5, maximum 10
-_throwableAmount = floor (round (random 3) + 3); // minimum 3, maximum 6
-_muzzleAmount = floor (round (random 2) + 2); // minimum 2, maximum 4
-_opticAmount = floor (round (random 4) + 5); // minimum 5, maximum 9
-_primaryWeaponAmount = floor (round (random 5) + 5); // minimum 5, maximum 10
-_secondaryWeaponAmount = floor (round (random 3) + 2); // minimum 2, maximum 5
-_uniformAmount = floor (round (random 4) + 3); // minimum 3, maximum 7
-_vestAmount = floor (round (random 4) + 3); // minimum 3, maximum 7
-_weaponAccessoryAmount = floor (round (random 3) + 2); // minimum 2, maximum 5
-_minesAmount = floor (round (random 2) + 2); // minimum 2, maximum 4
-_goggleAmount = floor (round (random 2) + 2); // minimum 2, maximum 4
+_backPackAmount = round (floor (random 3) + 3); // minimum 3, maximum 6
+_binocularAmount = round (floor (random 5) + 2); // minimum 3, maximum 7
+_bipodAmount = round (floor (random 3) + 2); // minimum 2, maximum 5
+_headGearAmount = round (floor (random 3) + 5); // minimum 5, maximum 8
+_itemAmount = round (floor (random 3) + 5); // minimum 5, maximum 8
+_launcherAmount = round (floor (random 3) + 2); // minimum 2, maximum 5
+_magazineAmount = round (floor (random 5) + 5); // minimum 5, maximum 10
+_throwableAmount = round (floor (random 3) + 3); // minimum 3, maximum 6
+_muzzleAmount = round (floor (random 2) + 2); // minimum 2, maximum 4
+_opticAmount = round (floor (random 4) + 5); // minimum 5, maximum 9
+_primaryWeaponAmount = round (floor (random 5) + 5); // minimum 5, maximum 10
+_secondaryWeaponAmount = round (floor (random 3) + 2); // minimum 2, maximum 5
+_uniformAmount = round (floor (random 4) + 3); // minimum 3, maximum 7
+_vestAmount = round (floor (random 4) + 3); // minimum 3, maximum 7
+_weaponAccessoryAmount = round (floor (random 3) + 2); // minimum 2, maximum 5
+_minesAmount = round (floor (random 2) + 2); // minimum 2, maximum 4
+_goggleAmount = round (floor (random 2) + 2); // minimum 2, maximum 4
 
 _loadCrateWithWhatArray =
 [
@@ -196,45 +186,65 @@ _loadCrateWithWhat = "";
 	diag_log "----------------------------------------------------";
 #endif
 
-_ableToAddToCrate = false;
+_crateTypeOf = typeOf _crate;
+_crateMaxLoad = getNumber (configFile >> "CfgVehicles" >> _crateTypeOf >> "maximumLoad");
+_crateMassPercentage = (selectRandom [0.25,0.30,0.35,0.40,0.45,0.50,0.55,0.60,0.65,0.70,0.75,0.80,0.85,0.90,0.95,1]) max 0 min 1;
+_crateMassLimit = _crateMaxLoad * _crateMassPercentage;
+
+_crateMassCurrent = 0;
+_ableToAddToCrateFailedTimes = 0;
+
 _canAddToCrate =
 {
 	params ["_crate","_item","_amount"];
-	_ableToAddToCrate = _crate canAdd [_item,_amount]; // check if able to add to crate.
-	if (_ableToAddToCrate) then // if able to add to crate
+	_ableToAddToCrate = false;
+	_mass = getNumber (configFile >> "CfgWeapons" >> _item >> "ItemInfo" >> "mass"); // items
+	if (_mass isEqualTo 0) then { _mass = getNumber (configFile >> "CfgWeapons" >> _item >> "WeaponSlotsInfo" >> "mass")}; // weapons/uniforms/vests/optics/muzzles/headgear
+	if (_mass isEqualTo 0) then { _mass = getNumber (configFile >> "CfgMagazines" >> _item >> "mass") }; // magazines
+	if (_mass isEqualTo 0) then { _mass = getNumber (configFile >> "CfgVehicles" >> _item >> "mass") }; // backpacks
+	if (_mass isEqualTo 0) then { _mass = getNumber (configFile >> "CfgGlasses" >> _item >> "mass")}; // goggles
+
+	if (((_mass + _crateMassCurrent) < _crateMassLimit) && (_crate canAdd [_item,_amount])) then
 	{
-		_isRare = !((_rares select {_item in _x}) isEqualTo []); // check if rare item
-		if (_isRare) then // if rare item
+		_ableToAddToCrate = true;
+		_isRare = !((_rares select {_item in _x}) isEqualTo []);
+		if (_isRare) then
 		{
-			if ((random 1) < (1/_raresChance)) then // do percentage chance
+			if ((1/_raresChance) > (random 1)) then
 			{
-				_ableToAddToCrate = true; // if success
+				_ableToAddToCrate = true;
 			}
 			else
 			{
-				_ableToAddToCrate = false; // if fail
+				_ableToAddToCrate = false;
 			};
 		};
 	};
-	_ableToAddToCrate // return true/false
+	if (_ableToAddToCrate) then
+	{
+		_crateMassCurrent = _crateMassCurrent + _mass;
+		_ableToAddToCrateFailedTimes = 0;
+	}
+	else
+	{
+		_ableToAddToCrateFailedTimes = _ableToAddToCrateFailedTimes + 1;
+	};
+	_ableToAddToCrate
 };
 
-for [{_i = 0},{_i < _overallLoopAmount},{_i = _i + 1}] do
+_fillTheCrate = true;
+while {_fillTheCrate} do
 {
-	if !(alive _crate) exitWith {};
-
-	_typeOfCrate = typeOf _crate;
-
-	_hasBackpackContainer = getNumber (configfile >> "CfgVehicles" >> _typeOfCrate >> "transportMaxBackpacks");
-	_hasMagazineContainer = getNumber (configfile >> "CfgVehicles" >> _typeOfCrate >> "transportMaxMagazines");
-	_hasWeaponContainer = getNumber (configfile >> "CfgVehicles" >> _typeOfCrate >> "transportMaxWeapons");
+	_hasBackpackContainer = getNumber (configfile >> "CfgVehicles" >> _crateTypeOf >> "transportMaxBackpacks");
+	_hasMagazineContainer = getNumber (configfile >> "CfgVehicles" >> _crateTypeOf >> "transportMaxMagazines");
+	_hasWeaponContainer = getNumber (configfile >> "CfgVehicles" >> _crateTypeOf >> "transportMaxWeapons");
 	_hasContainer = (_hasBackpackContainer + _hasMagazineContainer + _hasMagazineContainer);
 	if (_hasContainer isEqualTo 0) exitWith {};
 
 	_loadCrateWithWhat = selectRandom _loadCrateWithWhatArray;
 
 	#ifdef __DEBUG__
-		diag_log format ["%1 -> %2",(_i + 1),_loadCrateWithWhat];
+		diag_log format ["%1 -> %2",_crateTypeOf,_loadCrateWithWhat];
 	#endif
 
 	switch (_loadCrateWithWhat) do
@@ -319,9 +329,6 @@ for [{_i = 0},{_i < _overallLoopAmount},{_i = _i + 1}] do
 			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
 			{
 				_loadCrateItem = (selectRandom _launcherWeapons) select 1;
-				_loadCrateLootMagazine = getArray (configFile / "CfgWeapons" / _loadCrateItem / "magazines");
-				_loadCrateLootMagazineClass = selectRandom _loadCrateLootMagazine;
-				_loadCrateLootMagazineNum = floor (round (random 4) + 2); // minimum 2, maximum 6
 				_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
 				if (_addToCrate) then
 				{
@@ -330,13 +337,19 @@ for [{_i = 0},{_i < _overallLoopAmount},{_i = _i + 1}] do
 						diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateItem];
 					#endif
 				};
-				_addToCrate = [_crate,_loadCrateLootMagazineClass,_loadCrateLootMagazineNum] call _canAddToCrate;
-				if (_addToCrate) then
+				_loadCrateLootMagazine = getArray (configFile / "CfgWeapons" / _loadCrateItem / "magazines");
+				_loadCrateLootMagazineClass = selectRandom _loadCrateLootMagazine;
+				_loadCrateLootMagazineNum = round (floor (random 4) + 2); // minimum 2, maximum 6
+				for "_i" from 0 to _loadCrateLootMagazineNum do
 				{
-					_crate addMagazineCargoGlobal [_loadCrateLootMagazineClass,_loadCrateLootMagazineNum];
-					#ifdef __DEBUG__
-						diag_log format [" + %1 added -> 1x %2 with %3x %4 rockets",_loadCrateWithWhat,_loadCrateItem,_loadCrateLootMagazineNum,_loadCrateLootMagazineClass];
-					#endif
+					_addToCrate = [_crate,_loadCrateLootMagazineClass,1] call _canAddToCrate;
+					if (_addToCrate) then
+					{
+						_crate addMagazineCargoGlobal [_loadCrateLootMagazineClass,1];
+						#ifdef __DEBUG__
+							diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateLootMagazineClass];
+						#endif
+					};
 				};
 			};
 		};
@@ -345,14 +358,17 @@ for [{_i = 0},{_i < _overallLoopAmount},{_i = _i + 1}] do
 			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
 			{
 				_loadCrateItem = (selectRandom _magazines) select 1;
-				_loadCrateLootMagazineNum = floor (round (random 4) + 2); // minimum 2, maximum 6
-				_addToCrate = [_crate,_loadCrateItem,_loadCrateLootMagazineNum] call _canAddToCrate;
-				if (_addToCrate) then
+				_loadCrateLootMagazineNum = round (floor (random 4) + 2); // minimum 2, maximum 6
+				for "_i" from 0 to _loadCrateLootMagazineNum do
 				{
-					_crate addMagazineCargoGlobal [_loadCrateItem,_loadCrateLootMagazineNum];
-					#ifdef __DEBUG__
-						diag_log format [" + %1 added -> %2x %3 magazines",_loadCrateWithWhat,_loadCrateLootMagazineNum,_loadCrateItem];
-					#endif
+					_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
+					if (_addToCrate) then
+					{
+						_crate addMagazineCargoGlobal [_loadCrateItem,1];
+						#ifdef __DEBUG__
+							diag_log format [" + %1 added -> %2x %3 magazines",_loadCrateWithWhat,1,_loadCrateItem];
+						#endif
+					};
 				};
 			};
 		};
@@ -361,14 +377,17 @@ for [{_i = 0},{_i < _overallLoopAmount},{_i = _i + 1}] do
 			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
 			{
 				_loadCrateItem = (selectRandom _throwables) select 1;
-				_loadCrateLootMagazineNum = floor (round (random 8) + 2); // minimum 2, maximum 10
-				_addToCrate = [_crate,_loadCrateItem,_loadCrateLootMagazineNum] call _canAddToCrate;
-				if (_addToCrate) then
+				_loadCrateLootMagazineNum = round (floor (random 8) + 2); // minimum 2, maximum 10
+				for "_i" from 0 to _loadCrateLootMagazineNum do
 				{
-					_crate addMagazineCargoGlobal [_loadCrateItem,_loadCrateLootMagazineNum];
-					#ifdef __DEBUG__
-						diag_log format [" + %1 added -> %2x %3",_loadCrateWithWhat,_loadCrateLootMagazineNum,_loadCrateItem];
-					#endif
+					_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
+					if (_addToCrate) then
+					{
+						_crate addMagazineCargoGlobal [_loadCrateItem,1];
+						#ifdef __DEBUG__
+							diag_log format [" + %1 added -> %2x %3",_loadCrateWithWhat,1,_loadCrateItem];
+						#endif
+					};
 				};
 			};
 		};
@@ -407,9 +426,6 @@ for [{_i = 0},{_i < _overallLoopAmount},{_i = _i + 1}] do
 			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
 			{
 				_loadCrateItem = (selectRandom _primaryWeapons) select 1;
-				_loadCrateLootMagazine = getArray (configFile / "CfgWeapons" / _loadCrateItem / "magazines");
-				_loadCrateLootMagazineClass = selectRandom _loadCrateLootMagazine;
-				_loadCrateLootMagazineNum = floor (round (random 6) + 4); // minimum 4, maximum 10
 				_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
 				if (_addToCrate) then
 				{
@@ -418,13 +434,19 @@ for [{_i = 0},{_i < _overallLoopAmount},{_i = _i + 1}] do
 						diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateItem];
 					#endif
 				};
-				_addToCrate = [_crate,_loadCrateLootMagazineClass,_loadCrateLootMagazineNum] call _canAddToCrate;
-				if (_addToCrate) then
+				_loadCrateLootMagazine = getArray (configFile / "CfgWeapons" / _loadCrateItem / "magazines");
+				_loadCrateLootMagazineClass = selectRandom _loadCrateLootMagazine;
+				_loadCrateLootMagazineNum = round (floor (random 6) + 4); // minimum 4, maximum 10
+				for "_i" from 0 to _loadCrateLootMagazineNum do
 				{
-					_crate addMagazineCargoGlobal [_loadCrateLootMagazineClass,_loadCrateLootMagazineNum];
-					#ifdef __DEBUG__
-						diag_log format [" + %1 added -> 1x %2 with %3x %4 magazines",_loadCrateWithWhat,_loadCrateItem,_loadCrateLootMagazineNum,_loadCrateLootMagazineClass];
-					#endif
+					_addToCrate = [_crate,_loadCrateLootMagazineClass,1] call _canAddToCrate;
+					if (_addToCrate) then
+					{
+						_crate addMagazineCargoGlobal [_loadCrateLootMagazineClass,1];
+						#ifdef __DEBUG__
+							diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateLootMagazineClass];
+						#endif
+					};
 				};
 			};
 		};
@@ -433,9 +455,6 @@ for [{_i = 0},{_i < _overallLoopAmount},{_i = _i + 1}] do
 			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
 			{
 				_loadCrateItem = (selectRandom _secondaryWeapons) select 1;
-				_loadCrateLootMagazine = getArray (configFile / "CfgWeapons" / _loadCrateItem / "magazines");
-				_loadCrateLootMagazineClass = selectRandom _loadCrateLootMagazine;
-				_loadCrateLootMagazineNum = floor (round (random 4) + 2); // minimum 2, maximum 6
 				_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
 				if (_addToCrate) then
 				{
@@ -444,13 +463,19 @@ for [{_i = 0},{_i < _overallLoopAmount},{_i = _i + 1}] do
 						diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateItem];
 					#endif
 				};
-				_addToCrate = [_crate,_loadCrateLootMagazineClass,_loadCrateLootMagazineNum] call _canAddToCrate;
-				if (_addToCrate) then
+				_loadCrateLootMagazine = getArray (configFile / "CfgWeapons" / _loadCrateItem / "magazines");
+				_loadCrateLootMagazineClass = selectRandom _loadCrateLootMagazine;
+				_loadCrateLootMagazineNum = round (floor (random 4) + 2); // minimum 2, maximum 6
+				for "_i" from 0 to _loadCrateLootMagazineNum do
 				{
-					_crate addMagazineCargoGlobal [_loadCrateLootMagazineClass,_loadCrateLootMagazineNum];
-					#ifdef __DEBUG__
-						diag_log format [" + %1 added -> 1x %2 with %3x %4 magazines",_loadCrateWithWhat,_loadCrateItem,_loadCrateLootMagazineNum,_loadCrateLootMagazineClass];
-					#endif
+					_addToCrate = [_crate,_loadCrateLootMagazineClass,1] call _canAddToCrate;
+					if (_addToCrate) then
+					{
+						_crate addMagazineCargoGlobal [_loadCrateLootMagazineClass,1];
+						#ifdef __DEBUG__
+							diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateLootMagazineClass];
+						#endif
+					};
 				};
 			};
 		};
@@ -504,14 +529,17 @@ for [{_i = 0},{_i < _overallLoopAmount},{_i = _i + 1}] do
 			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
 			{
 				_loadCrateItem = (selectRandom _mines) select 1;
-				_loadCrateLootMagazineNum = floor (round (random 2) + 2); // minimum 2, maximum 4
-				_addToCrate = [_crate,_loadCrateItem,_loadCrateLootMagazineNum] call _canAddToCrate;
-				if (_addToCrate) then
+				_loadCrateLootMagazineNum = round (floor (random 2) + 2); // minimum 2, maximum 4
+				for "_i" from 0 to _loadCrateLootMagazineNum do
 				{
-					_crate addItemCargoGlobal [_loadCrateItem,_loadCrateLootMagazineNum];
-					#ifdef __DEBUG__
-						diag_log format [" + %1 added -> %2x %3",_loadCrateWithWhat,_loadCrateLootMagazineNum,_loadCrateItem];
-					#endif
+					_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
+					if (_addToCrate) then
+					{
+						_crate addItemCargoGlobal [_loadCrateItem,1];
+						#ifdef __DEBUG__
+							diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateItem];
+						#endif
+					};
 				};
 			};
 		};
@@ -520,17 +548,34 @@ for [{_i = 0},{_i < _overallLoopAmount},{_i = _i + 1}] do
 			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
 			{
 				_loadCrateItem = (selectRandom _goggles) select 1;
-				_loadCrateLootMagazineNum = floor (round (random 2) + 2); // minimum 2, maximum 4
-				_addToCrate = [_crate,_loadCrateItem,_loadCrateLootMagazineNum] call _canAddToCrate;
-				if (_addToCrate) then
+				_loadCrateLootMagazineNum = round (floor (random 2) + 2); // minimum 2, maximum 4
+				for "_i" from 0 to _loadCrateLootMagazineNum do
 				{
-					_crate addItemCargoGlobal [_loadCrateItem,_loadCrateLootMagazineNum];
-					#ifdef __DEBUG__
-						diag_log format [" + %1 added -> %2x %3",_loadCrateWithWhat,_loadCrateLootMagazineNum,_loadCrateItem];
-					#endif
+					_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
+					if (_addToCrate) then
+					{
+						_crate addItemCargoGlobal [_loadCrateItem,1];
+						#ifdef __DEBUG__
+							diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateItem];
+						#endif
+					};
 				};
 			};
 		};
+	};
+	if ((_crateMassCurrent > _crateMassLimit) || (_ableToAddToCrateFailedTimes > 5)) exitWith
+	{
+		#ifdef __DEBUG__
+			diag_log format ["CRATE FILLED TO %1%4 CAPACITY -> %2 (MAX LOAD %3)",(_crateMassPercentage * 100),_crateTypeOf,_crateMaxLoad,"%"];
+		#endif
+		_fillTheCrate = false;
+	};
+	if !(alive _crate) exitWith
+	{
+		#ifdef __DEBUG__
+			diag_log format ["CRATE DAMAGED -> %1",_crateTypeOf];
+		#endif
+		_fillTheCrate = false;
 	};
 };
 
