@@ -22,7 +22,7 @@ _setupVars =
 		// Easy
 		[
 			"Small Smuggler Shipment", // Marker text
-			60000, 80000, 100000, // Money
+			50000, // Money
 			[
 				[ // NATO convoy
 					["B_MRAP_01_hmg_F", "B_MRAP_01_gmg_F", "O_T_LSV_02_armed_F"], // Veh 1
@@ -42,7 +42,7 @@ _setupVars =
 		// Medium
 		[
 			"Medium Smuggler Shipment", // Marker text
-			80000, 100000, 120000, // Money
+			100000, // Money
 			//3, //crates
 			[
 				[ // NATO convoy
@@ -65,7 +65,7 @@ _setupVars =
 		// Hard
 		[
 			"Large Smuggler Shipment", // Marker text
-			100000, 120000, 140000, // Money
+			150000,  // Money
 			//4, //crates
 			[
 				[ // NATO convoy
@@ -88,7 +88,7 @@ _setupVars =
 		// Extreme
 		[
 			"Heavy Smugglers Shipment", // Marker text
-			120000, 140000, 160000, // Money
+			200000, // Money
 			[
 				[ // NATO convoy
 					["B_APC_Wheeled_01_cannon_F", "B_APC_Tracked_01_rcws_F", "B_APC_Tracked_01_AA_F", "B_MBT_01_cannon_F", "B_MBT_01_TUSK_F"], // Veh 1
@@ -114,13 +114,13 @@ _setupVars =
 
 	_missionType = _moneyShipment select 0;
 
-	_moneyAmount = round (floor (random [_moneyShipment select 1, _moneyShipment select 2,  _moneyShipment select 3]));
+	_moneyAmount = _moneyShipment select 2;
 	_moneyText = "$" + (_moneyAmount call fn_numbersText);
 
 	_missionMoneyAmount = _moneyAmount; // for the successExec handler (missionSuccessHandler).
 
 	_vehClasses = [];
-	_vehChoices = selectRandom (_moneyShipment select 4);
+	_vehChoices = selectRandom (_moneyShipment select 3);
 	{ _vehClasses pushBack selectRandom _x } forEach _vehChoices;
 };
 
