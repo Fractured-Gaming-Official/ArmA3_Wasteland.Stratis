@@ -783,7 +783,7 @@ genItemArray = compileFinal str
 	["Compact NVG (Hex)", "O_NVGoggles_hex_F", 1500, "nvg"],
 	["Compact NVG (G Hex)", "O_NVGoggles_ghex_F", 1500, "nvg"],
 	["Compact NVG (Urban)", "O_NVGoggles_urb_F", 1500, "nvg"],
-	["Full Screen NVG's", "G_Combat_Goggles_tna_F", 5000, "gogg", "noDLC"],
+	["Combat Goggles (Full Screen Night Vision)", "G_Combat_Goggles_tna_F", 5000, "gogg", "noDLC"],
 	["Binoculars", "Binocular", 50, "binoc"],
 
 	["Rangefinder", "Rangefinder", 200, "binoc", "RCLO_BINOCULAR"],
@@ -803,7 +803,7 @@ genItemArray = compileFinal str
 	["Stealth Balaclava (Black)", "G_Balaclava_TI_blk_F", 400, "gogg", "RCLO_GOGGLE"],
 	["Stealth Balaclava (Black, Goggles)", "G_Balaclava_TI_G_blk_F", 450, "gogg", "RCLO_GOGGLE"],
 	["Stealth Balaclava (Green)", "G_Balaclava_TI_tna_F", 400, "gogg", "RCLO_GOGGLE"],
-	["Stealth Balaclava (Green, Goggles)", "G_Balaclava_TI_G_tna_F", 450, "gogg", "RCLO_GOGGLE"],
+	["Stealth Balaclava (Full Screen Night Vision)", "G_Balaclava_TI_G_tna_F", 450, "gogg", "RCLO_GOGGLE"],
 	["Combat Goggles", "G_Combat", 125, "gogg", "RCLO_GOGGLE"],
 	["VR Goggles", "G_Goggles_VR", 125, "gogg", "RCLO_GOGGLE"],
 	["Balaclava (Black)", "G_Balaclava_blk", 125, "gogg", "RCLO_GOGGLE"],
