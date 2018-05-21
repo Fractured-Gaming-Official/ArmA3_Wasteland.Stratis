@@ -40,14 +40,14 @@
 	----------------------------------------------------------------------------------------------
 */
 
-_missionCratesSpawn = true; // upon mission success, spawn crates?
+_missionCratesSpawn = false; // upon mission success, spawn crates?
 _missionCrateAmount = 2; // the total number of crates to spawn.
 _missionCrateSmoke = true; // spawn crate smoke (red) to show location of dropped crates?
 _missionCrateSmokeDuration = 120; // how long will the smoke last for once the crate reaches the ground?
 _missionCrateChemlight = true; // spawn crate chemlight (red) to show location of dropped crates?
 _missionCrateChemlightDuration = 120; // how long will the chemlight last for once the crate reaches the ground?
 
-_missionMoneySpawn = true; // upon mission success, spawn money?
+_missionMoneySpawn = false; // upon mission success, spawn money?
 _missionMoneyAmount = 100000; // the total amount of money to spawn.
 _missionMoneyBundles = 10; // how many bundles of money to spawn? (_missionMoneyAmount / _missionMoneyBundles).
 _missionMoneySmoke = true; // spawn money smoke (red) to show location of dropped money?
