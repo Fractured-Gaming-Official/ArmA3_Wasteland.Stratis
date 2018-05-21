@@ -5,7 +5,7 @@
 
 if (!isServer) exitWith {};
 
-if (!hasInterface) then 
+if (!hasInterface) then
 {
 	if (loadFile (externalConfigFolder + "\admins.sqf") != "") then
 	{

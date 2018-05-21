@@ -91,14 +91,24 @@ if (isServer) then
 
 	[] execVM "server\functions\broadcaster.sqf";
 	[] execVM "server\functions\relations.sqf";
-	[] execVM (externalConfigFolder + "\init.sqf");
+
+	if (!hasInterface) then
+	{
+		if (loadFile (externalConfigFolder + "\init.sqf") != "") then
+		{
+			[] execVM (externalConfigFolder + "\init.sqf");
+		};
+	};
 
 	waitUntil {scriptDone _serverCompileHandle};
 
 	// Broadcast server rules
-	if (loadFile (externalConfigFolder + "\serverRules.sqf") != "") then
+	if (!hasInterface) then
 	{
-		[[call compile preprocessFileLineNumbers (externalConfigFolder + "\serverRules.sqf")], "client\functions\defineServerRules.sqf"] remoteExecCall ["execVM", [-2,0] select hasInterface, true];
+		if (loadFile (externalConfigFolder + "\serverRules.sqf") != "") then
+		{
+			[[call compile preprocessFileLineNumbers (externalConfigFolder + "\serverRules.sqf")], "client\functions\defineServerRules.sqf"] remoteExecCall ["execVM", [-2,0] select hasInterface, true];
+		};
 	};
 };
 
@@ -108,14 +118,17 @@ diag_log "WASTELAND SERVER - Server Compile Finished";
 call compile preprocessFileLineNumbers "server\default_config.sqf";
 
 // load external config
-if (loadFile (externalConfigFolder + "\main_config.sqf") != "") then
+if (!hasInterface) then
 {
-	call compile preprocessFileLineNumbers (externalConfigFolder + "\main_config.sqf");
-}
-else
-{
-	diag_log format["[WARNING] A3W configuration file '%1\main_config.sqf' was not found. Using default settings!", externalConfigFolder];
-	diag_log "[WARNING] For more information go to http://forums.a3wasteland.com/";
+	if (loadFile (externalConfigFolder + "\main_config.sqf") != "") then
+	{
+		call compile preprocessFileLineNumbers (externalConfigFolder + "\main_config.sqf");
+	}
+	else
+	{
+		diag_log format["[WARNING] A3W configuration file '%1\main_config.sqf' was not found. Using default settings!", externalConfigFolder];
+		diag_log "[WARNING] For more information go to http://forums.a3wasteland.com/";
+	};
 };
 
 if (isServer) then
