@@ -36,6 +36,8 @@ if (_money <= 0) then
 	_money = _corpse getVariable ["cmoney", 0];
 };
 
+_money = floor _money; // soulkobk - fix for remainder money due to buggy money missions.
+
 if (_money > 0) then
 {
 	_m = createVehicle ["Land_Money_F", _targetPos, [], 1, "CAN_COLLIDE"];
@@ -52,7 +54,6 @@ if (_items isEqualTo []) then
 
 {
 	_x params [["_id","",[""]], ["_qty",0,[0]], ["_type","",[""]]];
-
 	for "_i" from 1 to _qty do
 	{
 		_obj = createVehicle [_type, _targetPos, [], 1, "CAN_COLLIDE"];
@@ -61,3 +62,9 @@ if (_items isEqualTo []) then
 		_obj call A3W_fnc_setItemCleanup;
 	};
 } forEach _items;
+
+{
+	_targetPos = getPos _x;
+	_targetPos set [2,(getPosATL _x select 2) max 0 + 0.01];
+	_x setPos _targetPos;
+} forEach (nearestObjects [position player,["GroundWeaponHolder","WeaponHolderSimulated"],10]); // soulkobk - make sure dropped weapons are placed above terrain level upon death.

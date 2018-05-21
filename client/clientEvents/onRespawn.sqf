@@ -19,6 +19,14 @@ _corpse setVariable ["newRespawnedUnit", _player, true];
 _player setVariable ["playerSpawning", true, true];
 _player setVariable ["A3W_oldCorpse", _corpse];
 
+_corpseMines = getAllOwnedMines _corpse; // soulkobk - keep ownership of mines over death/respawn.
+if (!isNil "_corpseMines") then
+{
+	{
+		_player addOwnedMine _x;
+	} forEach _corpseMines;
+};
+
 _this remoteExec ["A3W_fnc_playerRespawnServer", 2];
 
 _group = _player getVariable ["currentGroupRestore", grpNull];
