@@ -23,17 +23,17 @@ _setupObjects =
 	_baseToDelete = nearestObjects [_missionPos, ["All"], 25];
 	{ deleteVehicle _x } forEach _baseToDelete;
 
-	_camonet = createVehicle ["CamoNet_INDP_big_F", [_missionPos select 0, _missionPos select 1], [], 0, "CAN COLLIDE"];
+	_camonet = createVehicle ["CamoNet_INDP_big_F", [_missionPos select 0, _missionPos select 1], [], 0, "CAN_COLLIDE"];
 	_camonet allowdamage false;
 	_camonet setDir random 360;
 	_camonet setVariable ["R3F_LOG_disabled", false];
 
 	_missionPos = getPosATL _camonet;
 
-	_table = createVehicle ["Land_WoodenTable_small_F", _missionPos, [], 0, "CAN COLLIDE"];
+	_table = createVehicle ["Land_WoodenTable_small_F", _missionPos, [], 0, "CAN_COLLIDE"];
 	_table setPosATL [_missionPos select 0, _missionPos select 1, _missionPos select 2];
 
-	_laptop = createVehicle ["Land_Laptop_unfolded_F", _missionPos, [], 0, "CAN COLLIDE"];
+	_laptop = createVehicle ["Land_Laptop_unfolded_F", _missionPos, [], 0, "CAN_COLLIDE"];
 	_laptop attachTo [_table,[0,0,0.60]];
 
 	_obj1 = createVehicle ["I_GMG_01_high_F", _missionPos,[], 10,"None"];
