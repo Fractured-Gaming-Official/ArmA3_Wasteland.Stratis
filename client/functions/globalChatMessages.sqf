@@ -38,7 +38,8 @@ _globalChatMessages = [
     ["You are playing on Fractured's A3Wasteland Stratis server.",120],
     ["Discord -> discord.frac.gg",120],
     ["Website -> Fractured-Gaming.com",120],
-    ["Server restarts are at 6am, 12pm, 6pm and 12am daily (CST).",120],
+    ["Server restarts are at 6am, 12pm, 6pm and 12am daily (CST).",10],
+    ["We also have a Malden Server. Have no fear, all gear and money transfer!",120],
     ["Gearlevel Information -> Can be found in the map menu.",120],
     ["You can view your stats or anyone elses stats -> stats.frac.gg ",120],
     ["If you encounter a bug, please post it on the forums -> forums.fractured-gaming.com .",120],
@@ -71,7 +72,7 @@ if (((count _globalChatMessages) >= 1) && (hasInterface)) then
 		{
 			_currentMessage = _x select 0;
 			_currentSleep = _x select 1;
-			server globalChat format ["%1 -> %2",_globalChatPrefix,_currentMessage];
+			server globalChat format ["%1 :: %2",_globalChatPrefix,_currentMessage];
 			uiSleep _currentSleep;
 		} forEach _globalChatMessages;
 	};

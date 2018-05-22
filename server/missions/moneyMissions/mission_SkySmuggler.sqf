@@ -157,7 +157,7 @@ _failedExec = nil;
 
 _missionCratesSpawn = true;
 _missionCrateAmount = selectRandom [2,3];
-_missionCrateSmoke = false;
+_missionCrateSmoke = true;
 _missionCrateSmokeDuration = 120;
 _missionCrateChemlight = true;
 _missionCrateChemlightDuration = 120;

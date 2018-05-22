@@ -428,9 +428,9 @@ accessoriesArray = compileFinal str
 	["LRPS (G Hex)", "optic_LRPS_ghex_F", 300, "item", "noDLC", "RCLO_OPTIC"],
 	["LRPS (Tropic)", "optic_LRPS_tna_F", 300, "item", "noDLC", "RCLO_OPTIC"],
 	["NVS", "optic_NVS", 500, "item", "RCLO_OPTIC"],
-	["TWS", "optic_tws", 100000, "item", "HIDDEN"], // To hide from store list, add "HIDDEN" after "item", like "item", "HIDDEN"]
-	["TWS MG", "optic_tws_mg", 150000, "item", "HIDDEN"],
-	["Nightstalker", "optic_Nightstalker", 200000, "item", "HIDDEN"]
+	["TWS", "optic_tws", 100000, "item", "HIDDEN", "RCLO_OPTIC", "RCLO_RARE"], // To hide from store list, add "HIDDEN" after "item", like "item", "HIDDEN"]
+	["TWS MG", "optic_tws_mg", 150000, "item", "HIDDEN", "RCLO_OPTIC", "RCLO_RARE"],
+	["Nightstalker", "optic_Nightstalker", 200000, "item", "HIDDEN", "RCLO_OPTIC", "RCLO_RARE"]
 ];
 
 // If commented, means the color/camo isn't implemented or is a duplicate of another hat
@@ -783,7 +783,7 @@ genItemArray = compileFinal str
 	["Compact NVG (Hex)", "O_NVGoggles_hex_F", 1500, "nvg"],
 	["Compact NVG (G Hex)", "O_NVGoggles_ghex_F", 1500, "nvg"],
 	["Compact NVG (Urban)", "O_NVGoggles_urb_F", 1500, "nvg"],
-	["Full Screen NVG's", "G_Combat_Goggles_tna_F", 5000, "gogg", "noDLC"],
+	["Combat Goggles (Full Screen Night Vision)", "G_Combat_Goggles_tna_F", 5000, "gogg", "noDLC"],
 	["Binoculars", "Binocular", 50, "binoc"],
 
 	["Rangefinder", "Rangefinder", 200, "binoc", "RCLO_BINOCULAR"],
@@ -803,7 +803,7 @@ genItemArray = compileFinal str
 	["Stealth Balaclava (Black)", "G_Balaclava_TI_blk_F", 400, "gogg", "RCLO_GOGGLE"],
 	["Stealth Balaclava (Black, Goggles)", "G_Balaclava_TI_G_blk_F", 450, "gogg", "RCLO_GOGGLE"],
 	["Stealth Balaclava (Green)", "G_Balaclava_TI_tna_F", 400, "gogg", "RCLO_GOGGLE"],
-	["Stealth Balaclava (Green, Goggles)", "G_Balaclava_TI_G_tna_F", 450, "gogg", "RCLO_GOGGLE"],
+	["Stealth Balaclava (Full Screen Night Vision)", "G_Balaclava_TI_G_tna_F", 5000, "gogg", "RCLO_GOGGLE"],
 	["Combat Goggles", "G_Combat", 125, "gogg", "RCLO_GOGGLE"],
 	["VR Goggles", "G_Goggles_VR", 125, "gogg", "RCLO_GOGGLE"],
 	["Balaclava (Black)", "G_Balaclava_blk", 125, "gogg", "RCLO_GOGGLE"],

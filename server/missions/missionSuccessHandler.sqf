@@ -19,10 +19,10 @@
 	----------------------------------------------------------------------------------------------
 
 	Name: missionSuccessHandler.sqf
-	Version: 1.0.A3WL1
+	Version: 1.0.A3WL3
 	Author: soulkobk (soulkobk.blogspot.com) in conjunction with Mokey [FRAC]
 	Creation Date: 5:00 PM 16/05/2018
-	Modification Date: 2:30 PM 18/05/2018
+	Modification Date: 5:31 PM 22/05/2018
 
 	Description:
 	For use with A3Wasteland 1.3x mission (A3Wasteland.com).
@@ -35,18 +35,20 @@
 	1.0.A3WL0 - new missionSuccessHandler for all A3Wasteland missions.
 	1.0.A3WL1 - added conditional timers to all waitUntil statements, moved smoke and chem lights to
 	            inside the crates so they don't glitch through. added alive check to sack.
+	1.0.A3WL2 - added in round for money to make sure there are no decimal places (y u no round?).
+	1.0.A3WL3 - another round for money bundles to make sure there are no decimal places.
 
 	----------------------------------------------------------------------------------------------
 */
 
-_missionCratesSpawn = true; // upon mission success, spawn crates?
+_missionCratesSpawn = false; // upon mission success, spawn crates?
 _missionCrateAmount = 2; // the total number of crates to spawn.
 _missionCrateSmoke = true; // spawn crate smoke (red) to show location of dropped crates?
 _missionCrateSmokeDuration = 120; // how long will the smoke last for once the crate reaches the ground?
 _missionCrateChemlight = true; // spawn crate chemlight (red) to show location of dropped crates?
 _missionCrateChemlightDuration = 120; // how long will the chemlight last for once the crate reaches the ground?
 
-_missionMoneySpawn = true; // upon mission success, spawn money?
+_missionMoneySpawn = false; // upon mission success, spawn money?
 _missionMoneyAmount = 100000; // the total amount of money to spawn.
 _missionMoneyBundles = 10; // how many bundles of money to spawn? (_missionMoneyAmount / _missionMoneyBundles).
 _missionMoneySmoke = true; // spawn money smoke (red) to show location of dropped money?
@@ -88,7 +90,7 @@ _successExec =
 					{
 						_crateParachute = createVehicle ["O_Parachute_02_F",(getPosATL _crate),[],0,"CAN_COLLIDE"];
 						_crateParachute allowDamage false;
-						_crate attachTo [_crateParachute, [0,0,0]];
+						_crate attachTo [_crateParachute,[0,0,0]];
 						_timer = time + 120;
 						waitUntil {(getPosATL _crate select 2 < 5) || (time > _timer)};
 						detach _crate;
@@ -97,7 +99,7 @@ _successExec =
 					_timer = time + 10;
 					waitUntil {sleep 0.1; (getPos _crate select 2 < 0.1) || (time > _timer)};
 					_cratePos = getPosATL _crate;
-					_cratePos set [2, (_cratePos select 2) max 0 + 0.01];
+					_cratePos set [2,(_cratePos select 2) max 0 + 0.01];
 					_crate setPosATL _cratePos;
 					_crate allowDamage true;
 					if (_missionCrateSmoke) then
@@ -106,7 +108,7 @@ _successExec =
 						{
 							params ["_crate","_cratePos","_missionCrateSmokeDuration"];
 							_smokeSignalCrate = createVehicle ["SmokeShellRed_infinite",_cratePos,[],0,"CAN_COLLIDE"];
-							_smokeSignalCrate attachTo [_crate, [0,0,0]];
+							_smokeSignalCrate attachTo [_crate,[0,0,0]];
 							_timer = time + _missionCrateSmokeDuration;
 							waitUntil {sleep 0.1; time > _timer};
 							deleteVehicle _smokeSignalCrate;
@@ -118,7 +120,7 @@ _successExec =
 						{
 							params ["_crate","_cratePos","_missionCrateChemlightDuration"];
 							_lightSignalCrate = createVehicle ["Chemlight_red",_cratePos,[],0,"CAN_COLLIDE"];
-							_lightSignalCrate attachTo [_crate, [0,0,0]];
+							_lightSignalCrate attachTo [_crate,[0,0,0]];
 							_timer = time + _missionCrateChemlightDuration;
 							waitUntil {sleep 0.1; time > _timer};
 							deleteVehicle _lightSignalCrate;
@@ -141,29 +143,30 @@ _successExec =
 				{
 					_crateParachute = createVehicle ["O_Parachute_02_F",(getPosATL _sack),[],0,"CAN_COLLIDE"];
 					_crateParachute allowDamage false;
-					_sack attachTo [_crateParachute, [0,0,0]];
+					_sack attachTo [_crateParachute,[0,0,0]];
 					_timer = time + 120;
 					waitUntil {sleep 0.1; (getPosATL _sack select 2 < 5) || (time > _timer)};
 					detach _sack;
 					deleteVehicle _crateParachute;
 				};
 				_log = createVehicle ["Land_WoodenLog_F",(getPosATL _sack),[],0,"CAN_COLLIDE"];
-				_sack attachTo [_log, [0,0,0]];
+				_sack attachTo [_log,[0,0,0]];
 				_timer = time + 10;
 				waitUntil {sleep 0.1; (getPos _sack select 2 < 0.1) || (time > _timer)};
 				detach _sack;
 				deleteVehicle _log;
 				_sackPos = getPosATL _sack;
-				_sackPos set [2, (getPosATL _sack select 2) max 0 + 0.01];
+				_sackPos set [2,(getPosATL _sack select 2) max 0 + 0.01];
 				_sack setPosATL _sackPos;
 				_i = 0;
+				_missionMoneyAmount = round _missionMoneyAmount;
 				while {_i < _missionMoneyBundles} do
 				{
 					_cash = createVehicle ["Land_Money_F",_sackPos,[],5,"CAN_COLLIDE"];
-					_cash setPos ([_sackPos, [[2 + random 3,0,0], random 360] call BIS_fnc_rotateVector2D] call BIS_fnc_vectorAdd);
+					_cash setPos ([_sackPos,[[2 + random 3,0,0],random 360] call BIS_fnc_rotateVector2D] call BIS_fnc_vectorAdd);
 					_cash setDir random 360;
-					_cash setVariable ["cmoney", (_missionMoneyAmount / _missionMoneyBundles), true];
-					_cash setVariable ["owner", "world", true];
+					_cash setVariable ["cmoney",round(_missionMoneyAmount / _missionMoneyBundles),true];
+					_cash setVariable ["owner","world",true];
 					_cash call A3W_fnc_setItemCleanup;
 					_i = _i + 1;
 				};
@@ -175,7 +178,7 @@ _successExec =
 					{
 						params ["_sack","_sackPos","_missionMoneySmokeDuration"];
 						_smokeSignalMoney = createVehicle ["SmokeShellRed_infinite",_sackPos,[],0,"CAN_COLLIDE"];
-						_smokeSignalMoney attachTo [_sack, [0,0,0]];
+						_smokeSignalMoney attachTo [_sack,[0,0,0]];
 						_timer = time + _missionMoneySmokeDuration;
 						waitUntil {sleep 0.1; !(alive _sack) || time > _timer};
 						deleteVehicle _smokeSignalMoney;
@@ -188,7 +191,7 @@ _successExec =
 					{
 						params ["_sack","_sackPos","_missionMoneyChemlightDuration"];
 						_lightSignalMoney = createVehicle ["Chemlight_red",_sackPos,[],0,"CAN_COLLIDE"];
-						_lightSignalMoney attachTo [_sack, [0,0,0]];
+						_lightSignalMoney attachTo [_sack,[0,0,0]];
 						_timer = time + _missionMoneyChemlightDuration;
 						waitUntil {sleep 0.1; !(alive _sack) || time > _timer};
 						deleteVehicle _lightSignalMoney;

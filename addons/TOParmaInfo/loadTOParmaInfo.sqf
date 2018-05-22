@@ -9,6 +9,8 @@
 
 //private ["_display", "_map", "_mission", "_player", "_newsOnline", "_newsOffline", "_ctrlHTML", "_htmlLoaded"];
 
+private ["_serverInfoString"];
+
 disableSerialization;
 
 _uid = getPlayerUID player;
@@ -18,7 +20,14 @@ createDialog "TOParmaInfoD";
 _display = (findDisplay TOParmaInfo_dialog);
 
 _serverInfoText = _display displayCtrl TOParmaInfo_Server_Info;
-_serverInfoString = format ["<t color='#A0FFFFFF'>Fractured Wasteland #%1 %2</t>", call A3W_extDB_ServerID, worldName];
+if (!hasInterface) then
+{
+	_serverInfoString = format ["<t color='#A0FFFFFF'>Fractured Wasteland #%1 %2</t>", call A3W_extDB_ServerID, worldName];
+}
+else
+{
+	_serverInfoString = "";
+};
 _serverInfoText ctrlSetStructuredText parseText _serverInfoString;
 
 _generalInfoText = _display displayCtrl TOParmaInfo_General_Info_BG;
