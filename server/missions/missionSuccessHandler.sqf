@@ -19,10 +19,10 @@
 	----------------------------------------------------------------------------------------------
 
 	Name: missionSuccessHandler.sqf
-	Version: 1.0.A3WL2
+	Version: 1.0.A3WL3
 	Author: soulkobk (soulkobk.blogspot.com) in conjunction with Mokey [FRAC]
 	Creation Date: 5:00 PM 16/05/2018
-	Modification Date: 2:30 PM 18/05/2018
+	Modification Date: 5:31 PM 22/05/2018
 
 	Description:
 	For use with A3Wasteland 1.3x mission (A3Wasteland.com).
@@ -36,6 +36,7 @@
 	1.0.A3WL1 - added conditional timers to all waitUntil statements, moved smoke and chem lights to
 	            inside the crates so they don't glitch through. added alive check to sack.
 	1.0.A3WL2 - added in round for money to make sure there are no decimal places (y u no round?).
+	1.0.A3WL3 - another round for money bundles to make sure there are no decimal places.
 
 	----------------------------------------------------------------------------------------------
 */
@@ -164,7 +165,7 @@ _successExec =
 					_cash = createVehicle ["Land_Money_F",_sackPos,[],5,"CAN_COLLIDE"];
 					_cash setPos ([_sackPos,[[2 + random 3,0,0],random 360] call BIS_fnc_rotateVector2D] call BIS_fnc_vectorAdd);
 					_cash setDir random 360;
-					_cash setVariable ["cmoney",(_missionMoneyAmount / _missionMoneyBundles),true];
+					_cash setVariable ["cmoney",round(_missionMoneyAmount / _missionMoneyBundles),true];
 					_cash setVariable ["owner","world",true];
 					_cash call A3W_fnc_setItemCleanup;
 					_i = _i + 1;
