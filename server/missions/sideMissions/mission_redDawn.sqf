@@ -8,40 +8,55 @@ if (!isServer) exitwith {};
 
 #include "sideMissionDefines.sqf"
 
-private ["_nbUnits", "_box1", "_box2", "_townName", "_missionPos", "_buildingRadius", "_putOnRoof", "_fillEvenly", "_tent1", "_chair1", "_chair2", "_cFire1"];
+private ["_pos","_radius","_unitPositionArray","_leader","_speedMode","_waypoint","_numWaypoints"];
 
 _setupVars =
 {
-	_missionType = "RED DAWN";
-	_nbUnits = if (missionDifficultyHard) then { AI_GROUP_LARGE } else { AI_GROUP_MEDIUM };
-	_locArray = ((call cityList) call BIS_fnc_selectRandom);
-	_missionPos = markerPos (_locArray select 0);
-	_missionPos set [2,200];
-	_buildingRadius = _locArray select 1;
-	_townName = _locArray select 2;
-	_nbUnits = _nbUnits + round(random (_nbUnits*0.5));
-	_buildingRadius = if (_buildingRadius > 201) then {(_buildingRadius*0.5)} else {_buildingRadius};
-
+	_missionType = "Red Dawn!";
+	_locationsArray = nil;
 };
 
 _setupObjects =
 {
-	_fillEvenly = true;
-	_putOnRoof = true;
+	_town = (call cityList) call BIS_fnc_selectRandom;
+	_townSpawn = _town select 2;
+	_missionPos = markerPos (_town select 0);
+	_missionPos set [2,150];
 	_aiGroup = createGroup CIVILIAN;
-	[_aiGroup, _missionPos, _nbUnits] call createAirTroops;
-	{
- 		_x move _missionPos;
-		_x moveTo _missionPos;
-	} forEach units _aiGroup;
-	[_aiGroup, _missionPos, _buildingRadius, _fillEvenly, _putOnRoof] call moveIntoBuildings;
+	_radius = _town select 1;
+	_unitPositionArray = [_missionPos,_radius,_radius + 50,5,0,0,0] call findSafePos;
 
-	_missionHintText = format ["Hostiles parachuted over <br/><t size='1.25' color='%1'>%2</t><br/><br/>There seem to be <t color='%1'>%3 enemies</t> dropping in! Get rid of them all, and take their supplies!<br/>WOLVERINES!", sideMissionColor, _townName, _nbUnits];
+	_soldier = [_aiGroup, _missionPos] call createAirTroops;
+
+	_leader = leader _aiGroup;
+	_leader setRank "LIEUTENANT";
+	_aiGroup setCombatMode "GREEN"; // units will defend themselves
+	_aiGroup setBehaviour "SAFE"; // units feel safe until they spot an enemy or get into contact
+	_aiGroup setFormation "STAG COLUMN";
+
+	_speedMode = if (missionDifficultyHard) then { "NORMAL" } else { "LIMITED" };
+	_aiGroup setSpeedMode _speedMode;
+
+	{
+		_waypoint = _aiGroup addWaypoint [markerPos (_x select 0), 0];
+		_waypoint setWaypointType "MOVE";
+		_waypoint setWaypointCompletionRadius 50;
+		_waypoint setWaypointCombatMode "GREEN";
+		_waypoint setWaypointBehaviour "SAFE";
+		_waypoint setWaypointFormation "STAG COLUMN";
+		_waypoint setWaypointSpeed _speedMode;
+	} forEach ((call cityList) call BIS_fnc_arrayShuffle);
+
+	_missionPos = getPosATL leader _aiGroup;
+
+	_missionHintText = format ["Hostiles parachuted over <br/><t size='1.25' color='%1'>%2</t><br/><br/>Kill them and take their supplies before they run rampant!<br/>WOLVERINES!", sideMissionColor, _townSpawn];
+
+	_numWaypoints = count waypoints _aiGroup;
 };
 
-_waitUntilMarkerPos = nil;
+_waitUntilMarkerPos = {getPosATL _leader};
 _waitUntilExec = nil;
-_waitUntilCondition = nil;
+_waitUntilCondition = {currentWaypoint _aiGroup >= _numWaypoints};
 _failedExec = nil;
 
 #include "..\missionSuccessHandler.sqf"
