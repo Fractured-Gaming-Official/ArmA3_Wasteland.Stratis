@@ -1,45 +1,85 @@
+// ******************************************************************************************
+// * This project is licensed under the GNU Affero GPL v3. Copyright © 2018 A3Wasteland.com *
+// ******************************************************************************************
+//	@file Name: airTroopGroup.sqf
+//	@file Author: [FRAC] Mokey , soulkobk
+//	@file Updated: 1:23 PM 22/05/2018 rewritten by soulkobk
+
 if (!isServer) exitWith {};
 
-private ["_soldierTypes", "_uniformTypes", "_vestTypes", "_weaponTypes", "_group", "_position", "_rank", "_soldier","_nbUnits"];
+private ["_unitClasses","_unitGroup","_missionPosition","_unit","_unitAmount"];
 
-_soldierTypes = ["C_man_polo_1_F", "C_man_polo_2_F", "C_man_polo_3_F", "C_man_polo_4_F", "C_man_polo_5_F", "C_man_polo_6_F"];
-_uniformTypes = ["U_B_CombatUniform_mcam_vest", "U_B_CombatUniform_mcam_tshirt" ,"U_B_CombatUniform_mcam"];
-_vestTypes = ["V_PlateCarrier1_rgr","V_PlateCarrier2_rgr"];
-_weaponTypes = ["arifle_TRG20_F","LMG_Mk200_F","arifle_MXM_F","arifle_MX_GL_F"];
+_unitClasses =
+[
+	"C_man_polo_1_F",
+	"C_man_polo_2_F",
+	"C_man_polo_3_F",
+	"C_man_polo_4_F",
+	"C_man_polo_5_F",
+	"C_man_polo_6_F"
+];
 
-_group = _this select 0;
-_position = _this select 1;
-_rank = param [2, "", [""]];
-_nbUnits = param [2, 14, [0]];
-_radius = param [3, 10, [0]];
+_unitGroup = _this select 0;
+_missionPosition = _this select 1;
+_unitAmount = param [2, 12, [0]];
+_missionRadius = param [3, 100, [0]];
 
-for "_i" from 1 to _nbUnits do
+_missionPosition set [2,2000]; // update mission altitude to 2000m.
+
+for "_i" from 1 to _unitAmount do
 {
-	_uPos = _position vectorAdd ([[random _radius, 0, 0], random 360] call BIS_fnc_rotateVector2D);
-	_soldier = _group createUnit[(selectRandom _soldierTypes), _uPos, [], 0, "Form"];
-	_soldier setPos _uPos;
-
-	//[_soldierTypes call BIS_fnc_selectRandom, _position, [], 0, "NONE"];
-	_soldier addUniform (_uniformTypes call BIS_fnc_selectRandom);
-	_soldier addVest (_vestTypes call BIS_fnc_selectRandom);
-	[_soldier, _weaponTypes call BIS_fnc_selectRandom, 3] call BIS_fnc_addWeapon;
-	if (_rank != "") then
+	_unitPosition = [0,0,0];
+	_overland = false;
+	while {!_overLand} do // force a land position, don't spawn over water.
 	{
-		_soldier setRank _rank;
+		_unitPosition = _missionPosition vectorAdd ([[(random _missionRadius) + 10, 0, 0], random 360] call BIS_fnc_rotateVector2D);
+		if !(surfaceIsWater _unitPosition) then
+		{
+			_overLand = true;
+		};
 	};
-
-	_parachute = createVehicle ["Steerable_Parachute_F",(getPosATL _soldier),[],0,"CAN_COLLIDE"];
-	_parachute allowDamage false;
-	_soldier assignAsDriver _parachute;
-	_soldier moveInDriver _parachute;
-	_soldier spawn refillPrimaryAmmo;
-	_soldier spawn addMilCap;
-	_soldier call setMissionSkill;
-	_soldier addEventHandler ["Killed", server_playerDied];
-	[_soldier] call randomSoldierLoadout;
+	if !(_unitPosition isEqualTo [0,0,0]) then
+	{
+		// create the unit
+		_unit = _unitGroup createUnit [(selectRandom _unitClasses),_unitPosition,[],0,"FORM"];
+		waitUntil {alive _unit};
+		_unit setPos _unitPosition;
+		[_unit,_unitGroup,_missionPosition] spawn // units will spawn high, free fall to a random height, then pull chute (min 100m).
+		{
+			params ["_unit","_unitGroup","_missionPosition"];
+			_missionSpawnHeight = _missionPosition select 2;
+			_pullChuteAltitude = round(random 500) max 100 min 400; // 100m minimum height, 400 maximum height.
+			_timer = time + 90; // max 1m30s free fall.
+			waitUntil {sleep 0.1; (((getPos _unit select 2) <= _pullChuteAltitude) || (time > _timer))};
+			_parachute = createVehicle ["Steerable_Parachute_F",(getPos _unit),[],0,"CAN_COLLIDE"];
+			_parachute allowDamage false;
+			_smoke = createVehicle ["SmokeShellRed_infinite",(getPos _unit),[],0,"CAN_COLLIDE"];
+			_smoke attachTo [_parachute,[0,0,0]];
+			_unit assignAsDriver _parachute;
+			_unit moveInDriver _parachute;
+			_timer = time + 180; // max 3m00s until on ground.
+			waitUntil {sleep 0.1; ((isTouchingGround _unit) || (time > _timer))};
+			deleteVehicle _smoke;
+			_leader = leader _unitGroup;
+			if (_unit isEqualTo _leader) then
+			{
+				_missionPosition set [2,0]; // reset altitude back to ground level.
+				_unit move _missionPosition; // make the unit move to the mission position.
+				_unit doMove _missionPosition; // make the unit move to the mission position.
+			}
+			else
+			{
+				_unit doFollow leader _unitGroup; // makes the unit follow the leader of the group.
+			};
+		};
+		// update the solider
+		[_unit] call randomSoldierLoadout;
+		_unit spawn refillPrimaryAmmo;
+		_unit call setMissionSkill;
+		_unit addEventHandler ["Killed", server_playerDied];
+	};
 	sleep 0.5;
 };
-_leader = leader _group;
 
-
-_soldier
+_soldiers = units _unitGroup;
+_soldiers
