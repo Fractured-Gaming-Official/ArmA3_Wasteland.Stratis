@@ -23,7 +23,6 @@ _unitGroup = _this select 0;
 _missionPosition = _this select 1;
 _unitAmount = param [2, 12, [0]];
 _missionRadius = param [3, 100, [0]];
-
 _missionPosition set [2,2000]; // update mission altitude to 2000m.
 
 for "_i" from 1 to _unitAmount do
@@ -63,13 +62,13 @@ for "_i" from 1 to _unitAmount do
 			_leader = leader _unitGroup;
 			if (_unit isEqualTo _leader) then
 			{
-				_missionPosition set [2,0]; // reset altitude back to ground level.
-				_unit move _missionPosition; // make the unit move to the mission position.
-				_unit doMove _missionPosition; // make the unit move to the mission position.
+				_missionPosition set [2,0];
+				_unit move _missionPosition;
+				_unit doMove _missionPosition;
 			}
 			else
 			{
-				_unit doFollow leader _unitGroup; // makes the unit follow the leader of the group.
+				_unit doFollow leader _unitGroup;
 			};
 		};
 		// update the solider

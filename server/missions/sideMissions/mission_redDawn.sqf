@@ -19,12 +19,11 @@ _setupVars =
 
 _setupObjects =
 {
-	/*/ --------------------------------------------------------------------------------------- /*/
     _skippedTowns = // get the list from -> \mapConfig\towns.sqf
     [
         "Town_14" // Pythos Island Marker Name
     ];
-	/*/ --------------------------------------------------------------------------------------- /*/
+
     _town = ""; _missionPos = [0,0,0]; _radius = 0;
     _townOK = false;
     while {!_townOK} do
@@ -39,7 +38,7 @@ _setupObjects =
         };
         sleep 0.1;
     };
-	/*/ --------------------------------------------------------------------------------------- /*/
+
 	_aiGroup = createGroup CIVILIAN;
 	_groupAmount = (round(random 6) + 12); // min 12, max 18
 	_soldiers = [_aiGroup,_missionPos,_groupAmount,_radius] call createAirTroops;
@@ -54,16 +53,16 @@ _setupObjects =
 		_x setSkill ["commanding", 0.8];
 		_x setSkill ["general", 0.9];
 	} forEach _soldiers;
-	/*/ --------------------------------------------------------------------------------------- /*/
+
 	_leader = leader _aiGroup;
 	_leader setRank "LIEUTENANT";
 	_aiGroup setCombatMode "GREEN"; // units will defend themselves
 	_aiGroup setBehaviour "SAFE"; // units feel safe until they spot an enemy or get into contact
 	_aiGroup setFormation "STAG COLUMN";
-	/*/ --------------------------------------------------------------------------------------- /*/
+
 	_speedMode = if (missionDifficultyHard) then { "NORMAL" } else { "LIMITED" };
 	_aiGroup setSpeedMode _speedMode;
-	/*/ --------------------------------------------------------------------------------------- /*/
+
 	{
 		_waypoint = _aiGroup addWaypoint [markerPos (_x select 0), 0];
 		_waypoint setWaypointType "MOVE";
@@ -73,11 +72,10 @@ _setupObjects =
 		_waypoint setWaypointFormation "STAG COLUMN";
 		_waypoint setWaypointSpeed _speedMode;
 	} forEach ((call cityList) call BIS_fnc_arrayShuffle);
-	/*/ --------------------------------------------------------------------------------------- /*/
+
 	_missionPos = getPosATL leader _aiGroup;
 	_missionHintText = format ["Hostile forces have parachuted over <br/><t size='1.25' color='%1'>%2</t><br/><br/>Kill them and take their supplies before they run rampant!", sideMissionColor, (_town select 2)];
 	_numWaypoints = count wayPoints _aiGroup;
-	/*/ --------------------------------------------------------------------------------------- /*/
 };
 
 _waitUntilMarkerPos = {getPosATL _leader};
@@ -94,7 +92,7 @@ _missionCrateSmokeDuration = 120;
 _missionCrateChemlight = true;
 _missionCrateChemlightDuration = 120;
 
-_missionMoneySpawn = true;
+_missionMoneySpawn = false;
 _missionMoneyAmount = round(floor(random [20000,40000,60000]));
 _missionMoneyBundles = 10;
 _missionMoneySmoke = true;
