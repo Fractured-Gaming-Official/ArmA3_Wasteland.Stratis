@@ -49,7 +49,6 @@ _waitUntilExec = nil;
 _waitUntilCondition = nil;
 
 _failedExec = nil;
-_successExec =
 #include "..\missionSuccessHandler.sqf"
 
 _missionCratesSpawn = true;
