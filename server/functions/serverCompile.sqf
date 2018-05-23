@@ -49,6 +49,7 @@ createGroup4= [_path, "createUnits\Group4.sqf"] call mf_compile;
 createGroup5= [_path, "createUnits\Group5.sqf"] call mf_compile;
 randomSoldierLoadOut = [_path, "createUnits\randomSoldierLoadOut.sqf"] call mf_compile;
 createAirTroops = [_path, "createUnits\createAirTroops.sqf"] call mf_compile;
+createDivingGroup = [_path, "createUnits\createDivingGroup.sqf"] call mf_compile;
 
 //Function Compiles
 _path = "server\functions";
