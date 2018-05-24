@@ -90,6 +90,10 @@ _exclObjectIDs = [];
 		if (!isNil "_owner") then
 		{
 			_obj setVariable ["ownerUID", _owner, true];
+			_baseNameSpace = "baseObjects" + _owner;
+			_baseObjects = missionNameSpace getVariable[_baseNameSpace, 0];
+			_baseObjects = _baseObjects + 1;
+			missionNameSpace setVariable[_baseNameSpace, _baseObjects, true];
 		};
 
 		private _uavSide = if (isNil "_playerSide") then { sideUnknown } else { _playerSide };

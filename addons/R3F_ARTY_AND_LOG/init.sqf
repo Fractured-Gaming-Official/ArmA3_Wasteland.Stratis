@@ -28,54 +28,62 @@
 [] spawn
 {
 	#include "config.sqf"
-	#include "R3F_ARTY_disable_enable.sqf"
-	#include "R3F_LOG_disable_enable.sqf"
+	#include "R3F_LOG_disableEnable.sqf"
 
 	// Chargement du fichier de langage
-	call compile preprocessFile format ["addons\R3F_ARTY_AND_LOG\%1_strings_lang.sqf", R3F_ARTY_AND_LOG_CFG_langage];
+	call compile preprocessFile format ["addons\R3F_ARTY_AND_LOG\%1_strings_lang.sqf", R3F_LOG_FRAC_CFG_language];
 
 	if (isServer) then
 	{
 		// Service offert par le serveur : orienter un objet (car setDir est à argument local)
-		R3F_ARTY_AND_LOG_FNCT_PUBVAR_setDir =
+		R3F_LOG_FRAC_FNC__PUBVAR_setDir =
 		{
-			private ["_objet", "_direction"];
-			_objet = _this select 1 select 0;
+			private ["_object", "_direction"];
+			_object = _this select 1 select 0;
 			_direction = _this select 1 select 1;
 
 			// Orienter l'objet et broadcaster l'effet
-			_objet setDir _direction;
-			_objet setPos (getPos _objet);
+			_object setDir _direction;
+			_object setPos (getPos _object);
 		};
-		"R3F_ARTY_AND_LOG_PUBVAR_setDir" addPublicVariableEventHandler R3F_ARTY_AND_LOG_FNCT_PUBVAR_setDir;
-	};
+		"R3F_LOG_FRAC_PUBVAR_setDir" addPublicVariableEventHandler R3F_LOG_FRAC_FNC__PUBVAR_setDir;
 
-	#ifdef R3F_ARTY_enable
-		#include "R3F_ARTY\init.sqf"
-		R3F_ARTY_active = true;
-	#endif
+		R3F_LOG_FNC_PUBVAR_setDirAndUp =
+		{
+			private ["_object", "_attachedTo", "_dirAndUp", "_bldPosX", "_bldPosY", "_bldPosZ"];
+			_object = _this select 1 select 0;
+			_attachedTo = _this select 1 select 1;
+			_dirAndUp = _this select 1 select 2;
+			_bldPosX = _this select 1 select 3;
+			_bldPosY =_this select 1 select 4;
+			_bldPosZ =_this select 1 select 5;
+			_object attachTo [_attachedTo, [_bldPosX, _bldPosY, _bldPosZ]];
+			_object setVectorDirAndUp _dirAndUp;
+		};
+		"R3F_LOG_FNC_PUBVAR_setDirAndUp" addPublicVariableEventHandler R3F_LOG_FNC_PUBVAR_setDirAndUp;
+	};
 
 	#ifdef R3F_LOG_enable
 		#include "R3F_LOG\init.sqf"
 		R3F_LOG_active = true;
 	#else
 		// Pour les actions du PC d'arti
-		R3F_LOG_joueur_deplace_objet = objNull;
+		R3F_LOG_playerMovesObject = objNull;
 	#endif
 
 	// Auto-détection permanente des objets sur le jeu
 	if (isDedicated) then
 	{
 		// Version allégée pour le serveur dédié
-		//execVM "addons\R3F_ARTY_AND_LOG\surveiller_nouveaux_objets_dedie.sqf";
+		//execVM "addons\R3F_ARTY_AND_LOG\monitorNewObjectsDedicated.sqf";
 	}
 	else
 	{
-		execVM "addons\R3F_ARTY_AND_LOG\surveiller_nouveaux_objets.sqf";
+		execVM "addons\R3F_ARTY_AND_LOG\monitorNewObjects.sqf";
 
 		// Disable R3F on map objects that are not network-synced
 		//{
 		//	_x setVariable ["R3F_LOG_disabled", true];
-		//} forEach ((nearestObjects [[0,0], R3F_LOG_CFG_objets_deplacables, 99999]) - (allMissionObjects "All"));
+		//} forEach ((nearestObjects [[0,0], R3F_LOG_CFG_movableObjects, 99999]) - (allMissionObjects "All"));
 	};
 };

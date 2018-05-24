@@ -1,18 +1,15 @@
 /**
  * Constantes pour rendre les définitions des boîtes de dialogue plus lisible et maintenable
  */
+#define R3F_LOG_IDD_dlg_vehicleContents (R3F_ARTY_ID_carrierStart + 1)
 
-#define R3F_ARTY_ID_transporteur_START 65430
+#define R3F_LOG_IDC_dlg_CV_vehicleCapacity (R3F_ARTY_ID_carrierStart + 2)
+#define R3F_LOG_IDC_dlg_CV_contentsList (R3F_ARTY_ID_carrierStart + 3)
+#define R3F_LOG_IDC_dlg_CV_unloadBtn (R3F_ARTY_ID_carrierStart + 4)
 
-#define R3F_LOG_IDD_dlg_contenu_vehicule (R3F_ARTY_ID_transporteur_START + 1)
-
-#define R3F_LOG_IDC_dlg_CV_capacite_vehicule (R3F_ARTY_ID_transporteur_START + 2)
-#define R3F_LOG_IDC_dlg_CV_liste_contenu (R3F_ARTY_ID_transporteur_START + 3)
-#define R3F_LOG_IDC_dlg_CV_btn_decharger (R3F_ARTY_ID_transporteur_START + 4)
-
-#define R3F_LOG_IDC_dlg_CV_titre (R3F_ARTY_ID_transporteur_START + 10)
-#define R3F_LOG_IDC_dlg_CV_credits (R3F_ARTY_ID_transporteur_START + 11)
-#define R3F_LOG_IDC_dlg_CV_btn_fermer (R3F_ARTY_ID_transporteur_START + 12)
+#define R3F_LOG_IDC_dlg_CV_title (R3F_ARTY_ID_carrierStart + 10)
+#define R3F_LOG_IDC_dlg_CV_credits (R3F_ARTY_ID_carrierStart + 11)
+#define R3F_LOG_IDC_dlg_CV_cancelBtn (R3F_ARTY_ID_carrierStart + 12)
 
 // Control types
 #define CT_STATIC           0

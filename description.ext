@@ -109,6 +109,11 @@ class CfgFunctions
 	#include "addons\CHVD\CfgFunctions.hpp"
 };
 
+class CfgBaseBuilding
+{
+	playerObjectLimit = 20;
+};
+
 class CfgNotifications
 {
 	#include "client\CfgNotifications.hpp"

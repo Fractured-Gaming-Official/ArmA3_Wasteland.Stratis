@@ -6,8 +6,8 @@
 //	@file Args: [object,player,int,lockState(lock = 0 / unlock = 1)]
 
 // Check if mutex lock is active.
-if(R3F_LOG_mutex_local_verrou) exitWith {
-	player globalChat STR_R3F_LOG_mutex_action_en_cours;
+if(R3F_LOG_mutexLocalLock) exitWith {
+	player globalChat STR_R3F_LOG_mutexActionOngoing;
 };
 
 private["_locking", "_object", "_lockState", "_lockDuration", "_stringEscapePercent", "_iteration", "_unlockDuration", "_totalDuration", "_poiDist", "_poiMarkers", "_checks", "_success"];
@@ -22,7 +22,7 @@ switch (_lockState) do
 {
 	case 0: // LOCK
 	{
-		R3F_LOG_mutex_local_verrou = true;
+		R3F_LOG_mutexLocalLock = true;
 		_totalDuration = 5;
 		//_lockDuration = _totalDuration;
 		//_iteration = 0;
@@ -35,7 +35,15 @@ switch (_lockState) do
 		{
 			playSound "FD_CP_Not_Clear_F";
 			[format ["You are not allowed to lock objects within %1m of stores and mission spawns", _poiDist], 5] call mf_notify_client;
-			R3F_LOG_mutex_local_verrou = false;
+			R3F_LOG_mutexLocalLock = false;
+		};
+
+		_playerObjectLimits = getNumber(missionConfigFile >> "CfgBaseBuilding" >> "playerObjectLimit");
+		if((missionNameSpace getVariable ["baseObjects" + (getPlayerUID player), 0]) >= _playerObjectLimits) exitWith
+		{
+			playSound "FD_CP_Not_Clear_F";
+			[format ["You are not allowed to lock more than %1 objects.", _playerObjectLimits], 3] call mf_notify_client;
+			R3F_LOG_mutexLocalLock = false;
 		};
 
 		_checks =
@@ -50,7 +58,7 @@ switch (_lockState) do
 				case (!alive player): { _text = "" };
 				case (doCancelAction): { doCancelAction = false; _text = "Locking cancelled" };
 				case (vehicle player != player): { _text = "Action failed! You can't do this in a vehicle" };
-				case (!isNull (_object getVariable ["R3F_LOG_est_transporte_par", objNull])): { _text = "Action failed! Somebody moved the object" };
+				case (!isNull (_object getVariable ["R3F_LOG_isTransportedBy", objNull])): { _text = "Action failed! Somebody moved the object" };
 				case (_object getVariable ["objectLocked", false]): { _text = "Somebody else locked it before you" };
 				default
 				{
@@ -69,13 +77,18 @@ switch (_lockState) do
 			_object setVariable ["objectLocked", true, true];
 			_object setVariable ["ownerUID", getPlayerUID player, true];
 
+			_baseNameSpace = "baseObjects" + (getPlayerUID player);
+			_baseObjects = missionNameSpace getVariable[_baseNameSpace, 0];
+			_baseObjects = _baseObjects + 1;
+			missionNameSpace setVariable [_baseNameSpace, _baseObjects, true];
+
 			pvar_manualObjectSave = netId _object;
 			publicVariableServer "pvar_manualObjectSave";
 
 			["Object locked!", 5] call mf_notify_client;
 		};
 
-		R3F_LOG_mutex_local_verrou = false;
+		R3F_LOG_mutexLocalLock = false;
 
 		/*player switchMove "AinvPknlMstpSlayWrflDnon_medic";
 
@@ -85,7 +98,7 @@ switch (_lockState) do
 			if (player distance _object > 14 || !alive player) exitWith
 			{
 		        2 cutText ["Object lock interrupted...", "PLAIN DOWN", 1];
-				R3F_LOG_mutex_local_verrou = false;
+				R3F_LOG_mutexLocalLock = false;
 			};
 
 			// Keep the player locked in medic animation for the full duration of the unlock.
@@ -106,7 +119,7 @@ switch (_lockState) do
 				_object setVariable ["objectLocked", true, true];
 				_object setVariable ["ownerUID", getPlayerUID player, true];
 				2 cutText ["", "PLAIN DOWN", 1];
-				R3F_LOG_mutex_local_verrou = false;
+				R3F_LOG_mutexLocalLock = false;
 		    };
 		};
 
@@ -114,7 +127,7 @@ switch (_lockState) do
 	};
 	case 1: // UNLOCK
 	{
-		R3F_LOG_mutex_local_verrou = true;
+		R3F_LOG_mutexLocalLock = true;
 		_totalDuration = if (_object getVariable ["ownerUID", ""] == getPlayerUID player) then { 10 } else { 45 }; // Allow owner to unlock quickly
 		//_unlockDuration = _totalDuration;
 		//_iteration = 0;
@@ -131,7 +144,7 @@ switch (_lockState) do
 				case (!alive player): {};
 				case (doCancelAction): { doCancelAction = false; _text = "Unlocking cancelled" };
 				case (vehicle player != player): { _text = "Action failed! You can't do this in a vehicle" };
-				case (!isNull (_object getVariable ["R3F_LOG_est_transporte_par", objNull])): { _text = "Action failed! Somebody moved the object" };
+				case (!isNull (_object getVariable ["R3F_LOG_isTransportedBy", objNull])): { _text = "Action failed! Somebody moved the object" };
 				case !(_object getVariable ["objectLocked", false]): { _text = "Somebody else unlocked it before you" };
 				default
 				{
@@ -152,13 +165,18 @@ switch (_lockState) do
 			_object setVariable ["baseSaving_hoursAlive", nil, true];
 			_object setVariable ["baseSaving_spawningTime", nil, true];
 
+			_baseNameSpace = "baseObjects" + (getPlayerUID player);
+			_baseObjects = missionNameSpace getVariable[_baseNameSpace, 0];
+			_baseObjects = _baseObjects - 1;
+			missionNameSpace setVariable [_baseNameSpace, _baseObjects, true];
+
 			pvar_manualObjectSave = netId _object;
 			publicVariableServer "pvar_manualObjectSave";
 
 			["Object unlocked!", 5] call mf_notify_client;
 		};
 
-		R3F_LOG_mutex_local_verrou = false;
+		R3F_LOG_mutexLocalLock = false;
 
 		/*for "_iteration" from 1 to _unlockDuration do
 		{
@@ -166,7 +184,7 @@ switch (_lockState) do
 			if (player distance _object > 5 || !alive player) exitWith
 			{
 		        2 cutText ["Object unlock interrupted...", "PLAIN DOWN", 1];
-				R3F_LOG_mutex_local_verrou = false;
+				R3F_LOG_mutexLocalLock = false;
 			};
 
 			// Keep the player locked in medic animation for the full duration of the unlock.
@@ -189,7 +207,7 @@ switch (_lockState) do
 				_object setVariable ["baseSaving_hoursAlive", nil, true];
 				_object setVariable ["baseSaving_spawningTime", nil, true];
 				2 cutText ["", "PLAIN DOWN", 1];
-				R3F_LOG_mutex_local_verrou = false;
+				R3F_LOG_mutexLocalLock = false;
 		    };
 		};
 
@@ -201,7 +219,7 @@ switch (_lockState) do
 	};
 };
 
-if (R3F_LOG_mutex_local_verrou) then {
-	R3F_LOG_mutex_local_verrou = false;
-	diag_log format["WASTELAND DEBUG: An error has occured in LockStateMachine.sqf. Mutex lock was not reset. Mutex lock state actual: %1", R3F_LOG_mutex_local_verrou];
+if (R3F_LOG_mutexLocalLock) then {
+	R3F_LOG_mutexLocalLock = false;
+	diag_log format["WASTELAND DEBUG: An error has occured in LockStateMachine.sqf. Mutex lock was not reset. Mutex lock state actual: %1", R3F_LOG_mutexLocalLock];
 };

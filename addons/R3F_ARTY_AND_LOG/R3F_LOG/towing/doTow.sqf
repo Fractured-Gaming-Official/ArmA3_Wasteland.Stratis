@@ -1,5 +1,5 @@
 /**
- * Remorque l'objet déplacé par le joueur avec un remorqueur
+ * Remorque l'objet déplacé par le joueur avec un towing
  *
  * Copyright (C) 2010 madbull ~R3F~
  *
@@ -10,52 +10,52 @@
 
 #define VEHICLE_UNLOCKED(VEH) (locked (VEH) < 2 || (VEH) getVariable ["ownerUID","0"] isEqualTo getPlayerUID player)
 
-if (R3F_LOG_mutex_local_verrou) then
+if (R3F_LOG_mutexLocalLock) then
 {
-	player globalChat STR_R3F_LOG_mutex_action_en_cours;
+	player globalChat STR_R3F_LOG_mutexActionOngoing;
 }
 else
 {
-	R3F_LOG_mutex_local_verrou = true;
+	R3F_LOG_mutexLocalLock = true;
 
-	private ["_objet", "_remorqueur"];
+	private ["_object", "_tug"];
 
-	_objet = R3F_LOG_joueur_deplace_objet;
+	_object = R3F_LOG_playerMovesObject;
 
-	_remorqueur = nearestObjects [_objet, R3F_LOG_CFG_remorqueurs, 22];
-	// Parce que le remorqueur peut être un objet remorquable
-	_remorqueur = _remorqueur - [_objet];
+	_tug = nearestObjects [_object, R3F_LOG_CFG_tugs, 22];
+	// Parce que le towing peut être un objet remorquable
+	_tug = _tug - [_object];
 
-	if (count _remorqueur > 0) then
+	if (count _tug > 0) then
 	{
-		_remorqueur = _remorqueur select 0;
+		_tug = _tug select 0;
 
-		if (alive _remorqueur && isNull (_remorqueur getVariable "R3F_LOG_remorque") && (vectorMagnitude velocity _remorqueur < 6) && (getPos _remorqueur select 2 < 2) && VEHICLE_UNLOCKED(_remorqueur) && !(_remorqueur getVariable "R3F_LOG_disabled")) then
+		if (alive _tug && isNull (_tug getVariable "R3F_LOG_towing") && (vectorMagnitude velocity _tug < 6) && (getPos _tug select 2 < 2) && VEHICLE_UNLOCKED(_tug) && !(_tug getVariable "R3F_LOG_disabled")) then
 		{
 			// On mémorise sur le réseau que le véhicule remorque quelque chose
-			_remorqueur setVariable ["R3F_LOG_remorque", _objet, true];
+			_tug setVariable ["R3F_LOG_towing", _object, true];
 			// On mémorise aussi sur le réseau que le canon est attaché en remorque
-			_objet setVariable ["R3F_LOG_est_transporte_par", _remorqueur, true];
+			_object setVariable ["R3F_LOG_isTransportedBy", _tug, true];
 
-			["disableDriving", _objet] call A3W_fnc_towingHelper;
+			["disableDriving", _object] call A3W_fnc_towingHelper;
 
-			_towerBB = _remorqueur call fn_boundingBoxReal;
+			_towerBB = _tug call fn_boundingBoxReal;
 			_towerMinBB = _towerBB select 0;
 			_towerMaxBB = _towerBB select 1;
 
-			_objectBB = _objet call fn_boundingBoxReal;
+			_objectBB = _object call fn_boundingBoxReal;
 			_objectMinBB = _objectBB select 0;
 			_objectMaxBB = _objectBB select 1;
 
 			_towerCenterX = (_towerMinBB select 0) + (((_towerMaxBB select 0) - (_towerMinBB select 0)) / 2);
 			_objectCenterX = (_objectMinBB select 0) + (((_objectMaxBB select 0) - (_objectMinBB select 0)) / 2);
 
-			_towerGroundPos = _remorqueur worldToModel (_remorqueur call fn_getPos3D);
+			_towerGroundPos = _tug worldToModel (_tug call fn_getPos3D);
 
 			if ((getPosASL player) select 2 > 0) then
 			{
 				// On place le joueur sur le côté du véhicule, ce qui permet d'éviter les blessure et rend l'animation plus réaliste
-				player attachTo [_remorqueur,
+				player attachTo [_tug,
 				[
 					(_towerMinBB select 0) - 0.25,
 					(_towerMinBB select 1) - 0.25,
@@ -72,9 +72,10 @@ else
 			sleep 2;
 
 			// Attacher à l'arrière du véhicule au ras du sol
-			[_remorqueur, true] call fn_enableSimulationGlobal;
-			[_objet, true] call fn_enableSimulationGlobal;
-			_objet attachTo [_remorqueur,
+			// Attach to the rear of vehicle at ground level
+			[_tug, true] call fn_enableSimulationGlobal;
+			[_object, true] call fn_enableSimulationGlobal;
+			_object attachTo [_tug,
 			[
 				_towerCenterX - _objectCenterX,
 				(_towerMinBB select 1) - (_objectMaxBB select 1) - 0.5,
@@ -82,31 +83,31 @@ else
 			]];
 
 			// Faire relacher l'objet au joueur (si il l'a dans "les mains")
-			R3F_LOG_joueur_deplace_objet = objNull;
+			R3F_LOG_playerMovesObject = objNull;
 			detach player;
 
 			// Si l'objet est une arme statique, on corrige l'orientation en fonction de la direction du canon
-			/*if (_objet isKindOf "StaticWeapon") then
+			/*if (_object isKindOf "StaticWeapon") then
 			{
-				private ["_azimut_canon"];
+				private ["_cannonAzimuth"];
 
-				_azimut_canon = ((_objet weaponDirection (weapons _objet select 0)) select 0) atan2 ((_objet weaponDirection (weapons _objet select 0)) select 1);
+				_cannonAzimuth = ((_object weaponDirection (weapons _object select 0)) select 0) atan2 ((_object weaponDirection (weapons _object select 0)) select 1);
 
 				// Seul le D30 a le canon pointant vers le véhicule
-				if !(_objet isKindOf "D30_Base") then
+				if !(_object isKindOf "D30_Base") then
 				{
-					_azimut_canon = _azimut_canon + 180;
+					_cannonAzimuth = _cannonAzimuth + 180;
 				};
 
 				// On est obligé de demander au serveur de tourner l'objet pour nous
-				R3F_ARTY_AND_LOG_PUBVAR_setDir = [_objet, (getDir _objet)-_azimut_canon];
+				R3F_LOG_FRAC_PUBVAR_setDir = [_object, (getDir _object)-_cannonAzimuth];
 				if (isServer) then
 				{
-					["R3F_ARTY_AND_LOG_PUBVAR_setDir", R3F_ARTY_AND_LOG_PUBVAR_setDir] spawn R3F_ARTY_AND_LOG_FNCT_PUBVAR_setDir;
+					["R3F_LOG_FRAC_PUBVAR_setDir", R3F_LOG_FRAC_PUBVAR_setDir] spawn R3F_LOG_FRAC_FNC__PUBVAR_setDir;
 				}
 				else
 				{
-					publicVariable "R3F_ARTY_AND_LOG_PUBVAR_setDir";
+					publicVariable "R3F_LOG_FRAC_PUBVAR_setDir";
 				};
 			};*/
 
@@ -119,5 +120,5 @@ else
 		};
 	};
 
-	R3F_LOG_mutex_local_verrou = false;
+	R3F_LOG_mutexLocalLock = false;
 };

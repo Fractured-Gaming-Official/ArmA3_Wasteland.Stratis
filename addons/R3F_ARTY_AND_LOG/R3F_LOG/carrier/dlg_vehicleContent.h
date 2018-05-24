@@ -8,30 +8,30 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "dlg_constantes.h"
+#include "dlg_constants.h"
 
-class R3F_LOG_dlg_contenu_vehicule
+class R3F_LOG_dlg_vehicleContents
 {
-	idd = R3F_LOG_IDD_dlg_contenu_vehicule;
-	name = "R3F_LOG_dlg_contenu_vehicule";
+	idd = R3F_LOG_IDD_dlg_vehicleContents;
+	name = "R3F_LOG_dlg_vehicleContents";
 	movingEnable = false;
 
-	controlsBackground[] = {R3F_LOG_dlg_CV_arriere_plan};
+	controlsBackground[] = {R3F_LOG_dlg_CV_background};
 	objects[] = {};
 	controls[] =
 	{
-		R3F_LOG_dlg_CV_titre,
+		R3F_LOG_dlg_CV_title,
 
-		R3F_LOG_dlg_CV_capacite_vehicule,
-		R3F_LOG_dlg_CV_liste_contenu,
+		R3F_LOG_dlg_CV_vehicleCapacity,
+		R3F_LOG_dlg_CV_contentsList,
 
 		R3F_LOG_dlg_CV_credits,
-		R3F_LOG_dlg_CV_btn_decharger,
-		R3F_LOG_dlg_CV_btn_fermer
+		R3F_LOG_dlg_CV_unloadBtn,
+		R3F_LOG_dlg_CV_cancelBtn
 	};
 
 	// Définition des classes de base
-	class R3F_LOG_dlg_CV_texte
+	class R3F_LOG_dlg_CV_text
 	{
 		idc = -1;
 		type = CT_STATIC;
@@ -129,7 +129,7 @@ class R3F_LOG_dlg_contenu_vehicule
 		};
 	};
 
-	class R3F_LOG_dlg_CV_liste
+	class R3F_LOG_dlg_CV_list
 	{
 		type = CT_LISTBOX;
 		style = ST_LEFT;
@@ -173,7 +173,7 @@ class R3F_LOG_dlg_contenu_vehicule
 	// FIN Définition des classes de base
 
 
-	class R3F_LOG_dlg_CV_arriere_plan
+	class R3F_LOG_dlg_CV_background
 	{
 		/*idc = -1;
 		type = CT_STATIC;
@@ -195,33 +195,33 @@ class R3F_LOG_dlg_contenu_vehicule
 		sizeEx            = 0.04;
 	};
 
-	class R3F_LOG_dlg_CV_titre : R3F_LOG_dlg_CV_texte
+	class R3F_LOG_dlg_CV_title : R3F_LOG_dlg_CV_text
 	{
-		idc = R3F_LOG_IDC_dlg_CV_titre;
+		idc = R3F_LOG_IDC_dlg_CV_title;
 		x = 0.28; w = 0.4;
 		y = 0.125; h = 0.05;
 		sizeEx = 0.05;
 		text = "";
 	};
 
-	class R3F_LOG_dlg_CV_capacite_vehicule : R3F_LOG_dlg_CV_texte
+	class R3F_LOG_dlg_CV_vehicleCapacity : R3F_LOG_dlg_CV_text
 	{
-		idc = R3F_LOG_IDC_dlg_CV_capacite_vehicule;
+		idc = R3F_LOG_IDC_dlg_CV_vehicleCapacity;
 		x = 0.255; w = 0.4;
 		y = 0.185; h = 0.03;
 		sizeEx = 0.03;
 		text = "";
 	};
 
-	class R3F_LOG_dlg_CV_liste_contenu : R3F_LOG_dlg_CV_liste
+	class R3F_LOG_dlg_CV_contentsList : R3F_LOG_dlg_CV_list
 	{
-		idc = R3F_LOG_IDC_dlg_CV_liste_contenu;
+		idc = R3F_LOG_IDC_dlg_CV_contentsList;
 		x = 0.26; w = 0.45;
 		y = 0.22; h = 0.44;
-		onLBDblClick = "execVM ""addons\R3F_ARTY_AND_LOG\R3F_LOG\transporteur\decharger.sqf"";";
+		onLBDblClick = "execVM ""addons\R3F_ARTY_AND_LOG\R3F_LOG\carrier\unload.sqf"";";
 	};
 
-	class R3F_LOG_dlg_CV_credits : R3F_LOG_dlg_CV_texte
+	class R3F_LOG_dlg_CV_credits : R3F_LOG_dlg_CV_text
 	{
 		idc = R3F_LOG_IDC_dlg_CV_credits;
 		x = 0.250; w = 0.19;
@@ -231,19 +231,19 @@ class R3F_LOG_dlg_contenu_vehicule
 		text = "";
 	};
 
-	class R3F_LOG_dlg_CV_btn_decharger : R3F_LOG_dlg_CV_btn
+	class R3F_LOG_dlg_CV_unloadBtn : R3F_LOG_dlg_CV_btn
 	{
-		idc = R3F_LOG_IDC_dlg_CV_btn_decharger;
+		idc = R3F_LOG_IDC_dlg_CV_unloadBtn;
 		x = 0.355; w = 0.18;
 		y = 0.66;
 		sizeEx = 0.02;
 		text = "";
-		action = "execVM ""addons\R3F_ARTY_AND_LOG\R3F_LOG\transporteur\decharger.sqf"";";
+		action = "execVM ""addons\R3F_ARTY_AND_LOG\R3F_LOG\carrier\unload.sqf"";";
 	};
 
-	class R3F_LOG_dlg_CV_btn_fermer : R3F_LOG_dlg_CV_btn
+	class R3F_LOG_dlg_CV_cancelBtn : R3F_LOG_dlg_CV_btn
 	{
-		idc = R3F_LOG_IDC_dlg_CV_btn_fermer;
+		idc = R3F_LOG_IDC_dlg_CV_cancelBtn;
 		x = 0.537; w = 0.16;
 		y = 0.66;
 		text = "";

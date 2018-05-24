@@ -24,6 +24,9 @@ player createDiaryRecord ["changelog",
 [
 "FRACTURED Logs",
 "
+<br/>--------5/23/2018-------
+<br/>[ADDED] Vector control of objects
+<br/>[CHANGED] R3F Logistics for future optimizations
 <br/>--------5/19/2018-------
 <br/>[FIX] Remaining Value in Smuggler Missions
 <br/>--------5/18/2018-------

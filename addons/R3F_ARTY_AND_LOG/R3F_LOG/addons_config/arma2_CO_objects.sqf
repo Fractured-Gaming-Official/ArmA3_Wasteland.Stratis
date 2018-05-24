@@ -15,7 +15,7 @@
  * List of class names of vehicles which can tow towable objects.
  * Liste des noms de classes des véhicules terrestres pouvant remorquer des objets remorquables.
  */
-R3F_LOG_CFG_remorqueurs = R3F_LOG_CFG_remorqueurs +
+R3F_LOG_CFG_tugs = R3F_LOG_CFG_tugs +
 [
 
 ];
@@ -24,7 +24,7 @@ R3F_LOG_CFG_remorqueurs = R3F_LOG_CFG_remorqueurs +
  * List of class names of towables objects.
  * Liste des noms de classes des objets remorquables.
  */
-R3F_LOG_CFG_objets_remorquables = R3F_LOG_CFG_objets_remorquables +
+R3F_LOG_CFG_towableObjects = R3F_LOG_CFG_towableObjects +
 [
 
 ];
@@ -36,7 +36,7 @@ R3F_LOG_CFG_objets_remorquables = R3F_LOG_CFG_objets_remorquables +
  * List of class names of air vehicles which can lift liftable objects.
  * Liste des noms de classes des véhicules aériens pouvant héliporter des objets héliportables.
  */
-R3F_LOG_CFG_heliporteurs = R3F_LOG_CFG_heliporteurs +
+R3F_LOG_CFG_helicarriers = R3F_LOG_CFG_helicarriers +
 [
 
 ];
@@ -45,7 +45,7 @@ R3F_LOG_CFG_heliporteurs = R3F_LOG_CFG_heliporteurs +
  * List of class names of liftable objects.
  * Liste des noms de classes des objets héliportables.
  */
-R3F_LOG_CFG_objets_heliportables = R3F_LOG_CFG_objets_heliportables +
+R3F_LOG_CFG_heliportableObjects = R3F_LOG_CFG_heliportableObjects +
 [
 
 ];
@@ -80,7 +80,7 @@ R3F_LOG_CFG_objets_heliportables = R3F_LOG_CFG_objets_heliportables +
  * Liste des noms de classes des véhicules (terrestres ou aériens) pouvant transporter des objets transportables.
  * Le deuxième élément des tableaux est la capacité de chargement (en relation avec le coût de capacité des objets).
  */
-R3F_LOG_CFG_transporteurs = R3F_LOG_CFG_transporteurs +
+R3F_LOG_CFG_carriers = R3F_LOG_CFG_carriers +
 [
 
 ];
@@ -92,7 +92,7 @@ R3F_LOG_CFG_transporteurs = R3F_LOG_CFG_transporteurs +
  * Liste des noms de classes des objets transportables.
  * Le deuxième élément des tableaux est le coût de capacité (en relation avec la capacité des véhicules).
  */
-R3F_LOG_CFG_objets_transportables = R3F_LOG_CFG_objets_transportables +
+R3F_LOG_CFG_transportableObjects = R3F_LOG_CFG_transportableObjects +
 [
 
 ];
@@ -104,7 +104,7 @@ R3F_LOG_CFG_objets_transportables = R3F_LOG_CFG_objets_transportables +
  * List of class names of objects moveable by player.
  * Liste des noms de classes des objets transportables par le joueur.
  */
-R3F_LOG_CFG_objets_deplacables = R3F_LOG_CFG_objets_deplacables +
+R3F_LOG_CFG_movableObjects = R3F_LOG_CFG_movableObjects +
 [
 
 ];

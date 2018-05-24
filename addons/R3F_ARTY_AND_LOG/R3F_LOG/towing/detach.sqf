@@ -10,21 +10,21 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-if (R3F_LOG_mutex_local_verrou) then
+if (R3F_LOG_mutexLocalLock) then
 {
-	player globalChat STR_R3F_LOG_mutex_action_en_cours;
+	player globalChat STR_R3F_LOG_mutexActionOngoing;
 }
 else
 {
-	R3F_LOG_mutex_local_verrou = true;
+	R3F_LOG_mutexLocalLock = true;
 
-	private ["_remorqueur", "_objet"];
+	private ["_tug", "_object"];
 
-	_objet = _this select 0;
-	_remorqueur = _objet getVariable "R3F_LOG_est_transporte_par";
+	_object = _this select 0;
+	_tug = _object getVariable "R3F_LOG_isTransportedBy";
 
 	// Ne pas permettre de décrocher un objet s'il est porté héliporté
-	if ({_remorqueur isKindOf _x} count R3F_LOG_CFG_remorqueurs > 0) then
+	if ({_tug isKindOf _x} count R3F_LOG_CFG_tugs > 0) then
 	{
 		[player, "AinvPknlMstpSlayWrflDnon_medic"] call switchMoveGlobal;
 
@@ -37,13 +37,13 @@ else
 			};
 		}];*/
 
-		_towerBB = _remorqueur call fn_boundingBoxReal;
+		_towerBB = _tug call fn_boundingBoxReal;
 		_towerMinBB = _towerBB select 0;
 		_towerMaxBB = _towerBB select 1;
 
 		if ((getPosASL player) select 2 > 0) then
 		{
-			player attachTo [_remorqueur,
+			player attachTo [_tug,
 			[
 				(_towerMinBB select 0) - 0.25,
 				(_towerMinBB select 1) - 0.25,
@@ -59,17 +59,17 @@ else
 		sleep 2;
 
 		// On mémorise sur le réseau que le véhicule remorque quelque chose
-		_remorqueur setVariable ["R3F_LOG_remorque", objNull, true];
+		_tug setVariable ["R3F_LOG_towing", objNull, true];
 		// On mémorise aussi sur le réseau que le objet est attaché en remorque
-		_objet setVariable ["R3F_LOG_est_transporte_par", objNull, true];
+		_object setVariable ["R3F_LOG_isTransportedBy", objNull, true];
 
-		if (local _objet) then
+		if (local _object) then
 		{
-			[_objet] call detachTowedObject;
+			[_object] call detachTowedObject;
 		}
 		else
 		{
-			pvar_detachTowedObject = [netId _objet];
+			pvar_detachTowedObject = [netId _object];
 			publicVariable "pvar_detachTowedObject";
 		};
 
@@ -80,26 +80,26 @@ else
 			[player, ""] call switchMoveGlobal;
 		};
 
-		if ({_objet isKindOf _x} count R3F_LOG_CFG_objets_deplacables > 0) then
+		if ({_object isKindOf _x} count R3F_LOG_CFG_movableObjects > 0) then
 		{
 			// Si personne n'a re-remorquer l'objet pendant le sleep 6
-			if (isNull (_remorqueur getVariable "R3F_LOG_remorque") &&
-				(isNull (_objet getVariable "R3F_LOG_est_transporte_par")) &&
-				(isNull (_objet getVariable "R3F_LOG_est_deplace_par"))
+			if (isNull (_tug getVariable "R3F_LOG_towing") &&
+				(isNull (_object getVariable "R3F_LOG_isTransportedBy")) &&
+				(isNull (_object getVariable "R3F_LOG_isMovedBy"))
 			) then
 			{
-				[_objet] execVM "addons\R3F_ARTY_AND_LOG\R3F_LOG\objet_deplacable\deplacer.sqf";
+				[_object] execVM "addons\R3F_ARTY_AND_LOG\R3F_LOG\movableObject\move.sqf";
 			};
 		}
 		else
 		{
-			player globalChat STR_R3F_LOG_action_detacher_fait;
+			player globalChat STR_R3F_LOG_actionObjectUntowed;
 		};
 	}
 	else
 	{
-		player globalChat STR_R3F_LOG_action_detacher_impossible_pour_ce_vehicule;
+		player globalChat STR_R3F_LOG_actionOnlyPilotDetach;
 	};
 
-	R3F_LOG_mutex_local_verrou = false;
+	R3F_LOG_mutexLocalLock = false;
 };

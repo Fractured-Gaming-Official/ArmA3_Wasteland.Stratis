@@ -21,7 +21,7 @@ if (isClass (configFile >> "CfgVehicles" >> "ACE_Required_Logic")) then
 	 * List of class names of (ground or air) vehicles which can tow towables objects.
 	 * Liste des noms de classes des véhicules terrestres pouvant remorquer des objets remorquables.
 	 */
-	R3F_LOG_CFG_remorqueurs = R3F_LOG_CFG_remorqueurs +
+	R3F_LOG_CFG_tugs = R3F_LOG_CFG_tugs +
 	[
 		"ACE_Truck5tMG_Base"
 	];
@@ -30,7 +30,7 @@ if (isClass (configFile >> "CfgVehicles" >> "ACE_Required_Logic")) then
 	 * List of class names of towables objects.
 	 * Liste des noms de classes des objets remorquables.
 	 */
-	R3F_LOG_CFG_objets_remorquables = R3F_LOG_CFG_objets_remorquables +
+	R3F_LOG_CFG_towableObjects = R3F_LOG_CFG_towableObjects +
 	[
 		"ACE_EASA_Vehicle"
 	];
@@ -42,7 +42,7 @@ if (isClass (configFile >> "CfgVehicles" >> "ACE_Required_Logic")) then
 	 * List of class names of air vehicles which can lift liftables objects.
 	 * Liste des noms de classes des véhicules aériens pouvant héliporter des objets héliportables.
 	 */
-	R3F_LOG_CFG_heliporteurs = R3F_LOG_CFG_heliporteurs +
+	R3F_LOG_CFG_helicarriers = R3F_LOG_CFG_helicarriers +
 	[
 		// Aucun lifteur fourni par ACE OA
 	];
@@ -51,7 +51,7 @@ if (isClass (configFile >> "CfgVehicles" >> "ACE_Required_Logic")) then
 	 * List of class names of liftables objects.
 	 * Liste des noms de classes des objets héliportables.
 	 */
-	R3F_LOG_CFG_objets_heliportables = R3F_LOG_CFG_objets_heliportables +
+	R3F_LOG_CFG_heliportableObjects = R3F_LOG_CFG_heliportableObjects +
 	[
 		"ACE_Truck5tMG_Base",
 		"ACE_Lifeboat",
@@ -88,7 +88,7 @@ if (isClass (configFile >> "CfgVehicles" >> "ACE_Required_Logic")) then
 	 * Liste des noms de classes des véhicules (terrestres ou aériens) pouvant transporter des objets transportables.
 	 * Le deuxième élément des tableaux est la capacité de chargement (en relation avec le coût de capacité des objets).
 	 */
-	R3F_LOG_CFG_transporteurs = R3F_LOG_CFG_transporteurs +
+	R3F_LOG_CFG_carriers = R3F_LOG_CFG_carriers +
 	[
 		["ACE_Truck5tRepair", 35],
 		["ACE_Truck5tRepair_Base", 35],
@@ -113,7 +113,7 @@ if (isClass (configFile >> "CfgVehicles" >> "ACE_Required_Logic")) then
 	 * Liste des noms de classes des objets transportables.
 	 * Le deuxième élément des tableaux est le coût de capacité (en relation avec la capacité des véhicules).
 	 */
-	R3F_LOG_CFG_objets_transportables = R3F_LOG_CFG_objets_transportables +
+	R3F_LOG_CFG_transportableObjects = R3F_LOG_CFG_transportableObjects +
 	[
 		["ACE_Stretcher", 2],
 		["ACE_KonkursTripod_NoGeo", 5],
@@ -162,7 +162,7 @@ if (isClass (configFile >> "CfgVehicles" >> "ACE_Required_Logic")) then
 	 * List of class names of objects moveables by player.
 	 * Liste des noms de classes des objets transportables par le joueur.
 	 */
-	R3F_LOG_CFG_objets_deplacables = R3F_LOG_CFG_objets_deplacables +
+	R3F_LOG_CFG_movableObjects = R3F_LOG_CFG_movableObjects +
 	[
 		"ACE_Stretcher",
 		"ACE_Lifeboat",

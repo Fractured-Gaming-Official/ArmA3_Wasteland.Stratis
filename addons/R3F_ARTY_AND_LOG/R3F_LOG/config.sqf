@@ -3,7 +3,7 @@
 /**
  * List of class names of vehicles which can tow towables objects.
  */
-R3F_LOG_CFG_remorqueurs =
+R3F_LOG_CFG_tugs =
 [
 	"SUV_01_base_F",
 	"Offroad_01_base_F",
@@ -20,9 +20,9 @@ R3F_LOG_CFG_remorqueurs =
 ];
 
 /**
- * List of class names of HEAVY vehicles which can tow heavy towables objects. Takes precedence over R3F_LOG_CFG_remorqueurs
+ * List of class names of HEAVY vehicles which can tow heavy towables objects. Takes precedence over R3F_LOG_CFG_tugs
  */
-R3F_LOG_CFG_remorqueursH =
+R3F_LOG_CFG_tugsHvy =
 [
 	"Truck_01_base_F",
 	"Truck_02_base_F",
@@ -37,12 +37,12 @@ R3F_LOG_CFG_remorqueursH =
 	"MBT_04_base_F"
 ];
 
-R3F_LOG_CFG_remorqueurs append R3F_LOG_CFG_remorqueursH;
+R3F_LOG_CFG_tugs append R3F_LOG_CFG_tugsHvy;
 
 /**
  * List of class names of towables objects.
  */
-R3F_LOG_CFG_objets_remorquables =
+R3F_LOG_CFG_towableObjects =
 [
 	"Car_F",
 	"Ship_F",
@@ -56,9 +56,9 @@ R3F_LOG_CFG_objets_remorquables =
 ];
 
 /**
- * List of class names of HEAVY towables objects. Takes precedence over R3F_LOG_CFG_objets_remorquables
+ * List of class names of HEAVY towables objects. Takes precedence over R3F_LOG_CFG_towableObjects
  */
-R3F_LOG_CFG_objets_remorquablesH =
+R3F_LOG_CFG_towableObjectsHvy =
 [
 	"Wheeled_APC_F",
 	"APC_Tracked_01_base_F",
@@ -81,14 +81,14 @@ R3F_LOG_CFG_objets_remorquablesH =
 	"Plane_CAS_02_base_F"
 ];
 
-R3F_LOG_CFG_objets_remorquables append R3F_LOG_CFG_objets_remorquablesH;
+R3F_LOG_CFG_towableObjects append R3F_LOG_CFG_towableObjectsHvy;
 
 /****** LIFT WITH VEHICLE  ******/
 
 /**
  * List of class names of air vehicles which can lift liftables objects.
  */
-R3F_LOG_CFG_heliporteurs =
+R3F_LOG_CFG_helicarriers =
 [
 	//"Helicopter_Base_F"
 	//"Heli_Light_01_base_F",
@@ -101,21 +101,21 @@ R3F_LOG_CFG_heliporteurs =
 ];
 
 /**
- * List of class names of HEAVY air vehicles which can lift heavy liftables objects. Takes precedence over R3F_LOG_CFG_objets_remorquables
+ * List of class names of HEAVY air vehicles which can lift heavy liftables objects. Takes precedence over R3F_LOG_CFG_towableObjects
  */
-R3F_LOG_CFG_heliporteursH =
+R3F_LOG_CFG_helicarrierHvy =
 [
 	"Heli_Transport_02_base_F",
 	"Heli_Transport_03_base_F",
 	"Heli_Transport_04_base_F"
 ];
 
-R3F_LOG_CFG_heliporteurs append R3F_LOG_CFG_heliporteursH;
+R3F_LOG_CFG_helicarriers append R3F_LOG_CFG_helicarrierHvy;
 
 /**
  * List of class names of liftables objects.
  */
-R3F_LOG_CFG_objets_heliportables =
+R3F_LOG_CFG_heliportableObjects =
 [
 	"Car_F",
 	"Ship_F",
@@ -126,9 +126,9 @@ R3F_LOG_CFG_objets_heliportables =
 ];
 
 /**
- * List of class names of HEAVY liftables objects. Takes precedence over R3F_LOG_CFG_objets_heliportables
+ * List of class names of HEAVY liftables objects. Takes precedence over R3F_LOG_CFG_heliportableObjects
  */
-R3F_LOG_CFG_objets_heliportablesH =
+R3F_LOG_CFG_objectHeliportableHvy =
 [
 	"Wheeled_APC_F",
 	"APC_Tracked_01_base_F",
@@ -153,7 +153,7 @@ R3F_LOG_CFG_objets_heliportablesH =
 	"VTOL_02_base_F"
 ];
 
-R3F_LOG_CFG_objets_heliportables append R3F_LOG_CFG_objets_heliportablesH;
+R3F_LOG_CFG_heliportableObjects append R3F_LOG_CFG_objectHeliportableHvy;
 
 
 /****** LOAD IN VEHICLE / CHARGER DANS LE VEHICULE ******/
@@ -163,7 +163,7 @@ R3F_LOG_CFG_objets_heliportables append R3F_LOG_CFG_objets_heliportablesH;
  * List of class names of (ground or air) vehicles which can transport transportables objects.
  * The second element of the arrays is the load capacity (in relation with the capacity cost of the objects).
  */
-R3F_LOG_CFG_transporteurs =
+R3F_LOG_CFG_carriers =
 [
 	["Quadbike_01_base_F", 5],
 	["UGV_01_base_F", 10],
@@ -204,7 +204,7 @@ R3F_LOG_CFG_transporteurs =
 ];
 
 
-R3F_LOG_CFG_objets_transportables =
+R3F_LOG_CFG_transportableObjects =
 [
 	["Static_Designator_01_base_F", 2],
 	["Static_Designator_02_base_F", 2],
@@ -266,7 +266,7 @@ R3F_LOG_CFG_objets_transportables =
 
 /****** MOVABLE-BY-PLAYER OBJECTS / OBJETS DEPLACABLES PAR LE JOUEUR ******/
 
-R3F_LOG_CFG_objets_deplacables =
+R3F_LOG_CFG_movableObjects =
 [
 	"StaticWeapon",
 	"ReammoBox_F",

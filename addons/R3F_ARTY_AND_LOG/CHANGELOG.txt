@@ -1,3 +1,7 @@
+V1.7 - WIP by Strilles
+- Translated variables to english for future optimization
+- Removal: Chopped artillery script
+
 v1.6
 - Added : smoke shells and cluster shells (sub-munitions/DPICM)
 - Added : the mortar of the Stryker MC has now the artillery features
