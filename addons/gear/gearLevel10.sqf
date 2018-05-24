@@ -59,8 +59,10 @@ switch (true) do
 		{
 			_player addItem "ToolKit";
 			_Player addItem "MineDetector";
+			_player unassignItem "Binocular";
 			_player removeItem "Binocular";
-			_Player addItem "Laserdesignator";
+			_player addWeapon "Laserdesignator";
+			_player addItem "Laserbatteries";
 			_player addMagazines ["30Rnd_65x39_caseless_mag", 3];
 			_player addWeapon "arifle_MXC_F";
 			_player addPrimaryWeaponItem "optic_Hamr";
@@ -74,9 +76,10 @@ switch (true) do
 		};
 		case (["_sniper_", typeOf _player] call fn_findString != -1):
 		{
-			_player addWeapon "Rangefinder";
-			_player removeItem "Rangefinder";
-			_Player addItem "Laserdesignator";
+			_player unassignItem "Binocular";
+			_player removeItem "Binocular";
+			_player addItem "Laserdesignator";
+			_player addItem "Laserbatteries";
 			_player addMagazines ["20Rnd_762x51_Mag", 3];
 			_player addWeapon "srifle_EBR_F";
 			_player addPrimaryWeaponItem "optic_DMS";
