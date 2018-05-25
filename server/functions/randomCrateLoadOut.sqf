@@ -126,7 +126,7 @@ _mines = call RCLO_ARRAY select {"RCLO_MINE" in (_x select [3,999])};
 _goggles = call RCLO_ARRAY select {"RCLO_GOGGLE" in (_x select [3,999])};
 
 _rares = call RCLO_ARRAY select {"RCLO_RARE" in (_x select [3,999])};
-_raresChance = 50; // percentage chance of actually being added to crate.
+_raresChance = 60; // percentage chance of actually being added to crate.
 
 _backPackAmount = round (floor (random 3) + 3); // minimum 3, maximum 6
 _binocularAmount = round (floor (random 5) + 2); // minimum 3, maximum 7
