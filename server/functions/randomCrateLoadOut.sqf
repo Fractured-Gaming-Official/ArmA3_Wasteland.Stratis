@@ -19,10 +19,10 @@
 	----------------------------------------------------------------------------------------------
 
 	Name: randomCrateLoadOut.sqf
-	Version: 1.0.A3WL2
+	Version: 1.0.A3WL3
 	Author: soulkobk (soulkobk.blogspot.com)
 	Creation Date: 3:10 PM 11/05/2018
-	Modification Date: 6:35 PM 20/05/2018
+	Modification Date: 1:02 PM 22/05/2018
 
 	Description:
 	For use with A3Wasteland 1.3x mission (A3Wasteland.com). This script is a replacement mission
@@ -97,6 +97,8 @@
 	1.0.A3WL0 - adapted script for use of storeConfig.sqf arrays of A3Wasteland (specific A3Wasteland edit).
 	1.0.A3WL1 - adapted script for RCLO_RARE usage with a percentage probability of actually being added.
 	1.0.A3WL2 - updated script to precisely fill crates to a certain (random) percentage from 25% to 100%.
+	1.0.A3WL3 - added in error checking so if base class arrays are empty (due to missing storeConfig entries), then skip it.
+	            code routine updates, increased rare chance to 75% (from 50%).
 
 	----------------------------------------------------------------------------------------------
 */
@@ -107,64 +109,46 @@ waitUntil {!(isNil "RCLO_ARRAY")};
 
 // #define __DEBUG__
 
-_backPacks = call RCLO_ARRAY select {"RCLO_BACKPACK" in (_x select [3,999])}; // compiles array from storeConfig.sqf (A3Wasteland).
-_binoculars = call RCLO_ARRAY select {"RCLO_BINOCULAR" in (_x select [3,999])};
-_bipods = call RCLO_ARRAY select {"RCLO_BIPOD" in (_x select [3,999])};
-_headGear = call RCLO_ARRAY select {"RCLO_HEADGEAR" in (_x select [3,999])};
-_items = call RCLO_ARRAY select {"RCLO_ITEM" in (_x select [3,999])};
-_launcherWeapons = call RCLO_ARRAY select {"RCLO_WEAPONLAUNCHER" in (_x select [3,999])};
-_magazines = call RCLO_ARRAY select {"RCLO_MAGAZINE" in (_x select [3,999])};
-_throwables = call RCLO_ARRAY select {"RCLO_THROWABLE" in (_x select [3,999])};
-_muzzles = call RCLO_ARRAY select {"RCLO_MUZZLE" in (_x select [3,999])};
-_optics = call RCLO_ARRAY select {"RCLO_OPTIC" in (_x select [3,999])};
-_primaryWeapons = call RCLO_ARRAY select {"RCLO_WEAPONPRIMARY" in (_x select [3,999])};
-_secondaryWeapons = call RCLO_ARRAY select {"RCLO_WEAPONSECONDARY" in (_x select [3,999])};
-_uniforms = call RCLO_ARRAY select {"RCLO_UNIFORM" in (_x select [3,999])};
-_vests = call RCLO_ARRAY select {"RCLO_VEST" in (_x select [3,999])};
-_weaponAccessories = call RCLO_ARRAY select {"RCLO_WEAPONACCESSORY" in (_x select [3,999])};
-_mines = call RCLO_ARRAY select {"RCLO_MINE" in (_x select [3,999])};
-_goggles = call RCLO_ARRAY select {"RCLO_GOGGLE" in (_x select [3,999])};
+_backPacks = call RCLO_ARRAY select {"RCLO_BACKPACK" in (_x select [3,999])}; _backPackAmount = round (floor (random 3) + 3);
+_binoculars = call RCLO_ARRAY select {"RCLO_BINOCULAR" in (_x select [3,999])}; _binocularAmount = round (floor (random 5) + 2);
+_bipods = call RCLO_ARRAY select {"RCLO_BIPOD" in (_x select [3,999])}; _bipodAmount = round (floor (random 3) + 2);
+_goggles = call RCLO_ARRAY select {"RCLO_GOGGLE" in (_x select [3,999])}; _goggleAmount = round (floor (random 2) + 2);
+_headGear = call RCLO_ARRAY select {"RCLO_HEADGEAR" in (_x select [3,999])}; _headGearAmount = round (floor (random 3) + 5);
+_items = call RCLO_ARRAY select {"RCLO_ITEM" in (_x select [3,999])}; _itemAmount = round (floor (random 3) + 5);
+_launcherWeapons = call RCLO_ARRAY select {"RCLO_WEAPONLAUNCHER" in (_x select [3,999])}; _launcherAmount = round (floor (random 3) + 2);
+_magazines = call RCLO_ARRAY select {"RCLO_MAGAZINE" in (_x select [3,999])}; _magazineAmount = round (floor (random 5) + 5);
+_mines = call RCLO_ARRAY select {"RCLO_MINE" in (_x select [3,999])}; _minesAmount = round (floor (random 2) + 2);
+_muzzles = call RCLO_ARRAY select {"RCLO_MUZZLE" in (_x select [3,999])}; _muzzleAmount = round (floor (random 2) + 2);
+_optics = call RCLO_ARRAY select {"RCLO_OPTIC" in (_x select [3,999])}; _opticAmount = round (floor (random 4) + 5);
+_primaryWeapons = call RCLO_ARRAY select {"RCLO_WEAPONPRIMARY" in (_x select [3,999])}; _primaryWeaponAmount = round (floor (random 5) + 5);
+_secondaryWeapons = call RCLO_ARRAY select {"RCLO_WEAPONSECONDARY" in (_x select [3,999])}; _secondaryWeaponAmount = round (floor (random 3) + 2);
+_throwables = call RCLO_ARRAY select {"RCLO_THROWABLE" in (_x select [3,999])}; _throwableAmount = round (floor (random 3) + 3);
+_uniforms = call RCLO_ARRAY select {"RCLO_UNIFORM" in (_x select [3,999])}; _uniformAmount = round (floor (random 4) + 3);
+_vests = call RCLO_ARRAY select {"RCLO_VEST" in (_x select [3,999])}; _vestAmount = round (floor (random 4) + 3);
+_weaponAccessories = call RCLO_ARRAY select {"RCLO_WEAPONACCESSORY" in (_x select [3,999])}; _weaponAccessoryAmount = round (floor (random 3) + 2);
 
 _rares = call RCLO_ARRAY select {"RCLO_RARE" in (_x select [3,999])};
-_raresChance = 60; // percentage chance of actually being added to crate.
-
-_backPackAmount = round (floor (random 3) + 3); // minimum 3, maximum 6
-_binocularAmount = round (floor (random 5) + 2); // minimum 3, maximum 7
-_bipodAmount = round (floor (random 3) + 2); // minimum 2, maximum 5
-_headGearAmount = round (floor (random 3) + 5); // minimum 5, maximum 8
-_itemAmount = round (floor (random 3) + 5); // minimum 5, maximum 8
-_launcherAmount = round (floor (random 3) + 2); // minimum 2, maximum 5
-_magazineAmount = round (floor (random 5) + 5); // minimum 5, maximum 10
-_throwableAmount = round (floor (random 3) + 3); // minimum 3, maximum 6
-_muzzleAmount = round (floor (random 2) + 2); // minimum 2, maximum 4
-_opticAmount = round (floor (random 4) + 5); // minimum 5, maximum 9
-_primaryWeaponAmount = round (floor (random 5) + 5); // minimum 5, maximum 10
-_secondaryWeaponAmount = round (floor (random 3) + 2); // minimum 2, maximum 5
-_uniformAmount = round (floor (random 4) + 3); // minimum 3, maximum 7
-_vestAmount = round (floor (random 4) + 3); // minimum 3, maximum 7
-_weaponAccessoryAmount = round (floor (random 3) + 2); // minimum 2, maximum 5
-_minesAmount = round (floor (random 2) + 2); // minimum 2, maximum 4
-_goggleAmount = round (floor (random 2) + 2); // minimum 2, maximum 4
+_raresChance = 75; // percentage chance of actually being added to crate after actually being chosen.
 
 _loadCrateWithWhatArray =
 [
 	"_backPacks",
 	"_binoculars",
 	"_bipods",
+	"_goggles",
 	"_headGear",
 	"_items",
 	"_launcherWeapons",
 	"_magazines",
-	"_throwables",
+	"_mines",
 	"_muzzles",
 	"_optics",
 	"_primaryWeapons",
 	"_secondaryWeapons",
+	"_throwables",
 	"_uniforms",
 	"_vests",
-	"_weaponAccessories",
-	"_mines",
-	"_goggles"
+	"_weaponAccessories"
 ];
 
 /*	------------------------------------------------------------------------------------------
@@ -188,7 +172,7 @@ _loadCrateWithWhat = "";
 
 _crateTypeOf = typeOf _crate;
 _crateMaxLoad = getNumber (configFile >> "CfgVehicles" >> _crateTypeOf >> "maximumLoad");
-_crateMassPercentage = (selectRandom [0.25,0.30,0.35,0.40,0.45,0.50,0.55,0.60,0.65,0.70,0.75,0.80,0.85,0.90,0.95,1]) max 0 min 1;
+_crateMassPercentage = (selectRandom [0.25,0.30,0.35,0.40,0.45,0.50,0.55,0.60,0.65,0.70,0.75,0.80,0.85,0.90,0.95,1]) max 0.25 min 1;
 _crateMassLimit = _crateMaxLoad * _crateMassPercentage;
 
 _crateMassCurrent = 0;
@@ -235,9 +219,9 @@ _canAddToCrate =
 _fillTheCrate = true;
 while {_fillTheCrate} do
 {
-	_hasBackpackContainer = getNumber (configfile >> "CfgVehicles" >> _crateTypeOf >> "transportMaxBackpacks");
-	_hasMagazineContainer = getNumber (configfile >> "CfgVehicles" >> _crateTypeOf >> "transportMaxMagazines");
-	_hasWeaponContainer = getNumber (configfile >> "CfgVehicles" >> _crateTypeOf >> "transportMaxWeapons");
+	_hasBackpackContainer = getNumber (configFile >> "CfgVehicles" >> _crateTypeOf >> "transportMaxBackpacks");
+	_hasMagazineContainer = getNumber (configFile >> "CfgVehicles" >> _crateTypeOf >> "transportMaxMagazines");
+	_hasWeaponContainer = getNumber (configFile >> "CfgVehicles" >> _crateTypeOf >> "transportMaxWeapons");
 	_hasContainer = (_hasBackpackContainer + _hasMagazineContainer + _hasMagazineContainer);
 	if (_hasContainer isEqualTo 0) exitWith {};
 
@@ -250,288 +234,278 @@ while {_fillTheCrate} do
 	switch (_loadCrateWithWhat) do
 	{
 		case "_backPacks": {
-			_loadCrateAmount = _backPackAmount;
-			for [{_lootCount = 0 },{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
+			if !(_backPacks isEqualTo []) then
 			{
-				_loadCrateItem = (selectRandom _backPacks) select 1;
-				_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
-				if (_addToCrate) then
+				_loadCrateAmount = _backPackAmount;
+				for [{_lootCount = 0 },{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
 				{
-					_crate addBackpackCargoGlobal [_loadCrateItem,1];
-					#ifdef __DEBUG__
-						diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateItem];
-					#endif
+					_loadCrateItem = (selectRandom _backPacks) select 1;
+					_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
+					if (_addToCrate) then
+					{
+						_crate addBackpackCargoGlobal [_loadCrateItem,1];
+						#ifdef __DEBUG__
+							diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateItem];
+						#endif
+					};
 				};
 			};
 		};
 		case "_binoculars": {
-			_loadCrateAmount = _binocularAmount;
-			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
+			if !(_binoculars isEqualTo []) then
 			{
-				_loadCrateItem = (selectRandom _binoculars) select 1;
-				_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
-				if (_addToCrate) then
+				_loadCrateAmount = _binocularAmount;
+				for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
 				{
-					_crate addItemCargoGlobal [_loadCrateItem,1];
-					#ifdef __DEBUG__
-						diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateItem];
-					#endif
+					_loadCrateItem = (selectRandom _binoculars) select 1;
+					_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
+					if (_addToCrate) then
+					{
+						_crate addItemCargoGlobal [_loadCrateItem,1];
+						#ifdef __DEBUG__
+							diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateItem];
+						#endif
+					};
 				};
 			};
 		};
 		case "_bipods": {
-			_loadCrateAmount = _bipodAmount;
-			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
+			if !(_bipods isEqualTo []) then
 			{
-				_loadCrateItem = (selectRandom _bipods) select 1;
-				_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
-				if (_addToCrate) then
+				_loadCrateAmount = _bipodAmount;
+				for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
 				{
-					_crate addItemCargoGlobal [_loadCrateItem,1];
-					#ifdef __DEBUG__
-						diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateItem];
-					#endif
+					_loadCrateItem = (selectRandom _bipods) select 1;
+					_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
+					if (_addToCrate) then
+					{
+						_crate addItemCargoGlobal [_loadCrateItem,1];
+						#ifdef __DEBUG__
+							diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateItem];
+						#endif
+					};
 				};
 			};
 		};
 		case "_headGear": {
-			_loadCrateAmount = _headGearAmount;
-			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
+			if !(_headGear isEqualTo []) then
 			{
-				_loadCrateItem = (selectRandom _headGear) select 1;
-				_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
-				if (_addToCrate) then
+				_loadCrateAmount = _headGearAmount;
+				for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
 				{
-					_crate addItemCargoGlobal [_loadCrateItem,1];
-					#ifdef __DEBUG__
-						diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateItem];
-					#endif
+					_loadCrateItem = (selectRandom _headGear) select 1;
+					_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
+					if (_addToCrate) then
+					{
+						_crate addItemCargoGlobal [_loadCrateItem,1];
+						#ifdef __DEBUG__
+							diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateItem];
+						#endif
+					};
 				};
 			};
 		};
 		case "_items": {
-			_loadCrateAmount = _itemAmount;
-			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
+			if !(_items isEqualTo []) then
 			{
-				_loadCrateItem = (selectRandom _items) select 1;
-				_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
-				if (_addToCrate) then
+				_loadCrateAmount = _itemAmount;
+				for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
 				{
-					_crate addItemCargoGlobal [_loadCrateItem,1];
-					#ifdef __DEBUG__
-						diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateItem];
-					#endif
+					_loadCrateItem = (selectRandom _items) select 1;
+					_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
+					if (_addToCrate) then
+					{
+						_crate addItemCargoGlobal [_loadCrateItem,1];
+						#ifdef __DEBUG__
+							diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateItem];
+						#endif
+					};
 				};
 			};
 		};
 		case "_launcherWeapons": {
-			_loadCrateAmount = _launcherAmount;
-			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
+			if !(_launcherWeapons isEqualTo []) then
 			{
-				_loadCrateItem = (selectRandom _launcherWeapons) select 1;
-				_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
-				if (_addToCrate) then
+				_loadCrateAmount = _launcherAmount;
+				for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
 				{
-					_crate addWeaponCargoGlobal [_loadCrateItem,1];
-					#ifdef __DEBUG__
-						diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateItem];
-					#endif
-				};
-				_loadCrateLootMagazine = getArray (configFile / "CfgWeapons" / _loadCrateItem / "magazines");
-				_loadCrateLootMagazineClass = selectRandom _loadCrateLootMagazine;
-				_loadCrateLootMagazineNum = round (floor (random 4) + 2); // minimum 2, maximum 6
-				for "_i" from 0 to _loadCrateLootMagazineNum do
-				{
-					_addToCrate = [_crate,_loadCrateLootMagazineClass,1] call _canAddToCrate;
+					_loadCrateItem = (selectRandom _launcherWeapons) select 1;
+					_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
 					if (_addToCrate) then
 					{
-						_crate addMagazineCargoGlobal [_loadCrateLootMagazineClass,1];
+						_crate addWeaponCargoGlobal [_loadCrateItem,1];
 						#ifdef __DEBUG__
-							diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateLootMagazineClass];
+							diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateItem];
 						#endif
+					};
+					_loadCrateLootMagazine = getArray (configFile / "CfgWeapons" / _loadCrateItem / "magazines");
+					_loadCrateLootMagazineClass = selectRandom _loadCrateLootMagazine;
+					_loadCrateLootMagazineNum = round (floor (random 4) + 2); // minimum 2, maximum 6
+					for "_i" from 0 to _loadCrateLootMagazineNum do
+					{
+						_addToCrate = [_crate,_loadCrateLootMagazineClass,1] call _canAddToCrate;
+						if (_addToCrate) then
+						{
+							_crate addMagazineCargoGlobal [_loadCrateLootMagazineClass,1];
+							#ifdef __DEBUG__
+								diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateLootMagazineClass];
+							#endif
+						};
 					};
 				};
 			};
 		};
 		case "_magazines": {
-			_loadCrateAmount = _magazineAmount;
-			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
+			if !(_magazines isEqualTo []) then
 			{
-				_loadCrateItem = (selectRandom _magazines) select 1;
-				_loadCrateLootMagazineNum = round (floor (random 4) + 2); // minimum 2, maximum 6
-				for "_i" from 0 to _loadCrateLootMagazineNum do
+				_loadCrateAmount = _magazineAmount;
+				for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
 				{
-					_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
-					if (_addToCrate) then
+					_loadCrateItem = (selectRandom _magazines) select 1;
+					_loadCrateLootMagazineNum = round (floor (random 4) + 2); // minimum 2, maximum 6
+					for "_i" from 0 to _loadCrateLootMagazineNum do
 					{
-						_crate addMagazineCargoGlobal [_loadCrateItem,1];
-						#ifdef __DEBUG__
-							diag_log format [" + %1 added -> %2x %3 magazines",_loadCrateWithWhat,1,_loadCrateItem];
-						#endif
+						_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
+						if (_addToCrate) then
+						{
+							_crate addMagazineCargoGlobal [_loadCrateItem,1];
+							#ifdef __DEBUG__
+								diag_log format [" + %1 added -> %2x %3 magazines",_loadCrateWithWhat,1,_loadCrateItem];
+							#endif
+						};
 					};
 				};
 			};
 		};
 		case "_throwables": {
-			_loadCrateAmount = _throwableAmount;
-			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
+			if !(_throwables isEqualTo []) then
 			{
-				_loadCrateItem = (selectRandom _throwables) select 1;
-				_loadCrateLootMagazineNum = round (floor (random 8) + 2); // minimum 2, maximum 10
-				for "_i" from 0 to _loadCrateLootMagazineNum do
+				_loadCrateAmount = _throwableAmount;
+				for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
 				{
-					_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
-					if (_addToCrate) then
+					_loadCrateItem = (selectRandom _throwables) select 1;
+					_loadCrateLootMagazineNum = round (floor (random 8) + 2); // minimum 2, maximum 10
+					for "_i" from 0 to _loadCrateLootMagazineNum do
 					{
-						_crate addMagazineCargoGlobal [_loadCrateItem,1];
-						#ifdef __DEBUG__
-							diag_log format [" + %1 added -> %2x %3",_loadCrateWithWhat,1,_loadCrateItem];
-						#endif
+						_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
+						if (_addToCrate) then
+						{
+							_crate addMagazineCargoGlobal [_loadCrateItem,1];
+							#ifdef __DEBUG__
+								diag_log format [" + %1 added -> %2x %3",_loadCrateWithWhat,1,_loadCrateItem];
+							#endif
+						};
 					};
 				};
 			};
 		};
 		case "_muzzles": {
-			_loadCrateAmount = _muzzleAmount;
-			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
+			if !(_muzzles isEqualTo []) then
 			{
-				_loadCrateItem = (selectRandom _muzzles) select 1;
-				_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
-				if (_addToCrate) then
+				_loadCrateAmount = _muzzleAmount;
+				for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
 				{
-					_crate addItemCargoGlobal [_loadCrateItem, 1];
-					#ifdef __DEBUG__
-						diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateItem];
-					#endif
+					_loadCrateItem = (selectRandom _muzzles) select 1;
+					_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
+					if (_addToCrate) then
+					{
+						_crate addItemCargoGlobal [_loadCrateItem, 1];
+						#ifdef __DEBUG__
+							diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateItem];
+						#endif
+					};
 				};
 			};
 		};
 		case "_optics": {
-			_loadCrateAmount = _opticAmount;
-			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
+			if !(_optics isEqualTo []) then
 			{
-				_loadCrateItem = (selectRandom _optics) select 1;
-				_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
-				if (_addToCrate) then
+				_loadCrateAmount = _opticAmount;
+				for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
 				{
-					_crate addItemCargoGlobal [_loadCrateItem, 1];
-					#ifdef __DEBUG__
-						diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateItem];
-					#endif
+					_loadCrateItem = (selectRandom _optics) select 1;
+					_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
+					if (_addToCrate) then
+					{
+						_crate addItemCargoGlobal [_loadCrateItem, 1];
+						#ifdef __DEBUG__
+							diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateItem];
+						#endif
+					};
 				};
 			};
 		};
 		case "_primaryWeapons": {
-			_loadCrateAmount = _primaryWeaponAmount;
-			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
+			if !(_primaryWeapons isEqualTo []) then
 			{
-				_loadCrateItem = (selectRandom _primaryWeapons) select 1;
-				_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
-				if (_addToCrate) then
+				_loadCrateAmount = _primaryWeaponAmount;
+				for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
 				{
-					_crate addWeaponCargoGlobal [_loadCrateItem,1];
-					#ifdef __DEBUG__
-						diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateItem];
-					#endif
-				};
-				_loadCrateLootMagazine = getArray (configFile / "CfgWeapons" / _loadCrateItem / "magazines");
-				_loadCrateLootMagazineClass = selectRandom _loadCrateLootMagazine;
-				_loadCrateLootMagazineNum = round (floor (random 6) + 4); // minimum 4, maximum 10
-				for "_i" from 0 to _loadCrateLootMagazineNum do
-				{
-					_addToCrate = [_crate,_loadCrateLootMagazineClass,1] call _canAddToCrate;
+					_loadCrateItem = (selectRandom _primaryWeapons) select 1;
+					_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
 					if (_addToCrate) then
 					{
-						_crate addMagazineCargoGlobal [_loadCrateLootMagazineClass,1];
+						_crate addWeaponCargoGlobal [_loadCrateItem,1];
 						#ifdef __DEBUG__
-							diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateLootMagazineClass];
+							diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateItem];
 						#endif
+					};
+					_loadCrateLootMagazine = getArray (configFile / "CfgWeapons" / _loadCrateItem / "magazines");
+					_loadCrateLootMagazineClass = selectRandom _loadCrateLootMagazine;
+					_loadCrateLootMagazineNum = round (floor (random 6) + 4); // minimum 4, maximum 10
+					for "_i" from 0 to _loadCrateLootMagazineNum do
+					{
+						_addToCrate = [_crate,_loadCrateLootMagazineClass,1] call _canAddToCrate;
+						if (_addToCrate) then
+						{
+							_crate addMagazineCargoGlobal [_loadCrateLootMagazineClass,1];
+							#ifdef __DEBUG__
+								diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateLootMagazineClass];
+							#endif
+						};
 					};
 				};
 			};
 		};
 		case "_secondaryWeapons": {
-			_loadCrateAmount = _secondaryWeaponAmount;
-			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
+			if !(_secondaryWeapons isEqualTo []) then
 			{
-				_loadCrateItem = (selectRandom _secondaryWeapons) select 1;
-				_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
-				if (_addToCrate) then
+				_loadCrateAmount = _secondaryWeaponAmount;
+				for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
 				{
-					_crate addWeaponCargoGlobal [_loadCrateItem,1];
-					#ifdef __DEBUG__
-						diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateItem];
-					#endif
-				};
-				_loadCrateLootMagazine = getArray (configFile / "CfgWeapons" / _loadCrateItem / "magazines");
-				_loadCrateLootMagazineClass = selectRandom _loadCrateLootMagazine;
-				_loadCrateLootMagazineNum = round (floor (random 4) + 2); // minimum 2, maximum 6
-				for "_i" from 0 to _loadCrateLootMagazineNum do
-				{
-					_addToCrate = [_crate,_loadCrateLootMagazineClass,1] call _canAddToCrate;
+					_loadCrateItem = (selectRandom _secondaryWeapons) select 1;
+					_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
 					if (_addToCrate) then
 					{
-						_crate addMagazineCargoGlobal [_loadCrateLootMagazineClass,1];
+						_crate addWeaponCargoGlobal [_loadCrateItem,1];
 						#ifdef __DEBUG__
-							diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateLootMagazineClass];
+							diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateItem];
 						#endif
+					};
+					_loadCrateLootMagazine = getArray (configFile / "CfgWeapons" / _loadCrateItem / "magazines");
+					_loadCrateLootMagazineClass = selectRandom _loadCrateLootMagazine;
+					_loadCrateLootMagazineNum = round (floor (random 4) + 2); // minimum 2, maximum 6
+					for "_i" from 0 to _loadCrateLootMagazineNum do
+					{
+						_addToCrate = [_crate,_loadCrateLootMagazineClass,1] call _canAddToCrate;
+						if (_addToCrate) then
+						{
+							_crate addMagazineCargoGlobal [_loadCrateLootMagazineClass,1];
+							#ifdef __DEBUG__
+								diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateLootMagazineClass];
+							#endif
+						};
 					};
 				};
 			};
 		};
 		case "_uniforms": {
-			_loadCrateAmount = _uniformAmount;
-			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
+			if !(_uniforms isEqualTo []) then
 			{
-				_loadCrateItem = (selectRandom _uniforms) select 1;
-				_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
-				if (_addToCrate) then
+				_loadCrateAmount = _uniformAmount;
+				for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
 				{
-					_crate addItemCargoGlobal [_loadCrateItem,1];
-					#ifdef __DEBUG__
-						diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateItem];
-					#endif
-				};
-			};
-		};
-		case "_vests": {
-			_loadCrateAmount = _vestAmount;
-			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
-			{
-				_loadCrateItem = (selectRandom _vests) select 1;
-				_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
-				if (_addToCrate) then
-				{
-					_crate addItemCargoGlobal [_loadCrateItem,1];
-					#ifdef __DEBUG__
-						diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateItem];
-					#endif
-				};
-			};
-		};
-		case "_weaponAccessories": {
-			_loadCrateAmount = _weaponAccessoryAmount;
-			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
-			{
-				_loadCrateItem = (selectRandom _weaponAccessories) select 1;
-				_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
-				if (_addToCrate) then
-				{
-					_crate addItemCargoGlobal [_loadCrateItem,1];
-					#ifdef __DEBUG__
-						diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateItem];
-					#endif
-				};
-			};
-		};
-		case "_mines": {
-			_loadCrateAmount = _minesAmount;
-			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
-			{
-				_loadCrateItem = (selectRandom _mines) select 1;
-				_loadCrateLootMagazineNum = round (floor (random 2) + 2); // minimum 2, maximum 4
-				for "_i" from 0 to _loadCrateLootMagazineNum do
-				{
+					_loadCrateItem = (selectRandom _uniforms) select 1;
 					_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
 					if (_addToCrate) then
 					{
@@ -543,14 +517,13 @@ while {_fillTheCrate} do
 				};
 			};
 		};
-		case "_goggles": {
-			_loadCrateAmount = _goggleAmount;
-			for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
+		case "_vests": {
+			if !(_vests isEqualTo []) then
 			{
-				_loadCrateItem = (selectRandom _goggles) select 1;
-				_loadCrateLootMagazineNum = round (floor (random 2) + 2); // minimum 2, maximum 4
-				for "_i" from 0 to _loadCrateLootMagazineNum do
+				_loadCrateAmount = _vestAmount;
+				for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
 				{
+					_loadCrateItem = (selectRandom _vests) select 1;
 					_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
 					if (_addToCrate) then
 					{
@@ -558,6 +531,68 @@ while {_fillTheCrate} do
 						#ifdef __DEBUG__
 							diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateItem];
 						#endif
+					};
+				};
+			};
+		};
+		case "_weaponAccessories": {
+			if !(_weaponAccessories isEqualTo []) then
+			{
+				_loadCrateAmount = _weaponAccessoryAmount;
+				for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
+				{
+					_loadCrateItem = (selectRandom _weaponAccessories) select 1;
+					_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
+					if (_addToCrate) then
+					{
+						_crate addItemCargoGlobal [_loadCrateItem,1];
+						#ifdef __DEBUG__
+							diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateItem];
+						#endif
+					};
+				};
+			};
+		};
+		case "_mines": {
+			if !(_mines isEqualTo []) then
+			{
+				_loadCrateAmount = _minesAmount;
+				for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
+				{
+					_loadCrateItem = (selectRandom _mines) select 1;
+					_loadCrateLootMagazineNum = round (floor (random 2) + 2); // minimum 2, maximum 4
+					for "_i" from 0 to _loadCrateLootMagazineNum do
+					{
+						_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
+						if (_addToCrate) then
+						{
+							_crate addItemCargoGlobal [_loadCrateItem,1];
+							#ifdef __DEBUG__
+								diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateItem];
+							#endif
+						};
+					};
+				};
+			};
+		};
+		case "_goggles": {
+			if !(_goggles isEqualTo []) then
+			{
+				_loadCrateAmount = _goggleAmount;
+				for [{_lootCount = 0},{_lootCount < _loadCrateAmount},{_lootCount = _lootCount + 1}] do
+				{
+					_loadCrateItem = (selectRandom _goggles) select 1;
+					_loadCrateLootMagazineNum = round (floor (random 2) + 2); // minimum 2, maximum 4
+					for "_i" from 0 to _loadCrateLootMagazineNum do
+					{
+						_addToCrate = [_crate,_loadCrateItem,1] call _canAddToCrate;
+						if (_addToCrate) then
+						{
+							_crate addItemCargoGlobal [_loadCrateItem,1];
+							#ifdef __DEBUG__
+								diag_log format [" + %1 added -> 1x %2",_loadCrateWithWhat,_loadCrateItem];
+							#endif
+						};
 					};
 				};
 			};
