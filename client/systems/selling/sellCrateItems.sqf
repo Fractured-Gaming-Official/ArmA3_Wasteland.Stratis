@@ -22,7 +22,7 @@ storeSellingHandle = _this spawn
 	}
 	else
 	{
-		missionNamespace getVariable ["R3F_LOG_joueur_deplace_objet", objNull]
+		missionNamespace getVariable ["R3F_LOG_playerMovesObject", objNull]
 	};
 
 	_sellValue = 0;
@@ -110,13 +110,13 @@ storeSellingHandle = _this spawn
 
 				if (_deleteObject) then
 				{
-					if (_crate getVariable ["R3F_LOG_est_deplace_par", objNull] == player) then
+					if (_crate getVariable ["R3F_LOG_isMovedBy", objNull] == player) then
 					{
-						[_crate, player, -1, false] execVM "addons\R3F_ARTY_AND_LOG\R3F_LOG\objet_deplacable\relacher.sqf";
-						waitUntil {_crate getVariable ["R3F_LOG_est_deplace_par", objNull] != player};
+						[_crate, player, -1, false] execVM "addons\R3F_ARTY_AND_LOG\R3F_LOG\movableObject\release.sqf";
+						waitUntil {_crate getVariable ["R3F_LOG_isMovedBy", objNull] != player};
 					};
 
-					if (isNull (_crate getVariable ["R3F_LOG_est_deplace_par", objNull])) then
+					if (isNull (_crate getVariable ["R3F_LOG_isMovedBy", objNull])) then
 					{
 						deleteVehicle _crate;
 					};
