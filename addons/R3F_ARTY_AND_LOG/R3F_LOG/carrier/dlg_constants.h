@@ -1,6 +1,7 @@
 /**
  * Constantes pour rendre les définitions des boîtes de dialogue plus lisible et maintenable
  */
+#define R3F_ARTY_ID_carrierStart 65430
 #define R3F_LOG_IDD_dlg_vehicleContents (R3F_ARTY_ID_carrierStart + 1)
 
 #define R3F_LOG_IDC_dlg_CV_vehicleCapacity (R3F_ARTY_ID_carrierStart + 2)
