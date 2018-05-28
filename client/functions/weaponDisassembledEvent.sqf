@@ -14,7 +14,7 @@ _currBag = unitBackpack _unit;
 
 if (_unit == player) then
 {
-	[format ["You are not allowed to disassemble weapons.<br/>Use the ""%1"" option instead.", ["STR_R3F_LOG_action_deplacer_objet", "Move"] call getPublicVar]] spawn BIS_fnc_guiMessage;
+	[format ["You are not allowed to disassemble weapons.<br/>Use the ""%1"" option instead.", ["STR_R3F_LOG_actionMoveObject", "Move"] call getPublicVar]] spawn BIS_fnc_guiMessage;
 };
 
 // Optional hiding of dropped bags
