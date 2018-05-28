@@ -31,7 +31,7 @@ STR_R3F_LOG_actionLoadSelectionNotEnoughRoom = "Il n'y pas assez de place pour c
 STR_R3F_LOG_actionLoadSelectionObjectInMotion = "L'objet ""%1"" est en cours de transport.";
 
 STR_R3F_LOG_actionLoad = "Charger dans le véhicule";
-STR_R3F_LOG_action_charger_deplace_en_cours = "Chargement en cours...";
+STR_R3F_LOG_action_objLoadingInProgress = "Chargement en cours...";
 STR_R3F_LOG_actionObjectLoaded = "L'objet a été chargé dans le véhicule ""%1"".";
 STR_R3F_LOG_actionNotEnoughSpace = "Il n'y pas assez de place pour cet objet dans ce véhicule.";
 

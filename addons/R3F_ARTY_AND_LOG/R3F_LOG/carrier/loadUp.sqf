@@ -76,7 +76,7 @@ else
 				_carrier setVariable ["R3F_LOG_loadedObjects", _loadedObjects, true];
 				_object setVariable ["R3F_LOG_isTransportedBy", _carrier, true];
 
-				player globalChat STR_R3F_LOG_action_charger_deplace_en_cours;
+				player globalChat STR_R3F_LOG_action_objLoadingInProgress;
 
 				// Faire relacher l'objet au joueur (si il l'a dans "les mains")
 				_object disableCollisionWith _carrier;

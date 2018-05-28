@@ -34,7 +34,7 @@ STR_R3F_LOG_actionLoadSelectionNotEnoughRoom = "There is not enough space in thi
 STR_R3F_LOG_actionLoadSelectionObjectInMotion = "The object ""%1"" is in transit.";
 
 STR_R3F_LOG_actionLoad = "Load in the vehicle";
-STR_R3F_LOG_action_charger_deplace_en_cours = "Loading in progress...";
+STR_R3F_LOG_action_objLoadingInProgress = "Loading in progress...";
 STR_R3F_LOG_actionObjectLoaded = "The object has been loaded in the vehicle ""%1"".";
 STR_R3F_LOG_actionNotEnoughSpace = "There is not enough space in this vehicle.";
 
