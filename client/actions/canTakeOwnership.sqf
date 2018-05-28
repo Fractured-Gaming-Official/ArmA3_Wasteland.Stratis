@@ -35,8 +35,8 @@ switch (true) do
 	case (locked _vehicle > 1): { _text = CONCAT(ERR_FAILED, ERR_LOCKED) };
 	case ({alive _x && getText (configFile >> "CfgVehicles" >> typeOf _x >> "simulation") != "UAVPilot"} count crew _vehicle > 0): { _text = CONCAT(ERR_FAILED, ERR_CREW) };
 	case (!isNull ((uavControl _vehicle) select 0)): { _text = CONCAT(ERR_FAILED, ERR_CONNECTED) };
-	//case (!isNull (_vehicle getVariable ["R3F_LOG_est_deplace_par", objNull])): { _text = CONCAT(ERR_FAILED, ERR_MOVED) };
-	//case (!isNull (_vehicle getVariable ["R3F_LOG_est_transporte_par", objNull])): { _text = CONCAT(ERR_FAILED, ERR_TOWED) };
+	//case (!isNull (_vehicle getVariable ["R3F_LOG_isMovedBy", objNull])): { _text = CONCAT(ERR_FAILED, ERR_MOVED) };
+	//case (!isNull (_vehicle getVariable ["R3F_LOG_isTransportedBy", objNull])): { _text = CONCAT(ERR_FAILED, ERR_TOWED) };
 	case (player distance _vehicle > (sizeOf typeOf _vehicle / 3) max 3): { _text = CONCAT(ERR_FAILED, ERR_DISTANCE) };
 };
 

@@ -37,8 +37,8 @@ _checks =
 		case (player distance _object > (sizeOf typeOf _object / 3) max 2): { _text = "Action failed! You are too far away from the object" };
 		case (isNull _object): { _text = "The object no longer exists" };
 		//case (alive _object || {alive _x} count crew _object > 0): { _text = "Action failed! You are not allowed to break into this object" };
-		case (!isNull (_object getVariable ["R3F_LOG_est_deplace_par", objNull])): { _text = "Action failed! Somebody moved the object" };
-		case (!isNull (_object getVariable ["R3F_LOG_est_transporte_par", objNull])): { _text = "Action failed! Somebody loaded or towed the object" };
+		case (!isNull (_object getVariable ["R3F_LOG_isMovedBy", objNull])): { _text = "Action failed! Somebody moved the object" };
+		case (!isNull (_object getVariable ["R3F_LOG_isTransportedBy", objNull])): { _text = "Action failed! Somebody loaded or towed the object" };
 		case (doCancelAction): { doCancelAction = false; _text = "break in cancelled" };
 		default
 		{

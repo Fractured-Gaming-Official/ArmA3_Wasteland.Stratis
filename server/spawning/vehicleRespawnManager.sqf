@@ -24,8 +24,8 @@ while {true} do
 			_veh = [_x, "Vehicle", objNull] call fn_getFromPairs;
 
 			// Check if vehicle is not being towed or moved
-			if (isNull (_veh getVariable ["R3F_LOG_est_transporte_par", objNull]) &&
-			    isNull (_veh getVariable ["R3F_LOG_est_deplace_par", objNull])) then
+			if (isNull (_veh getVariable ["R3F_LOG_isTransportedBy", objNull]) &&
+			    isNull (_veh getVariable ["R3F_LOG_isMovedBy", objNull])) then
 			{
 				_settings = _x;
 
@@ -189,7 +189,7 @@ while {true} do
 					if (!isNull _towedVeh) then
 					{
 						_towedVeh enableSimulationGlobal true;
-						_towedVeh setVariable ["R3F_LOG_est_transporte_par", objNull, true];
+						_towedVeh setVariable ["R3F_LOG_isTransportedBy", objNull, true];
 						_veh setVariable ["R3F_LOG_remorque", objNull, true];
 
 						if (local _towedVeh) then
