@@ -429,7 +429,6 @@ player createDiaryRecord ["admins",
 <br/><font color='#00FFEF' size='12'>Teleport, Spectate, Slay Delete Hacked objects</font>
 <br/> * Praetorian
 <br/> * Reaper
-<br/> * Sage
 
 <br/><font color='#002FFF' size='18'>Low Admins</font>
 <br/><font color='#00FFEF' size='12'>Spectate, Slay, Delete Hacked Objects</font>
