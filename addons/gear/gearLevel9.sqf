@@ -36,7 +36,6 @@ _player addWeapon "Binocular";
 _player addMagazines ["HandGrenade", 2];
 _player addItem "FirstAidKit";
 _player addHeadgear "H_HelmetB_light";
-
 _player addMagazines ["9Rnd_45ACP_Mag", 2];
 _player addWeapon "hgun_ACPC2_F";
 
@@ -59,6 +58,10 @@ switch (true) do
 		{
 			_player addItem "ToolKit";
 			_Player addItem "MineDetector";
+			_player unassignItem "Binocular";
+			_player removeItem "Binocular";
+			_player addWeapon "Laserdesignator";
+			_player addItem "Laserbatteries";
 			_player addMagazines ["30Rnd_65x39_caseless_mag", 3];
 			_player addWeapon "arifle_MXC_F";
 			_player addPrimaryWeaponItem "optic_Hamr";
@@ -67,6 +70,7 @@ switch (true) do
 			_player addWeapon "launch_RPG32_F";
 			_player addMagazines ["MiniGrenade", 2];
 			_player addMagazines ["SLAMDirectionalMine_Wire_Mag", 2];
+			_player addMagazines ["ATMine_Range_Mag", 1];
 			_player selectWeapon "arifle_MXC_F";
 		};
 		case (["_sniper_", typeOf _player] call fn_findString != -1):
@@ -76,8 +80,10 @@ switch (true) do
 			_player addWeapon "srifle_EBR_F";
 			_player addPrimaryWeaponItem "optic_DMS";
 			_player addPrimaryWeaponItem "muzzle_snds_B";
+			_player addPrimaryWeaponItem "bipod_01_F_blk";
 			_player addMagazines ["RPG32_F", 1];
 			_player addWeapon "launch_RPG32_F";
+			_player addMagazines ["APERSTripMine_Wire_Mag", 2];
 			_player addMagazines ["ClaymoreDirectionalMine_Remote_Mag", 2];
 			_player selectWeapon "srifle_EBR_F";
 		};
@@ -88,7 +94,7 @@ switch (true) do
 			_player addMagazines ["30Rnd_556x45_Stanag_Tracer_Green", 3];
 			_player addMagazines ["20Rnd_556x45_UW_mag", 4];
 			_player addWeapon "arifle_SDAR_F";
-			_player addMagazines ["MiniGrenade", 2];
+			_player addMagazines ["MiniGrenade", 4];
 			_player selectWeapon "arifle_SDAR_F";
 		};
 	};
