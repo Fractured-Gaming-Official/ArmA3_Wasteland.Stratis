@@ -218,6 +218,7 @@ switch (true) do
 		switch (_variant) do
 		{
 			case "WipeoutMission": { _pylons = ["PylonRack_1Rnd_Missile_AA_04_F","PylonRack_3Rnd_LG_scalpel","PylonRack_3Rnd_Missile_AGM_02_F","PylonMissile_1Rnd_Bomb_04_F","PylonMissile_1Rnd_BombCluster_03_F","PylonMissile_1Rnd_BombCluster_03_F","PylonMissile_1Rnd_Bomb_04_F","PylonRack_3Rnd_Missile_AGM_02_F","PylonRack_3Rnd_LG_scalpel","PylonRack_1Rnd_Missile_AA_04_F"] };
+			case "WipeoutLightCAS": { _pylons = ["","PylonRack_7Rnd_Rocket_04_HE_F","","PylonMissile_1Rnd_Bomb_04_F","","","PylonMissile_1Rnd_Bomb_04_F","","PylonRack_7Rnd_Rocket_04_AP_F",""] };
 		};
 	};
 
