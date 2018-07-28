@@ -753,7 +753,7 @@ backpackArray = compileFinal str
 
 genItemArray = compileFinal str
 [
-	["Airstrike Designator", "Laserdesignator_02", 1000000, "binoc", "noDLC"],
+	["Airstrike Designator", "Laserdesignator_02", 250000, "binoc", "noDLC"],
 	["Designator Batteries", "Laserbatteries", 50, "item"],
 	["UAV Terminal (NATO)", "B_UavTerminal", 150, "gps"],
 	["UAV Terminal (CSAT)", "O_UavTerminal", 150, "gps"],

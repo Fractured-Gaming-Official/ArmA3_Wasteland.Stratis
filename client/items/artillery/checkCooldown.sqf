@@ -7,7 +7,7 @@ private _error = "";
 private _serverDiff = ["A3W_serverTickTimeDiff", 0] call getPublicVar;
 private _artiUseVar = "A3W_artilleryLastUse_" + getPlayerUID player;
 private _artiLastUse = missionNamespace getVariable _artiUseVar;
-private _cooldown = ["A3W_artilleryCooldown", 3600] call getPublicVar;
+private _cooldown = ["A3W_artilleryCooldown", 600] call getPublicVar;
 
 
 if (!isNil "_artiLastUse") then
