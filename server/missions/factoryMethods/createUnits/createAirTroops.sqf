@@ -52,13 +52,13 @@ for "_i" from 1 to _unitAmount do
 			waitUntil {sleep 0.1; (((getPos _unit select 2) <= _pullChuteAltitude) || (time > _timer))};
 			_parachute = createVehicle ["Steerable_Parachute_F",(getPos _unit),[],0,"CAN_COLLIDE"];
 			_parachute allowDamage false;
-			_smoke = createVehicle ["SmokeShellRed_infinite",(getPos _unit),[],0,"CAN_COLLIDE"];
-			_smoke attachTo [_parachute,[0,0,0]];
+			//_smoke = createVehicle ["SmokeShellRed_infinite",(getPos _unit),[],0,"CAN_COLLIDE"]; //disabled smoke due to server FPS impact
+			//_smoke attachTo [_parachute,[0,0,0]]; //disabled smoke due to server FPS impact
 			_unit assignAsDriver _parachute;
 			_unit moveInDriver _parachute;
 			_timer = time + 180; // max 3m00s until on ground.
 			waitUntil {sleep 0.1; ((isTouchingGround _unit) || (time > _timer))};
-			deleteVehicle _smoke;
+			//deleteVehicle _smoke; //disabled smoke due to server FPS impact
 			_leader = leader _unitGroup;
 			if (_unit isEqualTo _leader) then
 			{

@@ -18,7 +18,7 @@ MainMissions =
 	//["mission_LightArmVeh", 1],
 	["mission_ArmedHeli", 1],
 	//["mission_CivHeli", 1],
-	["mission_Hackers",0.5],
+	["mission_Hackers",1],
 	["mission_HostileJetFormation", .5],
 	["mission_AbandonedJet", .5],
 	["mission_ArmedPatrol", 1],
@@ -35,7 +35,7 @@ SideMissions =
 	["mission_TownInvasion", 1],
 	["mission_Outpost", 1],
 	["mission_Truck", 1],
-	["mission_redDawn", 1],
+	["mission_redDawn", 1.5],
 	//["mission_AirWreck", 2],
 	["mission_geoCache", 0.5],
 	["mission_HostileJet", 0.5],
@@ -50,7 +50,7 @@ MoneyMissions =
 	["mission_MoneyShipment", 2],
 	["mission_miniMoneyShipment", 2],
 	["mission_SunkenTreasure", 1],
-	["mission_SkySmuggler", 0.25],
+	["mission_SkySmuggler", 0.5],
 	["mission_shipWrecked", 1.5]
 ];
 
